@@ -2,55 +2,54 @@ import { useState } from "react";
 import Message from "./Message";
 import Input from "./Input";
 import Block from "./Block";
+import Conversation from "./Conversation";
 
 const Messages = (props) => {
 	const [draft, setDraft] = useState();
-	const [message, setMessage] = useState();
-	const [likeClicked, setLikeClicked] = useState(false);
+
 	const [blockClicked, setBlockClicked] = useState(false);
 
 	const onInput = (e) => setDraft(e.target.value);
 
-	const displayMessage = () => {
-		setMessage(draft);
-	};
-
 	const onKeyDown = (e) => {
 		if (e.key === "Enter") {
-			displayMessage();
+			props.addMessage({ content: draft });
 		}
 	};
 
-	const isLikeClicked = () => {
-		setLikeClicked(likeClicked === false ? true : false);
-	};
+	const displayMessage = () => props.addMessage({ content: draft });
 
 	const blockUser = () => {
 		setBlockClicked(blockClicked === false ? true : false);
 	};
 
-	const blockButtonText = blockClicked ? "Unblock (user)" : "Block (user)";
+	const name = props.users[0].personalDetails.name.firstName;
+	const blockButtonText = blockClicked ? `Unblock ${name}` : `Block ${name}`;
 
 	return (
 		<>
-			<Message
-				message={message}
-				likeClicked={likeClicked}
-				isLikeClicked={isLikeClicked}
-			/>
-
+			{props.messages.map((message, index) => {
+				return (
+					<Message
+						key={index}
+						message={message}
+						addMessage={props.addMessage}
+					/>
+				);
+			})}
 			<Input
 				onInput={onInput}
 				onKeyDown={onKeyDown}
 				displayMessage={displayMessage}
 			/>
-
 			<Block
 				blockUser={blockUser}
 				blockButtonText={blockButtonText}
 				blockClicked={blockClicked}
 				users={props.users}
+				name={name}
 			/>
+			<Conversation messages={props.messages} />
 		</>
 	);
 };
