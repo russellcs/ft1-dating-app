@@ -1,9 +1,10 @@
-import MatchedUser from "./MatchedUser";
+import MatchedUser from "./matchesComponents/MatchedUser";
+import "./matchesComponents/matches.scss";
 
 const Matches = (props) => {
   const { users } = props;
   // just for WiP
-  const currentUserId = 6;
+  const currentUserId = 3;
 
   const findUser = (id) => {
     return users.find(({ userId }) => userId === id);
@@ -27,8 +28,10 @@ const Matches = (props) => {
     <>
       {matchFinder(currentUser).map((user, i) => {
         return (
-          <div className="userCard" key={i}>
-            <MatchedUser user={user} />
+          <div className="userCardContainer">
+            <div className="userCard" key={i}>
+              <MatchedUser user={user} />
+            </div>
           </div>
         );
       })}

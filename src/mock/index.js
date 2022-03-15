@@ -51,7 +51,7 @@ export const users = [
       kidsAccepted: true,
       smokers: true,
     },
-    matches: [1, 3, 4, 5], //ids
+    matches: [1, 3, 4, 5, 6], //ids
     likes: [], //ids
     blocked: [], //ids
     login: { email: "", password: "" },
