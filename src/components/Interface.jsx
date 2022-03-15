@@ -5,7 +5,7 @@ import Messages from "./Messages";
 import { useState } from "react";
 
 const Interface = (props) => {
-  const [screen, setScreen] = useState(3);
+  const [screen, setScreen] = useState(0);
 
   return (
     <>
