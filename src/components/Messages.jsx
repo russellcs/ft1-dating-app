@@ -1,4 +1,7 @@
 import { useState } from "react";
+import Message from "./Message";
+import Input from "./Input";
+import Block from "./Block";
 
 const Messages = (props) => {
 	const [draft, setDraft] = useState();
@@ -26,22 +29,28 @@ const Messages = (props) => {
 		setBlockClicked(blockClicked === false ? true : false);
 	};
 
-	const blockButtonText = blockClicked ? "Unblock user" : "Block user";
+	const blockButtonText = blockClicked ? "Unblock (user)" : "Block (user)";
 
 	return (
 		<>
-			<div className="message">
-				{message}
-				{message && <button onClick={isLikeClicked}>&#9829;</button>}
-				{likeClicked && <p>Message liked</p>}
-			</div>
+			<Message
+				message={message}
+				likeClicked={likeClicked}
+				isLikeClicked={isLikeClicked}
+			/>
 
-			<input onInput={onInput} onKeyDown={onKeyDown} type="text" />
+			<Input
+				onInput={onInput}
+				onKeyDown={onKeyDown}
+				displayMessage={displayMessage}
+			/>
 
-			<button onClick={displayMessage}>Send</button>
-			<br />
-			{/* <button>Block {props.users.personalDetails.name.firstName}</button> */}
-			<button onClick={blockUser}>{blockButtonText}</button>
+			<Block
+				blockUser={blockUser}
+				blockButtonText={blockButtonText}
+				blockClicked={blockClicked}
+				users={props.users}
+			/>
 		</>
 	);
 };
