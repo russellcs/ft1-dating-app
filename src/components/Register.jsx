@@ -1,14 +1,10 @@
 import { useState } from "react";
-import {
-  religions,
-  wantKids,
-  smokes,
-  genders,
-  schema,
-  joiDataReorder,
-} from "../config/formConfig";
-import "./register.css";
+import { schema, joiDataReorder } from "../config/formConfig";
+import "./Register/register.css";
 import Joi from "joi";
+import RegisterPartOne from "./Register/RegisterPartOne";
+import RegisterPartTwo from "./Register/RegisterPartTwo";
+import RegisterPartThree from "./Register/RegisterPartThree";
 
 const Register = (props) => {
   let [data, setData] = useState({});
@@ -42,137 +38,20 @@ const Register = (props) => {
   console.log(errors);
   return (
     <>
-      <form
-        className="form"
-        onInput={onInput}
-        onSubmit={onSubmit}
-        name="registerForm"
-      >
-        <h1>Please enter your details</h1>
-        <div className="formRow">
-          <label>
-            Email Address:
-            <input type="email" placeholder="Email" name="email" />
-          </label>
-        </div>
-        <div className="formRow">
-          <label>
-            Password:
-            <input
-              type="password"
-              placeholder="Password (8 characters minimum)"
-              name="password"
-              minLength="8"
-              required
-            />
-          </label>
-        </div>
-        <div className="formRow">
-          <label>
-            First Name:
-            <input type="name" placeholder="First Name" name="firstName" />
-          </label>
-        </div>
-        <div className="formRow">
-          <label>
-            Last Name:
-            <input type="name" placeholder="Last Name" name="lastName" />
-          </label>
-        </div>
-        <div className="formRow">
-          <label>
-            Date of Birth:
-            <input type="date" name="dateOfBirth" />
-          </label>
-        </div>
-        <div className="formRow">
-          <label>
-            Gender:
-            <select defaultValue={"DEFAULT"}>
-              <option value="DEFAULT" disabled>
-                Select
-              </option>
-              {genders.map((gender, index) => (
-                <option key={index} value={index}>
-                  {gender}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-        <div className="formRow">
-          <label>
-            Location:
-            <input type="name" name="location" placeholder="town" />
-            <input type="name" name="postcode" placeholder="postcode" />
-          </label>
-        </div>
-        <div className="formRow">
-          <label>
-            Height:
-            <input type="number" placeholder="in cm" name="height" />
-          </label>
-        </div>
-        <div className="formRow">
-          <label>
-            Smokes?:
-            <select defaultValue={"DEFAULT"} name="smokes">
-              <option value="DEFAULT" disabled>
-                Select
-              </option>
-              {smokes.map((smokes, index) => (
-                <option key={index} value={index}>
-                  {smokes}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-        <div className="formRow">
-          <label>
-            Do you have any kids?:
-            <select defaultValue={"DEFAULT"} name="haveKids">
-              <option value="DEFAULT" disabled>
-                Select
-              </option>
-              <option value="0">No</option>
-              <option value="1">Yes</option>
-              <option value="2">Prefer not to say</option>
-            </select>
-          </label>
-        </div>
-        <div className="formRow">
-          <label>
-            Do you want kids in the future?
-            <select defaultValue={"DEFAULT"} name="wantKids">
-              <option value="DEFAULT" disabled>
-                Select
-              </option>
-              {wantKids.map((kids, index) => (
-                <option key={index} value={index}>
-                  {kids}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-        <div className="formRow">
-          <label>
-            Religion:
-            <select defaultValue={"DEFAULT"} name="religion">
-              <option value="DEFAULT" disabled>
-                Select
-              </option>
-              {religions.map((religion, index) => (
-                <option key={index} value={index}>
-                  {religion}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-        <input type="submit" value="Register"></input>
-      </form>
+      <div className="container">
+        <form
+          className="form"
+          onInput={onInput}
+          onSubmit={onSubmit}
+          name="registerForm"
+        >
+          <h1>Please enter your details</h1>
+          <RegisterPartOne />
+          <RegisterPartTwo />
+          <RegisterPartThree />
+          <input className="submit" type="submit" value="Register"></input>
+        </form>
+      </div>
     </>
   );
 };

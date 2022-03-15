@@ -37,6 +37,8 @@ export const genders = [
 
 const now = Date.now();
 const eigthteenYearsAgo = new Date(now - 1000 * 60 * 60 * 24 * 365 * 18);
+const ukPostcode =
+  "^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([AZa-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z])))) [0-9][A-Za-z]{2})$";
 export const schema = {
   email: Joi.string().email({ tlds: { allow: false } }),
   firstName: Joi.string().alphanum().max(30).min(2),
@@ -45,7 +47,7 @@ export const schema = {
   dateOfBirth: Joi.number().max(eigthteenYearsAgo.getTime()),
   height: Joi.number().integer().positive(),
   town: Joi.string().alphanum().max(30).min(2),
-  postcode: Joi.string().alphanum().max(7).min(2),
+  postcode: Joi.string().regex(RegExp(ukPostcode)),
 };
 
 //Add required to validation

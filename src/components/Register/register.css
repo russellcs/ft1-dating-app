@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+/* .form {
+  width: 50vw;
+} */
+
+.formRow {
+  padding: 5px 0px;
+}
+
+.submit {
+  width: 50vw;
+  display: block;
+  margin: auto;
+}
+
+input {
+  margin: 0px 5px;
+}
+
+input[type="password"] {
+  width: 250px;
+}
+
+select {
+  margin: 0px 5px;
+}
