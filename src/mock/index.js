@@ -26,7 +26,13 @@ export const users = [
     likes: [], //ids
     blocked: [], //ids
     login: { email: "", password: "" },
-    status: { type: "admin", blocked: false, lastLoginTimestamp: 0 },
+    status: {
+      type: "admin",
+      blocked: false,
+      lastLoginTimestamp: 0,
+      loggedIn: true,
+      lastActiveTime: 0,
+    },
   },
   {
     userId: 1,
@@ -69,3 +75,5 @@ export const messages = [
     blocked: false,
   },
 ];
+
+export const currentUserId = 1;
