@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+/* .form {
+  width: 50vw;
+} */
+
+.formRow {
+  padding: 5px 0px;
+}
+
+.submit {
+  width: 40vw;
+  display: block;
+  margin: auto;
+}
+
+input {
+  margin: 0px 5px;
+}
+
+input[type="password"] {
+  width: 250px;
+}
+
+select {
+  margin: 0px 5px;
+}
+
+.nextButton {
+  float: right;
+}
+
+.backButton {
+  float: left;
+}
+
+nav {
+  margin-top: 5px;
+}
