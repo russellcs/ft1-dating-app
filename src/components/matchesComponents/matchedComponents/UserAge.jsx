@@ -1,4 +1,4 @@
-import { matchedIcons } from "./matchedIcons";
+import { matchedIcons } from "../matchedIcons";
 
 const UserAge = (props) => {
   const getAge = (dateString) => {
