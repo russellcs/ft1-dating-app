@@ -1,5 +1,5 @@
-import { matchedIcons } from "./matchedIcons";
-import { genders } from "../../config/formConfig";
+import { matchedIcons } from "../matchedIcons";
+import { genders } from "../../../config/formConfig";
 
 const UserGender = (props) => {
   return (

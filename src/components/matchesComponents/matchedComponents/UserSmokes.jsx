@@ -1,5 +1,5 @@
-import { matchedIcons } from "./matchedIcons";
-import { smokes } from "../../config/formConfig";
+import { matchedIcons } from "../matchedIcons";
+import { smokes } from "../../../config/formConfig";
 
 const UserSmokes = (props) => {
   return (

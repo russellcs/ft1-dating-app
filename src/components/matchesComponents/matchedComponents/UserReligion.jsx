@@ -1,5 +1,5 @@
-import { matchedIcons } from "./matchedIcons";
-import { religions } from "../../config/formConfig";
+import { matchedIcons } from "../matchedIcons";
+import { religions } from "../../../config/formConfig";
 
 const UserReligion = (props) => {
   return (

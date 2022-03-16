@@ -1,5 +1,5 @@
-import { matchedIcons } from "./matchedIcons";
-import { wantKids } from "../../config/formConfig";
+import { matchedIcons } from "../matchedIcons";
+import { wantKids } from "../../../config/formConfig";
 
 const UserOpenToKids = (props) => {
   return (
