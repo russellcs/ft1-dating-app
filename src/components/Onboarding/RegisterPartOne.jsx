@@ -1,6 +1,7 @@
-const RegisterPartOne = () => {
+const RegisterPartOne = (props) => {
   return (
     <>
+      <h1>Please enter your details</h1>
       <div className="formRow">
         <label>
           Email Address:
@@ -31,6 +32,11 @@ const RegisterPartOne = () => {
           <input type="name" placeholder="Last Name" name="lastName" />
         </label>
       </div>
+      <nav>
+        <button className="nextButton" onClick={() => props.setRegScreen(1)}>
+          Next
+        </button>
+      </nav>
     </>
   );
 };

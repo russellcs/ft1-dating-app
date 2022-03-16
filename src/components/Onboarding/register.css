@@ -12,7 +12,7 @@
 }
 
 .submit {
-  width: 50vw;
+  width: 40vw;
   display: block;
   margin: auto;
 }
@@ -27,4 +27,16 @@ input[type="password"] {
 
 select {
   margin: 0px 5px;
+}
+
+.nextButton {
+  float: right;
+}
+
+.backButton {
+  float: left;
+}
+
+nav {
+  margin-top: 5px;
 }

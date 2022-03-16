@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { schema, joiDataReorder } from "../config/formConfig";
-import "./Register/register.css";
+import "./Onboarding/register.css";
 import Joi from "joi";
-import RegisterPartOne from "./Register/RegisterPartOne";
-import RegisterPartTwo from "./Register/RegisterPartTwo";
-import RegisterPartThree from "./Register/RegisterPartThree";
+import RegisterPartOne from "./Onboarding/RegisterPartOne";
+import RegisterPartTwo from "./Onboarding/RegisterPartTwo";
+import RegisterPartThree from "./Onboarding/RegisterPartThree";
 
 const Register = (props) => {
-  let [data, setData] = useState({});
-  let [errors, setErrors] = useState({});
+  const [data, setData] = useState({});
+  const [errors, setErrors] = useState({});
+  const [regScreen, setRegScreen] = useState(0);
 
   const onSubmit = () => {
     //will send the data to be added to users
@@ -45,11 +46,11 @@ const Register = (props) => {
           onSubmit={onSubmit}
           name="registerForm"
         >
-          <h1>Please enter your details</h1>
-          <RegisterPartOne />
-          <RegisterPartTwo />
-          <RegisterPartThree />
-          <input className="submit" type="submit" value="Register"></input>
+          {regScreen === 0 && <RegisterPartOne setRegScreen={setRegScreen} />}
+          {regScreen === 1 && <RegisterPartTwo setRegScreen={setRegScreen} />}
+          {regScreen === 2 && <RegisterPartThree setRegScreen={setRegScreen} />}
+
+
         </form>
       </div>
     </>

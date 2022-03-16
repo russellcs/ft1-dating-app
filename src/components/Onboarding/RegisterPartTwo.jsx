@@ -1,8 +1,9 @@
 import { genders } from "../../config/formConfig";
 
-const RegisterPartTwo = () => {
+const RegisterPartTwo = (props) => {
   return (
     <>
+      <h1>Please enter your details</h1>
       <div className="formRow">
         <label>
           Date of Birth:
@@ -37,6 +38,12 @@ const RegisterPartTwo = () => {
           <input type="number" placeholder="in cm" name="height" />
         </label>
       </div>
+      <nav>
+        <button onClick={() => props.setRegScreen(0)}>Back</button>
+        <button className="nextButton" onClick={() => props.setRegScreen(2)}>
+          Next
+        </button>
+      </nav>
     </>
   );
 };

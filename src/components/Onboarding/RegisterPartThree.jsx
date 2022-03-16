@@ -1,8 +1,9 @@
 import { religions, wantKids, smokes } from "../../config/formConfig";
 
-const RegisterPartThree = () => {
+const RegisterPartThree = (props) => {
   return (
     <>
+      <h1>Please enter your details</h1>
       <div className="formRow">
         <label>
           Smokes?:
@@ -61,6 +62,12 @@ const RegisterPartThree = () => {
           </select>
         </label>
       </div>
+      <nav>
+        <button className="backButton" onClick={() => props.setRegScreen(1)}>
+          Back
+        </button>
+      </nav>
+      <input className="submit" type="submit" value="Register"></input>
     </>
   );
 };
