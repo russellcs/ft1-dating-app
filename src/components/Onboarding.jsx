@@ -8,7 +8,7 @@ const Onboarding = (props) => {
   const [onBoardingScreen, setOnBoardingScreen] = useState();
   return (
     <>
-      <p>Onboarding</p>
+      <p>Onboarding Hello</p>
       <nav className="onBoarding">
         <button onClick={() => setOnBoardingScreen(0)}>Register</button>
         <button onClick={() => setOnBoardingScreen(1)}>Log In</button>
