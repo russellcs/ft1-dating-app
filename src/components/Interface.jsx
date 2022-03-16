@@ -1,11 +1,11 @@
 import Onboarding from "./Onboarding";
-import Matches from "./Matches";
+import Matching from "./Matching";
 import Search from "./Search";
 import Messages from "./messages/Messages";
 import { useState } from "react";
 
 const Interface = (props) => {
-  const [screen, setScreen] = useState(0);
+  const [screen, setScreen] = useState(1);
 
   const onLogin = (payload) => {
     setScreen(1);
@@ -31,7 +31,7 @@ const Interface = (props) => {
       {screen === 0 && <Onboarding onLogin={onLogin} users={props.users} />}
 
       {screen === 1 && (
-        <Matches onLikeUpdate={onLikeUpdate} users={props.users} />
+        <Matching onLikeUpdate={onLikeUpdate} users={props.users} />
       )}
 
       {screen === 2 && <Search users={props.users} />}
