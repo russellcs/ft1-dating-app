@@ -3,6 +3,7 @@ import Interface from "./components/Interface";
 import { useState } from "react";
 
 const App = () => {
+
 	const [messages, setMessages] = useState(mockMessages);
 	const addMessage = (payload) => {
 		const copy = [...messages];
@@ -15,6 +16,7 @@ const App = () => {
 			<Interface users={users} messages={messages} addMessage={addMessage} />
 		</>
 	);
+
 };
 
 export default App;
