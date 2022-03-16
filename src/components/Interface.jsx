@@ -19,7 +19,7 @@ const Interface = (props) => {
   const onLikeUpdate = (payload) => {
     //update the like
   };
-
+  
   return (
     <>
       <nav>
