@@ -1,10 +1,10 @@
 const Block = (props) => {
-	const { blockUser, blockButtonText, blockClicked, name } = props;
+	const { blockUser, blockButtonText, blockClicked } = props;
 
 	return (
 		<div style={{ margin: "20px" }}>
 			<button onClick={blockUser}>{blockButtonText}</button>
-			{blockClicked && <p>{name} has been blocked</p>}
+			{blockClicked && <p>user has been blocked</p>}
 		</div>
 	);
 };
