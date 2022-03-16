@@ -18,7 +18,6 @@ export const religions = [
 
 export const wantKids = [
   "Prefer not to say",
-<<<<<<< HEAD
   "Don't want children",
   "Not sure yet",
   "Open to children",
@@ -26,15 +25,6 @@ export const wantKids = [
 ];
 
 export const smokes = ["Prefer not to say", "No", "Sometimes", "Yes"];
-=======
-  "Do not want kids",
-  "Not sure yet",
-  "Open to kids",
-  "Want kids",
-];
-
-export const smokes = ["No", "Sometimes", "Yes"];
->>>>>>> d8af3ed1b203288bbfa8af72cbf4d1aead030637
 
 export const genders = [
   "Prefer not to say",
@@ -47,11 +37,8 @@ export const genders = [
 
 const now = Date.now();
 const eigthteenYearsAgo = new Date(now - 1000 * 60 * 60 * 24 * 365 * 18);
-<<<<<<< HEAD
-=======
 const ukPostcode =
   "^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([AZa-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z])))) [0-9][A-Za-z]{2})$";
->>>>>>> d8af3ed1b203288bbfa8af72cbf4d1aead030637
 export const schema = {
   email: Joi.string().email({ tlds: { allow: false } }),
   firstName: Joi.string().alphanum().max(30).min(2),
@@ -60,11 +47,7 @@ export const schema = {
   dateOfBirth: Joi.number().max(eigthteenYearsAgo.getTime()),
   height: Joi.number().integer().positive(),
   town: Joi.string().alphanum().max(30).min(2),
-<<<<<<< HEAD
-  postcode: Joi.string().alphanum().max(7).min(2),
-=======
   postcode: Joi.string().regex(RegExp(ukPostcode)),
->>>>>>> d8af3ed1b203288bbfa8af72cbf4d1aead030637
 };
 
 //Add required to validation
