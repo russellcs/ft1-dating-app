@@ -1,4 +1,5 @@
 export const users = [
+
   {
     userId: 1,
     signUpDate: 0,
@@ -66,14 +67,42 @@ export const users = [
 ];
 
 export const messages = [
-  {
-    userId: 1,
-    messageId: 1,
-    content: "",
-    sendTimestamp: 0,
-    read: false,
-    blocked: false,
-  },
+	{
+		toUserId: 2,
+		fromUserId: 1,
+		messageId: 1,
+		content: "Hello user 2",
+		sendTimestamp: 0,
+		read: false,
+		blocked: false,
+	},
+	{
+		toUserId: 1,
+		fromUserId: 2,
+		messageId: 2,
+		content: "Hello user 3",
+		sendTimestamp: 0,
+		read: false,
+		blocked: false,
+	},
+	{
+		toUserId: 4,
+		fromUserId: 1,
+		messageId: 3,
+		content: "Hello user 4",
+		sendTimestamp: 0,
+		read: false,
+		blocked: false,
+	},
+	{
+		toUserId: 5,
+		fromUserId: 1,
+		messageId: 4,
+		content: "Hello user 5",
+		sendTimestamp: 0,
+		read: false,
+		blocked: false,
+	},
 ];
 
 export const currentUserId = 2;

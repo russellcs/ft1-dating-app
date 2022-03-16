@@ -1,10 +1,11 @@
 import Onboarding from "./Onboarding";
 import Matches from "./Matches";
 import Search from "./Search";
-import Messages from "./Messages";
+import Messages from "./messages/Messages";
 import { useState } from "react";
 
 const Interface = (props) => {
+
   const [screen, setScreen] = useState(0);
 
   const onLogin = (payload) => {
