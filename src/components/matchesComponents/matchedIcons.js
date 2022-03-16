@@ -1,10 +1,6 @@
 export const matchedIcons = {
   person: (
-    <svg
-      className="matchedIcon"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 64 64"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
       <g data-name="Person">
         <path
           fill="#222"
@@ -23,7 +19,6 @@ export const matchedIcons = {
   ),
   baby: (
     <svg
-      className="matchedIcon"
       xmlns="http://www.w3.org/2000/svg"
       enable-background="new 0 0 48 48"
       viewBox="0 0 48 48"
@@ -40,7 +35,6 @@ export const matchedIcons = {
   ),
   cake: (
     <svg
-      className="matchedIcon"
       xmlns="http://www.w3.org/2000/svg"
       data-name="Layer 1"
       viewBox="0 0 32 32"
@@ -53,9 +47,8 @@ export const matchedIcons = {
   ),
   ruler: (
     <svg
-      className="matchedIcon"
       xmlns="http://www.w3.org/2000/svg"
-      width="11"
+      width="25"
       height="30"
       viewBox="0 0 11 30"
     >
@@ -69,7 +62,6 @@ export const matchedIcons = {
   ),
   praying: (
     <svg
-      className="matchedIcon"
       xmlns="http://www.w3.org/2000/svg"
       width="655.359"
       height="655.359"
@@ -89,7 +81,6 @@ export const matchedIcons = {
   ),
   smoking: (
     <svg
-      className="matchedIcon"
       xmlns="http://www.w3.org/2000/svg"
       width="48"
       height="48"
@@ -106,7 +97,6 @@ export const matchedIcons = {
   ),
   rings: (
     <svg
-      className="matchedIcon"
       xmlns="http://www.w3.org/2000/svg"
       enable-background="new 0 0 511.94 511.94"
       viewBox="0 0 511.94 511.94"
@@ -150,11 +140,7 @@ export const matchedIcons = {
     </svg>
   ),
   devilHeart: (
-    <svg
-      className="matchedIcon"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 48 48"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
       <path
         d="M39.85,39.31c-.76-4.16-4-6.36-10.3-3.2-6.09,3-18,7.75-20.63,1.5-1.57-3.66,2.25-6.23,6-7.53,6.88,6.89,6.52,6.69,7.1,6.69a1,1,0,0,0,.71-.29C37.6,21.58,36.35,22.79,36.45,22.74a8.8,8.8,0,0,0,.81-11.42C39.15,5,33.7.54,33.45.35a1,1,0,0,0-1.59,1c.58,2.32-.46,4.68-1.56,6.4C26.13,7.71,24,10.4,22,12.4c-2.28-2.28-4.13-4.66-8.26-4.61-1.54-2.4-2.08-4.6-1.59-6.55a1,1,0,0,0-1.59-1C10.5.27,4.74,5,6.67,11.42A8.72,8.72,0,0,0,5.3,18.79c.83,3,2.32,4,8.05,9.74-4.6,1.87-8.23,5.28-6.27,9.86,3.34,7.79,15.76,3.3,23.37-.5,3.25-1.62,6.39-2.24,7.32,1.26A3,3,0,0,0,33.85,42c0,1.66.89,2.14,4.44,5.69a1,1,0,0,0,1.42,0l3.56-3.56A3,3,0,0,0,39.85,39.31ZM34,3.81a8.1,8.1,0,0,1,1.63,5.8,8.59,8.59,0,0,0-3.13-1.55A11.82,11.82,0,0,0,34,3.81ZM10,3.69a12,12,0,0,0,1.53,4.38A8.37,8.37,0,0,0,8.33,9.68,8.3,8.3,0,0,1,10,3.69ZM7.23,18.28a6.76,6.76,0,0,1,11.31-6.51l2.75,2.75c1.77,1.76,3.91-5.47,9.72-4.7a6.78,6.78,0,0,1,4,11.5l-13,13C8.17,20.52,7.89,20.69,7.23,18.28ZM41.85,42.73h0L39,45.59c-3.09-3.1-3.15-3-3.15-3.57a1,1,0,0,1,1-1c.92,0,1.19,1.31,2.13,1.31.54,0,.76-.35,1.42-1A1,1,0,0,1,41.85,42.73Z"
         data-name="Heart devil"
@@ -163,7 +149,6 @@ export const matchedIcons = {
   ),
   child: (
     <svg
-      className="matchedIcon"
       xmlns="http://www.w3.org/2000/svg"
       width="48"
       height="48"

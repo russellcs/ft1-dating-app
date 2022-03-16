@@ -1,67 +1,64 @@
-import { matchedIcons } from "./matchedIcons";
+import UserSmokes from "./matchedComponents/UserSmokes";
+import UserChildren from "./matchedComponents/UserChildren";
+import UserReligion from "./matchedComponents/UserReligion";
+import UserOpenToKids from "./matchedComponents/UserOpenToKids";
+import UserMarriage from "./matchedComponents/UserMarriage";
+import UserCasual from "./matchedComponents/UserCasual";
+import UserHeight from "./matchedComponents/UserHeight";
+import UserGender from "./matchedComponents/UserGender";
+import UserAge from "./matchedComponents/UserAge";
+import UserImage from "./matchedComponents/UserImage";
+import UserName from "./matchedComponents/UserName";
 
 const MatchedUser = (props) => {
   const { user } = props;
-
-  const getAge = (dateString) => {
-    let birthDate = new Date(dateString);
-    let now = new Date();
-    let currentYear = now.getFullYear();
-    let userYear = birthDate.getFullYear();
-    let age = currentYear - userYear;
-    if (now < new Date(birthDate.setFullYear(currentYear))) {
-      age--;
-    }
-    return age;
-  };
-
-  const getGender = (user) => {
-    return user.personalDetails === 0
-      ? "Male"
-      : user.personalDetails === 1
-      ? "Female"
-      : "Other";
-  };
-
   return (
     <>
-      <h3 className="userName">{user.personalDetails.name.firstName}</h3>
-      <div className="userImg">
-        Image of {user.personalDetails.name.firstName}
-      </div>
-
+      <UserName user={user} />
+      <UserImage user={user} />
       <ul className="userDetails">
         <li>
-          {matchedIcons.cake}{" "}
-          {getAge(
-            `${user.personalDetails.dob.year}-${user.personalDetails.dob.months}-${user.personalDetails.dob.day}`
-          )}
+          {" "}
+          <UserAge user={user} />
         </li>
+        {user.personalDetails.gender ? (
+          <li>
+            <UserGender user={user} />
+          </li>
+        ) : null}
         <li>
-          {matchedIcons.person} {getGender(user)}
+          <UserHeight user={user} />
         </li>
-        <li>
-          {matchedIcons.devilHeart}
-          {user.preferences.lifeStyle.casual ? " Yes" : " No"}
-        </li>
-        <li>
-          {matchedIcons.rings}
-          {user.preferences.lifeStyle.marriage ? " Yes" : " No"}
-        </li>
-        <li>
-          {matchedIcons.ruler} {user.personalDetails.height} cm
-        </li>
-        <li>
-          {matchedIcons.praying} {user.personalDetails.religion}
-        </li>
-        <li>
-          {matchedIcons.smoking}
-          {user.personalDetails.smokers ? " Yes" : " No"}
-        </li>
-        {user.personalDetails.kids && (
-          <li>{matchedIcons.child} Has children</li>
+        {user.preferences.lifeStyle.marriage === undefined ? null : (
+          <li>
+            <UserMarriage user={user} />
+          </li>
         )}
-        {<li>{matchedIcons.baby} Wants children</li>}
+        {user.preferences.lifeStyle.casual === undefined ? null : (
+          <li>
+            <UserCasual user={user} />
+          </li>
+        )}
+        {user.preferences.lifeStyle.openToKids ? (
+          <li>
+            <UserOpenToKids user={user} />
+          </li>
+        ) : null}
+        {user.personalDetails.religion ? (
+          <li>
+            <UserReligion user={user} />
+          </li>
+        ) : null}
+        {user.personalDetails.kids === undefined ? null : (
+          <li>
+            <UserChildren user={user} />
+          </li>
+        )}
+        {user.personalDetails.smokers === undefined ? null : (
+          <li>
+            <UserSmokes user={user} />
+          </li>
+        )}
       </ul>
     </>
   );

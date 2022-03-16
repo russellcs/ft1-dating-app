@@ -25,17 +25,15 @@ const Matches = (props) => {
   };
 
   return (
-    <>
+    <div className="userCardContainer">
       {matchFinder(currentUser).map((user, i) => {
         return (
-          <div className="userCardContainer">
-            <div className="userCard" key={i}>
-              <MatchedUser user={user} />
-            </div>
+          <div className="userCard" key={i}>
+            <MatchedUser user={user} />
           </div>
         );
       })}
-    </>
+    </div>
   );
 };
 
