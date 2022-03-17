@@ -3,10 +3,11 @@ import { useState } from "react";
 const Message = (props) => {
 	const [likeClicked, setLikeClicked] = useState(false);
 	const { message } = props;
-
+	// Toggles the Like button
 	const isLikeClicked = () => {
 		setLikeClicked(likeClicked === false ? true : false);
 	};
+
 	return (
 		<div style={{ margin: "20px" }}>
 			{message.content}
