@@ -76,8 +76,18 @@ const RegisterPartThree = (props) => {
         <button className="backButton" onClick={() => props.setRegScreen(1)}>
           Back
         </button>
+        {smokesErrors === undefined &&
+          haveKidsErrors === undefined &&
+          wantKidsErrors === undefined &&
+          religionErrors === undefined && (
+            <button
+              className="nextButton"
+              onClick={() => props.setRegScreen(3)}
+            >
+              Next
+            </button>
+          )}
       </nav>
-      <input className="submit" type="submit" value="Register"></input>
     </>
   );
 };

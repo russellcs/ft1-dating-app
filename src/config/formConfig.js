@@ -16,6 +16,21 @@ export const religions = [
   "Other",
 ];
 
+export const religionsPref = [
+  "No preference",
+  "African Traditional & Diasporic",
+  "Agnostic",
+  "Atheist",
+  "Buddhism",
+  "Chinese traditional religion",
+  "Christianity",
+  "Hinduism",
+  "Islam",
+  "Judaism",
+  "Sikhism",
+  "Spiritism",
+];
+
 export const wantKids = [
   "Prefer not to say",
   "Don't want children",
@@ -27,6 +42,15 @@ export const wantKids = [
 export const smokes = ["Prefer not to say", "No", "Sometimes", "Yes"];
 
 export const genders = [
+  "Female",
+  "Male",
+  "Non-binary",
+  "Transgender",
+  "Intersex",
+];
+
+export const gendersPref = [
+  "No preference",
   "Female",
   "Male",
   "Non-binary",
@@ -54,6 +78,14 @@ export const schema = {
   haveKids: Joi.required(),
   wantKids: Joi.required(),
   religion: Joi.required(),
+  relationship: Joi.required(),
+  genderPref: Joi.required(),
+  minAge: Joi.required(),
+  maxAge: Joi.required(),
+  acceptedReligions: Joi.required(),
+  acceptedDistance: Joi.number().integer().positive().required(),
+  kidsAccepted: Joi.required(),
+  smokersPref: Joi.required(),
 };
 
 //Add validation for select options

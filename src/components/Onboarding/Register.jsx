@@ -5,6 +5,7 @@ import RegisterPartOne from "./RegisterPartOne";
 import RegisterPartTwo from "./RegisterPartTwo";
 import RegisterPartThree from "./RegisterPartThree";
 import "../Onboarding/register.css";
+import Preferences from "./Preferences";
 
 const Register = (props) => {
   const [newUserData, setNewUserData] = useState({});
@@ -12,7 +13,16 @@ const Register = (props) => {
   const [regScreen, setRegScreen] = useState(0);
 
   const onSubmit = () => {
-    //will send the data to be added to users
+    const newUserStructured = {
+      personalDetails: {
+        name: {
+          firstName: newUserData.firstName,
+          lastName: newUserData.lastName,
+        },
+        dob: { year: newUserData.dataOfBirth }, //this needs to be converted from unix
+      },
+      location: { town: newUserData.town, postCode: newUserData.postCode },
+    };
   };
 
   const onInput = (e) => {
@@ -28,15 +38,15 @@ const Register = (props) => {
   const onValidate = async (data) => {
     const _joiInstance = Joi.object(schema);
     try {
-      // await _joiInstance.validateAsync(data);
-      await _joiInstance.validateAsync(data, { abortEarly: false });
+      await _joiInstance.validateAsync(data);
+      // await _joiInstance.validateAsync(data, { abortEarly: false });
       setErrors({ errors: "" });
     } catch (errors) {
       setErrors(joiDataReorder(errors.details));
     }
   };
 
-  // console.log(newUserData);
+  console.log(newUserData);
   // console.log(errors);
   return (
     <>
@@ -59,6 +69,9 @@ const Register = (props) => {
           )}
           {regScreen === 2 && (
             <RegisterPartThree setRegScreen={setRegScreen} errors={errors} />
+          )}
+          {regScreen === 3 && (
+            <Preferences setRegScreen={setRegScreen} errors={errors} />
           )}
         </form>
       </div>

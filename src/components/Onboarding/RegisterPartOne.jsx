@@ -6,8 +6,6 @@ const RegisterPartOne = (props) => {
     lastName: lastNameErrors,
   } = props.errors;
 
-  console.log(props.newUserData);
-
   return (
     <>
       <div>

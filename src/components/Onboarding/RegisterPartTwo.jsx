@@ -1,8 +1,6 @@
 import { genders } from "../../config/formConfig";
 
 const RegisterPartTwo = (props) => {
-  console.log(props.errors);
-
   const {
     dateOfBirth: dateOfBirthErrors,
     gender: genderErrors,
@@ -24,7 +22,7 @@ const RegisterPartTwo = (props) => {
       <div className="formRow">
         <label>
           Gender:
-          <select name="gender">
+          <select defaultValue="" name="gender">
             <option value="" disabled>
               Select
             </option>
