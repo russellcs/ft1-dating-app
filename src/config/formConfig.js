@@ -27,7 +27,6 @@ export const wantKids = [
 export const smokes = ["Prefer not to say", "No", "Sometimes", "Yes"];
 
 export const genders = [
-  "Prefer not to say",
   "Female",
   "Male",
   "Non-binary",

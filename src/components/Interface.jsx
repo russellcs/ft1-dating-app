@@ -1,5 +1,5 @@
 import Onboarding from "./Onboarding";
-import Matches from "./Matches";
+import Matching from "./Matching";
 import Search from "./Search";
 import Messaging from "./messages/Messaging";
 import { useState } from "react";
@@ -16,10 +16,6 @@ const Interface = (props) => {
 		//do something useful
 	};
 
-	const onLikeUpdate = (payload) => {
-		//update the like
-	};
-
 	return (
 		<>
 			<nav>
@@ -31,7 +27,7 @@ const Interface = (props) => {
 			{screen === 0 && <Onboarding onLogin={onLogin} users={props.users} />}
 
 			{screen === 1 && (
-				<Matches onLikeUpdate={onLikeUpdate} users={props.users} />
+				<Matches onLikeUpdate={props.onLikeUpdate} users={props.users} />
 			)}
 
 			{screen === 2 && <Search users={props.users} />}
