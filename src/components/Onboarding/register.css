@@ -1,11 +1,7 @@
-.container {
+.containerReg {
   display: flex;
   justify-content: center;
 }
-
-/* .form {
-  width: 50vw;
-} */
 
 .formRow {
   padding: 5px 0px;
@@ -18,7 +14,7 @@
 }
 
 input {
-  margin: 0px 5px;
+  margin: 0px 2px;
 }
 
 input[type="password"] {
@@ -39,4 +35,8 @@ select {
 
 nav {
   margin-top: 5px;
+}
+
+h1 {
+  text-align: center;
 }
