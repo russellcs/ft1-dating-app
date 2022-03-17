@@ -27,7 +27,10 @@ const Preferences = (props) => {
             <option value="1">Casual</option>
             <option value="2">Open to both</option>
           </select>
-          <p>{relationshipErrors}</p>
+          <p>
+            {relationshipErrors &&
+              "Please select what type of relationship you are looking for"}
+          </p>
         </label>
       </div>
       <div className="formRow">
@@ -40,21 +43,27 @@ const Preferences = (props) => {
               </option>
             ))}
           </select>
-          <p>{genderPrefErrors}</p>
+          <p>{genderPrefErrors && "Please select your gender preference"}</p>
         </label>
       </div>
       <div className="formRow">
         <label>
           Minimum age you would consider?
           <input type="number" placeholder="Minimum age" name="minAge" />
-          <p>{minAgeErrors}</p>
+          <p>
+            {minAgeErrors &&
+              "Please enter a valid minimum age you would consider"}
+          </p>
         </label>
       </div>
       <div className="formRow">
         <label>
           Maximum age you would consider?
           <input type="number" placeholder="Maximum age" name="maxAge" />
-          <p>{maxAgeErrors}</p>
+          <p>
+            {maxAgeErrors &&
+              "Please enter a valid maximum age you would consider"}
+          </p>
         </label>
       </div>
       <div className="formRow">
@@ -73,11 +82,7 @@ const Preferences = (props) => {
       <div className="formRow">
         <label>
           Maximum distance you would be willing to travel for romance?
-          <input
-            type="number"
-            placeholder="in miles or km?"
-            name="acceptedDistance"
-          />
+          <input type="number" placeholder="in miles" name="acceptedDistance" />
           <p>{acceptedDistanceErrors}</p>
         </label>
       </div>

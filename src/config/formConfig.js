@@ -73,15 +73,19 @@ export const schema = {
   gender: Joi.required(),
   town: Joi.string().alphanum().max(30).min(2).required(),
   postcode: Joi.string().regex(RegExp(ukPostcode)).required(),
-  height: Joi.number().integer().positive().required(),
+  height: Joi.number().less(252).greater(54).required(),
   smokes: Joi.required(),
   haveKids: Joi.required(),
   wantKids: Joi.required(),
   religion: Joi.required(),
   relationship: Joi.required(),
   genderPref: Joi.required(),
-  minAge: Joi.required(),
-  maxAge: Joi.required(),
+  minAge: Joi.number().integer().less(125).greater(17).required(),
+  maxAge: Joi.number()
+    .integer()
+    .less(125)
+    .greater(Joi.ref("minAge"))
+    .required(),
   acceptedReligions: Joi.required(),
   acceptedDistance: Joi.number().integer().positive().required(),
   kidsAccepted: Joi.required(),

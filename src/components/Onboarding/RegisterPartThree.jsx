@@ -12,7 +12,7 @@ const RegisterPartThree = (props) => {
       <h1>a few more details...</h1>
       <div className="formRow">
         <label>
-          Smokes?:
+          Do you smoke?:
           <select defaultValue="" name="smokes">
             <option value="" disabled>
               Select
@@ -23,7 +23,7 @@ const RegisterPartThree = (props) => {
               </option>
             ))}
           </select>
-          <p>{smokesErrors}</p>
+          <p>{smokesErrors && "Please select your smoking preference"}</p>
         </label>
       </div>
       <div className="formRow">
@@ -38,7 +38,7 @@ const RegisterPartThree = (props) => {
             <option value="2">Prefer not to say</option>
           </select>
         </label>
-        <p>{haveKidsErrors}</p>
+        <p>{haveKidsErrors && "Please select if you have any kids"}</p>
       </div>
       <div className="formRow">
         <label>
@@ -53,7 +53,9 @@ const RegisterPartThree = (props) => {
               </option>
             ))}
           </select>
-          <p>{wantKidsErrors}</p>
+          <p>
+            {wantKidsErrors && "Please select if you want kids in the future"}
+          </p>
         </label>
       </div>
       <div className="formRow">
@@ -69,7 +71,7 @@ const RegisterPartThree = (props) => {
               </option>
             ))}
           </select>
-          <p>{religionErrors}</p>
+          <p>{religionErrors && "Please select your religion"}</p>
         </label>
       </div>
       <nav>

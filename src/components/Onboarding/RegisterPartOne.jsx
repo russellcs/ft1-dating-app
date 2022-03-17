@@ -14,7 +14,7 @@ const RegisterPartOne = (props) => {
           <label>
             Email Address:
             <input type="email" placeholder="Email" name="email" />
-            <p>{emailErrors}</p>
+            <p>{emailErrors && "Please enter a valid email address"}</p>
           </label>
         </div>
         <div className="formRow">
@@ -27,7 +27,7 @@ const RegisterPartOne = (props) => {
               minLength="8"
               required
             />
-            <p>{passwordErrors}</p>
+            <p>{passwordErrors} </p>
           </label>
         </div>
         <div className="formRow">
@@ -35,14 +35,14 @@ const RegisterPartOne = (props) => {
             First Name:
             <input type="name" placeholder="First Name" name="firstName" />
           </label>
-          <p>{firstNameErrors}</p>
+          <p>{firstNameErrors && "Please enter your first name"}</p>
         </div>
         <div className="formRow">
           <label>
             Last Name:
             <input type="name" placeholder="Last Name" name="lastName" />
           </label>
-          <p>{lastNameErrors}</p>
+          <p>{lastNameErrors && "Please enter your last name"}</p>
         </div>
         <nav>
           {Object.keys(props.newUserData).length > 1 &&

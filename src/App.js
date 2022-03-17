@@ -52,6 +52,12 @@ const App = () => {
     }
   };
 
+  const addUser = (newUser) => {
+    const usersCopy = [...users];
+    usersCopy.push(newUser);
+    setUsers(usersCopy);
+  };
+
   return (
     <>
       <button
