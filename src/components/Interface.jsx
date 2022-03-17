@@ -16,10 +16,6 @@ const Interface = (props) => {
     //do something useful
   };
 
-  const onLikeUpdate = (payload) => {
-    //update the like
-  };
-
   return (
     <>
       <nav>
@@ -31,7 +27,7 @@ const Interface = (props) => {
       {screen === 0 && <Onboarding onLogin={onLogin} users={props.users} />}
 
       {screen === 1 && (
-        <Matching onLikeUpdate={onLikeUpdate} users={props.users} />
+        <Matching onLikeUpdate={props.onLikeUpdate} users={props.users} />
       )}
 
       {screen === 2 && <Search users={props.users} />}

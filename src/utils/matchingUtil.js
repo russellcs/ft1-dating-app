@@ -10,3 +10,7 @@ export const getAge = (user) => {
   }
   return age;
 };
+
+export const getUserById = (id, users) => {
+  return users.find(({ userId }) => userId === id);
+};

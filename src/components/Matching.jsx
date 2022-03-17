@@ -1,24 +1,20 @@
 import MatchedUser from "./matching/MatchedUser";
 import "./matching/matching.scss";
-import { getAge } from "../utils/matchingUtil";
+import { getAge, getUserById } from "../utils/matchingUtil";
 
 const Matches = (props) => {
   const { users } = props;
   // just for WiP
   const currentUserId = 1;
 
-  const findUserById = (id) => {
-    return users.find(({ userId }) => userId === id);
-  };
-
-  let currentUser = findUserById(currentUserId);
+  let currentUser = getUserById(currentUserId, users);
 
   // RETURNS ARRAY OF USERS THAT HAVE MATCHED EACHOTHER
   const matchFinder = (currentUser) => {
     // creates array of users that currentUser has liked.
     let matches = [...currentUser.matches];
     matches.forEach((id, i) => {
-      matches[i] = findUserById(id);
+      matches[i] = getUserById(id, users);
     });
     // returns array of users that also like currentUser.
     return matches.filter((user) => {
@@ -97,6 +93,9 @@ const Matches = (props) => {
           </div>
         );
       })}
+
+      <button>Pass</button>
+      <button>Like</button>
     </div>
   );
 };

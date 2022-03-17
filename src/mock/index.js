@@ -270,4 +270,4 @@ export const messages = [
 //   login: { email: "", password: "" },
 //   status: { type: "admin", blocked: false, lastLoginTimestamp: 0 },
 // },
-export const currentUserId = 2;
+export const currentUserId = 1;
