@@ -1,0 +1,10 @@
+.onBoarding > button {
+  margin-right: 10px;
+  width: 90px;
+  height: 30px;
+}
+
+.onBoarding {
+  display: flex;
+  justify-content: center;
+}
