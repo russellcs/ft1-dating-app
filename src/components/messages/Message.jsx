@@ -13,6 +13,7 @@ const Message = (props) => {
 			{message.content}
 			{message.content && <button onClick={isLikeClicked}>&#9829;</button>}
 			{likeClicked && <p>Message liked</p>}
+			<button>Delete</button>
 		</div>
 	);
 };

@@ -10,8 +10,6 @@ const Conversation = (props) => {
 	// Calls the function on Send button
 	const onMessageClick = () => onMessageSave();
 
-	const blockButtonText = blockClicked ? `Unblock user` : `Block user`;
-
 	const onInput = (e) => setDraft(e.target.value);
 	// Calls the addMessage function from App.js
 	const onMessageSave = () => {
@@ -31,15 +29,18 @@ const Conversation = (props) => {
 	// Toggles the Block button as well as calling the blockUserId function from App.js
 	const blockUser = () => {
 		setBlockClicked(blockClicked === false ? true : false);
-		props.blockUserId();
+		props.blockUserId(
+			props.conversation[0],
+			props.conversation[1][0].fromUserId
+		);
 	};
 
 	return (
-		<>
+		<div style={{ border: "solid 1px black", margin: "10px" }}>
 			<p>User ID is {props.conversation[0]}</p>
 			<Block
 				blockUser={blockUser}
-				blockButtonText={blockButtonText}
+				// blockButtonText={blockButtonText}
 				blockClicked={blockClicked}
 				users={props.users}
 			/>
@@ -51,7 +52,7 @@ const Conversation = (props) => {
 				onKeyDown={onKeyDown}
 				onMessageClick={onMessageClick}
 			/>
-		</>
+		</div>
 	);
 };
 

@@ -1,4 +1,4 @@
-export const messages2 = [
+export const messages = [
 	{
 		toUserId: 2,
 		fromUserId: 1,
