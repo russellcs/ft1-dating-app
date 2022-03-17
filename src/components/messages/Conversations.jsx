@@ -19,7 +19,7 @@ const Conversations = (props) => {
 
 	return (
 		<div>
-			{filteredConversations.map((conversation) => {
+			{filteredConversations.map((conversation, index) => {
 				return (
 					<Conversation
 						conversation={conversation}
@@ -29,6 +29,8 @@ const Conversations = (props) => {
 						blockClicked={props.blockClicked}
 						users={props.users}
 						blockUserId={props.blockUserId}
+						deleteMessage={props.deleteMessage}
+						key={index}
 					/>
 				);
 			})}

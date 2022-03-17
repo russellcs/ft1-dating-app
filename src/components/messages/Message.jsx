@@ -13,7 +13,15 @@ const Message = (props) => {
 			{message.content}
 			{message.content && <button onClick={isLikeClicked}>&#9829;</button>}
 			{likeClicked && <p>Message liked</p>}
-			<button>Delete</button>
+			<button
+				onClick={() => {
+					console.log("onclick called");
+					props.deleteMessage(message.messageId);
+				}}
+				style={{ display: "block" }}
+			>
+				Delete message
+			</button>
 		</div>
 	);
 };

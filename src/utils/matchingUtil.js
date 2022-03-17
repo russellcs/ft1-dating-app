@@ -18,3 +18,6 @@ export const getUserById = (id, users) => {
 export const getIndexById = (id, users) => {
 	return users.findIndex(({ userId }) => userId === id);
 };
+export const getMessageIndexById = (id, messages) => {
+	return messages.findIndex(({ messageId }) => messageId === id);
+};
