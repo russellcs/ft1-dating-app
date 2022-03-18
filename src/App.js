@@ -60,25 +60,30 @@ const App = () => {
 		setMessages(messagesCopy);
 	};
 
-	return (
-		<>
-			<button
-				onClick={() => {
-					localStorage.clear();
-				}}
-			>
-				Clear localStorage
-			</button>
-			<Interface
-				users={users}
-				messages={messages}
-				addMessage={addMessage}
-				onLikeUpdate={onLikeUpdate}
-				blockUserId={blockUserId}
-				deleteMessage={deleteMessage}
-			/>
-		</>
-	);
+  const addUser = (newUser) => {
+    const usersCopy = [...users];
+    usersCopy.push(newUser);
+    setUsers(usersCopy);
+  };
+
+  return (
+    <>
+      <button
+        onClick={() => {
+          localStorage.clear();
+        }}
+      >
+        Clear localStorage
+      </button>
+      <Interface
+        users={users}
+        messages={messages}
+        addMessage={addMessage}
+        onLikeUpdate={onLikeUpdate}
+        blockUserId={blockUserId}
+      />
+    </>
+  );
 };
 
 export default App;

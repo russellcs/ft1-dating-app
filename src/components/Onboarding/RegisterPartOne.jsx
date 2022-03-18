@@ -1,3 +1,5 @@
+import { errorCodes } from "../../config/formConfig";
+
 const RegisterPartOne = (props) => {
   const {
     email: emailErrors,
@@ -5,8 +7,6 @@ const RegisterPartOne = (props) => {
     firstName: firstNameErrors,
     lastName: lastNameErrors,
   } = props.errors;
-
-  console.log(props.newUserData);
 
   return (
     <>
@@ -16,7 +16,7 @@ const RegisterPartOne = (props) => {
           <label>
             Email Address:
             <input type="email" placeholder="Email" name="email" />
-            <p>{emailErrors}</p>
+            <p>{emailErrors && errorCodes.email}</p>
           </label>
         </div>
         <div className="formRow">
@@ -29,7 +29,7 @@ const RegisterPartOne = (props) => {
               minLength="8"
               required
             />
-            <p>{passwordErrors}</p>
+            <p>{passwordErrors} </p>
           </label>
         </div>
         <div className="formRow">
@@ -37,14 +37,14 @@ const RegisterPartOne = (props) => {
             First Name:
             <input type="name" placeholder="First Name" name="firstName" />
           </label>
-          <p>{firstNameErrors}</p>
+          <p>{firstNameErrors && errorCodes.firstName}</p>
         </div>
         <div className="formRow">
           <label>
             Last Name:
             <input type="name" placeholder="Last Name" name="lastName" />
           </label>
-          <p>{lastNameErrors}</p>
+          <p>{lastNameErrors && errorCodes.lastName}</p>
         </div>
         <nav>
           {Object.keys(props.newUserData).length > 1 &&

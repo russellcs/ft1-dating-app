@@ -7,12 +7,13 @@ const RegisterPartThree = (props) => {
     wantKids: wantKidsErrors,
     religion: religionErrors,
   } = props.errors;
+
   return (
     <>
       <h1>a few more details...</h1>
       <div className="formRow">
         <label>
-          Smokes?:
+          Do you smoke?:
           <select defaultValue="" name="smokes">
             <option value="" disabled>
               Select
@@ -23,7 +24,7 @@ const RegisterPartThree = (props) => {
               </option>
             ))}
           </select>
-          <p>{smokesErrors}</p>
+          <p>{smokesErrors && "Please select your smoking preference"}</p>
         </label>
       </div>
       <div className="formRow">
@@ -38,7 +39,7 @@ const RegisterPartThree = (props) => {
             <option value="2">Prefer not to say</option>
           </select>
         </label>
-        <p>{haveKidsErrors}</p>
+        <p>{haveKidsErrors && "Please select if you have any kids"}</p>
       </div>
       <div className="formRow">
         <label>
@@ -53,7 +54,9 @@ const RegisterPartThree = (props) => {
               </option>
             ))}
           </select>
-          <p>{wantKidsErrors}</p>
+          <p>
+            {wantKidsErrors && "Please select if you want kids in the future"}
+          </p>
         </label>
       </div>
       <div className="formRow">
@@ -69,15 +72,25 @@ const RegisterPartThree = (props) => {
               </option>
             ))}
           </select>
-          <p>{religionErrors}</p>
+          <p>{religionErrors && "Please select your religion"}</p>
         </label>
       </div>
       <nav>
         <button className="backButton" onClick={() => props.setRegScreen(1)}>
           Back
         </button>
+        {smokesErrors === undefined &&
+          haveKidsErrors === undefined &&
+          wantKidsErrors === undefined &&
+          religionErrors === undefined && (
+            <button
+              className="nextButton"
+              onClick={() => props.setRegScreen(3)}
+            >
+              Next
+            </button>
+          )}
       </nav>
-      <input className="submit" type="submit" value="Register"></input>
     </>
   );
 };
