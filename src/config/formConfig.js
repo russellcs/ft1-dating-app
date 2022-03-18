@@ -39,6 +39,19 @@ export const errorCodes = {
   gender: "Please select your gender",
   postcode: "Please enter a valid UK postcde",
   height: "Please enter your height in cm",
+  smokes: "Please select your smoking preference",
+  haveKids: "Please select if you have any kids",
+  wantKids: "Please select if you want kids in the future",
+  religion: "Please select your religion",
+  relationship: "Please select what type of relationship you are looking for",
+  genderPref: "Please select your gender preference",
+  minAge: "Please enter a valid minimum age you would consider",
+  maxAge: "Please enter a valid maximum age you would consider",
+  acceptedDistance:
+    "Please enter the maximum distance you would be willing to travel",
+  kidsAccepted: "Please select if you would consider matches that have kids",
+  smokersPref: "Please select if you want to be matched with smokers",
+  // minHeight: "Height must be higher than 0cm and lower than 252cm",
 };
 
 export const wantKids = [
@@ -100,6 +113,7 @@ export const schema = {
   acceptedDistance: Joi.number().integer().positive().required(),
   kidsAccepted: Joi.required(),
   smokersPref: Joi.required(),
+  mininumHeight: Joi.number().required(),
 };
 
 //Add validation for select options
