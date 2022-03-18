@@ -1,30 +1,30 @@
 export const users = [
-	// NEED:
-	// Preferences form (check-boxes?):
-	//   // Interest in: gender(s) (array)
-	//   // Age range?
-	//   // height range?
-	//   // smokers ok? (boolean)
-	//   // religions? (array, default ALL)
-	//   // kids ok? (boolean)
+  // NEED:
+  // Preferences form (check-boxes?):
+  //   // Interest in: gender(s) (array)
+  //   // Age range?
+  //   // height range?
+  //   // smokers ok? (boolean)
+  //   // religions? (array, default ALL)
+  //   // kids ok? (boolean)
 
-	// Option to show on profile for some personal details?:
-	// // Religion, haveKids, smoker, lifestyles
-	// [force answer but give option to hide on profile?]
-	// [OR: allow no answer and always show on profile if answered]
-	// [OR: allow no answer AND give option to hide on profile if answered?]
+  // Option to show on profile for some personal details?:
+  // // Religion, haveKids, smoker, lifestyles
+  // [force answer but give option to hide on profile?]
+  // [OR: allow no answer and always show on profile if answered]
+  // [OR: allow no answer AND give option to hide on profile if answered?]
 
-	// REQUIRED OR POINTS?
-	// age/height/gender(/seen): required
-	// lifestyle: points
-	// religion: points
-	// has Kids: required? (but why would anyone say they have kids then? maybe scrap)
+  // REQUIRED OR POINTS?
+  // age/height/gender(/seen): required
+  // lifestyle: points
+  // religion: points
+  // has Kids: required? (but why would anyone say they have kids then? maybe scrap)
 
-	// CHANGE LIST:
-	// option to "not say" removed from PD.gender
-	// pref.gender made into array
-	// min/max age made into object
-	// added "seen" object
+  // CHANGE LIST:
+  // option to "not say" removed from PD.gender
+  // pref.gender made into array
+  // min/max age made into object
+  // added "seen" object
 
   {
     userId: 1,

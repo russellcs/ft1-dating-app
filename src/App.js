@@ -13,6 +13,7 @@ const App = () => {
 	const [users, setUsers] = useState(mockUsers);
 	const [messages, setMessages] = useState(mockMessages);
 
+
 	//set the state from the disk
 	// useEffect(() => {
 	// 	const data = getData();
@@ -62,8 +63,13 @@ const App = () => {
 
   const addUser = (newUser) => {
     const usersCopy = [...users];
-    usersCopy.push(newUser);
-    setUsers(usersCopy);
+    if (boolean) {
+      usersCopy.currentUser.likes.push(user.userId);
+      usersCopy.currentUser.seen.push(user.userId);
+    }
+    // add to seen
+    // potentially add to matches
+
   };
 
   return (
