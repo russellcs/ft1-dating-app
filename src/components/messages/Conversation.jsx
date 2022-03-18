@@ -28,6 +28,7 @@ const Conversation = (props) => {
 
 	// Toggles the Block button as well as calling the blockUserId function from App.js
 	const blockUser = () => {
+		console.log("block clicked");
 		setBlockClicked(blockClicked === false ? true : false);
 		props.blockUserId(
 			props.conversation[0],
@@ -36,7 +37,14 @@ const Conversation = (props) => {
 	};
 
 	return (
-		<div style={{ border: "solid 1px black", margin: "10px" }}>
+		<div
+			style={{
+				border: "solid 1px black",
+				margin: "10px",
+				padding: "10px",
+				width: "280px",
+			}}
+		>
 			<p>User ID is {props.conversation[0]}</p>
 			<Block
 				blockUser={blockUser}
@@ -44,8 +52,14 @@ const Conversation = (props) => {
 				blockClicked={blockClicked}
 				users={props.users}
 			/>
-			{props.conversation[1].map((message) => {
-				return <Message message={message} />;
+			{props.conversation[1].map((message, index) => {
+				return (
+					<Message
+						message={message}
+						deleteMessage={props.deleteMessage}
+						key={index}
+					/>
+				);
 			})}
 			<Input
 				onInput={onInput}

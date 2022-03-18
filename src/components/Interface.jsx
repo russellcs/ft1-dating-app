@@ -39,6 +39,7 @@ const Interface = (props) => {
 					onMessageUpdate={onMessageUpdate}
 					addMessage={props.addMessage}
 					blockUserId={props.blockUserId}
+					deleteMessage={props.deleteMessage}
 				/>
 			)}
 		</>

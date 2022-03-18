@@ -8,6 +8,7 @@ const Messaging = (props) => {
 				addMessage={props.addMessage}
 				blockUserId={props.blockUserId}
 				users={props.users}
+				deleteMessage={props.deleteMessage}
 			/>
 		</>
 	);
