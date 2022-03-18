@@ -69,8 +69,9 @@ const Preferences = (props) => {
             name="minimumHeight"
             placeholder="in cm"
             id="minimumHeight"
+            defaultValue="1"
           />
-          <p>{minimumHeightErrors}</p>
+          <p>{minimumHeightErrors && errorCodes.minHeight}</p>
         </label>
       </div>
       <div className="formRow">

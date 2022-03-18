@@ -51,7 +51,7 @@ export const errorCodes = {
     "Please enter the maximum distance you would be willing to travel",
   kidsAccepted: "Please select if you would consider matches that have kids",
   smokersPref: "Please select if you want to be matched with smokers",
-  // minHeight: "Height must be higher than 0cm and lower than 252cm",
+  minHeight: "Height must be higher than 0cm and lower than 252cm",
 };
 
 export const wantKids = [
@@ -113,7 +113,7 @@ export const schema = {
   acceptedDistance: Joi.number().integer().positive().required(),
   kidsAccepted: Joi.required(),
   smokersPref: Joi.required(),
-  mininumHeight: Joi.number().required(),
+  minimumHeight: Joi.number().required().positive().integer().default("1"),
 };
 
 //Add validation for select options

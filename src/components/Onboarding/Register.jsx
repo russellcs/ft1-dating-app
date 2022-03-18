@@ -72,8 +72,8 @@ const Register = (props) => {
   const onValidate = async (data) => {
     const _joiInstance = Joi.object(schema);
     try {
-      await _joiInstance.validateAsync(data);
-      // await _joiInstance.validateAsync(data, { abortEarly: false });
+      // await _joiInstance.validateAsync(data);
+      await _joiInstance.validateAsync(data, { abortEarly: false });
       setErrors({ errors: "" });
     } catch (errors) {
       setErrors(joiDataReorder(errors.details));
