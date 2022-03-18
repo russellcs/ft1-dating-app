@@ -32,7 +32,12 @@ export const users = [
     personalDetails: {
       name: { firstName: "Abdul", lastName: "Aroyo" },
       dob: { year: "1993", months: "12", day: "23" },
-      location: { town: "London", postCode: "se21 0pt" },
+      location: {
+        town: "London",
+        postCode: "se27 0sr",
+        longitude: -0.105,
+        latitude: 51.43,
+      },
       kids: undefined, // undefined: not saying, false: no, true: Yes
       religion: 7,
       height: 165,
@@ -41,12 +46,13 @@ export const users = [
     },
     preferences: {
       lifeStyle: { marriage: true, casual: false, openToKids: 1 },
-      age: { min: 24, max: 42 },
+      age: { min: 24, max: 42 }, //
       acceptedReligions: [],
-      height: { min: 130, max: 160 },
-      gender: [1],
+      height: { min: 130, max: 160 }, //
+      gender: [1], //
       kidsAccepted: 2, // 0: not saying, 2: not sure, 3: open to kids, 4: want kids
       smokers: false,
+      acceptedDistance: 20, //
     },
     seen: [],
     matches: [6, 3, 2],
@@ -61,7 +67,12 @@ export const users = [
     personalDetails: {
       name: { firstName: "Simone", lastName: "Duboir" },
       dob: { year: "1987", months: "3", day: "3" },
-      location: { town: "London", postCode: "n1" },
+      location: {
+        town: "London",
+        postCode: "n1 0sr",
+        longitude: -0.118,
+        latitude: 51.54,
+      },
       kids: false,
       religion: 1,
       height: 140,
@@ -76,6 +87,7 @@ export const users = [
       gender: [0, 1, 2, 3, 4],
       kidsAccepted: 4,
       smokers: true,
+      acceptedDistance: 10, //
     },
     seen: [],
     matches: [1, 3, 4, 5, 6], //ids
@@ -90,7 +102,12 @@ export const users = [
     personalDetails: {
       name: { firstName: "Dante", lastName: "Perry" },
       dob: { year: "1993", months: "7", day: "28" },
-      location: { town: "", postCode: "" },
+      location: {
+        town: "",
+        postCode: "SW19 1AA",
+        longitude: -0.1862,
+        latitude: 51.421,
+      },
       kids: false,
       religion: 1,
       height: 158,
@@ -105,6 +122,7 @@ export const users = [
       gender: [0],
       kidsAccepted: 2,
       smokers: true,
+      acceptedDistance: 10, //
     },
     seen: [],
     matches: [1, 2, 6], //ids
@@ -119,7 +137,12 @@ export const users = [
     personalDetails: {
       name: { firstName: "Jamari", lastName: "Zhang" },
       dob: { year: "1999", months: "1", day: "1" },
-      location: { town: "Guilford", postCode: "" },
+      location: {
+        town: "Guildford",
+        postCode: "GU1 4DN",
+        longitude: -0.5685,
+        latitude: 51.24,
+      },
       kids: false,
       religion: 4,
       height: 180,
@@ -134,6 +157,7 @@ export const users = [
       gender: [1, 2, 3],
       kidsAccepted: 3,
       smokers: true,
+      acceptedDistance: 10, //
     },
     seen: [],
     matches: [2, 1, 5], //ids
@@ -148,7 +172,12 @@ export const users = [
     personalDetails: {
       name: { firstName: "Araceli", lastName: "Trujilo" },
       dob: { year: "1988", months: "9", day: "19" },
-      location: { town: "London", postCode: "w1" },
+      location: {
+        town: "London",
+        postCode: "W1 0AA",
+        longitude: -0.134,
+        latitude: 51.517,
+      },
       kids: false,
       religion: 0,
       height: 155,
@@ -163,6 +192,7 @@ export const users = [
       gender: [0, 1],
       kidsAccepted: 0,
       smokers: true,
+      acceptedDistance: 10, //
     },
     seen: [],
     matches: [3, 6, 1], //ids
@@ -177,7 +207,12 @@ export const users = [
     personalDetails: {
       name: { firstName: "Hiro", lastName: "Nazuko" },
       dob: { year: "1997", months: "4", day: "4" },
-      location: { town: "London", postCode: "e2" },
+      location: {
+        town: "London",
+        postCode: "E2 8EA",
+        longitude: -0.076,
+        latitude: 51.315,
+      },
       kids: undefined,
       religion: 0,
       height: 155,
@@ -192,6 +227,7 @@ export const users = [
       gender: [0],
       kidsAccepted: 0,
       smokers: false,
+      acceptedDistance: 10, //
     },
     seen: [],
     matches: [1, 3, 4], //ids
@@ -203,42 +239,42 @@ export const users = [
 ];
 
 export const messages = [
-	{
-		toUserId: 2,
-		fromUserId: 1,
-		messageId: 1,
-		content: "Hello user 2",
-		sendTimestamp: 0,
-		read: false,
-		blocked: false,
-	},
-	{
-		toUserId: 1,
-		fromUserId: 2,
-		messageId: 2,
-		content: "Hello user 3",
-		sendTimestamp: 0,
-		read: false,
-		blocked: false,
-	},
-	{
-		toUserId: 4,
-		fromUserId: 1,
-		messageId: 3,
-		content: "Hello user 4",
-		sendTimestamp: 0,
-		read: false,
-		blocked: false,
-	},
-	{
-		toUserId: 5,
-		fromUserId: 1,
-		messageId: 4,
-		content: "Hello user 5",
-		sendTimestamp: 0,
-		read: false,
-		blocked: false,
-	},
+  {
+    toUserId: 2,
+    fromUserId: 1,
+    messageId: 1,
+    content: "Hello user 2",
+    sendTimestamp: 0,
+    read: false,
+    blocked: false,
+  },
+  {
+    toUserId: 1,
+    fromUserId: 2,
+    messageId: 2,
+    content: "Hello user 3",
+    sendTimestamp: 0,
+    read: false,
+    blocked: false,
+  },
+  {
+    toUserId: 4,
+    fromUserId: 1,
+    messageId: 3,
+    content: "Hello user 4",
+    sendTimestamp: 0,
+    read: false,
+    blocked: false,
+  },
+  {
+    toUserId: 5,
+    fromUserId: 1,
+    messageId: 4,
+    content: "Hello user 5",
+    sendTimestamp: 0,
+    read: false,
+    blocked: false,
+  },
 ];
 
 export const currentUserId = 1;
