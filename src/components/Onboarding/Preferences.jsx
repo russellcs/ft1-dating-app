@@ -23,7 +23,7 @@ const Preferences = (props) => {
             <option value="" disabled>
               Select
             </option>
-            <option value="0">Marriage</option>
+            <option value="0">Serrious</option>
             <option value="1">Casual</option>
             <option value="2">Open to both</option>
           </select>
