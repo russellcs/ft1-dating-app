@@ -52,6 +52,7 @@ const App = () => {
       usersCopy.currentUser.likes.push(user.userId);
       usersCopy.currentUser.seen.push(user.userId);
     }
+    // check if users Match -> add respective IDs in respective {match}
   };
 
   const deleteMessage = (messageId) => {

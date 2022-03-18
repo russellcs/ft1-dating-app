@@ -242,43 +242,46 @@ const Matches = (props) => {
       : 1;
   };
 
+  const filteredUsers = [...users];
+  filteredUsers
+    .splice(
+      users.findIndex((user) => user === currentUser),
+      1
+    )
+    .filter(potentialMatchFilter)
+    .sort(potentialMatchSorter);
+
   return (
     <>
       <Search
         setFilterOptions={setFilterOptions}
         filterOptions={filterOptions}
       />
+
       <div className="userCardContainer">
-        {users
-          .filter(potentialMatchFilter)
-          // .splice(
-          //   users.findIndex((user) => user === currentUser),
-          //   1
-          // )
-          .sort(potentialMatchSorter)
-          .map((user, i) => {
-            return (
-              <>
-                <div className="userCard" key={i}>
-                  <MatchedUser user={user} />
-                </div>
+        {filteredUsers.map((user, i) => {
+          return (
+            <>
+              <div className="userCard" key={i}>
+                <MatchedUser user={user} />
+              </div>
 
-                <button
-                  key={`pass${i}`}
-                  onClick={() => props.onLikeUpdate(user, false)}
-                >
-                  Pass
-                </button>
+              <button
+                key={`pass${i}`}
+                onClick={() => props.onLikeUpdate(user, false)}
+              >
+                Pass
+              </button>
 
-                <button
-                  key={`like${i}`}
-                  onClick={() => props.onLikeUpdate(user, true)}
-                >
-                  Like
-                </button>
-              </>
-            );
-          })}
+              <button
+                key={`like${i}`}
+                onClick={() => props.onLikeUpdate(user, true)}
+              >
+                Like
+              </button>
+            </>
+          );
+        })}
         {/* {Controls} */}
       </div>
     </>
