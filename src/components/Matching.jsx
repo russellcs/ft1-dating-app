@@ -1,8 +1,25 @@
 import MatchedUser from "./matching/MatchedUser";
 import "./matching/matching.scss";
-import { getAge, getUserById, distanceFilter, ageFilter } from "../utils/matching";
+import {
+  getAge,
+  getUserById,
+  distanceFilter,
+  ageFilter,
+} from "../utils/matching";
+import Search from "./Search";
+import { useState } from "react";
 
 const Matches = (props) => {
+  const [filterOptions, setFilterOptions] = useState({
+    // seenFilter: true,
+    // genderFilter: true,
+    // heightFilter: true,
+    // existingKidsFilter: true,
+    // openToKidsFilter: true,
+    distanceFilter: true,
+    ageFilter: true,
+  });
+
   const { users } = props;
   // just for WiP
   const currentUserId = 1;
@@ -105,14 +122,26 @@ const Matches = (props) => {
   };
 
   const potentialMatchFilter = (user) => {
-    return (
-      seenFilter(user) &&
-      genderFilter(user) &&
-      ageFilter(currentUser, user) &&
-      heightFilter(user) &&
-      // existingKidsFilter(user) &&
-      openToKidsFilter(user)
-    );
+    // if (filterOptions.seenFilter) {
+    //   filteredUser = seenFilter(filteredUser);
+    // }
+    // if (filterOptions.genderFilter) {
+    //   filteredUser = genderFilter(filteredUser);
+    // }
+    // if (filterOptions.heightFilter) {
+    //   filteredUser = heightFilter(filteredUser);
+    // }
+    // if (filterOptions.existingKidsFilter) {
+    //   filteredUser = existingKidsFilter(filteredUser);
+    // }
+    // if (filterOptions.openToKidsFilter) {
+    //   filteredUser = openToKidsFilter(filteredUser);
+    // }
+    return filterOptions.distanceFilter && !distanceFilter(currentUser, user)
+      ? false
+      : filterOptions.ageFilter && !ageFilter(currentUser, user)
+      ? false
+      : true;
   };
 
   // potentialMatchDisplayer = DISPLAY oUSER PROFILE -> btnLike / btnPass
@@ -214,39 +243,45 @@ const Matches = (props) => {
   };
 
   return (
-    <div className="userCardContainer">
-      {users
-        .filter(potentialMatchFilter)
-        // .splice(
-        //   users.findIndex((user) => user === currentUser),
-        //   1
-        // )
-        .sort(potentialMatchSorter)
-        .map((user, i) => {
-          return (
-            <>
-              <div className="userCard" key={i}>
-                <MatchedUser user={user} />
-              </div>
+    <>
+      <Search
+        setFilterOptions={setFilterOptions}
+        filterOptions={filterOptions}
+      />
+      <div className="userCardContainer">
+        {users
+          .filter(potentialMatchFilter)
+          // .splice(
+          //   users.findIndex((user) => user === currentUser),
+          //   1
+          // )
+          .sort(potentialMatchSorter)
+          .map((user, i) => {
+            return (
+              <>
+                <div className="userCard" key={i}>
+                  <MatchedUser user={user} />
+                </div>
 
-              <button
-                key={`pass${i}`}
-                onClick={() => props.onLikeUpdate(user, false)}
-              >
-                Pass
-              </button>
+                <button
+                  key={`pass${i}`}
+                  onClick={() => props.onLikeUpdate(user, false)}
+                >
+                  Pass
+                </button>
 
-              <button
-                key={`like${i}`}
-                onClick={() => props.onLikeUpdate(user, true)}
-              >
-                Like
-              </button>
-            </>
-          );
-        })}
-      {/* {Controls} */}
-    </div>
+                <button
+                  key={`like${i}`}
+                  onClick={() => props.onLikeUpdate(user, true)}
+                >
+                  Like
+                </button>
+              </>
+            );
+          })}
+        {/* {Controls} */}
+      </div>
+    </>
   );
 };
 

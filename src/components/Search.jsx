@@ -3,22 +3,22 @@ import { getAge } from "../utils/matching";
 import { findDistanceFromLongsAndLats } from "../utils/general";
 
 const Search = (props) => {
-  const { users } = props;
+  // const { users } = props;
 
-  // preferences of user
-  const { height, age, kidsAccepted, acceptedDistance } = users[0].preferences;
+  // // preferences of user
+  // const { height, age, kidsAccepted, acceptedDistance } = users[0].preferences;
 
-  const acceptedReligions = [...props.users[0].preferences.acceptedReligions];
+  // const acceptedReligions = [...props.users[0].preferences.acceptedReligions];
 
-  let potentialMatches = [...users];
+  // let potentialMatches = [...users];
 
-  // filter height
-  potentialMatches = potentialMatches.filter((item) => {
-    return (
-      item.personalDetails.height > height.min &&
-      item.personalDetails.height < height.max
-    );
-  });
+  // // filter height
+  // potentialMatches = potentialMatches.filter((item) => {
+  //   return (
+  //     item.personalDetails.height > height.min &&
+  //     item.personalDetails.height < height.max
+  //   );
+  // });
 
   // filter age ( loosely )
   // potentialMatches = potentialMatches.filter((item) => {
@@ -51,20 +51,50 @@ const Search = (props) => {
   //   return findDistanceFromLongsAndLats(userLocation, users.personalDetails.location) < acceptedDistance;
   // })
 
-
-
   return (
     <>
       <h2>Find your someone:</h2>
       <p>search below for your perfect match</p>
-      <button>Remove Age filter</button>
-      <button>Remove Gender filter</button>
-      <button>Remove Height filter</button>
-      <button>Remove Location filter</button>
+      <button
+        onClick={() => {
+          const newState = { ...props.filterOptions };
+          newState.ageFilter = !newState.ageFilter;
+          props.setFilterOptions(newState);
+        }}
+      >
+        Remove Age filter
+      </button>
+      <button
+        onClick={() => {
+          const newState = { ...props.filterOptions };
+          newState.genderFilter = !newState.genderFilter;
+          props.setFilterOptions(newState);
+        }}
+      >
+        Remove Gender filter
+      </button>
+      <button
+        onClick={() => {
+          const newState = { ...props.filterOptions };
+          newState.heightFilter = !newState.heightFilter;
+          props.setFilterOptions(newState);
+        }}
+      >
+        Remove Height filter
+      </button>
+      <button
+        onClick={() => {
+          const newState = { ...props.filterOptions };
+          newState.distanceFilter = !newState.distanceFilter;
+          props.setFilterOptions(newState);
+        }}
+      >
+        Remove Location filter
+      </button>
       {/* <button>Order by location</button> */}
       {/* <input type="text"></input> */}
 
-      <DisplayMatches users={potentialMatches} />
+      {/* <DisplayMatches users={potentialMatches} /> */}
     </>
   );
 };

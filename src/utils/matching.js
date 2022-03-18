@@ -34,7 +34,6 @@ export const distanceCheck = (user1, user2) => {
   const user1Location = user1.personalDetails.location;
   const user1AcceptedDistance = user1.preferences.acceptedDistance;
   const user2Location = user2.personalDetails.location;
-
   return (
     findDistanceFromLongsAndLats(user1Location, user2Location) <
     user1AcceptedDistance
