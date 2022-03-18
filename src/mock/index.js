@@ -1,36 +1,36 @@
 export const users = [
-  // NEED:
-  // Preferences form (check-boxes?):
-  //   // Interest in: gender(s) (array)
-  //   // Age range?
-  //   // height range?
-  //   // smokers ok? (boolean)
-  //   // religions? (array, default ALL)
-  //   // kids ok? (boolean)
+	// NEED:
+	// Preferences form (check-boxes?):
+	//   // Interest in: gender(s) (array)
+	//   // Age range?
+	//   // height range?
+	//   // smokers ok? (boolean)
+	//   // religions? (array, default ALL)
+	//   // kids ok? (boolean)
 
-  // Option to show on profile for some personal details?:
-  // // Religion, haveKids, smoker, lifestyles
-  // [force answer but give option to hide on profile?]
-  // [OR: allow no answer and always show on profile if answered]
-  // [OR: allow no answer AND give option to hide on profile if answered?]
+	// Option to show on profile for some personal details?:
+	// // Religion, haveKids, smoker, lifestyles
+	// [force answer but give option to hide on profile?]
+	// [OR: allow no answer and always show on profile if answered]
+	// [OR: allow no answer AND give option to hide on profile if answered?]
 
-  // REQUIRED OR POINTS?
-  // age/height/gender(/seen): required
-  // lifestyle: points
-  // religion: points
-  // has Kids: required? (but why would anyone say they have kids then? maybe scrap)
+	// REQUIRED OR POINTS?
+	// age/height/gender(/seen): required
+	// lifestyle: points
+	// religion: points
+	// has Kids: required? (but why would anyone say they have kids then? maybe scrap)
 
-  // CHANGE LIST:
-  // option to "not say" removed from PD.gender
-  // pref.gender made into array
-  // min/max age made into object
-  // added "seen" object
+	// CHANGE LIST:
+	// option to "not say" removed from PD.gender
+	// pref.gender made into array
+	// min/max age made into object
+	// added "seen" object
 
   {
     userId: 1,
     signUpDate: 0,
     personalDetails: {
-      name: { firstName: "Abdul", lastName: "Aroyo" },
+      name: { firstName: "1Abdul", lastName: "Aroyo" },
       dob: { year: "1993", months: "12", day: "23" },
       location: {
         town: "London",
@@ -65,7 +65,7 @@ export const users = [
     userId: 2,
     signUpDate: 0,
     personalDetails: {
-      name: { firstName: "Simone", lastName: "Duboir" },
+      name: { firstName: "2Simone", lastName: "Duboir" },
       dob: { year: "1987", months: "3", day: "3" },
       location: {
         town: "London",
@@ -80,7 +80,7 @@ export const users = [
       smokers: 0,
     },
     preferences: {
-      lifeStyle: { marriage: true, casual: undefined, openToKids: 3 },
+      lifeStyle: { marriage: true, casual: false, openToKids: 3 },
       age: { min: 28, max: 45 },
       acceptedReligions: [1, 2],
       height: { min: 100, max: 210 },
@@ -89,7 +89,7 @@ export const users = [
       smokers: true,
       acceptedDistance: 10, //
     },
-    seen: [],
+    seen: [1, 3, 5, 2, 3],
     matches: [1, 3, 4, 5, 6], //ids
     likes: [],
     blocked: [], //ids
@@ -100,7 +100,7 @@ export const users = [
     userId: 3,
     signUpDate: 0,
     personalDetails: {
-      name: { firstName: "Dante", lastName: "Perry" },
+      name: { firstName: "3Dante", lastName: "Perry" },
       dob: { year: "1993", months: "7", day: "28" },
       location: {
         town: "",
@@ -135,7 +135,7 @@ export const users = [
     userId: 4,
     signUpDate: 0,
     personalDetails: {
-      name: { firstName: "Jamari", lastName: "Zhang" },
+      name: { firstName: "4Jamari", lastName: "Zhang" },
       dob: { year: "1999", months: "1", day: "1" },
       location: {
         town: "Guildford",
@@ -170,7 +170,7 @@ export const users = [
     userId: 5,
     signUpDate: 0,
     personalDetails: {
-      name: { firstName: "Araceli", lastName: "Trujilo" },
+      name: { firstName: "5Araceli", lastName: "Trujilo" },
       dob: { year: "1988", months: "9", day: "19" },
       location: {
         town: "London",
@@ -205,7 +205,7 @@ export const users = [
     userId: 6,
     signUpDate: 0,
     personalDetails: {
-      name: { firstName: "Hiro", lastName: "Nazuko" },
+      name: { firstName: "6Hiro", lastName: "Nazuko" },
       dob: { year: "1997", months: "4", day: "4" },
       location: {
         town: "London",
@@ -220,7 +220,7 @@ export const users = [
       smokers: 3,
     },
     preferences: {
-      lifeStyle: { marriage: true, casual: false, openToKids: 4 },
+      lifeStyle: { marriage: false, casual: true, openToKids: 4 },
       age: { min: 21, max: 30 },
       acceptedReligions: [],
       height: { min: 120, max: 165 },
