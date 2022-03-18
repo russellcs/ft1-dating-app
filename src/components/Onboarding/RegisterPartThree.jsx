@@ -7,6 +7,7 @@ const RegisterPartThree = (props) => {
     wantKids: wantKidsErrors,
     religion: religionErrors,
   } = props.errors;
+
   return (
     <>
       <h1>a few more details...</h1>

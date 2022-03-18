@@ -1,3 +1,5 @@
+import { errorCodes } from "../../config/formConfig";
+
 const RegisterPartOne = (props) => {
   const {
     email: emailErrors,
@@ -14,7 +16,7 @@ const RegisterPartOne = (props) => {
           <label>
             Email Address:
             <input type="email" placeholder="Email" name="email" />
-            <p>{emailErrors && "Please enter a valid email address"}</p>
+            <p>{emailErrors && errorCodes.email}</p>
           </label>
         </div>
         <div className="formRow">
@@ -35,14 +37,14 @@ const RegisterPartOne = (props) => {
             First Name:
             <input type="name" placeholder="First Name" name="firstName" />
           </label>
-          <p>{firstNameErrors && "Please enter your first name"}</p>
+          <p>{firstNameErrors && errorCodes.firstName}</p>
         </div>
         <div className="formRow">
           <label>
             Last Name:
             <input type="name" placeholder="Last Name" name="lastName" />
           </label>
-          <p>{lastNameErrors && "Please enter your last name"}</p>
+          <p>{lastNameErrors && errorCodes.lastName}</p>
         </div>
         <nav>
           {Object.keys(props.newUserData).length > 1 &&

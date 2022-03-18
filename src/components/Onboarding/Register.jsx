@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { schema, joiDataReorder } from "../../config/formConfig";
+import { schema, joiDataReorder, timeConverter } from "../../config/formConfig";
 import Joi from "joi";
 import RegisterPartOne from "./RegisterPartOne";
 import RegisterPartTwo from "./RegisterPartTwo";
@@ -19,11 +19,18 @@ const Register = (props) => {
           firstName: newUserData.firstName,
           lastName: newUserData.lastName,
         },
-        dob: { year: newUserData.dataOfBirth }, //this needs to be converted from unix
+        dob: timeConverter(newUserData.dataOfBirth),
       },
       location: { town: newUserData.town, postCode: newUserData.postCode },
+      kids: newUserData.haveKids,
+      religion: newUserData.religion,
+      height: newUserData.height,
+      gender: newUserData.gender,
+      smokers: newUserData.smokes,
     };
   };
+
+  console.log(timeConverter(919296000000));
 
   const onInput = (e) => {
     let value = e.target.value;

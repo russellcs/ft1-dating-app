@@ -34,17 +34,15 @@ const Preferences = (props) => {
         </label>
       </div>
       <div className="formRow">
-        <label>
-          Gender:
-          <select name="genderPref" multiple size="6">
-            {gendersPref.map((gender, index) => (
-              <option key={index} value={index}>
-                {gender}
-              </option>
-            ))}
-          </select>
-          <p>{genderPrefErrors && "Please select your gender preference"}</p>
-        </label>
+        <label>Gender:</label>
+        <select name="genderPref" multiple size="6">
+          {gendersPref.map((gender, index) => (
+            <option key={index} value={index}>
+              {gender}
+            </option>
+          ))}
+        </select>
+        <p>{genderPrefErrors && "Please select your gender preference"}</p>
       </div>
       <div className="formRow">
         <label>

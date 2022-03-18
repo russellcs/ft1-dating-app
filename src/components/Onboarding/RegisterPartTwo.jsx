@@ -1,4 +1,4 @@
-import { genders } from "../../config/formConfig";
+import { genders, errorCodes } from "../../config/formConfig";
 
 const RegisterPartTwo = (props) => {
   const {
@@ -16,9 +16,7 @@ const RegisterPartTwo = (props) => {
         <label>
           Date of Birth:
           <input type="date" name="dateOfBirth" />
-          <p>
-            {dateOfBirthErrors && "You must be over 18 years old to register"}
-          </p>
+          <p>{dateOfBirthErrors && errorCodes.dateOfBirth}</p>
         </label>
       </div>
       <div className="formRow">
@@ -34,7 +32,7 @@ const RegisterPartTwo = (props) => {
               </option>
             ))}
           </select>
-          <p>{genderErrors && "Please select your gender"}</p>
+          <p>{genderErrors && errorCodes.gender}</p>
         </label>
       </div>
       <div className="formRow">
@@ -44,13 +42,13 @@ const RegisterPartTwo = (props) => {
           <input type="name" name="postcode" placeholder="Postcode" />
         </label>
         <p>{townErrors && "Please enter your town"}</p>
-        <p>{postcodeErrors && "Please enter a valid UK postcode"}</p>
+        <p>{postcodeErrors && errorCodes.postcode}</p>
       </div>
       <div className="formRow">
         <label>
           Height:
-          <input type="number" placeholder="in cm" name="height" />
-          <p>{heightErrors && "Please enter your height in cm"}</p>
+          <input type="number" placeholder="in cm" name="height" id="height" />
+          <p>{heightErrors && errorCodes.height}</p>
         </label>
       </div>
       <nav>

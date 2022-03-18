@@ -31,6 +31,16 @@ export const religionsPref = [
   "Spiritism",
 ];
 
+export const errorCodes = {
+  lastName: "Please enter your last name",
+  email: "Please enter a valid email address",
+  firstName: "Please enter your first name",
+  dateOfBirth: "You must be over 18 years old to register",
+  gender: "Please select your gender",
+  postcode: "Please enter a valid UK postcde",
+  height: "Please enter your height in cm",
+};
+
 export const wantKids = [
   "Prefer not to say",
   "Don't want children",
@@ -105,4 +115,14 @@ export function joiDataReorder(details) {
   });
 
   return errorsMod;
+}
+
+export function timeConverter(UNIX_timestamp) {
+  const a = new Date(UNIX_timestamp);
+  var months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  var newYear = a.getFullYear();
+  var newMonth = months[a.getMonth()];
+  var newDate = a.getDate();
+  var time = { year: newYear, months: newMonth, day: newDate };
+  return time;
 }
