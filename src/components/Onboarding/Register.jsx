@@ -34,6 +34,16 @@ const Register = (props) => {
 
   const onInput = (e) => {
     let value = e.target.value;
+
+    console.log(e.target, e.target.value, e.target.selectedOptions);
+    if (e.target.name === "acceptedReligions") {
+      const religionArray = [];
+      for (let index = 0; index < e.target.selectedOptions.length; index++) {
+        religionArray.push(Number(e.target.selectedOptions[index].value));
+      }
+      value = religionArray;
+    }
+
     if (e.target.name === "dateOfBirth") {
       value = new Date(e.target.value).getTime();
     }
