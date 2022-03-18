@@ -14,21 +14,21 @@ const App = () => {
   const [users, setUsers] = useState(mockUsers);
   const [messages, setMessages] = useState(mockMessages);
 
-  // set the state from the disk
-  useEffect(() => {
-    const data = getData();
-    if (data.users && data.messages) {
-      setUsers(data.users);
-      setMessages(data.messages);
-    }
-  }, []);
-  // when the state changes, save the changes to the disk
-  useEffect(() => {
-    storeData("users", users);
-  }, [users]);
-  useEffect(() => {
-    storeData("messages", messages);
-  }, [messages]);
+  //   // set the state from the disk
+  //   useEffect(() => {
+  //     const data = getData();
+  //     if (data.users && data.messages) {
+  //       setUsers(data.users);
+  //       setMessages(data.messages);
+  //     }
+  //   }, []);
+  //   // when the state changes, save the changes to the disk
+  //   useEffect(() => {
+  //     storeData("users", users);
+  //   }, [users]);
+  //   useEffect(() => {
+  //     storeData("messages", messages);
+  //   }, [messages]);
 
   // const currentUser = getUserById(currentUserId, users);
 
