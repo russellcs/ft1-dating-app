@@ -72,8 +72,7 @@ const Matches = (props) => {
       ? false
       : filterOptions.heightFilter && !heightFilter(currentUser, user)
       ? false
-      : filterOptions.existingKidsFilter &&
-        !existingKidsFilter(currentUser, user)
+      : filterOptions.existingKidsFilter && !existingKidsFilter(currentUser, user)
       ? false
       : filterOptions.openToKidsFilter && !openToKidsFilter(currentUser, user)
       ? false
