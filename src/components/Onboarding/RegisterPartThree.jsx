@@ -1,4 +1,9 @@
-import { religions, wantKids, smokes } from "../../config/formConfig";
+import {
+  religions,
+  wantKids,
+  smokes,
+  errorCodes,
+} from "../../config/formConfig";
 
 const RegisterPartThree = (props) => {
   const {
@@ -24,7 +29,7 @@ const RegisterPartThree = (props) => {
               </option>
             ))}
           </select>
-          <p>{smokesErrors && "Please select your smoking preference"}</p>
+          <p>{smokesErrors && errorCodes.smokes}</p>
         </label>
       </div>
       <div className="formRow">
@@ -34,12 +39,12 @@ const RegisterPartThree = (props) => {
             <option value="" disabled>
               Select
             </option>
-            <option value="0">No</option>
-            <option value="1">Yes</option>
-            <option value="2">Prefer not to say</option>
+            <option value="0">Prefer not to say</option>
+            <option value="1">No</option>
+            <option value="2">Yes</option>
           </select>
         </label>
-        <p>{haveKidsErrors && "Please select if you have any kids"}</p>
+        <p>{haveKidsErrors && errorCodes.haveKids}</p>
       </div>
       <div className="formRow">
         <label>
@@ -54,9 +59,7 @@ const RegisterPartThree = (props) => {
               </option>
             ))}
           </select>
-          <p>
-            {wantKidsErrors && "Please select if you want kids in the future"}
-          </p>
+          <p>{wantKidsErrors && errorCodes.wantKids}</p>
         </label>
       </div>
       <div className="formRow">
@@ -72,7 +75,7 @@ const RegisterPartThree = (props) => {
               </option>
             ))}
           </select>
-          <p>{religionErrors && "Please select your religion"}</p>
+          <p>{religionErrors && errorCodes.religion}</p>
         </label>
       </div>
       <nav>

@@ -14,34 +14,51 @@ const Register = (props) => {
 
   const onSubmit = () => {
     const newUserStructured = {
+      // add userId
+      signUpData: Date.now(),
       personalDetails: {
         name: {
           firstName: newUserData.firstName,
           lastName: newUserData.lastName,
         },
         dob: timeConverter(newUserData.dataOfBirth),
+        location: { town: newUserData.town, postCode: newUserData.postCode },
+        kids: Number(newUserData.haveKids),
+        religion: newUserData.religion,
+        height: newUserData.height,
+        gender: newUserData.gender,
+        smokers: Number(newUserData.smokes),
       },
-      location: { town: newUserData.town, postCode: newUserData.postCode },
-      kids: newUserData.haveKids,
-      religion: newUserData.religion,
-      height: newUserData.height,
-      gender: newUserData.gender,
-      smokers: newUserData.smokes,
+      preferences: {
+        lifeStyle: { openToKids: Number(newUserData.kidsAccepted) }, // add other lifestyle
+        age: {
+          min: Number(newUserData.minAge),
+          max: Number(newUserData.maxAge),
+        },
+        acceptedReligions: newUserData.acceptedReligions,
+        height: {},
+      },
+      login: { email: newUserData.email, password: newUserData.password },
     };
   };
-
-  console.log(timeConverter(919296000000));
 
   const onInput = (e) => {
     let value = e.target.value;
 
-    console.log(e.target, e.target.value, e.target.selectedOptions);
     if (e.target.name === "acceptedReligions") {
       const religionArray = [];
       for (let index = 0; index < e.target.selectedOptions.length; index++) {
         religionArray.push(Number(e.target.selectedOptions[index].value));
       }
       value = religionArray;
+    }
+
+    if (e.target.name === "genderPref") {
+      const genderArray = [];
+      for (let index = 0; index < e.target.selectedOptions.length; index++) {
+        genderArray.push(Number(e.target.selectedOptions[index].value));
+      }
+      value = genderArray;
     }
 
     if (e.target.name === "dateOfBirth") {
