@@ -100,16 +100,16 @@ export const openToKidsFilter = (currentUser, user) => {
 	currentUser.preferences.lifeStyle.openToKids === 4 &&
 	user.preferences.lifeStyle.openToKids === 1
   ) {
-	console.log("cUser wants kids, user don't");
+	// console.log("cUser wants kids, user don't");
 	return false;
   } else if (
 	user.preferences.lifeStyle.openToKids === 4 &&
 	currentUser.preferences.lifeStyle.openToKids === 1
   ) {
-	console.log("cUser doesn't want kids, user does");
+	// console.log("cUser doesn't want kids, user does");
 	return false;
   } else {
-	console.log("kid want compatible");
+	// console.log("kid want compatible");
 	return true;
   }
 };

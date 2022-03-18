@@ -1,7 +1,6 @@
 import MatchedUser from "./matching/MatchedUser";
 import "./matching/matching.scss";
 import {
-  getAge,
   getUserById,
   distanceFilter,
   ageFilter,
@@ -184,6 +183,9 @@ const Matches = (props) => {
     filteredUsers.findIndex((user) => user === currentUser),
     1
   );
+  filteredUsers = filteredUsers
+    .filter(potentialMatchFilter)
+    .sort(potentialMatchSorter);
 
   return (
     <>
@@ -194,8 +196,8 @@ const Matches = (props) => {
 
       <div className="userCardContainer">
         {filteredUsers
-          .filter(potentialMatchFilter)
-          .sort(potentialMatchSorter)
+          // .filter(potentialMatchFilter)
+          // .sort(potentialMatchSorter)
           .map((user, i) => {
             return (
               <>
