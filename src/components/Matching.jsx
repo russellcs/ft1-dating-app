@@ -1,6 +1,6 @@
 import MatchedUser from "./matching/MatchedUser";
 import "./matching/matching.scss";
-import { getAge, getUserById } from "../utils/matchingUtil";
+import { getAge, getUserById, distanceFilter, ageFilter } from "../utils/matching";
 
 const Matches = (props) => {
   const { users } = props;
@@ -48,18 +48,6 @@ const Matches = (props) => {
       currentUser.preferences.gender.includes(user.personalDetails.gender) &&
       user.preferences.gender.includes(currentUser.personalDetails.gender)
     );
-  };
-
-  //age (range)
-  const ageFilter = (user) => {
-    // checks if user1's age is more/less than user2's prefered min/max age
-    const ageCheck = (user1, user2) => {
-      return getAge(user1) >= user2.preferences.age.min &&
-        getAge(user1) <= user2.preferences.age.max
-        ? true
-        : false;
-    };
-    return ageCheck(currentUser, user) && ageCheck(user, currentUser);
   };
 
   const heightFilter = (user) => {
@@ -120,7 +108,7 @@ const Matches = (props) => {
     return (
       seenFilter(user) &&
       genderFilter(user) &&
-      ageFilter(user) &&
+      ageFilter(currentUser, user) &&
       heightFilter(user) &&
       // existingKidsFilter(user) &&
       openToKidsFilter(user)

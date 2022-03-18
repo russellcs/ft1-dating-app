@@ -1,4 +1,4 @@
-import { getAge } from "../utils/matchingUtil";
+import { getAge } from "../utils/matching";
 
 const DisplayMatches = (props) => {
   return (

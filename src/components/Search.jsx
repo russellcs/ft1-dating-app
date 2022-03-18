@@ -1,6 +1,6 @@
 import DisplayMatches from "./displayMatches";
-import { getAge } from "../utils/matchingUtil";
-import { findDistanceFromLongsAndLats } from "../utils";
+import { getAge } from "../utils/matching";
+import { findDistanceFromLongsAndLats } from "../utils/general";
 
 const Search = (props) => {
   const { users } = props;
@@ -51,20 +51,7 @@ const Search = (props) => {
   //   return findDistanceFromLongsAndLats(userLocation, users.personalDetails.location) < acceptedDistance;
   // })
 
-  const distanceFilter = (user) => {
-    // checks if users location is more less than accepted distance
-    const distanceCheck = (user1, user2) => {
-      const user1Location = user1.personalDetails.location;
-      const user1AcceptedDistance = user1.preferences.acceptedDistance;
-      const user2Location = user2.personalDetails.location;
 
-      return (
-        findDistanceFromLongsAndLats(user1Location, user2Location) <
-        user1AcceptedDistance
-      );
-    };
-    return distanceCheck(currentUser, user) && distanceCheck(user, currentUser);
-  };
 
   return (
     <>

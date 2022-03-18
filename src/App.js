@@ -6,9 +6,9 @@ import {
   getIndexById,
   getMessageIndexById,
   getUserById,
-} from "./utils/matchingUtil";
+} from "./utils/matching";
 import { storeData, getData } from "./storage";
-import { getLngLat } from "./utils";
+import { getLngLat } from "./utils/general";
 
 const App = () => {
   const [users, setUsers] = useState(mockUsers);

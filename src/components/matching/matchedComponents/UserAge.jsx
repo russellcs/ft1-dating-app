@@ -1,5 +1,5 @@
 import { matchedIcons } from "../matchedIcons";
-import { getAge } from "../../../utils/matchingUtil";
+import { getAge } from "../../../utils/matching";
 
 const UserAge = (props) => {
   return (
