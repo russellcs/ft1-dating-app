@@ -228,13 +228,28 @@ const Matching = (props) => {
 
       // mcPointCalc is designed to take cUser and user in different orders, so that the values are easily changed inside.
       const mcPointCalc = (userA, userB) => {
-        console.log(userA, userB);
-        // if (
-        //   (userA.marriage && userA.casual) ||
-        //   (userB.marriage && userB.casual)
-        // ) {
-        //   return 10;
-        // }
+        console.log(userA, userB); // MC: MC Mc cM, mC: MC Mc mC, Cm: MC Mc mC
+        if (
+          //MC MC, mC mC, Mc Mc
+          (userA.marriage && userA.casual && userB.marriage && userB.casual) ||
+          (userA.marriage &&
+            !userA.casual &&
+            userB.marriage &&
+            !userB.casual) ||
+          (!userA.marriage && userA.casual && !userB.marriage && userB.casual)
+        ) {
+          return 10;
+        } else if (
+          //MC Mc, MC mC, Mc MC, mC MC,
+          (userA.marriage && userA.casual && userB.marriage && !userB.casual) ||
+          (userA.marriage && userA.casual && userB.marriage && userB.casual)
+        ) {
+          return 5;
+        } else {
+          // Mc cM, mC Mc
+          return -10;
+        }
+
         if (userA.marriage && userA.casual) {
           // userA wants marriage and casual
           return userB.marraige && userB.casual
