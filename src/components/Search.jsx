@@ -70,9 +70,10 @@ const Search = (props) => {
     <>
       <h2>Find your someone:</h2>
       <p>search below for your perfect match</p>
-      <button>Filter by age</button>
-      <button>Filter by height</button>
-      <button>Filter by kids</button>
+      <button>Remove Age filter</button>
+      <button>Remove Gender filter</button>
+      <button>Remove Height filter</button>
+      <button>Remove Location filter</button>
       {/* <button>Order by location</button> */}
       {/* <input type="text"></input> */}
 
