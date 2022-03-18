@@ -1,10 +1,13 @@
 import MatchedUser from "./matching/MatchedUser";
 import "./matching/matching.scss";
 import {
-  getAge,
   getUserById,
   distanceFilter,
   ageFilter,
+  genderFilter,
+  heightFilter,
+  existingKidsFilter,
+  openToKidsFilter,
 } from "../utils/matching";
 import Search from "./Search";
 import { useState } from "react";
@@ -12,10 +15,10 @@ import { useState } from "react";
 const Matching = (props) => {
   const [filterOptions, setFilterOptions] = useState({
     // seenFilter: true,
-    // genderFilter: true,
-    // heightFilter: true,
-    // existingKidsFilter: true,
-    // openToKidsFilter: true,
+    genderFilter: true,
+    heightFilter: true,
+    existingKidsFilter: true,
+    openToKidsFilter: true,
     distanceFilter: true,
     ageFilter: true,
   });
@@ -40,92 +43,23 @@ const Matching = (props) => {
   // };
 
   //seen
-  const seenFilter = (user) => {
+  const seenFilter = (currentUser, user) => {
     return currentUser.seen.includes(currentUser.userId) === false;
   };
 
-  //gender
-  const genderFilter = (user) => {
-    return (
-      currentUser.preferences.gender.includes(user.personalDetails.gender) &&
-      user.preferences.gender.includes(currentUser.personalDetails.gender)
-    );
-  };
-
-  const heightFilter = (user) => {
-    // checks if user1's height is more/less than user2's prefered min/max height
-    const heightCheck = (user1, user2) => {
-      return user1.personalDetails.height >= user2.preferences.height.min &&
-        user1.personalDetails.height <= user2.preferences.height.max
-        ? true
-        : false;
-    };
-    return heightCheck(currentUser, user) && heightCheck(user, currentUser);
-  };
-
-  //existing children
-  const existingKidsFilter = (user) => {
-    return (
-      (currentUser.personalDetails.kids === user.preferences.kidsAccepted &&
-        user.personalDetails.kids === currentUser.preferences.kidsAccepted) ||
-      currentUser.personalDetails.kids === undefined ||
-      user.personalDetails.kids === undefined
-    );
-  };
-
-  // filters out users that want kids from users that Don't want kids.
-  const openToKidsFilter = (user) => {
-    console.log(
-      "cUser: " +
-        currentUser.personalDetails.name.firstName +
-        " (" +
-        currentUser.preferences.lifeStyle.openToKids +
-        ") " +
-        " , user: " +
-        user.personalDetails.name.firstName +
-        " (" +
-        user.preferences.lifeStyle.openToKids +
-        ")"
-    );
-
-    if (
-      currentUser.preferences.lifeStyle.openToKids === 4 &&
-      user.preferences.lifeStyle.openToKids === 1
-    ) {
-      console.log("cUser wants kids, user don't");
-      return false;
-    } else if (
-      user.preferences.lifeStyle.openToKids === 4 &&
-      currentUser.preferences.lifeStyle.openToKids === 1
-    ) {
-      console.log("cUser doesn't want kids, user does");
-      return false;
-    } else {
-      console.log("kid want compatible");
-      return true;
-    }
-  };
-
   const potentialMatchFilter = (user) => {
-    // if (filterOptions.seenFilter) {
-    //   filteredUser = seenFilter(filteredUser);
-    // }
-    // if (filterOptions.genderFilter) {
-    //   filteredUser = genderFilter(filteredUser);
-    // }
-    // if (filterOptions.heightFilter) {
-    //   filteredUser = heightFilter(filteredUser);
-    // }
-    // if (filterOptions.existingKidsFilter) {
-    //   filteredUser = existingKidsFilter(filteredUser);
-    // }
-    // if (filterOptions.openToKidsFilter) {
-    //   filteredUser = openToKidsFilter(filteredUser);
-    // }
-    console.log("matchFilter activated");
+    // if (filterOptions.seenFilter) filteredUser = seenFilter(filteredUser)
     return filterOptions.distanceFilter && !distanceFilter(currentUser, user)
       ? false
       : filterOptions.ageFilter && !ageFilter(currentUser, user)
+      ? false
+      : filterOptions.genderFilter && !genderFilter(currentUser, user)
+      ? false
+      : filterOptions.heightFilter && !heightFilter(currentUser, user)
+      ? false
+      : filterOptions.existingKidsFilter && !existingKidsFilter(currentUser, user)
+      ? false
+      : filterOptions.openToKidsFilter && !openToKidsFilter(currentUser, user)
       ? false
       : true;
   };
@@ -300,12 +234,13 @@ const Matching = (props) => {
 
   let filteredUsers = [...users];
   filteredUsers.splice(
-    users.findIndex((user) => user === currentUser),
+    filteredUsers.findIndex((user) => user === currentUser),
     1
   );
-  filteredUsers = filteredUsers.sort(potentialMatchSorter);
-  // .filter(potentialMatchFilter)
-  // .sort(potentialMatchSorter);
+  filteredUsers = filteredUsers
+    .filter(potentialMatchFilter)
+    .sort(potentialMatchSorter);
+
 
   return (
     <>
@@ -315,29 +250,32 @@ const Matching = (props) => {
       />
 
       <div className="userCardContainer">
-        {filteredUsers.map((user, i) => {
-          return (
-            <>
-              <div className="userCard" key={i}>
-                <MatchedUser user={user} />
-              </div>
+        {filteredUsers
+          // .filter(potentialMatchFilter)
+          // .sort(potentialMatchSorter)
+          .map((user, i) => {
+            return (
+              <>
+                <div className="userCard" key={i}>
+                  <MatchedUser user={user} />
+                </div>
 
-              <button
-                key={`pass${i}`}
-                onClick={() => props.onLikeUpdate(user, false)}
-              >
-                Pass
-              </button>
+                <button
+                  key={`pass${i}`}
+                  onClick={() => props.onLikeUpdate(user, false)}
+                >
+                  Pass
+                </button>
 
-              <button
-                key={`like${i}`}
-                onClick={() => props.onLikeUpdate(user, true)}
-              >
-                Like
-              </button>
-            </>
-          );
-        })}
+                <button
+                  key={`like${i}`}
+                  onClick={() => props.onLikeUpdate(user, true)}
+                >
+                  Like
+                </button>
+              </>
+            );
+          })}
         {/* {Controls} */}
       </div>
     </>
