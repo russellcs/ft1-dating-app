@@ -1,4 +1,4 @@
-import { calculateAge } from "./utils/utils";
+import { getAge } from "../utils/matchingUtil";
 
 const DisplayMatches = (props) => {
   return (
@@ -9,7 +9,7 @@ const DisplayMatches = (props) => {
             <p>
               {item.personalDetails.name.firstName},{" "}
               {item.personalDetails.height}cm,{" "}
-              {calculateAge(item.personalDetails.dob.year)}, 
+              {getAge(item)}, 
               {item.personalDetails.religion}
               {false && item.personalDetails.kids}
               <button>Like</button>
