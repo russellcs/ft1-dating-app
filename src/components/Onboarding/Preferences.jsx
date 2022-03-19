@@ -15,9 +15,8 @@ const Preferences = (props) => {
     kidsAccepted: kidsAcceptedErrors,
     smokersPref: smokersPrefErrors,
     minimumHeight: minimumHeightErrors,
+    maximumHeight: maximumHeightErrors,
   } = props.errors;
-
-  console.log(props.errors);
 
   return (
     <>
@@ -63,15 +62,26 @@ const Preferences = (props) => {
       </div>
       <div className="formRow">
         <label>
-          Minimum height you would like (leave as 1 if no preference):
+          Minimum height you would like?:
           <input
             type="number"
             name="minimumHeight"
             placeholder="in cm"
             id="minimumHeight"
-            defaultValue="1"
           />
           <p>{minimumHeightErrors && errorCodes.minHeight}</p>
+        </label>
+      </div>
+      <div className="formRow">
+        <label>
+          Maximum height you would like?:
+          <input
+            type="number"
+            name="maximumHeight"
+            placeholder="in cm"
+            id="maximumHeight"
+          />
+          <p>{maximumHeightErrors && errorCodes.maximumHeight}</p>
         </label>
       </div>
       <div className="formRow">

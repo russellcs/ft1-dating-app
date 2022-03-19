@@ -38,7 +38,7 @@ export const errorCodes = {
   dateOfBirth: "You must be over 18 years old to register",
   gender: "Please select your gender",
   postcode: "Please enter a valid UK postcde",
-  height: "Please enter your height in cm",
+  height: "Please enter your height in cm", //should add logic for while range exists?
   smokes: "Please select your smoking preference",
   haveKids: "Please select if you have any kids",
   wantKids: "Please select if you want kids in the future",
@@ -113,7 +113,12 @@ export const schema = {
   acceptedDistance: Joi.number().integer().positive().required(),
   kidsAccepted: Joi.required(),
   smokersPref: Joi.required(),
-  minimumHeight: Joi.number().required().positive().integer().default("1"),
+  minimumHeight: Joi.number().required().positive().integer(),
+  maximumHeight: Joi.number()
+    .required()
+    .positive()
+    .integer()
+    .greater(Joi.ref("minumumHeight")),
 };
 
 //Add validation for select options
