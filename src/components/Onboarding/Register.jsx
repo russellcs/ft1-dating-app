@@ -13,6 +13,8 @@ const Register = (props) => {
   const [regScreen, setRegScreen] = useState(0);
 
   const onSubmit = () => {
+    // let lifeStyleRelationship = newUserData.relationship;
+    // lifeStyleRelationship.push({ openToKids: newUserData.wantKids });
     const newUserStructured = {
       // add userId
       signUpData: Date.now(),
@@ -21,25 +23,34 @@ const Register = (props) => {
           firstName: newUserData.firstName,
           lastName: newUserData.lastName,
         },
-        dob: timeConverter(newUserData.dataOfBirth),
+        dob: timeConverter(newUserData.dateOfBirth),
         location: { town: newUserData.town, postCode: newUserData.postCode },
         kids: Number(newUserData.haveKids),
-        religion: newUserData.religion,
-        height: newUserData.height,
-        gender: newUserData.gender,
+        religion: Number(newUserData.religion),
+        height: Number(newUserData.height),
+        gender: Number(newUserData.gender),
         smokers: Number(newUserData.smokes),
       },
       preferences: {
-        lifeStyle: { openToKids: Number(newUserData.kidsAccepted) }, // add other lifestyle
+        lifeStyle: newUserData.relationship, // can I push want kids to this?
         age: {
           min: Number(newUserData.minAge),
           max: Number(newUserData.maxAge),
         },
         acceptedReligions: newUserData.acceptedReligions,
-        height: {},
+        height: {
+          min: Number(newUserData.minHeight),
+          max: Number(newUserData.maxHeight),
+        },
+        gender: newUserData.genderPref,
+        kidsAccepted: Number(newUserData.kidsAccepted),
+        smokers: newUserData.smokersPref,
+        acceptedDistance: Number(newUserData.acceptedDistance),
       },
       login: { email: newUserData.email, password: newUserData.password },
+      status: { type: "member", lastLoginTimestamp: Date.now() },
     };
+    props.setRegisterUser(newUserStructured);
   };
 
   const onInput = (e) => {
@@ -64,6 +75,33 @@ const Register = (props) => {
     if (e.target.name === "dateOfBirth") {
       value = new Date(e.target.value).getTime();
     }
+
+    if ((e.target.name === "haveKids") & (value === "0")) {
+      value = undefined;
+    }
+
+    if (e.target.name === "haveKids" && value === "1") {
+      value = false;
+    }
+
+    if (e.target.name === "haveKids" && value === "2") {
+      value = true;
+    }
+    if (e.target.name === "relationship" && value === "0") {
+      value = { marriage: true, casual: false };
+    }
+    if (e.target.name === "relationship" && value === "1") {
+      value = { marriage: false, casual: true };
+    }
+    if (e.target.name === "relationship" && value === "2") {
+      value = { marriage: true, casual: true };
+    }
+    if (e.target.name === "smokersPref" && value === "0") {
+      value = true;
+    }
+    if (e.target.name === "smokersPref" && value === "1") {
+      value = false;
+    }
     const newState = { ...newUserData, [e.target.name]: value };
     setNewUserData(newState);
     onValidate(newState);
@@ -81,16 +119,12 @@ const Register = (props) => {
   };
 
   console.log(newUserData);
+  console.log(newUserData);
   // console.log(errors);
   return (
     <>
       <div className="containerReg">
-        <form
-          className="form"
-          onInput={onInput}
-          onSubmit={onSubmit}
-          name="registerForm"
-        >
+        <form className="form" onInput={onInput} name="registerForm">
           {regScreen === 0 && (
             <RegisterPartOne
               setRegScreen={setRegScreen}
@@ -105,7 +139,13 @@ const Register = (props) => {
             <RegisterPartThree setRegScreen={setRegScreen} errors={errors} />
           )}
           {regScreen === 3 && (
-            <Preferences setRegScreen={setRegScreen} errors={errors} />
+            <Preferences
+              setRegScreen={setRegScreen}
+              errors={errors}
+              onSubmit={onSubmit}
+              newUserData={newUserData}
+              setUserData={setNewUserData}
+            />
           )}
         </form>
       </div>

@@ -52,6 +52,7 @@ export const errorCodes = {
   kidsAccepted: "Please select if you would consider matches that have kids",
   smokersPref: "Please select if you want to be matched with smokers",
   minHeight: "Height must be higher than 0cm and lower than 252cm",
+  maxHeight: "Height must be higher than minimum height and lower than 252cm",
 };
 
 export const wantKids = [
@@ -113,15 +114,13 @@ export const schema = {
   acceptedDistance: Joi.number().integer().positive().required(),
   kidsAccepted: Joi.required(),
   smokersPref: Joi.required(),
-  minimumHeight: Joi.number().required().positive().integer(),
-  maximumHeight: Joi.number()
+  minHeight: Joi.number().required().positive().integer(),
+  maxHeight: Joi.number()
     .required()
     .positive()
     .integer()
-    .greater(Joi.ref("minumumHeight")),
+    .greater(Joi.ref("minHeight")),
 };
-
-//Add validation for select options
 
 export function joiDataReorder(details) {
   const errorsMod = {};
