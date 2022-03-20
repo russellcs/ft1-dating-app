@@ -40,3 +40,9 @@ nav {
 h1 {
   text-align: center;
 }
+
+.errorMessage {
+  font-style: italic;
+  font-size: 12px;
+  font-weight: 500;
+}

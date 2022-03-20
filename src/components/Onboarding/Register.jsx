@@ -87,21 +87,27 @@ const Register = (props) => {
     if (e.target.name === "haveKids" && value === "2") {
       value = true;
     }
+
     if (e.target.name === "relationship" && value === "0") {
       value = { marriage: true, casual: false };
     }
+
     if (e.target.name === "relationship" && value === "1") {
       value = { marriage: false, casual: true };
     }
+
     if (e.target.name === "relationship" && value === "2") {
       value = { marriage: true, casual: true };
     }
+
     if (e.target.name === "smokersPref" && value === "0") {
       value = true;
     }
+
     if (e.target.name === "smokersPref" && value === "1") {
       value = false;
     }
+
     const newState = { ...newUserData, [e.target.name]: value };
     setNewUserData(newState);
     onValidate(newState);
