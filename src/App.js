@@ -51,7 +51,7 @@ const App = () => {
       usersCopy.currentUser.matches.push(user.userId);
       usersCopy.user.matches.push(currentUser.userId); // push eachother's id's into their respective [matches]
       addMessage({
-        // & start convo
+        // & start convo.
         toUserId: user.userId,
         fromUserId: userId,
         messageId: getUniqueId(16),
