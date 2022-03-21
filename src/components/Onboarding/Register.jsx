@@ -6,17 +6,20 @@ import RegisterPartTwo from "./RegisterPartTwo";
 import RegisterPartThree from "./RegisterPartThree";
 import "../Onboarding/register.css";
 import Preferences from "./Preferences";
+import { getLngLat } from "../../utils/general";
 
 const Register = (props) => {
   const [newUserData, setNewUserData] = useState({});
   const [errors, setErrors] = useState({});
   const [regScreen, setRegScreen] = useState(0);
 
-  const onSubmit = () => {
-    // let lifeStyleRelationship = newUserData.relationship;
-    // lifeStyleRelationship.push({ openToKids: newUserData.wantKids });
+  const addNewUser = async () => {
+    let lifeStyleCombo = newUserData.relationship;
+    let openToKids = newUserData.wantKids;
+    lifeStyleCombo = { ...lifeStyleCombo, openToKids };
+    const coords = await getLngLat(newUserData.postCode);
     const newUserStructured = {
-      // add userId
+      userId: props.newUserId,
       signUpData: Date.now(),
       personalDetails: {
         name: {
@@ -24,7 +27,12 @@ const Register = (props) => {
           lastName: newUserData.lastName,
         },
         dob: timeConverter(newUserData.dateOfBirth),
-        location: { town: newUserData.town, postCode: newUserData.postCode },
+        location: {
+          town: newUserData.town,
+          postCode: newUserData.postCode,
+          longitude: coords.longitude,
+          latitude: coords.latitude,
+        },
         kids: Number(newUserData.haveKids),
         religion: Number(newUserData.religion),
         height: Number(newUserData.height),
@@ -32,7 +40,7 @@ const Register = (props) => {
         smokers: Number(newUserData.smokes),
       },
       preferences: {
-        lifeStyle: newUserData.relationship, // can I push want kids to this?
+        lifeStyle: lifeStyleCombo, // can I push want kids to this?
         age: {
           min: Number(newUserData.minAge),
           max: Number(newUserData.maxAge),
@@ -50,7 +58,7 @@ const Register = (props) => {
       login: { email: newUserData.email, password: newUserData.password },
       status: { type: "member", lastLoginTimestamp: Date.now() },
     };
-    props.setRegisterUser(newUserStructured);
+    props.addUser(newUserStructured);
   };
 
   const onInput = (e) => {
@@ -125,7 +133,7 @@ const Register = (props) => {
   };
 
   console.log(newUserData);
-  console.log(newUserData);
+  console.log(props);
   // console.log(errors);
   return (
     <>
@@ -148,7 +156,7 @@ const Register = (props) => {
             <Preferences
               setRegScreen={setRegScreen}
               errors={errors}
-              onSubmit={onSubmit}
+              addNewUser={addNewUser}
               newUserData={newUserData}
               setUserData={setNewUserData}
             />

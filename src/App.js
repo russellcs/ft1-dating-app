@@ -8,7 +8,7 @@ import {
   getUserById,
 } from "./utils/matching";
 import { storeData, getData } from "./storage";
-import { getLngLat } from "./utils/general";
+// import { getLngLat } from "./utils/general";
 
 const App = () => {
   const [users, setUsers] = useState(mockUsers);
@@ -64,12 +64,14 @@ const App = () => {
 
   const addUser = async (newUser) => {
     const usersCopy = [...users];
-    const coords = await getLngLat(newUser.personalDetails.location.postCode);
-    newUser.personalDetails.location.longitude = coords.longitude;
-    newUser.personalDetails.location.latitude = coords.latitude;
+    // const coords = await getLngLat(newUser.personalDetails.location.postCode);
+    // newUser.personalDetails.location.longitude = coords.longitude;
+    // newUser.personalDetails.location.latitude = coords.latitude;
     usersCopy.push(newUser);
     setUsers(usersCopy);
   };
+
+  let newUserId = users.length + 1;
 
   return (
     <>
@@ -86,6 +88,8 @@ const App = () => {
         addMessage={addMessage}
         onLikeUpdate={onLikeUpdate}
         blockUserId={blockUserId}
+        addUser={addUser}
+        newUserId={newUserId}
       />
     </>
   );

@@ -6,10 +6,10 @@ import "./Onboarding/onboarding.css";
 const Onboarding = (props) => {
   const [loggedStatus, setLoggedStatus] = useState(false);
   const [onBoardingScreen, setOnBoardingScreen] = useState();
-  const [registerUser, setRegisterUser] = useState();
 
   // console.log(loggedStatus);
-  console.log(registerUser);
+  console.log(props);
+
   return (
     <>
       <p>Onboarding</p>
@@ -19,7 +19,11 @@ const Onboarding = (props) => {
       </nav>
       <div>
         {onBoardingScreen === 0 && (
-          <Register users={props.users} setRegisterUser={setRegisterUser} />
+          <Register
+            users={props.users}
+            addUser={props.addUser}
+            newUserId={props.newUserId}
+          />
         )}
       </div>
       <div>

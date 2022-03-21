@@ -53,6 +53,7 @@ export const errorCodes = {
   smokersPref: "Please select if you want to be matched with smokers",
   minHeight: "Height must be higher than 0cm and lower than 252cm",
   maxHeight: "Height must be higher than minimum height and lower than 252cm",
+  acceptedReligions: "Please select religions you want to be matched with",
 };
 
 export const wantKids = [

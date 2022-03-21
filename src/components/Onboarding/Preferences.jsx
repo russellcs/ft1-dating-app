@@ -97,15 +97,16 @@ const Preferences = (props) => {
       <div className="formRow">
         <label>
           Religions you would be happy to match with:
-          <select name="acceptedReligions" multiple size="5">
-            <option>No Preference</option>
+          <select name="acceptedReligions" multiple size="10">
             {religionsPref.map((religion, index) => (
               <option key={index} value={index}>
                 {religion}
               </option>
             ))}
           </select>
-          <p className="errorMessage">{acceptedReligionsErrors}</p>
+          <p className="errorMessage">
+            {acceptedReligionsErrors && errorCodes.acceptedReligions}
+          </p>
         </label>
       </div>
       <div className="formRow">
@@ -149,7 +150,7 @@ const Preferences = (props) => {
           </p>
         </label>
       </div>
-      <button onClick={() => props.onSubmit()}>Register Now</button>
+      <button onClick={() => props.addNewUser()}>Register Now</button>
     </>
   );
 };
