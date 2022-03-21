@@ -41,7 +41,7 @@ const RegisterPartTwo = (props) => {
         <label>
           Location:
           <input type="name" name="town" placeholder="Town" />
-          <input type="name" name="postcode" placeholder="Postcode" />
+          <input type="name" name="postCode" placeholder="Postcode" />
         </label>
         <p>{townErrors && "Please enter your town"}</p>
         <p className="errorMessage">{postcodeErrors && errorCodes.postcode}</p>

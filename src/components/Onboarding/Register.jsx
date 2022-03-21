@@ -20,7 +20,7 @@ const Register = (props) => {
     const coords = await getLngLat(newUserData.postCode);
     const newUserStructured = {
       userId: props.newUserId,
-      signUpData: Date.now(),
+      signUpTimeStamp: Date.now(),
       personalDetails: {
         name: {
           firstName: newUserData.firstName,
@@ -59,6 +59,7 @@ const Register = (props) => {
       status: { type: "member", lastLoginTimestamp: Date.now() },
     };
     props.addUser(newUserStructured);
+    props.setScreen(1);
   };
 
   const onInput = (e) => {

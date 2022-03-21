@@ -97,7 +97,7 @@ export const schema = {
   dateOfBirth: Joi.number().max(eigthteenYearsAgo.getTime()).required(),
   gender: Joi.required(),
   town: Joi.string().alphanum().max(30).min(2).required(),
-  postcode: Joi.string().regex(RegExp(ukPostcode)).required(),
+  postCode: Joi.string().regex(RegExp(ukPostcode)).required(),
   height: Joi.number().less(252).greater(54).required(),
   smokes: Joi.required(),
   haveKids: Joi.required(),

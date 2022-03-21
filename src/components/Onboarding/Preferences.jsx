@@ -150,7 +150,14 @@ const Preferences = (props) => {
           </p>
         </label>
       </div>
-      <button onClick={() => props.addNewUser()}>Register Now</button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          props.addNewUser();
+        }}
+      >
+        Register Now
+      </button>
     </>
   );
 };

@@ -8,11 +8,13 @@ import {
   getUserById,
 } from "./utils/matching";
 import { storeData, getData } from "./storage";
-// import { getLngLat } from "./utils/general";
+import { getUniqueId } from "./utils/general";
 
 const App = () => {
   const [users, setUsers] = useState(mockUsers);
   const [messages, setMessages] = useState(mockMessages);
+  const [userId, setUserId] = useState(getUniqueId(16));
+  console.log(userId);
 
   //   // set the state from the disk
   //   useEffect(() => {
@@ -63,15 +65,17 @@ const App = () => {
   };
 
   const addUser = async (newUser) => {
+    console.log(newUser);
     const usersCopy = [...users];
     // const coords = await getLngLat(newUser.personalDetails.location.postCode);
     // newUser.personalDetails.location.longitude = coords.longitude;
     // newUser.personalDetails.location.latitude = coords.latitude;
     usersCopy.push(newUser);
+    console.log(usersCopy);
     setUsers(usersCopy);
   };
 
-  let newUserId = users.length + 1;
+  let newUserId = users.length + 1; // TBD
 
   return (
     <>

@@ -30,6 +30,7 @@ const Interface = (props) => {
           users={props.users}
           addUser={props.addUser}
           newUserId={props.newUserId}
+          setScreen={setScreen}
         />
       )}
 
