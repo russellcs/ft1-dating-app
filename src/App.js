@@ -7,58 +7,56 @@ import { storeData, getData } from "./storage";
 import { getUniqueId } from "./utils/general";
 
 const App = () => {
-
   const [users, setUsers] = useState(mockUsers);
   const [messages, setMessages] = useState(mockMessages);
   const [userId, setUserId] = useState(getUniqueId(16));
   console.log(userId);
 
+  //  set the state from the disk
+  useEffect(() => {
+    const data = getData();
+    if (data.users && data.messages) {
+      setUsers(data.users);
+      setMessages(data.messages);
+    }
+  }, []);
+  // when the state changes, save the changes to the disk
+  useEffect(() => {
+    storeData("users", users);
+  }, [users]);
+  useEffect(() => {
+    storeData("messages", messages);
+  }, [messages]);
 
-	//  set the state from the disk
-	useEffect(() => {
-		const data = getData();
-		if (data.users && data.messages) {
-			setUsers(data.users);
-			setMessages(data.messages);
-		}
-	}, []);
-	// when the state changes, save the changes to the disk
-	useEffect(() => {
-		storeData("users", users);
-	}, [users]);
-	useEffect(() => {
-		storeData("messages", messages);
-	}, [messages]);
+  // Adds the current user ID to the blocked array in the data
+  const blockUserId = (fId) => {
+    const foreignUserId = Number(fId);
+    const usersCopy = [...users];
+    usersCopy[getIndexById(currentUserId, users)].blocked.push(foreignUserId);
+    setUsers(usersCopy);
+  };
 
-	// Adds the current user ID to the blocked array in the data
-	const blockUserId = (fId) => {
-		const foreignUserId = Number(fId);
-		const usersCopy = [...users];
-		usersCopy[getIndexById(currentUserId, users)].blocked.push(foreignUserId);
-		setUsers(usersCopy);
-	};
+  const addMessage = (payload) => {
+    const copy = [...messages];
+    copy.push(payload);
+    setMessages(copy);
+  };
 
-	const addMessage = (payload) => {
-		const copy = [...messages];
-		copy.push(payload);
-		setMessages(copy);
-	};
+  const onLikeUpdate = (user, boolean) => {
+    const usersCopy = [...users];
+    if (boolean) {
+      usersCopy.currentUser.likes.push(user.userId);
+      usersCopy.currentUser.seen.push(user.userId);
+    }
+    // check if users Match -> add respective IDs in respective {match}
+  };
 
-	const onLikeUpdate = (user, boolean) => {
-		const usersCopy = [...users];
-		if (boolean) {
-			usersCopy.currentUser.likes.push(user.userId);
-			usersCopy.currentUser.seen.push(user.userId);
-		}
-		// check if users Match -> add respective IDs in respective {match}
-	};
-
-	const deleteMessage = (messageId) => {
-		const messagesCopy = [...messages];
-		const index = getMessageIndexById(messageId, messagesCopy);
-		messagesCopy.splice(index, 1);
-		setMessages(messagesCopy);
-	};
+  const deleteMessage = (messageId) => {
+    const messagesCopy = [...messages];
+    const index = getMessageIndexById(messageId, messagesCopy);
+    messagesCopy.splice(index, 1);
+    setMessages(messagesCopy);
+  };
 
   const addUser = async (newUser) => {
     console.log(newUser);
@@ -87,11 +85,10 @@ const App = () => {
         onLikeUpdate={onLikeUpdate}
         blockUserId={blockUserId}
         addUser={addUser}
-        newUserId={newUserId}
+        newUserId={userId}
       />
     </>
   );
-
 };
 
 export default App;
