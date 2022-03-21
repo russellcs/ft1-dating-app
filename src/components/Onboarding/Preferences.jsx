@@ -14,10 +14,11 @@ const Preferences = (props) => {
     acceptedDistance: acceptedDistanceErrors,
     kidsAccepted: kidsAcceptedErrors,
     smokersPref: smokersPrefErrors,
-    minimumHeight: minimumHeightErrors,
+    minHeight: minHeightErrors,
+    maxHeight: maxHeightErrors,
   } = props.errors;
 
-  console.log(props.errors);
+  console.log(Date.now());
 
   return (
     <>
@@ -33,7 +34,9 @@ const Preferences = (props) => {
             <option value="1">Casual</option>
             <option value="2">Open to both</option>
           </select>
-          <p>{relationshipErrors && errorCodes.relationship}</p>
+          <p className="errorMessage">
+            {relationshipErrors && errorCodes.relationship}
+          </p>
         </label>
       </div>
       <div className="formRow">
@@ -45,7 +48,9 @@ const Preferences = (props) => {
             </option>
           ))}
         </select>
-        <p>{genderPrefErrors && errorCodes.genderPref}</p>
+        <p className="errorMessage">
+          {genderPrefErrors && errorCodes.genderPref}
+        </p>
       </div>
       <div className="formRow">
         <label>
@@ -58,39 +63,59 @@ const Preferences = (props) => {
         <label>
           Maximum age you would consider?
           <input type="number" placeholder="Maximum age" name="maxAge" />
-          <p>{maxAgeErrors && errorCodes.maxAge}</p>
+          <p className="errorMessage">{maxAgeErrors && errorCodes.maxAge}</p>
         </label>
       </div>
       <div className="formRow">
         <label>
-          Minimum height you would like (leave as 1 if no preference):
+          Minimum height you would like?:
           <input
             type="number"
-            name="minimumHeight"
+            name="minHeight"
             placeholder="in cm"
-            id="minimumHeight"
+            id="minHeight"
           />
-          <p>{minimumHeightErrors}</p>
+          <p className="errorMessage">
+            {minHeightErrors && errorCodes.minHeight}
+          </p>
         </label>
       </div>
       <div className="formRow">
         <label>
-          Religion:
-          <select name="acceptedReligions" multiple size="5">
+          Maximum height you would like?:
+          <input
+            type="number"
+            name="maxHeight"
+            placeholder="in cm"
+            id="maxHeight"
+          />
+          <p className="errorMessage">
+            {maxHeightErrors && errorCodes.maxHeight}
+          </p>
+        </label>
+      </div>
+      <div className="formRow">
+        <label>
+          Religions you would be happy to match with:
+          <select name="acceptedReligions" multiple size="10">
             {religionsPref.map((religion, index) => (
               <option key={index} value={index}>
                 {religion}
               </option>
             ))}
           </select>
-          <p>{acceptedReligionsErrors}</p>
+          <p className="errorMessage">
+            {acceptedReligionsErrors && errorCodes.acceptedReligions}
+          </p>
         </label>
       </div>
       <div className="formRow">
         <label>
           Maximum distance you would be willing to travel for romance?
           <input type="number" placeholder="in km" name="acceptedDistance" />
-          <p>{acceptedDistanceErrors && errorCodes.acceptedDistance}</p>
+          <p className="errorMessage">
+            {acceptedDistanceErrors && errorCodes.acceptedDistance}
+          </p>
         </label>
       </div>
       <div className="formRow">
@@ -103,9 +128,11 @@ const Preferences = (props) => {
             <option value="0">Not saying</option>
             <option value="1">Not sure</option>
             <option value="2">Open to kids</option>
-            <option value="2">Want kids</option>
+            <option value="3">Want kids</option>
           </select>
-          <p>{kidsAcceptedErrors && errorCodes.kidsAccepted}</p>
+          <p className="errorMessage">
+            {kidsAcceptedErrors && errorCodes.kidsAccepted}
+          </p>
         </label>
       </div>
       <div className="formRow">
@@ -115,13 +142,22 @@ const Preferences = (props) => {
             <option value="" disabled>
               Select
             </option>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
+            <option value="0">Yes</option>
+            <option value="1">No</option>
           </select>
-          <p>{smokersPrefErrors && errorCodes.smokersPref}</p>
+          <p className="errorMessage">
+            {smokersPrefErrors && errorCodes.smokersPref}
+          </p>
         </label>
       </div>
-      <input className="submit" type="submit" value="Register"></input>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          props.addNewUser();
+        }}
+      >
+        Register Now
+      </button>
     </>
   );
 };

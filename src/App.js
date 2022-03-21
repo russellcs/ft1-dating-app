@@ -4,11 +4,15 @@ import Interface from "./components/Interface";
 import { useEffect, useState } from "react";
 import { getIndexById, getMessageIndexById } from "./utils/matching";
 import { storeData, getData } from "./storage";
-import { getLngLat } from "./utils/general";
+import { getUniqueId } from "./utils/general";
 
 const App = () => {
-	const [users, setUsers] = useState(mockUsers);
-	const [messages, setMessages] = useState(mockMessages);
+
+  const [users, setUsers] = useState(mockUsers);
+  const [messages, setMessages] = useState(mockMessages);
+  const [userId, setUserId] = useState(getUniqueId(16));
+  console.log(userId);
+
 
 	//  set the state from the disk
 	useEffect(() => {
@@ -56,34 +60,38 @@ const App = () => {
 		setMessages(messagesCopy);
 	};
 
-	const addUser = async (newUser) => {
-		const usersCopy = [...users];
-		const coords = await getLngLat(newUser.personalDetails.location.postCode);
-		newUser.personalDetails.location.longitude = coords.longitude;
-		newUser.personalDetails.location.latitude = coords.latitude;
-		usersCopy.push(newUser);
-		setUsers(usersCopy);
-	};
+  const addUser = async (newUser) => {
+    console.log(newUser);
+    const usersCopy = [...users];
+    // const coords = await getLngLat(newUser.personalDetails.location.postCode);
+    // newUser.personalDetails.location.longitude = coords.longitude;
+    // newUser.personalDetails.location.latitude = coords.latitude;
+    usersCopy.push(newUser);
+    console.log(usersCopy);
+    setUsers(usersCopy);
+  };
 
-	return (
-		<>
-			<button
-				onClick={() => {
-					localStorage.clear();
-				}}
-			>
-				Clear localStorage
-			</button>
-			<Interface
-				users={users}
-				messages={messages}
-				addMessage={addMessage}
-				onLikeUpdate={onLikeUpdate}
-				blockUserId={blockUserId}
-				deleteMessage={deleteMessage}
-			/>
-		</>
-	);
+  return (
+    <>
+      <button
+        onClick={() => {
+          localStorage.clear();
+        }}
+      >
+        Clear localStorage
+      </button>
+      <Interface
+        users={users}
+        messages={messages}
+        addMessage={addMessage}
+        onLikeUpdate={onLikeUpdate}
+        blockUserId={blockUserId}
+        addUser={addUser}
+        newUserId={newUserId}
+      />
+    </>
+  );
+
 };
 
 export default App;

@@ -6,40 +6,60 @@ import RegisterPartTwo from "./RegisterPartTwo";
 import RegisterPartThree from "./RegisterPartThree";
 import "../Onboarding/register.css";
 import Preferences from "./Preferences";
+import { getLngLat } from "../../utils/general";
 
 const Register = (props) => {
   const [newUserData, setNewUserData] = useState({});
   const [errors, setErrors] = useState({});
   const [regScreen, setRegScreen] = useState(0);
 
-  const onSubmit = () => {
+  const addNewUser = async () => {
+    let lifeStyleCombo = newUserData.relationship;
+    let openToKids = newUserData.wantKids;
+    lifeStyleCombo = { ...lifeStyleCombo, openToKids };
+    const coords = await getLngLat(newUserData.postCode);
     const newUserStructured = {
-      // add userId
-      signUpData: Date.now(),
+      userId: props.newUserId,
+      signUpTimeStamp: Date.now(),
       personalDetails: {
         name: {
           firstName: newUserData.firstName,
           lastName: newUserData.lastName,
         },
-        dob: timeConverter(newUserData.dataOfBirth),
-        location: { town: newUserData.town, postCode: newUserData.postCode },
+        dob: timeConverter(newUserData.dateOfBirth),
+        location: {
+          town: newUserData.town,
+          postCode: newUserData.postCode,
+          longitude: coords.longitude,
+          latitude: coords.latitude,
+        },
         kids: Number(newUserData.haveKids),
-        religion: newUserData.religion,
-        height: newUserData.height,
-        gender: newUserData.gender,
+        religion: Number(newUserData.religion),
+        height: Number(newUserData.height),
+        gender: Number(newUserData.gender),
         smokers: Number(newUserData.smokes),
       },
       preferences: {
-        lifeStyle: { openToKids: Number(newUserData.kidsAccepted) }, // add other lifestyle
+        lifeStyle: lifeStyleCombo, // can I push want kids to this?
         age: {
           min: Number(newUserData.minAge),
           max: Number(newUserData.maxAge),
         },
         acceptedReligions: newUserData.acceptedReligions,
-        height: {},
+        height: {
+          min: Number(newUserData.minHeight),
+          max: Number(newUserData.maxHeight),
+        },
+        gender: newUserData.genderPref,
+        kidsAccepted: Number(newUserData.kidsAccepted),
+        smokers: newUserData.smokersPref,
+        acceptedDistance: Number(newUserData.acceptedDistance),
       },
       login: { email: newUserData.email, password: newUserData.password },
+      status: { type: "member", lastLoginTimestamp: Date.now() },
     };
+    props.addUser(newUserStructured);
+    props.setScreen(1);
   };
 
   const onInput = (e) => {
@@ -64,6 +84,39 @@ const Register = (props) => {
     if (e.target.name === "dateOfBirth") {
       value = new Date(e.target.value).getTime();
     }
+
+    if ((e.target.name === "haveKids") & (value === "0")) {
+      value = undefined;
+    }
+
+    if (e.target.name === "haveKids" && value === "1") {
+      value = false;
+    }
+
+    if (e.target.name === "haveKids" && value === "2") {
+      value = true;
+    }
+
+    if (e.target.name === "relationship" && value === "0") {
+      value = { marriage: true, casual: false };
+    }
+
+    if (e.target.name === "relationship" && value === "1") {
+      value = { marriage: false, casual: true };
+    }
+
+    if (e.target.name === "relationship" && value === "2") {
+      value = { marriage: true, casual: true };
+    }
+
+    if (e.target.name === "smokersPref" && value === "0") {
+      value = true;
+    }
+
+    if (e.target.name === "smokersPref" && value === "1") {
+      value = false;
+    }
+
     const newState = { ...newUserData, [e.target.name]: value };
     setNewUserData(newState);
     onValidate(newState);
@@ -72,8 +125,8 @@ const Register = (props) => {
   const onValidate = async (data) => {
     const _joiInstance = Joi.object(schema);
     try {
-      await _joiInstance.validateAsync(data);
-      // await _joiInstance.validateAsync(data, { abortEarly: false });
+      // await _joiInstance.validateAsync(data);
+      await _joiInstance.validateAsync(data, { abortEarly: false });
       setErrors({ errors: "" });
     } catch (errors) {
       setErrors(joiDataReorder(errors.details));
@@ -81,16 +134,12 @@ const Register = (props) => {
   };
 
   console.log(newUserData);
+  console.log(props);
   // console.log(errors);
   return (
     <>
       <div className="containerReg">
-        <form
-          className="form"
-          onInput={onInput}
-          onSubmit={onSubmit}
-          name="registerForm"
-        >
+        <form className="form" onInput={onInput} name="registerForm">
           {regScreen === 0 && (
             <RegisterPartOne
               setRegScreen={setRegScreen}
@@ -105,7 +154,13 @@ const Register = (props) => {
             <RegisterPartThree setRegScreen={setRegScreen} errors={errors} />
           )}
           {regScreen === 3 && (
-            <Preferences setRegScreen={setRegScreen} errors={errors} />
+            <Preferences
+              setRegScreen={setRegScreen}
+              errors={errors}
+              addNewUser={addNewUser}
+              newUserData={newUserData}
+              setUserData={setNewUserData}
+            />
           )}
         </form>
       </div>
