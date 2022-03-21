@@ -15,16 +15,6 @@ export const users = [
   // [OR: allow no answer AND give option to hide on profile if answered?]
 
   // REQUIRED OR POINTS?
-  // age/height/gender(/seen): required
-  // lifestyle: points
-  // religion: points
-  // has Kids: required? (but why would anyone say they have kids then? maybe scrap)
-
-  // CHANGE LIST:
-  // option to "not say" removed from PD.gender
-  // pref.gender made into array
-  // min/max age made into object
-  // added "seen" object
 
   {
     userId: 1,

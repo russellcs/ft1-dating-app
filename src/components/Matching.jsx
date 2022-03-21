@@ -57,7 +57,8 @@ const Matching = (props) => {
       ? false
       : filterOptions.heightFilter && !heightFilter(currentUser, user)
       ? false
-      : filterOptions.existingKidsFilter && !existingKidsFilter(currentUser, user)
+      : filterOptions.existingKidsFilter &&
+        !existingKidsFilter(currentUser, user)
       ? false
       : filterOptions.openToKidsFilter && !openToKidsFilter(currentUser, user)
       ? false
@@ -72,82 +73,22 @@ const Matching = (props) => {
 
   // recieves array of filtered users
   const potentialMatchSorter = (userA, userB) => {
-    console.log("matchSort activated");
-
     const kidsPointer = (user) => {
       const cUserPref = currentUser.preferences.lifeStyle.openToKids;
       const userPref = user.preferences.lifeStyle.openToKids;
 
-      if (cUserPref === 0 || userPref === 0) {
-        // cUser or User don't state preference
-        return 0;
-      } else if (cUserPref === 1) {
-        // cUser doesn't want kids
-        return userPref === 1
-          ? // & user doesn't want kids
-            10
-          : userPref === 2
-          ? // & user not sure
-            0
-          : // & user open to kids
-            -5;
-      } else if (cUserPref === 2) {
-        // cUser not sure
-        return userPref === 1
-          ? // & user doesnt want kids
-            -5
-          : userPref === 2
-          ? // & user not sure
-            5
-          : userPref === 3
-          ? // & user open to kids
-            0
-          : // & user wants kids
-            -5;
-      } else if (cUserPref === 3) {
-        // cUser open to kids
-        return userPref === 1
-          ? // & user doesnt want kids
-            -5
-          : userPref === 2
-          ? // & user not sure
-            0
-          : userPref === 3
-          ? // & user open to kids
-            10
-          : // & user wants kids
-            5;
-      } else {
-        // cUser wants kids
-        return userPref === 2
-          ? // user not sure
-            0
-          : userPref === 3
-          ? // user open to kids
-            5
-          : // user wants kids
-            10;
-      }
-      // console.log(
-      //   currentUser.personalDetails.name.firstName +
-      //     " opentoKids: " +
-      //     currentUser.preferences.lifeStyle.openToKids
-      // );
-
-      // console.log(
-      //   userA.personalDetails.name.firstName +
-      //     " opentoKids: " +
-      //     userA.preferences.lifeStyle.openToKids +
-      //     " points: " +
-      //     kidsPointer(userA)
-      // );
-      // console.log(
-      //   userB.personalDetails.name.firstName +
-      //     " opentoKids: " +
-      //     userB.preferences.lifeStyle.openToKids +
-      //     " points: " +
-      //     kidsPointer(userB)
-      // );
+      // NB: want/don't want is filtered out in potentialMatchFilter
+      return cUserPref > 0 && cUserPref === userPref // neither "dont say" and both are same
+        ? 10
+        : (cUserPref === 3 && userPref === 4) ||
+          (cUserPref === 4 && userPref === 3) || // want + open
+          (cUserPref === 3 && userPref === 2) ||
+          (cUserPref === 2 && userPref === 3) // not sure + open
+        ? 5
+        : (cUserPref === 1 && userPref === 3) ||
+          (cUserPref === 3 && userPref === 1) // dont want + open
+        ? -5
+        : 0; // either doesn't say, not sure + dont want, not sure + want
     };
 
     const marriageCasualPointer = (user) => {
@@ -160,91 +101,46 @@ const Matching = (props) => {
         casual: user.preferences.lifeStyle.casual,
       };
 
-      // mcPointCalc is designed to take cUser and user in different orders, so that the values are easily changed inside.
-      const mcPointCalc = (userA, userB) => {
-        console.log(userA, userB); // MC: MC Mc cM, mC: MC Mc mC, Cm: MC Mc mC
-        if (
-          //MC MC, mC mC, Mc Mc
-          (userA.marriage && userA.casual && userB.marriage && userB.casual) ||
-          (userA.marriage &&
-            !userA.casual &&
-            userB.marriage &&
-            !userB.casual) ||
-          (!userA.marriage && userA.casual && !userB.marriage && userB.casual)
-        ) {
-          return 10;
-        } else if (
-          //MC Mc, MC mC, Mc MC, mC MC,
-          (userA.marriage && userA.casual && userB.marriage && !userB.casual) ||
-          (userA.marriage && userA.casual && userB.marriage && userB.casual)
-        ) {
-          return 5;
-        } else {
-          // Mc cM, mC Mc
-          return -10;
-        }
-
-        if (userA.marriage && userA.casual) {
-          // userA wants marriage and casual
-          return userB.marraige && userB.casual
-            ? // & userB also wants both
-              10
-            : userB.marraige && !userB.casual
-            ? // & user B only wants marraige
-              5
-            : // & user B only wants casual
-              5;
-        } else if (userA.marriage && !userA.casual) {
-          // userA only wants marriage
-          return userB.marriage && !userB.casual
-            ? // & userB only wants marriage
-              10
-            : // & userB only wants casual
-              -10;
-        } else {
-          // userA and user B only wants casual
-          return 10;
-        }
+      return cUserPref.marriage === userPref.marriage &&
+        cUserPref.casual === userPref.casual // MC MC, Mc Mc, mC mC
+        ? 10
+        : (!cUserPref.marriage &&
+            cUserPref.casual &&
+            userPref.marriage &&
+            !userPref.casual) || // mC Mc
+          (cUserPref.marriage &&
+            !cUserPref.casual &&
+            !userPref.marriage &&
+            userPref.casual) // Mc mC
+        ? -10
+        : 5; // MC mC, MC Mc
+    };
+    
+    const religionPointer = (user) => {
+      const cUser = {
+        religion: currentUser.personalDetails.religion,
+        pref: currentUser.preferences.acceptedReligions,
+      };
+      const user = {
+        religion: user.personalDetails.religion,
+        pref: user.preferences.acceptedReligions,
       };
 
-      console.log(
-        currentUser.personalDetails.name.firstName +
-          " " +
-          cUserPref.marriage +
-          " " +
-          cUserPref.casual +
-          ", " +
-          user.personalDetails.name.firstName +
-          " " +
-          userPref.marriage +
-          " " +
-          userPref.casual
-      );
-
-      console.log(cUserPref.marriage && cUserPref.casual);
-      console.log(userPref.marriage && userPref.casual);
-
-      // in order to accomodate mcPointCalc's design, a ternary is neccesary to select which order cUser and user are entered.
-      return cUserPref.marriage && cUserPref.casual
-        ? mcPointCalc(cUserPref, userPref)
-        : userPref.marraige && userPref.casual
-        ? mcPointCalc(userPref, cUserPref)
-        : cUserPref.marriage && !cUserPref.casual
-        ? mcPointCalc(cUserPref, userPref)
-        : mcPointCalc(userPref, cUserPref);
+      // cUser pref not say (0) + any = 0
+      // cUser 1+ & user 1+ (same) = 10
+      // cUser/user no pref (0) & user/cUser no pref (0) &
     };
 
     let totalPointsUserA = marriageCasualPointer(userA);
-    // kidsPointer(userA);
+    // + kidsPointer(userA);
     let totalPointsUserB = marriageCasualPointer(userB);
-    // kidsPointer(userB);
-    console.log("userA: " + totalPointsUserA + ", userB: " + totalPointsUserB);
+    // + kidsPointer(userB);
 
-    return totalPointsUserA === totalPointsUserB
-      ? 0
-      : totalPointsUserA < totalPointsUserB
+    return totalPointsUserA < totalPointsUserB
+      ? 1
+      : totalPointsUserA > totalPointsUserB
       ? -1
-      : 1;
+      : 0;
   };
 
   let filteredUsers = [...users];
@@ -252,10 +148,13 @@ const Matching = (props) => {
     filteredUsers.findIndex((user) => user === currentUser),
     1
   );
-  filteredUsers = filteredUsers
-    .filter(potentialMatchFilter)
-    .sort(potentialMatchSorter);
-
+  filteredUsers = filteredUsers.sort(potentialMatchSorter);
+  // .filter(potentialMatchFilter)
+  // .sort(potentialMatchSorter);
+  console.log(
+    currentUser.preferences.lifeStyle.marriage,
+    currentUser.preferences.lifeStyle.casual
+  );
 
   return (
     <>

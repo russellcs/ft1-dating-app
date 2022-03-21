@@ -1,13 +1,24 @@
-let currentUser = 1;
-let targetUser = 2;
-
-messages.forEach((message) => {
-  let existingConvo = [];
-  if (
-    (message.toUserId === currentUser && message.fromUserId === targetUser) ||
-    (message.toUserId === targetUser && message.fromUserId === currentUser)
-  ) {
-    existingConvo.push(message);
-  }
-  message.sort(byTime);
-});
+const x =
+  (cUserPref.marriage &&
+    cUserPref.casual &&
+    userPref.marriage &&
+    userPref.casual) || // MC MC
+  (cUserPref.marriage &&
+    !cUserPref.casual &&
+    userPref.marriage &&
+    !userPref.casual) || // Mc Mc
+  (!cUserPref.marriage &&
+    cUserPref.casual &&
+    !userPref.marriage &&
+    userPref.casual) // mC mC
+    ? 10
+    : (!cUserPref.marriage &&
+        cUserPref.casual &&
+        userPref.marriage &&
+        !userPref.casual) || // mC Mc
+      (cUserPref.marriage &&
+        !cUserPref.casual &&
+        !userPref.marriage &&
+        userPref.casual) // Mc mC
+    ? 5
+    : -10; // MC Mc, Mc MC, MC cM, MC Cm
