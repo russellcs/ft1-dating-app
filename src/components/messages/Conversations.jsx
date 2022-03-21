@@ -1,4 +1,3 @@
-import { users } from "../../mock";
 import Conversation from "./Conversation";
 
 const Conversations = (props) => {
@@ -14,7 +13,7 @@ const Conversations = (props) => {
 
 	// Filter through the entries object returning only the conversations which do not match (not blocked)
 	const filteredConversations = entries.filter((conversation) => {
-		return !users[0].blocked.includes(Number(conversation[0]));
+		return !props.users[0].blocked.includes(Number(conversation[0]));
 	});
 
 	return (

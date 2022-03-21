@@ -16,7 +16,9 @@ const RegisterPartTwo = (props) => {
         <label>
           Date of Birth:
           <input type="date" name="dateOfBirth" />
-          <p>{dateOfBirthErrors && errorCodes.dateOfBirth}</p>
+          <p className="errorMessage">
+            {dateOfBirthErrors && errorCodes.dateOfBirth}
+          </p>
         </label>
       </div>
       <div className="formRow">
@@ -32,23 +34,23 @@ const RegisterPartTwo = (props) => {
               </option>
             ))}
           </select>
-          <p>{genderErrors && errorCodes.gender}</p>
+          <p className="errorMessage">{genderErrors && errorCodes.gender}</p>
         </label>
       </div>
       <div className="formRow">
         <label>
           Location:
           <input type="name" name="town" placeholder="Town" />
-          <input type="name" name="postcode" placeholder="Postcode" />
+          <input type="name" name="postCode" placeholder="Postcode" />
         </label>
         <p>{townErrors && "Please enter your town"}</p>
-        <p>{postcodeErrors && errorCodes.postcode}</p>
+        <p className="errorMessage">{postcodeErrors && errorCodes.postcode}</p>
       </div>
       <div className="formRow">
         <label>
           Height:
           <input type="number" placeholder="in cm" name="height" id="height" />
-          <p>{heightErrors && errorCodes.height}</p>
+          <p className="errorMessage">{heightErrors && errorCodes.height}</p>
         </label>
       </div>
       <nav>

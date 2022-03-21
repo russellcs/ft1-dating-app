@@ -1,4 +1,8 @@
-import { religionsPref, gendersPref } from "../../config/formConfig";
+import {
+  religionsPref,
+  gendersPref,
+  errorCodes,
+} from "../../config/formConfig";
 
 const Preferences = (props) => {
   const {
@@ -10,9 +14,12 @@ const Preferences = (props) => {
     acceptedDistance: acceptedDistanceErrors,
     kidsAccepted: kidsAcceptedErrors,
     smokersPref: smokersPrefErrors,
+    minHeight: minHeightErrors,
+    maxHeight: maxHeightErrors,
   } = props.errors;
 
-  console.log(props.errors);
+  console.log(Date.now());
+
   return (
     <>
       <h1>What are you looking for?</h1>
@@ -23,13 +30,12 @@ const Preferences = (props) => {
             <option value="" disabled>
               Select
             </option>
-            <option value="0">Serrious</option>
+            <option value="0">Serious</option>
             <option value="1">Casual</option>
             <option value="2">Open to both</option>
           </select>
-          <p>
-            {relationshipErrors &&
-              "Please select what type of relationship you are looking for"}
+          <p className="errorMessage">
+            {relationshipErrors && errorCodes.relationship}
           </p>
         </label>
       </div>
@@ -42,46 +48,74 @@ const Preferences = (props) => {
             </option>
           ))}
         </select>
-        <p>{genderPrefErrors && "Please select your gender preference"}</p>
+        <p className="errorMessage">
+          {genderPrefErrors && errorCodes.genderPref}
+        </p>
       </div>
       <div className="formRow">
         <label>
           Minimum age you would consider?
           <input type="number" placeholder="Minimum age" name="minAge" />
-          <p>
-            {minAgeErrors &&
-              "Please enter a valid minimum age you would consider"}
-          </p>
+          <p>{minAgeErrors && errorCodes.minAge}</p>
         </label>
       </div>
       <div className="formRow">
         <label>
           Maximum age you would consider?
           <input type="number" placeholder="Maximum age" name="maxAge" />
-          <p>
-            {maxAgeErrors &&
-              "Please enter a valid maximum age you would consider"}
+          <p className="errorMessage">{maxAgeErrors && errorCodes.maxAge}</p>
+        </label>
+      </div>
+      <div className="formRow">
+        <label>
+          Minimum height you would like?:
+          <input
+            type="number"
+            name="minHeight"
+            placeholder="in cm"
+            id="minHeight"
+          />
+          <p className="errorMessage">
+            {minHeightErrors && errorCodes.minHeight}
           </p>
         </label>
       </div>
       <div className="formRow">
         <label>
-          Religion:
-          <select name="acceptedReligions" multiple size="5">
+          Maximum height you would like?:
+          <input
+            type="number"
+            name="maxHeight"
+            placeholder="in cm"
+            id="maxHeight"
+          />
+          <p className="errorMessage">
+            {maxHeightErrors && errorCodes.maxHeight}
+          </p>
+        </label>
+      </div>
+      <div className="formRow">
+        <label>
+          Religions you would be happy to match with:
+          <select name="acceptedReligions" multiple size="10">
             {religionsPref.map((religion, index) => (
               <option key={index} value={index}>
                 {religion}
               </option>
             ))}
           </select>
-          <p>{acceptedReligionsErrors}</p>
+          <p className="errorMessage">
+            {acceptedReligionsErrors && errorCodes.acceptedReligions}
+          </p>
         </label>
       </div>
       <div className="formRow">
         <label>
           Maximum distance you would be willing to travel for romance?
-          <input type="number" placeholder="in miles" name="acceptedDistance" />
-          <p>{acceptedDistanceErrors}</p>
+          <input type="number" placeholder="in km" name="acceptedDistance" />
+          <p className="errorMessage">
+            {acceptedDistanceErrors && errorCodes.acceptedDistance}
+          </p>
         </label>
       </div>
       <div className="formRow">
@@ -94,9 +128,11 @@ const Preferences = (props) => {
             <option value="0">Not saying</option>
             <option value="1">Not sure</option>
             <option value="2">Open to kids</option>
-            <option value="2">Want kids</option>
+            <option value="3">Want kids</option>
           </select>
-          <p>{kidsAcceptedErrors}</p>
+          <p className="errorMessage">
+            {kidsAcceptedErrors && errorCodes.kidsAccepted}
+          </p>
         </label>
       </div>
       <div className="formRow">
@@ -106,13 +142,22 @@ const Preferences = (props) => {
             <option value="" disabled>
               Select
             </option>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
+            <option value="0">Yes</option>
+            <option value="1">No</option>
           </select>
-          <p>{smokersPrefErrors}</p>
+          <p className="errorMessage">
+            {smokersPrefErrors && errorCodes.smokersPref}
+          </p>
         </label>
       </div>
-      <input className="submit" type="submit" value="Register"></input>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          props.addNewUser();
+        }}
+      >
+        Register Now
+      </button>
     </>
   );
 };

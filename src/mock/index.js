@@ -1,30 +1,20 @@
 export const users = [
-	// NEED:
-	// Preferences form (check-boxes?):
-	//   // Interest in: gender(s) (array)
-	//   // Age range?
-	//   // height range?
-	//   // smokers ok? (boolean)
-	//   // religions? (array, default ALL)
-	//   // kids ok? (boolean)
+  // NEED:
+  // Preferences form (check-boxes?):
+  //   // Interest in: gender(s) (array)
+  //   // Age range?
+  //   // height range?
+  //   // smokers ok? (boolean)
+  //   // religions? (array, default ALL)
+  //   // kids ok? (boolean)
 
-	// Option to show on profile for some personal details?:
-	// // Religion, haveKids, smoker, lifestyles
-	// [force answer but give option to hide on profile?]
-	// [OR: allow no answer and always show on profile if answered]
-	// [OR: allow no answer AND give option to hide on profile if answered?]
+  // Option to show on profile for some personal details?:
+  // // Religion, haveKids, smoker, lifestyles
+  // [force answer but give option to hide on profile?]
+  // [OR: allow no answer and always show on profile if answered]
+  // [OR: allow no answer AND give option to hide on profile if answered?]
 
-	// REQUIRED OR POINTS?
-	// age/height/gender(/seen): required
-	// lifestyle: points
-	// religion: points
-	// has Kids: required? (but why would anyone say they have kids then? maybe scrap)
-
-	// CHANGE LIST:
-	// option to "not say" removed from PD.gender
-	// pref.gender made into array
-	// min/max age made into object
-	// added "seen" object
+  // REQUIRED OR POINTS?
 
   {
     userId: 1,
@@ -50,7 +40,7 @@ export const users = [
       acceptedReligions: [],
       height: { min: 130, max: 160 }, //
       gender: [1], //
-      kidsAccepted: 2, // 0: not saying, 2: not sure, 3: open to kids, 4: want kids
+      kidsAccepted: 2, // 0: not saying, 2: not sure, 3: open to kids, 4: want kids //Check this during merge!
       smokers: false,
       acceptedDistance: 20, //
     },
