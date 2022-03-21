@@ -116,25 +116,33 @@ const Matching = (props) => {
         : 5; // MC mC, MC Mc
     };
 
-    // const religionPointer = (user) => {
-    //   const cUser = {
-    //     religion: currentUser.personalDetails.religion,
-    //     pref: currentUser.preferences.acceptedReligions,
-    //   };
-    //   const user = {
-    //     religion: user.personalDetails.religion,
-    //     pref: user.preferences.acceptedReligions,
-    //   };
+    const religionPointer = (user) => {
+      const cUserRelig = currentUser.personalDetails.religion;
+      const userRelig = user.personalDetails.religion;
 
-    //   // cUser pref not say (0) + any = 0
-    //   // cUser 1+ & user 1+ (same) = 10
-    //   // cUser/user no pref (0) & user/cUser no pref (0) &
-    // };
+      return cUserRelig === 0 || userRelig === 0 // cUser or user doesn't say
+        ? 0
+        : cUserRelig === userRelig // both share same religion
+        ? 10
+        : cUserRelig !== 3 && userRelig !== 3 // both are non-atheist
+        ? 5
+        : -5; // athiest and religion
+    };
 
-    let totalPointsUserA = marriageCasualPointer(userA);
-    // + kidsPointer(userA);
-    let totalPointsUserB = marriageCasualPointer(userB);
-    // + kidsPointer(userB);
+    const lastSeen = (user) => {
+      return currentUser.seen[-1] === user.userId ? 9999 : 0;
+    };
+
+    let totalPointsUserA =
+      marriageCasualPointer(userA) +
+      kidsPointer(userA) +
+      religionPointer(userA) +
+      lastSeen(userA);
+    let totalPointsUserB =
+      marriageCasualPointer(userB) +
+      kidsPointer(userB) +
+      religionPointer(userB) +
+      lastSeen(userA);
 
     return totalPointsUserA < totalPointsUserB
       ? 1
@@ -151,13 +159,12 @@ const Matching = (props) => {
   filteredUsers = filteredUsers.sort(potentialMatchSorter);
   // .filter(potentialMatchFilter)
   // .sort(potentialMatchSorter);
-  console.log(
-    currentUser.preferences.lifeStyle.marriage,
-    currentUser.preferences.lifeStyle.casual
-  );
 
   // need to add user to "seen" on display.
   // need to make sure filteredUsers ALWAYS shows last "seen" user first.
+
+  // how do i make it show 1 by 1?
+  // rather than map... get list... on like/pass... +index on list.
 
   return (
     <>
