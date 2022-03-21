@@ -24,6 +24,7 @@ const Interface = (props) => {
         <button onClick={() => setScreen(2)}>Search</button>
         <button onClick={() => setScreen(3)}>Messages</button>
       </nav>
+
       {screen === 0 && (
         <Onboarding
           onLogin={onLogin}
@@ -38,7 +39,9 @@ const Interface = (props) => {
         <Matching onLikeUpdate={props.onLikeUpdate} users={props.users} />
       )}
 
-      {screen === 2 && <Search users={props.users} />}
+
+      {/* {screen === 2 && <Search users={props.users} />} */}
+
 
       {screen === 3 && (
         <Messaging
