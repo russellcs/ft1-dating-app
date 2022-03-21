@@ -75,41 +75,18 @@ export const heightCheck = (user1, user2) => {
 
 export const existingKidsFilter = (currentUser, user) => {
   return (
-	(currentUser.personalDetails.kids === user.preferences.kidsAccepted &&
-	  user.personalDetails.kids === currentUser.preferences.kidsAccepted) ||
-	currentUser.personalDetails.kids === undefined ||
-	user.personalDetails.kids === undefined
+    (currentUser.personalDetails.kids === user.preferences.kidsAccepted &&
+      user.personalDetails.kids === currentUser.preferences.kidsAccepted) ||
+    currentUser.personalDetails.kids === undefined ||
+    user.personalDetails.kids === undefined
   );
 };
 
 export const openToKidsFilter = (currentUser, user) => {
-  console.log(
-	"cUser: " +
-	  currentUser.personalDetails.name.firstName +
-	  " (" +
-	  currentUser.preferences.lifeStyle.openToKids +
-	  ") " +
-	  " , user: " +
-	  user.personalDetails.name.firstName +
-	  " (" +
-	  user.preferences.lifeStyle.openToKids +
-	  ")"
-  );
-
-  if (
-	currentUser.preferences.lifeStyle.openToKids === 4 &&
-	user.preferences.lifeStyle.openToKids === 1
-  ) {
-	// console.log("cUser wants kids, user don't");
-	return false;
-  } else if (
-	user.preferences.lifeStyle.openToKids === 4 &&
-	currentUser.preferences.lifeStyle.openToKids === 1
-  ) {
-	// console.log("cUser doesn't want kids, user does");
-	return false;
-  } else {
-	// console.log("kid want compatible");
-	return true;
-  }
+  return (currentUser.preferences.lifeStyle.openToKids === 4 &&
+    user.preferences.lifeStyle.openToKids === 1) || // cUser wants kids & user doesn't
+    (user.preferences.lifeStyle.openToKids === 4 &&
+      currentUser.preferences.lifeStyle.openToKids === 1) // cUser doesn't want kids & user does
+    ? false
+    : true;
 };

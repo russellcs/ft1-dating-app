@@ -156,6 +156,9 @@ const Matching = (props) => {
     currentUser.preferences.lifeStyle.casual
   );
 
+  // need to add user to "seen" on display.
+  // need to make sure filteredUsers ALWAYS shows last "seen" user first.
+
   return (
     <>
       <Search
