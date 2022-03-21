@@ -40,14 +40,24 @@ const App = () => {
     const copy = [...messages];
     copy.push(payload);
     setMessages(copy);
+	console.log(copy)
   };
 
   const onLikeUpdate = (user, boolean) => {
-    const usersCopy = [...users];
-    if (boolean) {
-      usersCopy.currentUser.likes.push(user.userId);
-      usersCopy.currentUser.seen.push(user.userId);
-    }
+	  addMessage({
+		toUserId: user.userId,
+		fromUserId: userId,
+		messageId: getUniqueId(16),
+		content: "",
+		sendTimestamp: 0,
+		read: false,
+		blocked: false,
+	})
+    // const usersCopy = [...users];
+    // if (boolean) {
+    //   usersCopy.currentUser.likes.push(user.userId);
+    //   usersCopy.currentUser.seen.push(user.userId);
+    // }
     // check if users Match -> add respective IDs in respective {match}
   };
 
