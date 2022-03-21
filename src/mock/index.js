@@ -15,10 +15,6 @@ export const users = [
   // [OR: allow no answer AND give option to hide on profile if answered?]
 
   // REQUIRED OR POINTS?
-  // age/height/gender(/seen)/location/has kids: required //
-  // lifestyle: points //
-  // religion: points
-  // has Kids: required? (but why would anyone say they have kids then? maybe scrap)
 
   {
     userId: 1,
@@ -44,7 +40,7 @@ export const users = [
       acceptedReligions: [],
       height: { min: 130, max: 160 }, //
       gender: [1], //
-      kidsAccepted: 2, // 0: not saying, 2: not sure, 3: open to kids, 4: want kids
+      kidsAccepted: 2, // 0: not saying, 2: not sure, 3: open to kids, 4: want kids //Check this during merge!
       smokers: false,
       acceptedDistance: 20, //
     },

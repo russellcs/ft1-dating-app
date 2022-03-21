@@ -115,6 +115,7 @@ const Matching = (props) => {
         ? -10
         : 5; // MC mC, MC Mc
     };
+    
     const religionPointer = (user) => {
       const cUser = {
         religion: currentUser.personalDetails.religion,

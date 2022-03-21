@@ -13,6 +13,8 @@ const RegisterPartThree = (props) => {
     religion: religionErrors,
   } = props.errors;
 
+  console.log(props.errors);
+
   return (
     <>
       <h1>a few more details...</h1>
@@ -29,7 +31,7 @@ const RegisterPartThree = (props) => {
               </option>
             ))}
           </select>
-          <p>{smokesErrors && errorCodes.smokes}</p>
+          <p className="errorMessage">{smokesErrors && errorCodes.smokes}</p>
         </label>
       </div>
       <div className="formRow">
@@ -44,7 +46,7 @@ const RegisterPartThree = (props) => {
             <option value="2">Yes</option>
           </select>
         </label>
-        <p>{haveKidsErrors && errorCodes.haveKids}</p>
+        <p className="errorMessage">{haveKidsErrors && errorCodes.haveKids}</p>
       </div>
       <div className="formRow">
         <label>
@@ -59,7 +61,9 @@ const RegisterPartThree = (props) => {
               </option>
             ))}
           </select>
-          <p>{wantKidsErrors && errorCodes.wantKids}</p>
+          <p className="errorMessage">
+            {wantKidsErrors && errorCodes.wantKids}
+          </p>
         </label>
       </div>
       <div className="formRow">
@@ -75,7 +79,9 @@ const RegisterPartThree = (props) => {
               </option>
             ))}
           </select>
-          <p>{religionErrors && errorCodes.religion}</p>
+          <p className="errorMessage">
+            {religionErrors && errorCodes.religion}
+          </p>
         </label>
       </div>
       <nav>
