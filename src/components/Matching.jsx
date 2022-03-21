@@ -90,6 +90,7 @@ const Matching = (props) => {
         ? -5
         : 0; // either doesn't say, not sure + dont want, not sure + want
     };
+
     const marriageCasualPointer = (user) => {
       const cUserPref = {
         marriage: currentUser.preferences.lifeStyle.marriage,
@@ -119,6 +120,14 @@ const Matching = (props) => {
         religion: currentUser.personalDetails.religion,
         pref: currentUser.preferences.acceptedReligions,
       };
+      const user = {
+        religion: user.personalDetails.religion,
+        pref: user.preferences.acceptedReligions,
+      };
+
+      // cUser pref not say (0) + any = 0
+      // cUser 1+ & user 1+ (same) = 10
+      // cUser/user no pref (0) & user/cUser no pref (0) &
     };
 
     let totalPointsUserA = marriageCasualPointer(userA);
