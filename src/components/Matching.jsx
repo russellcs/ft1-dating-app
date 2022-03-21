@@ -115,21 +115,21 @@ const Matching = (props) => {
         ? -10
         : 5; // MC mC, MC Mc
     };
-    
-    const religionPointer = (user) => {
-      const cUser = {
-        religion: currentUser.personalDetails.religion,
-        pref: currentUser.preferences.acceptedReligions,
-      };
-      const user = {
-        religion: user.personalDetails.religion,
-        pref: user.preferences.acceptedReligions,
-      };
 
-      // cUser pref not say (0) + any = 0
-      // cUser 1+ & user 1+ (same) = 10
-      // cUser/user no pref (0) & user/cUser no pref (0) &
-    };
+    // const religionPointer = (user) => {
+    //   const cUser = {
+    //     religion: currentUser.personalDetails.religion,
+    //     pref: currentUser.preferences.acceptedReligions,
+    //   };
+    //   const user = {
+    //     religion: user.personalDetails.religion,
+    //     pref: user.preferences.acceptedReligions,
+    //   };
+
+    //   // cUser pref not say (0) + any = 0
+    //   // cUser 1+ & user 1+ (same) = 10
+    //   // cUser/user no pref (0) & user/cUser no pref (0) &
+    // };
 
     let totalPointsUserA = marriageCasualPointer(userA);
     // + kidsPointer(userA);
