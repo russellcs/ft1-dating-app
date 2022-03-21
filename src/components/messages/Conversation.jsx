@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { getUniqueId } from "../../utils/general";
 import Block from "./Block";
 import Input from "./Input";
 import Message from "./Message";
@@ -17,6 +18,7 @@ const Conversation = (props) => {
 			content: draft,
 			toUserId: props.conversation[0],
 			fromUserId: props.conversation[1][0].fromUserId,
+			messageId: getUniqueId(16),
 		});
 	};
 	// Allows the user to use the Enter key as well as clicking Send
@@ -54,11 +56,13 @@ const Conversation = (props) => {
 			/>
 			{props.conversation[1].map((message, index) => {
 				return (
-					<Message
-						message={message}
-						deleteMessage={props.deleteMessage}
-						key={index}
-					/>
+					message.content && (
+						<Message
+							message={message}
+							deleteMessage={props.deleteMessage}
+							key={index}
+						/>
+					)
 				);
 			})}
 			<Input

@@ -11,7 +11,7 @@ const Message = (props) => {
 	return (
 		<div style={{ margin: "20px" }}>
 			{message.content}
-			{message.content && <button onClick={isLikeClicked}>&#9829;</button>}
+			<button onClick={isLikeClicked}>&#9829;</button>
 			{likeClicked && <p>Message liked</p>}
 			<button
 				onClick={() => {
