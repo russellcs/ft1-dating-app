@@ -15,7 +15,7 @@ const Register = (props) => {
 
   const addNewUser = async () => {
     let lifeStyleCombo = newUserData.relationship;
-    let openToKids = newUserData.wantKids;
+    let openToKids = Number(newUserData.wantKids);
     lifeStyleCombo = { ...lifeStyleCombo, openToKids };
     const coords = await getLngLat(newUserData.postCode);
     const newUserStructured = {
@@ -45,7 +45,7 @@ const Register = (props) => {
           min: Number(newUserData.minAge),
           max: Number(newUserData.maxAge),
         },
-        acceptedReligions: newUserData.acceptedReligions,
+        // acceptedReligions: newUserData.acceptedReligions,
         height: {
           min: Number(newUserData.minHeight),
           max: Number(newUserData.maxHeight),
@@ -85,17 +85,17 @@ const Register = (props) => {
       value = new Date(e.target.value).getTime();
     }
 
-    if ((e.target.name === "haveKids") & (value === "0")) {
-      value = undefined;
-    }
+    // if ((e.target.name === "haveKids") & (value === "0")) {
+    //   value = undefined;
+    // }
 
-    if (e.target.name === "haveKids" && value === "1") {
-      value = false;
-    }
+    // if (e.target.name === "haveKids" && value === "1") {
+    //   value = false;
+    // }
 
-    if (e.target.name === "haveKids" && value === "2") {
-      value = true;
-    }
+    // if (e.target.name === "haveKids" && value === "2") {
+    //   value = true;
+    // }
 
     if (e.target.name === "relationship" && value === "0") {
       value = { marriage: true, casual: false };

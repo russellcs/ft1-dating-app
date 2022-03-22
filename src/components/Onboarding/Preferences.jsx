@@ -94,7 +94,7 @@ const Preferences = (props) => {
           </p>
         </label>
       </div>
-      <div className="formRow">
+      {/* <div className="formRow">
         <label>
           Religions you would be happy to match with:
           <select name="acceptedReligions" multiple size="10">
@@ -108,7 +108,7 @@ const Preferences = (props) => {
             {acceptedReligionsErrors && errorCodes.acceptedReligions}
           </p>
         </label>
-      </div>
+      </div> */}
       <div className="formRow">
         <label>
           Maximum distance you would be willing to travel for romance?
@@ -150,14 +150,20 @@ const Preferences = (props) => {
           </p>
         </label>
       </div>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          props.addNewUser();
-        }}
-      >
-        Register Now
-      </button>
+      <nav>
+        <button className="backButton" onClick={() => props.setRegScreen(2)}>
+          Back
+        </button>
+        <button
+          className="registerButton"
+          onClick={(e) => {
+            e.preventDefault();
+            props.addNewUser();
+          }}
+        >
+          Register Now
+        </button>
+      </nav>
     </>
   );
 };

@@ -8,7 +8,7 @@ const Onboarding = (props) => {
   const [onBoardingScreen, setOnBoardingScreen] = useState();
 
   // console.log(loggedStatus);
-  console.log(props);
+  // console.log(props);
 
   return (
     <>
