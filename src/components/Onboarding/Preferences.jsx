@@ -18,8 +18,6 @@ const Preferences = (props) => {
     maxHeight: maxHeightErrors,
   } = props.errors;
 
-  console.log(Date.now());
-
   return (
     <>
       <h1>What are you looking for?</h1>

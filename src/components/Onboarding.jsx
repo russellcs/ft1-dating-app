@@ -12,7 +12,6 @@ const Onboarding = (props) => {
 
   return (
     <>
-      <p>Onboarding</p>
       <nav className="onBoarding">
         <button onClick={() => setOnBoardingScreen(0)}>Register</button>
         <button onClick={() => setOnBoardingScreen(1)}>Log In</button>

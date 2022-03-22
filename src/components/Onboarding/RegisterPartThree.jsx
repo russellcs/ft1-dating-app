@@ -13,8 +13,6 @@ const RegisterPartThree = (props) => {
     religion: religionErrors,
   } = props.errors;
 
-  console.log(props.errors);
-
   return (
     <>
       <h1>a few more details...</h1>
