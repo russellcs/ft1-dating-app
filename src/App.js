@@ -10,23 +10,22 @@ const App = () => {
   const [users, setUsers] = useState(mockUsers);
   const [messages, setMessages] = useState(mockMessages);
   const [userId, setUserId] = useState(getUniqueId(16));
-  console.log(userId);
 
-  //   //  set the state from the disk
-  //   useEffect(() => {
-  //     const data = getData();
-  //     if (data.users && data.messages) {
-  //       setUsers(data.users);
-  //       setMessages(data.messages);
-  //     }
-  //   }, []);
-  //   // when the state changes, save the changes to the disk
-  //   useEffect(() => {
-  //     storeData("users", users);
-  //   }, [users]);
-  //   useEffect(() => {
-  //     storeData("messages", messages);
-  //   }, [messages]);
+  //  set the state from the disk
+  useEffect(() => {
+    const data = getData();
+    if (data.users && data.messages) {
+      setUsers(data.users);
+      setMessages(data.messages);
+    }
+  }, []);
+  // when the state changes, save the changes to the disk
+  useEffect(() => {
+    storeData("users", users);
+  }, [users]);
+  useEffect(() => {
+    storeData("messages", messages);
+  }, [messages]);
 
   // Adds the current user ID to the blocked array in the data
   const blockUserId = (fId) => {
@@ -51,7 +50,7 @@ const App = () => {
   };
 
   const addUser = async (newUser) => {
-    // console.log(newUser);
+
     const usersCopy = [...users];
     // const coords = await getLngLat(newUser.personalDetails.location.postCode);
     // newUser.personalDetails.location.longitude = coords.longitude;
@@ -93,7 +92,8 @@ const App = () => {
     // if (!currentUser.seen.includes(seenUserId)) {
     //   currentUser.seen.push(seenUserId);
     // }
-    // setUsers(usersCopy);
+    console.log(usersCopy);
+    setUsers(usersCopy);
   };
 
   return (
