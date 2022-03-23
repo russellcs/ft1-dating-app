@@ -50,7 +50,13 @@ const Interface = (props) => {
         />
       )}
 
-      {screen === 1 && <Matching onLikeUpdate={props.onLikeUpdate} />}
+
+      {screen === 1 && (
+        <Matching 
+        // addToLikes={props.addToLikes} 
+        />
+      )}
+
 
       {/* {screen === 2 && <Search users={props.users} />} */}
 
