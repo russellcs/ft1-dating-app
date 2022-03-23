@@ -6,11 +6,9 @@ import { getIndexById, getMessageIndexById } from "./utils/matching";
 import { storeData, getData } from "./storage";
 import { getUniqueId } from "./utils/general";
 import { useDispatch } from "react-redux";
-import { SET_USER_INPUT } from "./redux/types";
 
 const App = () => {
 	const dispatch = useDispatch();
-	dispatch({ type: SET_USER_INPUT, payload: "Hello World" });
 
 	const [users, setUsers] = useState(mockUsers);
 	const [messages, setMessages] = useState(mockMessages);

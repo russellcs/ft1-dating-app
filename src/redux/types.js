@@ -1,1 +1,4 @@
-export const SET_USER_INPUT = "SET_USER_INPUT";
+export const types = {
+	SET_USER_INPUT: "SET_USER_INPUT",
+	ADD_MESSAGE: "ADD_MESSAGE",
+};

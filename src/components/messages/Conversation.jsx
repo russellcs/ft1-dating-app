@@ -3,10 +3,13 @@ import { getUniqueId } from "../../utils/general";
 import Block from "./Block";
 import Input from "./Input";
 import Message from "./Message";
+import { useDispatch } from "react-redux";
+import { types } from "../../redux/types";
 
 const Conversation = (props) => {
 	const [draft, setDraft] = useState();
 	const [blockClicked, setBlockClicked] = useState(false);
+	const dispatch = useDispatch();
 
 	// Calls the function on Send button
 	const onMessageClick = () => onMessageSave();
@@ -14,11 +17,14 @@ const Conversation = (props) => {
 	const onInput = (e) => setDraft(e.target.value);
 	// Calls the addMessage function from App.js
 	const onMessageSave = () => {
-		props.addMessage({
-			content: draft,
-			toUserId: props.conversation[0],
-			fromUserId: props.conversation[1][0].fromUserId,
-			messageId: getUniqueId(16),
+		dispatch({
+			type: types.ADD_MESSAGE,
+			payload: {
+				content: draft,
+				toUserId: props.conversation[0],
+				fromUserId: props.conversation[1][0].fromUserId,
+				messageId: getUniqueId(16),
+			},
 		});
 	};
 	// Allows the user to use the Enter key as well as clicking Send

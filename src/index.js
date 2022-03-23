@@ -6,8 +6,16 @@ import reportWebVitals from "./reportWebVitals";
 import { combineReducers, createStore } from "redux";
 import { Provider } from "react-redux";
 import { generalReducer } from "./redux/reducers/generalReducer";
+import { matchingReducer } from "./redux/reducers/matchingReducer";
+import { messagingReducer } from "./redux/reducers/messagingReducer";
+import { onboardingReducer } from "./redux/reducers/onboardingReducer";
 
-const rootReducer = combineReducers({ generalReducer });
+const rootReducer = combineReducers({
+	generalReducer,
+	matchingReducer,
+	messagingReducer,
+	onboardingReducer,
+});
 
 const store = createStore(
 	rootReducer,
