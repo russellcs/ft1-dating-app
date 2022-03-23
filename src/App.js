@@ -64,7 +64,7 @@ const App = () => {
     const currentUser = usersCopy[getIndexById(currentUserId, usersCopy)];
 
     currentUser.likes.push(user.userId); // push liked userId into currentUser's [liked]
-    console.log(currentUser.likes);
+    // console.log(currentUser.likes);
     if (user.likes.includes(currentUserId)) {
       // if current user is also liked by user..
       const userCopy = usersCopy[getIndexById(user.userId, usersCopy)];
@@ -82,17 +82,17 @@ const App = () => {
       //insert notification function if desired
     }
     setUsers(usersCopy);
-    console.log(users[0].likes);
+    // console.log(users[0].likes);
   };
 
   const addToSeen = (seenUserId, currentUserId) => {
-    // const usersCopy = [...users];
-    // const currentUser = usersCopy[getIndexById(currentUserId, usersCopy)];
-    // if (!currentUser.seen.includes(seenUserId)) {
-    //   currentUser.seen.push(seenUserId);
-    // }
-    // console.log(usersCopy);
-    // setUsers(usersCopy);
+    const usersCopy = [...users];
+    const currentUser = usersCopy[getIndexById(currentUserId, usersCopy)];
+    if (!currentUser.seen.includes(seenUserId)) {
+      currentUser.seen.push(seenUserId);
+    }
+    setUsers(usersCopy);
+    console.log(usersCopy);
   };
 
   return (

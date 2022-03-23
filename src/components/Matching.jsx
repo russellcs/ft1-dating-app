@@ -10,7 +10,7 @@ import {
   openToKidsFilter,
 } from "../utils/matching";
 import Search from "./Search";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Matching = (props) => {
   const [currentResultIndex, setCurrentResultIndex] = useState(0);
@@ -113,7 +113,7 @@ const Matching = (props) => {
     };
 
     const lastSeen = (user) => {
-      return currentUser.seen[-1] === user.userId ? 9999 : 0;
+      return currentUser.seen[-1] === user.userId ? 999 : 0;
     };
 
     let totalPointsUserA =
@@ -143,11 +143,11 @@ const Matching = (props) => {
     .filter(potentialMatchFilter);
   filteredUsers = filteredUsers.sort(potentialMatchSorter);
 
-  // need to add user to "seen" on display.
-  // need to make sure filteredUsers ALWAYS shows last "seen" user first.
+  let userForReview = filteredUsers[currentResultIndex];
 
-  // how do i make it show 1 by 1?
-  // rather than map... get list... on like/pass... +index on list.
+  useEffect(() => {
+    props.addToSeen(userForReview.userId, currentUser.userId);
+  }, [currentResultIndex]);
 
   const onLike = (user) => {
     props.addToLikes(user, currentUser.userId);
@@ -157,8 +157,6 @@ const Matching = (props) => {
   const onPass = () => {
     setCurrentResultIndex(currentResultIndex + 1);
   };
-
-  let userForReview = filteredUsers[currentResultIndex];
 
   return (
     <>
