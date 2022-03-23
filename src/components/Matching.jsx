@@ -29,20 +29,7 @@ const Matching = (props) => {
 
   let currentUser = getUserById(currentUserId, users);
 
-  // // RETURNS ARRAY OF USERS THAT HAVE MATCHED EACHOTHER
-  // const matchFinder = (currentUser) => {
-  //   // creates array of users that currentUser has liked.
-  //   let matches = [...currentUser.matches];
-  //   matches.forEach((id, i) => {
-  //     matches[i] = getUserById(id, users);
-  //   });
-  //   // returns array of users that also like currentUser.
-  //   return matches.filter((user) => {
-  //     return user.matches.includes(currentUser.userId) === true;
-  //   });
-  // };
-
-  //seen
+  //seen NEEDS WORK
   const seenFilter = (currentUser, user) => {
     return currentUser.seen.includes(currentUser.userId) === false;
   };
@@ -64,12 +51,6 @@ const Matching = (props) => {
       ? false
       : true;
   };
-
-  // potentialMatchDisplayer = DISPLAY oUSER PROFILE -> btnLike / btnPass
-
-  // btnLike = PUSH oUSER to USER'S MATCH LIST -> !IF (USER is also on oUSER'S match list) START CONVO, seen Fn.
-  // btnDislike = seen Fn.
-  // seen Fn = ADDS oUSER TO USER'S "seen", SHOW NEXT oUSER.
 
   // recieves array of filtered users
   const potentialMatchSorter = (userA, userB) => {
@@ -152,13 +133,13 @@ const Matching = (props) => {
   };
 
   let filteredUsers = [...users];
-  filteredUsers.splice(
-    filteredUsers.findIndex((user) => user === currentUser),
-    1
-  );
+  filteredUsers
+    .splice(
+      filteredUsers.findIndex((user) => user === currentUser),
+      1
+    )
+    .filter(potentialMatchFilter);
   filteredUsers = filteredUsers.sort(potentialMatchSorter);
-  // .filter(potentialMatchFilter)
-  // .sort(potentialMatchSorter);
 
   // need to add user to "seen" on display.
   // need to make sure filteredUsers ALWAYS shows last "seen" user first.
@@ -166,44 +147,74 @@ const Matching = (props) => {
   // how do i make it show 1 by 1?
   // rather than map... get list... on like/pass... +index on list.
 
+  const onLike = (user) => {
+    props.addToLikes(user, currentUser.userId);
+    index++;
+  };
+
+  const onPass = () => {
+    index++;
+  };
+
+  let index = 0;
+  console.log(filteredUsers);
+  let userForReview = filteredUsers[index];
+  console.log(userForReview);
   return (
     <>
       <Search
         setFilterOptions={setFilterOptions}
         filterOptions={filterOptions}
       />
-
-      <div className="userCardContainer">
-        {filteredUsers
-          // .filter(potentialMatchFilter)
-          // .sort(potentialMatchSorter)
-          .map((user, i) => {
-            return (
-              <>
-                <div className="userCard" key={i}>
-                  <MatchedUser user={user} />
-                </div>
-
-                <button
-                  key={`pass${i}`}
-                  onClick={() => props.onLikeUpdate(user, false)}
-                >
-                  Pass
-                </button>
-
-                <button
-                  key={`like${i}`}
-                  onClick={() => props.onLikeUpdate(user, true)}
-                >
-                  Like
-                </button>
-              </>
-            );
-          })}
-        {/* {Controls} */}
+      {props.addToSeen(userForReview.userId, currentUser.userId)}
+      <div className="userCard" key={index}>
+        <MatchedUser user={userForReview} />
       </div>
+
+      <button onClick={() => onLike(userForReview)}>Like</button>
+
+      <button onClick={() => onPass()}>Pass</button>
     </>
   );
+
+  // return (
+  //   <>
+  //     <Search
+  //       setFilterOptions={setFilterOptions}
+  //       filterOptions={filterOptions}
+  //     />
+
+  //     <div className="userCardContainer">
+  //       {filteredUsers
+  //         // .filter(potentialMatchFilter)
+  //         // .sort(potentialMatchSorter)
+  //         .map((user, i) => {
+  //           return (
+  //             <>
+  //               <div className="userCard" key={i}>
+  //                 <MatchedUser user={user} />
+  //               </div>
+
+  //               <button
+  //                 key={`pass${i}`}
+  //                 onClick={() => props.onLikeUpdate(user, false)}
+  //               >
+  //                 Pass
+  //               </button>
+
+  //               <button
+  //                 key={`like${i}`}
+  //                 onClick={() => props.onLikeUpdate(user, true)}
+  //               >
+  //                 Like
+  //               </button>
+  //             </>
+  //           );
+  //         })}
+  //       {/* {Controls} */}
+  //     </div>
+  //   </>
+  // );
 };
 
 export default Matching;

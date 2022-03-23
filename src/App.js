@@ -43,28 +43,6 @@ const App = () => {
     console.log(copy);
   };
 
-  const onLikeUpdate = (user) => {
-    const usersCopy = [...users];
-    usersCopy.currentUser.likes.push(user.userId); // push liked userId into currentUser's [liked]
-    if (usersCopy.user.likes.includes(currentUser.userId)) {
-      // if current user is also liked by user..
-      usersCopy.currentUser.matches.push(user.userId);
-      usersCopy.user.matches.push(currentUser.userId); // push eachother's id's into their respective [matches]
-      addMessage({
-        // & start convo.
-        toUserId: user.userId,
-        fromUserId: userId,
-        messageId: getUniqueId(16),
-        content: "",
-        sendTimestamp: 0,
-        read: false,
-        blocked: false,
-      });
-      //insert notification function if desired
-    }
-    setUsers(usersCopy);
-  };
-
   const deleteMessage = (messageId) => {
     const messagesCopy = [...messages];
     const index = getMessageIndexById(messageId, messagesCopy);
@@ -73,14 +51,49 @@ const App = () => {
   };
 
   const addUser = async (newUser) => {
-    console.log(newUser);
+    // console.log(newUser);
     const usersCopy = [...users];
     // const coords = await getLngLat(newUser.personalDetails.location.postCode);
     // newUser.personalDetails.location.longitude = coords.longitude;
     // newUser.personalDetails.location.latitude = coords.latitude;
     usersCopy.push(newUser);
-    console.log(usersCopy);
+    // console.log(usersCopy);
     setUsers(usersCopy);
+  };
+
+  const addToLikes = (user, currentUserId) => {
+    const usersCopy = [...users];
+    const currentUser = usersCopy[getIndexById(currentUserId, usersCopy)];
+
+    currentUser.likes.push(user.userId); // push liked userId into currentUser's [liked]
+    console.log(currentUser.likes);
+    if (user.likes.includes(currentUserId)) {
+      // if current user is also liked by user..
+      const userCopy = usersCopy[getIndexById(user.userId, usersCopy)];
+      userCopy.matches.push(currentUserId);
+      currentUser.matches.push(user.userId); // push eachother's id's into their respective [matches]
+      addMessage({
+        toUserId: user.userId,
+        fromUserId: userId,
+        messageId: getUniqueId(16),
+        content: "",
+        sendTimestamp: 0,
+        read: false,
+        blocked: false, // & start convo.
+      });
+      //insert notification function if desired
+    }
+    setUsers(usersCopy);
+    console.log(users[0].likes);
+  };
+
+  const addToSeen = (seenUserId, currentUserId) => {
+    // const usersCopy = [...users];
+    // const currentUser = usersCopy[getIndexById(currentUserId, usersCopy)];
+    // if (!currentUser.seen.includes(seenUserId)) {
+    //   currentUser.seen.push(seenUserId);
+    // }
+    // setUsers(usersCopy);
   };
 
   return (
@@ -96,7 +109,8 @@ const App = () => {
         users={users}
         messages={messages}
         addMessage={addMessage}
-        onLikeUpdate={onLikeUpdate}
+        addToLikes={addToLikes}
+        addToSeen={addToSeen}
         blockUserId={blockUserId}
         addUser={addUser}
         newUserId={userId}
