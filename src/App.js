@@ -32,24 +32,24 @@ const App = () => {
 
 	// Adds the current user ID to the blocked array in the data
 	const blockUserId = (fId) => {
-		const foreignUserId = Number(fId);
-		const usersCopy = [...users];
-		usersCopy[getIndexById(currentUserId, users)].blocked.push(foreignUserId);
-		setUsers(usersCopy);
+		// const foreignUserId = Number(fId);
+		// const usersCopy = [...users];
+		// usersCopy[getIndexById(currentUserId, users)].blocked.push(foreignUserId);
+		// setUsers(usersCopy);
 	};
 
 	const addMessage = (payload) => {
-		const copy = [...messages];
-		copy.push(payload);
-		setMessages(copy);
-		console.log(copy);
+		// const copy = [...messages];
+		// copy.push(payload);
+		// setMessages(copy);
+		// console.log(copy);
 	};
 
 	const deleteMessage = (messageId) => {
-		const messagesCopy = [...messages];
-		const index = getMessageIndexById(messageId, messagesCopy);
-		messagesCopy.splice(index, 1);
-		setMessages(messagesCopy);
+		// const messagesCopy = [...messages];
+		// const index = getMessageIndexById(messageId, messagesCopy);
+		// messagesCopy.splice(index, 1);
+		// setMessages(messagesCopy);
 	};
 
 	const addUser = async (newUser) => {
