@@ -50,7 +50,6 @@ const App = () => {
   };
 
   const addUser = async (newUser) => {
-
     const usersCopy = [...users];
     // const coords = await getLngLat(newUser.personalDetails.location.postCode);
     // newUser.personalDetails.location.longitude = coords.longitude;
@@ -92,8 +91,8 @@ const App = () => {
     // if (!currentUser.seen.includes(seenUserId)) {
     //   currentUser.seen.push(seenUserId);
     // }
-    console.log(usersCopy);
-    setUsers(usersCopy);
+    // console.log(usersCopy);
+    // setUsers(usersCopy);
   };
 
   return (

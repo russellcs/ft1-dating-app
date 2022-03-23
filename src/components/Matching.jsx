@@ -13,6 +13,8 @@ import Search from "./Search";
 import { useState } from "react";
 
 const Matching = (props) => {
+  const [currentResultIndex, setCurrentResultIndex] = useState(0);
+
   const [filterOptions, setFilterOptions] = useState({
     // seenFilter: true,
     genderFilter: true,
@@ -149,34 +151,40 @@ const Matching = (props) => {
 
   const onLike = (user) => {
     props.addToLikes(user, currentUser.userId);
-    index++;
+    setCurrentResultIndex(currentResultIndex + 1);
   };
 
   const onPass = () => {
-    index++;
+    setCurrentResultIndex(currentResultIndex + 1);
   };
 
-  let index = 0;
-  console.log(filteredUsers);
-  let userForReview = filteredUsers[index];
-  console.log(userForReview);
+  let userForReview = filteredUsers[currentResultIndex];
+
   return (
     <>
       <Search
         setFilterOptions={setFilterOptions}
         filterOptions={filterOptions}
       />
-      {props.addToSeen(userForReview.userId, currentUser.userId)}
-      <div className="userCard" key={index}>
-        <MatchedUser user={userForReview} />
-      </div>
 
-      <button onClick={() => onLike(userForReview)}>Like</button>
-
-      <button onClick={() => onPass()}>Pass</button>
+      {currentResultIndex < filteredUsers.length ? (
+        <>
+          <div className="userCard">
+            <MatchedUser user={userForReview} />
+          </div>
+          <button onClick={() => onLike(userForReview)}>Like</button>
+          <button onClick={() => onPass()}>Pass</button>{" "}
+        </>
+      ) : (
+        <p>
+          You've seen all potential matches in current search parameters, try
+          again later or be less picky!
+        </p>
+      )}
     </>
   );
 
+  //  {props.addToSeen(userForReview.userId, currentUser.userId)}
   // return (
   //   <>
   //     <Search
