@@ -7,8 +7,11 @@ import RegisterPartThree from "./RegisterPartThree";
 import "../Onboarding/register.css";
 import Preferences from "./Preferences";
 import { getLngLat } from "../../utils/general";
+import { types } from "../../redux/types";
+import { useDispatch } from "react-redux";
 
 const Register = (props) => {
+  const dispatch = useDispatch();
   const [newUserData, setNewUserData] = useState({});
   const [errors, setErrors] = useState({});
   const [regScreen, setRegScreen] = useState(0);
@@ -58,7 +61,8 @@ const Register = (props) => {
       login: { email: newUserData.email, password: newUserData.password },
       status: { type: "member", lastLoginTimestamp: Date.now() },
     };
-    props.addUser(newUserStructured);
+    dispatch({ type: types.ADD_USER, payload: newUserStructured });
+    // props.addUser(newUserStructured);
     props.setScreen(1);
   };
 
