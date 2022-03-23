@@ -36,12 +36,14 @@ const Interface = (props) => {
       )}
 
       {screen === 1 && (
-        <Matching onLikeUpdate={props.onLikeUpdate} users={props.users} />
+        <Matching
+          addToLikes={props.addToLikes}
+          addToSeen={props.addToSeen}
+          users={props.users}
+        />
       )}
 
-
       {/* {screen === 2 && <Search users={props.users} />} */}
-
 
       {screen === 3 && (
         <Messaging

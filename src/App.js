@@ -11,8 +11,6 @@ const App = () => {
   const [messages, setMessages] = useState(mockMessages);
   const [userId, setUserId] = useState(getUniqueId(16));
 
-  // console.log(userId);
-
   //  set the state from the disk
   useEffect(() => {
     const data = getData();
@@ -29,7 +27,6 @@ const App = () => {
     storeData("messages", messages);
   }, [messages]);
 
-
   // Adds the current user ID to the blocked array in the data
   const blockUserId = (fId) => {
     const foreignUserId = Number(fId);
@@ -45,24 +42,6 @@ const App = () => {
     console.log(copy);
   };
 
-  const onLikeUpdate = (user, boolean) => {
-    addMessage({
-      toUserId: user.userId,
-      fromUserId: userId,
-      messageId: getUniqueId(16),
-      content: "",
-      sendTimestamp: 0,
-      read: false,
-      blocked: false,
-    });
-    // const usersCopy = [...users];
-    // if (boolean) {
-    //   usersCopy.currentUser.likes.push(user.userId);
-    //   usersCopy.currentUser.seen.push(user.userId);
-    // }
-    // check if users Match -> add respective IDs in respective {match}
-  };
-
   const deleteMessage = (messageId) => {
     const messagesCopy = [...messages];
     const index = getMessageIndexById(messageId, messagesCopy);
@@ -71,12 +50,48 @@ const App = () => {
   };
 
   const addUser = async (newUser) => {
-    console.log(newUser);
+
     const usersCopy = [...users];
     // const coords = await getLngLat(newUser.personalDetails.location.postCode);
     // newUser.personalDetails.location.longitude = coords.longitude;
     // newUser.personalDetails.location.latitude = coords.latitude;
     usersCopy.push(newUser);
+    // console.log(usersCopy);
+    setUsers(usersCopy);
+  };
+
+  const addToLikes = (user, currentUserId) => {
+    const usersCopy = [...users];
+    const currentUser = usersCopy[getIndexById(currentUserId, usersCopy)];
+
+    currentUser.likes.push(user.userId); // push liked userId into currentUser's [liked]
+    console.log(currentUser.likes);
+    if (user.likes.includes(currentUserId)) {
+      // if current user is also liked by user..
+      const userCopy = usersCopy[getIndexById(user.userId, usersCopy)];
+      userCopy.matches.push(currentUserId);
+      currentUser.matches.push(user.userId); // push eachother's id's into their respective [matches]
+      addMessage({
+        toUserId: user.userId,
+        fromUserId: userId,
+        messageId: getUniqueId(16),
+        content: "",
+        sendTimestamp: 0,
+        read: false,
+        blocked: false, // & start convo.
+      });
+      //insert notification function if desired
+    }
+    setUsers(usersCopy);
+    console.log(users[0].likes);
+  };
+
+  const addToSeen = (seenUserId, currentUserId) => {
+    // const usersCopy = [...users];
+    // const currentUser = usersCopy[getIndexById(currentUserId, usersCopy)];
+    // if (!currentUser.seen.includes(seenUserId)) {
+    //   currentUser.seen.push(seenUserId);
+    // }
     console.log(usersCopy);
     setUsers(usersCopy);
   };
@@ -94,7 +109,8 @@ const App = () => {
         users={users}
         messages={messages}
         addMessage={addMessage}
-        onLikeUpdate={onLikeUpdate}
+        addToLikes={addToLikes}
+        addToSeen={addToSeen}
         blockUserId={blockUserId}
         addUser={addUser}
         newUserId={userId}
