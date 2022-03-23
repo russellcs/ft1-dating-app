@@ -10,6 +10,7 @@ const App = () => {
   const [users, setUsers] = useState(mockUsers);
   const [messages, setMessages] = useState(mockMessages);
   const [userId, setUserId] = useState(getUniqueId(16));
+
   // console.log(userId);
 
   //  set the state from the disk
@@ -27,6 +28,7 @@ const App = () => {
   useEffect(() => {
     storeData("messages", messages);
   }, [messages]);
+
 
   // Adds the current user ID to the blocked array in the data
   const blockUserId = (fId) => {
