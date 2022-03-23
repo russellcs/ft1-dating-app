@@ -3,6 +3,7 @@ import { types } from "../types";
 import { getMessageIndexById, getIndexById } from "../../utils/matching";
 
 export function messagingReducer(state = messagingInitialState, action) {
+
 	switch (action.type) {
 		case types.ADD_MESSAGE: {
 			const messages = [...state.messages];
@@ -24,7 +25,7 @@ export function messagingReducer(state = messagingInitialState, action) {
 			// users[getIndexById(action.payload, users)].blocked.push(action.payload);
 			return { ...state };
 
-		default:
-			return state;
-	}
+    default:
+      return state;
+  }
 }

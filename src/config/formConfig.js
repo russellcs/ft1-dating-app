@@ -37,7 +37,7 @@ export const errorCodes = {
   firstName: "Please enter your first name",
   dateOfBirth: "You must be over 18 years old to register",
   gender: "Please select your gender",
-  postcode: "Please enter a valid UK postcde",
+  postCode: "Please enter a valid UK postcde",
   height: "Please enter your height in cm", //should add logic for while range exists?
   smokes: "Please select your smoking preference",
   haveKids: "Please select if you have any kids",

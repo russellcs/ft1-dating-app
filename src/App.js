@@ -62,31 +62,35 @@ const App = () => {
 		setUsers(usersCopy);
 	};
 
-	const addToLikes = (user, currentUserId) => {
-		const usersCopy = [...users];
-		const currentUser = usersCopy[getIndexById(currentUserId, usersCopy)];
+	// const addToLikes = (user, currentUserId) => {
+	// 	const usersCopy = [...users];
+	// 	const currentUser = usersCopy[getIndexById(currentUserId, usersCopy)];
 
-		currentUser.likes.push(user.userId); // push liked userId into currentUser's [liked]
-		// console.log(currentUser.likes);
-		if (user.likes.includes(currentUserId)) {
-			// if current user is also liked by user..
-			const userCopy = usersCopy[getIndexById(user.userId, usersCopy)];
-			userCopy.matches.push(currentUserId);
-			currentUser.matches.push(user.userId); // push eachother's id's into their respective [matches]
-			addMessage({
-				toUserId: user.userId,
-				fromUserId: userId,
-				messageId: getUniqueId(16),
-				content: "",
-				sendTimestamp: 0,
-				read: false,
-				blocked: false, // & start convo.
-			});
-			//insert notification function if desired
-		}
-		setUsers(usersCopy);
-		// console.log(users[0].likes);
-	};
+
+	// 	currentUser.likes.push(user.userId); // push liked userId into currentUser's [liked]
+	// 	// console.log(currentUser.likes);
+
+  //   console.log(currentUserId, currentUser)
+
+	// 	if (user.likes.includes(currentUserId)) {
+	// 		// if current user is also liked by user..
+	// 		const userCopy = usersCopy[getIndexById(user.userId, usersCopy)];
+	// 		userCopy.matches.push(currentUserId);
+	// 		currentUser.matches.push(user.userId); // push eachother's id's into their respective [matches]
+	// 		addMessage({
+	// 			toUserId: user.userId,
+	// 			fromUserId: userId,
+	// 			messageId: getUniqueId(16),
+	// 			content: "",
+	// 			sendTimestamp: 0,
+	// 			read: false,
+	// 			blocked: false, // & start convo.
+	// 		});
+	// 		//insert notification function if desired
+	// 	}
+	// 	setUsers(usersCopy);
+	// 	// console.log(users[0].likes);
+	// };
 
 	const addToSeen = (seenUserId, currentUserId) => {
 		const usersCopy = [...users];
@@ -111,7 +115,7 @@ const App = () => {
 				// users={users}
 				messages={messages}
 				addMessage={addMessage}
-				addToLikes={addToLikes}
+				// addToLikes={addToLikes}
 				addToSeen={addToSeen}
 				blockUserId={blockUserId}
 				addUser={addUser}

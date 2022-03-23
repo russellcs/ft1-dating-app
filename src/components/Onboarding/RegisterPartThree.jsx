@@ -4,8 +4,11 @@ import {
   smokes,
   errorCodes,
 } from "../../config/formConfig";
+import { types } from "../../redux/types";
+import { useDispatch } from "react-redux";
 
 const RegisterPartThree = (props) => {
+  const dispatch = useDispatch();
   const {
     smokes: smokesErrors,
     haveKids: haveKidsErrors,
@@ -83,7 +86,12 @@ const RegisterPartThree = (props) => {
         </label>
       </div>
       <nav>
-        <button className="backButton" onClick={() => props.setRegScreen(1)}>
+        <button
+          className="backButton"
+          onClick={() =>
+            dispatch({ type: types.SET_REGISTER_SCREEN, payload: 1 })
+          }
+        >
           Back
         </button>
         {smokesErrors === undefined &&
@@ -92,7 +100,9 @@ const RegisterPartThree = (props) => {
           religionErrors === undefined && (
             <button
               className="nextButton"
-              onClick={() => props.setRegScreen(3)}
+              onClick={() =>
+                dispatch({ type: types.SET_REGISTER_SCREEN, payload: 3 })
+              }
             >
               Next
             </button>
