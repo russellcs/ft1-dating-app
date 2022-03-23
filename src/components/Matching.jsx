@@ -146,7 +146,8 @@ const Matching = (props) => {
   let userForReview = filteredUsers[currentResultIndex];
 
   useEffect(() => {
-    props.addToSeen(userForReview.userId, currentUser.userId);
+    if (currentResultIndex < filteredUsers.length)
+      props.addToSeen(userForReview.userId, currentUser.userId);
   }, [currentResultIndex]);
 
   const onLike = (user) => {
