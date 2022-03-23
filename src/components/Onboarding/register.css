@@ -1,10 +1,12 @@
 .containerReg {
   display: flex;
   justify-content: center;
+  background-color: #daeaf6;
+  height: 100vh;
 }
 
 .formRow {
-  padding: 5px 0px;
+  padding: 8px 0px;
 }
 
 .submit {
@@ -14,7 +16,11 @@
 }
 
 input {
-  margin: 0px 2px;
+  margin: 0px 10px;
+  border-radius: 3px;
+  box-sizing: border-box;
+  border: 0;
+  font-size: 13px;
 }
 
 input[type="password"] {
@@ -31,6 +37,13 @@ select {
 
 .backButton {
   float: left;
+  display: block;
+}
+
+.registerButton {
+  width: 30vw;
+  display: block;
+  margin: auto;
 }
 
 nav {
@@ -39,6 +52,8 @@ nav {
 
 h1 {
   text-align: center;
+  /* background-color: paleturquoise; */
+  margin-bottom: 15px;
 }
 
 .errorMessage {
