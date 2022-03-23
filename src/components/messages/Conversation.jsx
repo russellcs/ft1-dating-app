@@ -5,8 +5,10 @@ import Input from "./Input";
 import Message from "./Message";
 import { useDispatch } from "react-redux";
 import { types } from "../../redux/types";
+import { useSelector } from "react-redux";
 
 const Conversation = (props) => {
+	const users = useSelector((state) => state.matching.users);
 	const [draft, setDraft] = useState();
 	const [blockClicked, setBlockClicked] = useState(false);
 	const dispatch = useDispatch();
@@ -21,8 +23,8 @@ const Conversation = (props) => {
 			type: types.ADD_MESSAGE,
 			payload: {
 				content: draft,
-				toUserId: props.conversation[0],
-				fromUserId: props.conversation[1][0].fromUserId,
+				toUserId: Number(props.conversation[0]),
+				fromUserId: 1, //Number(conversation[1][0]).fromUserId,
 				messageId: getUniqueId(16),
 			},
 		});
@@ -59,6 +61,7 @@ const Conversation = (props) => {
 				// blockButtonText={blockButtonText}
 				blockClicked={blockClicked}
 				users={props.users}
+				userId={props.conversation[0]}
 			/>
 			{props.conversation[1].map((message, index) => {
 				return (

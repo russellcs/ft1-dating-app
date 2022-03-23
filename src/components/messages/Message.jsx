@@ -1,8 +1,13 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { types } from "../../redux/types";
 
 const Message = (props) => {
+	const dispatch = useDispatch();
+
 	const [likeClicked, setLikeClicked] = useState(false);
 	const { message } = props;
+
 	// Toggles the Like button
 	const isLikeClicked = () => {
 		setLikeClicked(likeClicked === false ? true : false);
@@ -15,8 +20,10 @@ const Message = (props) => {
 			{likeClicked && <p>Message liked</p>}
 			<button
 				onClick={() => {
-					console.log("onclick called");
-					props.deleteMessage(message.messageId);
+					dispatch({
+						type: types.DELETE_MESSAGE,
+						payload: message.messageId,
+					});
 				}}
 				style={{ display: "block" }}
 			>
