@@ -108,7 +108,7 @@ const App = () => {
 				Clear localStorage
 			</button>
 			<Interface
-				users={users}
+				// users={users}
 				messages={messages}
 				addMessage={addMessage}
 				addToLikes={addToLikes}

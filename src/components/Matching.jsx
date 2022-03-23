@@ -11,8 +11,12 @@ import {
 } from "../utils/matching";
 import Search from "./Search";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const Matching = (props) => {
+  const users = useSelector((state) => state.matching.users);
+  console.log(users);
+
   const [currentResultIndex, setCurrentResultIndex] = useState(0);
 
   const [filterOptions, setFilterOptions] = useState({
@@ -25,7 +29,6 @@ const Matching = (props) => {
     ageFilter: true,
   });
 
-  const { users } = props;
   // just for WiP
   const currentUserId = 1;
 
@@ -145,14 +148,14 @@ const Matching = (props) => {
 
   let userForReview = filteredUsers[currentResultIndex];
 
-  useEffect(() => {
-    if (currentResultIndex < filteredUsers.length)
-      props.addToSeen(userForReview.userId, currentUser.userId);
-  }, [currentResultIndex]);
+  // useEffect(() => {
+  //   if (currentResultIndex < filteredUsers.length)
+  //     // props.addToSeen(userForReview.userId, currentUser.userId);
+  // }, [currentResultIndex]);
 
   const onLike = (user) => {
     props.addToLikes(user, currentUser.userId);
-    setCurrentResultIndex(currentResultIndex + 1);
+    // setCurrentResultIndex(currentResultIndex + 1);
   };
 
   const onPass = () => {

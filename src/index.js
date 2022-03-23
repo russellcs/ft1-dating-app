@@ -12,7 +12,7 @@ import { onboardingReducer } from "./redux/reducers/onboardingReducer";
 
 const rootReducer = combineReducers({
 	generalReducer,
-	matchingReducer,
+	matching: matchingReducer,
 	messagingReducer,
 	onboardingReducer,
 });
