@@ -9,12 +9,14 @@ import Preferences from "./Preferences";
 import { getLngLat } from "../../utils/general";
 import { types } from "../../redux/types";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Register = (props) => {
   const dispatch = useDispatch();
+  const regScreen = useSelector((state) => state.onboarding.regScreen);
   const [newUserData, setNewUserData] = useState({});
   const [errors, setErrors] = useState({});
-  const [regScreen, setRegScreen] = useState(0);
+  // const [regScreen, setRegScreen] = useState(0);
 
   const addNewUser = async () => {
     let lifeStyleCombo = newUserData.relationship;
@@ -62,20 +64,19 @@ const Register = (props) => {
       status: { type: "member", lastLoginTimestamp: Date.now() },
     };
     dispatch({ type: types.ADD_USER, payload: newUserStructured });
-    // props.addUser(newUserStructured);
-    props.setScreen(1);
+    dispatch({ type: types.SET_SCREEN, payload: 1 });
   };
 
   const onInput = (e) => {
     let value = e.target.value;
 
-    if (e.target.name === "acceptedReligions") {
-      const religionArray = [];
-      for (let index = 0; index < e.target.selectedOptions.length; index++) {
-        religionArray.push(Number(e.target.selectedOptions[index].value));
-      }
-      value = religionArray;
-    }
+    // if (e.target.name === "acceptedReligions") {
+    //   const religionArray = [];
+    //   for (let index = 0; index < e.target.selectedOptions.length; index++) {
+    //     religionArray.push(Number(e.target.selectedOptions[index].value));
+    //   }
+    //   value = religionArray;
+    // }
 
     if (e.target.name === "genderPref") {
       const genderArray = [];
@@ -88,18 +89,6 @@ const Register = (props) => {
     if (e.target.name === "dateOfBirth") {
       value = new Date(e.target.value).getTime();
     }
-
-    // if ((e.target.name === "haveKids") & (value === "0")) {
-    //   value = undefined;
-    // }
-
-    // if (e.target.name === "haveKids" && value === "1") {
-    //   value = false;
-    // }
-
-    // if (e.target.name === "haveKids" && value === "2") {
-    //   value = true;
-    // }
 
     if (e.target.name === "relationship" && value === "0") {
       value = { marriage: true, casual: false };
@@ -143,23 +132,18 @@ const Register = (props) => {
   return (
     <>
       <div className="containerReg">
-        <form className="form" onInput={onInput} name="registerForm">
+        <form
+          className="form"
+          onInput={(e) => dispatch({ type: types.ON_INPUT_REG, payload: e })}
+          name="registerForm"
+        >
           {regScreen === 0 && (
-            <RegisterPartOne
-              setRegScreen={setRegScreen}
-              errors={errors}
-              newUserData={newUserData}
-            />
+            <RegisterPartOne errors={errors} newUserData={newUserData} />
           )}
-          {regScreen === 1 && (
-            <RegisterPartTwo setRegScreen={setRegScreen} errors={errors} />
-          )}
-          {regScreen === 2 && (
-            <RegisterPartThree setRegScreen={setRegScreen} errors={errors} />
-          )}
+          {regScreen === 1 && <RegisterPartTwo errors={errors} />}
+          {regScreen === 2 && <RegisterPartThree errors={errors} />}
           {regScreen === 3 && (
             <Preferences
-              setRegScreen={setRegScreen}
               errors={errors}
               addNewUser={addNewUser}
               newUserData={newUserData}

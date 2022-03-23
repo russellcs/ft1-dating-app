@@ -2,10 +2,14 @@ import Login from "./Onboarding/Login";
 import Register from "./Onboarding/Register";
 import { useState } from "react";
 import "./Onboarding/onboarding.css";
+import { types } from "../redux/types";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Onboarding = (props) => {
+  const dispatch = useDispatch();
+  const screen = useSelector((state) => state.onboarding.screen);
   const [loggedStatus, setLoggedStatus] = useState(false);
-  const [onBoardingScreen, setOnBoardingScreen] = useState();
 
   // console.log(loggedStatus);
   // console.log(props);
@@ -13,21 +17,28 @@ const Onboarding = (props) => {
   return (
     <>
       <nav className="onBoarding">
-        <button onClick={() => setOnBoardingScreen(0)}>Register</button>
-        <button onClick={() => setOnBoardingScreen(1)}>Log In</button>
+        <button
+          onClick={() =>
+            dispatch({ type: types.SET_ONBOARDING_SCREEN, payload: 0 })
+          }
+        >
+          Register
+        </button>
+        <button
+          onClick={() =>
+            dispatch({ type: types.SET_ONBOARDING_SCREEN, payload: 1 })
+          }
+        >
+          Log In
+        </button>
       </nav>
       <div>
-        {onBoardingScreen === 0 && (
-          <Register
-            users={props.users}
-            addUser={props.addUser}
-            newUserId={props.newUserId}
-            setScreen={props.setScreen}
-          />
+        {screen === 0 && (
+          <Register newUserId={props.newUserId} setScreen={props.setScreen} />
         )}
       </div>
       <div>
-        {onBoardingScreen === 1 && (
+        {screen === 1 && (
           <Login users={props.users} setLoggedStatus={setLoggedStatus} />
         )}
       </div>

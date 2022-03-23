@@ -1,16 +1,19 @@
 import {
-  religionsPref,
+  // religionsPref,
   gendersPref,
   errorCodes,
 } from "../../config/formConfig";
+import { types } from "../../redux/types";
+import { useDispatch } from "react-redux";
 
 const Preferences = (props) => {
+  const dispatch = useDispatch();
   const {
     relationship: relationshipErrors,
     genderPref: genderPrefErrors,
     minAge: minAgeErrors,
     maxAge: maxAgeErrors,
-    acceptedReligions: acceptedReligionsErrors,
+    // acceptedReligions: acceptedReligionsErrors,
     acceptedDistance: acceptedDistanceErrors,
     kidsAccepted: kidsAcceptedErrors,
     smokersPref: smokersPrefErrors,
@@ -149,18 +152,33 @@ const Preferences = (props) => {
         </label>
       </div>
       <nav>
-        <button className="backButton" onClick={() => props.setRegScreen(2)}>
+        <button
+          className="backButton"
+          onClick={() =>
+            dispatch({ type: types.SET_REGISTER_SCREEN, payload: 2 })
+          }
+        >
           Back
         </button>
-        <button
-          className="registerButton"
-          onClick={(e) => {
-            e.preventDefault();
-            props.addNewUser();
-          }}
-        >
-          Register Now
-        </button>
+        {relationshipErrors === undefined &&
+          genderPrefErrors === undefined &&
+          minAgeErrors === undefined &&
+          maxAgeErrors === undefined &&
+          acceptedDistanceErrors === undefined &&
+          kidsAcceptedErrors === undefined &&
+          smokersPrefErrors === undefined &&
+          minHeightErrors === undefined &&
+          maxHeightErrors === undefined && (
+            <button
+              className="registerButton"
+              onClick={(e) => {
+                e.preventDefault();
+                props.addNewUser();
+              }}
+            >
+              Register Now
+            </button>
+          )}
       </nav>
     </>
   );
