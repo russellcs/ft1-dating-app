@@ -12,15 +12,18 @@ import {
 import Search from "./Search";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { types } from "../redux/types";
+import { useDispatch } from "react-redux";
 
 const Matching = (props) => {
+  const dispatch = useDispatch();
+
   const users = useSelector((state) => state.matching.users);
-  console.log(users);
 
   const [currentResultIndex, setCurrentResultIndex] = useState(0);
 
   const [filterOptions, setFilterOptions] = useState({
-    // seenFilter: true,
+    seenFilter: true,
     genderFilter: true,
     heightFilter: true,
     existingKidsFilter: true,
@@ -29,9 +32,10 @@ const Matching = (props) => {
     ageFilter: true,
   });
 
+  console.log(filterOptions);
+
   // just for WiP
   const currentUserId = 1;
-
   let currentUser = getUserById(currentUserId, users);
 
   //seen NEEDS WORK
@@ -138,13 +142,16 @@ const Matching = (props) => {
   };
 
   let filteredUsers = [...users];
+  console.log(filteredUsers);
   filteredUsers
     .splice(
       filteredUsers.findIndex((user) => user === currentUser),
       1
     )
     .filter(potentialMatchFilter);
+  console.log(filteredUsers);
   filteredUsers = filteredUsers.sort(potentialMatchSorter);
+  console.log(filteredUsers);
 
   let userForReview = filteredUsers[currentResultIndex];
 
@@ -154,7 +161,18 @@ const Matching = (props) => {
   // }, [currentResultIndex]);
 
   const onLike = (user) => {
-    props.addToLikes(user, currentUser.userId);
+    // props.addToLikes(user, currentUser.userId);
+    const usersToAddToLikes = { user, currentUser };
+    dispatch({ type: types.ADD_TO_LIKES, payload: usersToAddToLikes });
+    dispatch({
+      type: types.UPDATE_MATCHES,
+      payload: { seenUserId: user.userId, currentUserId: currentUser.userId },
+    });
+
+    // check if they like eachother - in matches array
+    // initiate messages
+    // - crossover of reducers
+
     // setCurrentResultIndex(currentResultIndex + 1);
   };
 

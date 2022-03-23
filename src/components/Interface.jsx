@@ -36,7 +36,9 @@ const Interface = (props) => {
       )}
 
       {screen === 1 && (
-        <Matching onLikeUpdate={props.onLikeUpdate}  />
+        <Matching 
+        // addToLikes={props.addToLikes} 
+        />
       )}
 
 

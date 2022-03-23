@@ -62,11 +62,11 @@ export const genderFilter = (currentUser, user) => {
 
 export const heightFilter = (currentUser, user) => {
   // checks if user1's height is more/less than user2's prefered min/max height
-
   return heightCheck(currentUser, user) && heightCheck(user, currentUser);
 };
 
 export const heightCheck = (user1, user2) => {
+  // console.log(user1.personalDetails.height, user2.preferences.height.min, user2.preferences.height.max )
   return user1.personalDetails.height >= user2.preferences.height.min &&
     user1.personalDetails.height <= user2.preferences.height.max
     ? true
