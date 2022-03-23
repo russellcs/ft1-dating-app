@@ -1,6 +1,9 @@
 import { errorCodes } from "../../config/formConfig";
+import { types } from "../../redux/types";
+import { useDispatch } from "react-redux";
 
 const RegisterPartOne = (props) => {
+  const dispatch = useDispatch();
   const {
     email: emailErrors,
     password: passwordErrors,
@@ -57,7 +60,9 @@ const RegisterPartOne = (props) => {
             firstNameErrors === undefined && (
               <button
                 className="nextButton"
-                onClick={() => props.setRegScreen(1)}
+                onClick={() =>
+                  dispatch({ type: types.SET_REGISTER_SCREEN, payload: 1 })
+                }
               >
                 Next
               </button>

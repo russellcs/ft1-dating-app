@@ -1,1 +1,1 @@
-export const onboardingInitialState = {};
+export const onboardingInitialState = { regScreen: 0 };
