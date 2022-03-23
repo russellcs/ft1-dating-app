@@ -20,7 +20,6 @@ const Conversation = (props) => {
 			fromUserId: props.conversation[1][0].fromUserId,
 			messageId: getUniqueId(16),
 		});
-		setDraft("");
 	};
 	// Allows the user to use the Enter key as well as clicking Send
 	const onKeyDown = (e) => {
@@ -70,7 +69,6 @@ const Conversation = (props) => {
 				onInput={onInput}
 				onKeyDown={onKeyDown}
 				onMessageClick={onMessageClick}
-				value={draft}
 			/>
 		</div>
 	);
