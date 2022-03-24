@@ -5,8 +5,10 @@ import {
 } from "../../config/formConfig";
 import { types } from "../../redux/types";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Preferences = (props) => {
+  const errors = useSelector((state) => state.onboarding.errors);
   const dispatch = useDispatch();
   const {
     relationship: relationshipErrors,
@@ -19,7 +21,7 @@ const Preferences = (props) => {
     smokersPref: smokersPrefErrors,
     minHeight: minHeightErrors,
     maxHeight: maxHeightErrors,
-  } = props.errors;
+  } = errors;
 
   return (
     <>
@@ -126,10 +128,9 @@ const Preferences = (props) => {
             <option value="" disabled>
               Select
             </option>
-            <option value="0">Not saying</option>
-            <option value="1">Not sure</option>
-            <option value="2">Open to kids</option>
-            <option value="3">Want kids</option>
+            <option value="0">Not sure</option>
+            <option value="1">Don't want to be match with kids</option>
+            <option value="2">Open to matches with kids</option>
           </select>
           <p className="errorMessage">
             {kidsAcceptedErrors && errorCodes.kidsAccepted}

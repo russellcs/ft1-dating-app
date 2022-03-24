@@ -18,6 +18,8 @@ export function onboardingReducer(state = onboardingInitialState, action) {
     case types.ON_INPUT_REG:
       let value = action.payload.target.value;
 
+      //move if statements to a utils
+
       if (action.payload.target.name === "genderPref") {
         const genderArray = [];
         for (
@@ -60,6 +62,8 @@ export function onboardingReducer(state = onboardingInitialState, action) {
         ...state.newUserData,
         [action.payload.target.name]: value,
       };
+
+      console.log(newUserData);
 
       return { ...state, newUserData };
 

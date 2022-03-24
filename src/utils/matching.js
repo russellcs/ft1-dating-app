@@ -17,6 +17,12 @@ export const getUserById = (id, users) => {
   return users.find(({ userId }) => userId === id);
 };
 
+export const getIndexByEmailAndPassword = (emailTest, passwordTest, users) => {
+  return users.findIndex(
+    ({ email, password }) => email === emailTest && password === passwordTest
+  );
+};
+
 export const getIndexById = (id, users) => {
   // console.log(users, id);
   return users.findIndex(({ userId }) => userId === id);

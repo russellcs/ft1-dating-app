@@ -5,13 +5,14 @@ import { useSelector } from "react-redux";
 
 const RegisterPartOne = (props) => {
   const newUserData = useSelector((state) => state.onboarding.newUserData);
+  const errors = useSelector((state) => state.onboarding.errors);
   const dispatch = useDispatch();
   const {
     email: emailErrors,
     password: passwordErrors,
     firstName: firstNameErrors,
     lastName: lastNameErrors,
-  } = props.errors;
+  } = errors;
 
   return (
     <>

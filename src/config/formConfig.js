@@ -57,7 +57,6 @@ export const errorCodes = {
 };
 
 export const wantKids = [
-  "Prefer not to say",
   "Don't want children",
   "Not sure yet",
   "Open to children",
