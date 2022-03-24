@@ -3,7 +3,7 @@ export const messages = [
 		toUserId: 2,
 		fromUserId: 1,
 		messageId: 1,
-		content: "Hey, how are you?",
+		content: "Hey, how are you? 2",
 		sendTimestamp: 0,
 		read: false,
 		blocked: false,

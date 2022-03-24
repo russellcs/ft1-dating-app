@@ -1,9 +1,13 @@
 import Conversation from "./Conversation";
+import { useSelector } from "react-redux";
 
 const Conversations = (props) => {
+	const users = useSelector((state) => state.matching.users);
+	const messages = useSelector((state) => state.messagingReducer.messages);
+
 	// Iterate through the messages data setting the keys for a new object to be user ID of the existing user and then saving that info in the entries object
 	const result = {};
-	props.messages.forEach((message) => {
+	messages.forEach((message) => {
 		const existing = result[message.fromUserId]
 			? result[message.fromUserId]
 			: [];
@@ -13,7 +17,7 @@ const Conversations = (props) => {
 
 	// Filter through the entries object returning only the conversations which do not match (not blocked)
 	const filteredConversations = entries.filter((conversation) => {
-		return !props.users[0].blocked.includes(Number(conversation[0]));
+		return !users[0].blocked.includes(Number(conversation[0]));
 	});
 
 	return (

@@ -1,11 +1,14 @@
 import { genders, errorCodes } from "../../config/formConfig";
+import { types } from "../../redux/types";
+import { useDispatch } from "react-redux";
 
 const RegisterPartTwo = (props) => {
+  const dispatch = useDispatch();
   const {
     dateOfBirth: dateOfBirthErrors,
     gender: genderErrors,
     town: townErrors,
-    postcode: postcodeErrors,
+    postCode: postCodeErrors,
     height: heightErrors,
   } = props.errors;
 
@@ -44,7 +47,7 @@ const RegisterPartTwo = (props) => {
           <input type="name" name="postCode" placeholder="Postcode" />
         </label>
         <p>{townErrors && "Please enter your town"}</p>
-        <p className="errorMessage">{postcodeErrors && errorCodes.postcode}</p>
+        <p className="errorMessage">{postCodeErrors && errorCodes.postCode}</p>
       </div>
       <div className="formRow">
         <label>
@@ -54,15 +57,23 @@ const RegisterPartTwo = (props) => {
         </label>
       </div>
       <nav>
-        <button onClick={() => props.setRegScreen(0)}>Back</button>
+        <button
+          onClick={() =>
+            dispatch({ type: types.SET_REGISTER_SCREEN, payload: 0 })
+          }
+        >
+          Back
+        </button>
         {dateOfBirthErrors === undefined &&
           genderErrors === undefined &&
           townErrors === undefined &&
-          postcodeErrors === undefined &&
+          postCodeErrors === undefined &&
           heightErrors === undefined && (
             <button
               className="nextButton"
-              onClick={() => props.setRegScreen(2)}
+              onClick={() =>
+                dispatch({ type: types.SET_REGISTER_SCREEN, payload: 2 })
+              }
             >
               Next
             </button>

@@ -1,10 +1,20 @@
+import { useDispatch } from "react-redux";
+import { types } from "../../redux/types";
+
 const Block = (props) => {
-	const { blockUser } = props;
+	const dispatch = useDispatch();
+
+	const { userId } = props;
 
 	return (
 		<div style={{ margin: "20px" }}>
-			<button onClick={blockUser}>Block user</button>
-			{/* {blockClicked && <p>user has been blocked</p>} */}
+			<button
+				onClick={() => {
+					dispatch({ type: types.BLOCK_USER, payload: userId });
+				}}
+			>
+				Block user
+			</button>
 		</div>
 	);
 };

@@ -1,16 +1,20 @@
 import Onboarding from "./Onboarding";
 import Matching from "./Matching";
-import Search from "./Search";
 import Messaging from "./messages/Messaging";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { types } from "../redux/types";
+import { useSelector } from "react-redux";
 
 const Interface = (props) => {
-  const [screen, setScreen] = useState(0);
+  const dispatch = useDispatch();
+  const screen = useSelector((state) => state.general.screen);
+  // const [screen, setScreen] = useState(0);
 
-  const onLogin = (payload) => {
-    setScreen(1);
-    //save the new user data
-  };
+  // const onLogin = (payload) => {
+  //   setScreen(1);
+  //   //save the new user data
+  // };
 
   const onMessageUpdate = (payload) => {
     //do something useful
@@ -19,31 +23,43 @@ const Interface = (props) => {
   return (
     <>
       <nav>
-        <button onClick={() => setScreen(0)}>Onboarding</button>
-        <button onClick={() => setScreen(1)}>Matches</button>
+        <button
+          onClick={() => dispatch({ type: types.SET_SCREEN, payload: 0 })}
+        >
+          Onboarding
+        </button>
+        <button
+          onClick={() => dispatch({ type: types.SET_SCREEN, payload: 1 })}
+        >
+          Matches
+        </button>
         {/* <button onClick={() => setScreen(2)}>Search</button> */}
-        <button onClick={() => setScreen(3)}>Messages</button>
+        <button
+          onClick={() => dispatch({ type: types.SET_SCREEN, payload: 2 })}
+        >
+          Messages
+        </button>
       </nav>
 
       {screen === 0 && (
         <Onboarding
-          onLogin={onLogin}
-
           addUser={props.addUser}
           newUserId={props.newUserId}
-          setScreen={setScreen}
+          // setScreen={setScreen} to be changed
         />
       )}
 
+
       {screen === 1 && (
-        <Matching onLikeUpdate={props.onLikeUpdate}  />
+        <Matching 
+        // addToLikes={props.addToLikes} 
+        />
       )}
 
 
       {/* {screen === 2 && <Search users={props.users} />} */}
 
-
-      {screen === 3 && (
+      {screen === 2 && (
         <Messaging
           messages={props.messages}
           onMessageUpdate={onMessageUpdate}
