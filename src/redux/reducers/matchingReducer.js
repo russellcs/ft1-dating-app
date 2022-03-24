@@ -59,11 +59,7 @@ export function matchingReducer(state = matchingInitialState, action) {
 		case types.BLOCK_USER: {
 			console.log(state);
 			const users = [...state.users];
-
-			console.log(action.payload, users, users[getIndexById(1, users)]);
 			const index = getIndexById(Number(action.payload), users);
-			console.log(index, "i");
-
 			users[index].blocked.push(Number(action.payload));
 			return { ...state, users };
 		}
