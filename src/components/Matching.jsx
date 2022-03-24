@@ -164,6 +164,7 @@ const Matching = (props) => {
     // props.addToLikes(user, currentUser.userId);
     const usersToAddToLikes = { user, currentUser };
     dispatch({ type: types.ADD_TO_LIKES, payload: usersToAddToLikes });
+    
     dispatch({
       type: types.UPDATE_MATCHES,
       payload: { seenUserId: user.userId, currentUserId: currentUser.userId },
