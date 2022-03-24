@@ -1,70 +1,70 @@
 import { matchingInitialState } from "../matchingInitialState";
 import { types } from "../types";
 import { getIndexById } from "../../utils/matching";
-import { useDispatch } from "react-redux";
 
 export function matchingReducer(state = matchingInitialState, action) {
-	switch (action.type) {
-		case types.ADD_USER:
-			const users = [...state.users];
-			users.push(action.payload);
-			return { ...state, users };
+  switch (action.type) {
+    case types.ADD_USER:
+      const users = [...state.users];
+      users.push(action.payload);
+      return { ...state, users };
 
-		case types.ADD_TO_LIKES: {
-			const { user, currentUser } = action.payload;
-			const users = [...state.users];
-			currentUser.likes.push(user.userId);
+    case types.ADD_TO_SEEN: {
+      const currentUserIndex = getIndexById(
+        Number(action.payload.currentUserId),
+        state.users
+      );
 
-			return { ...state, users };
-		}
+      if (
+        !state.users[currentUserIndex].seen.includes(action.payload.seenUserId)
+      ) {
+        const users = [...state.users];
+        users[currentUserIndex].seen.push(action.payload.seenUserId);
+        return { ...state, users };
+      }
+      return state;
+    }
 
-		case types.UPDATE_MATCHES: {
-			const seenUserIndex = getIndexById(
-				action.payload.seenUserId,
-				state.users
-			);
-			const currentUserIndex = getIndexById(
-				action.payload.currentUserId,
-				state.users
-			);
+    case types.ADD_TO_LIKES: {
+      const { user, currentUser } = action.payload;
+      const users = [...state.users];
+      currentUser.likes.push(user.userId);
 
-			if (
-				state.users[seenUserIndex].likes.includes(
-					action.payload.currentUserId
-				) &&
-				state.users[currentUserIndex].likes.includes(action.payload.seenUserId)
-			) {
-				const users = [...state.users];
+      return { ...state, users };
+    }
 
-				users[seenUserIndex].matches.push(action.payload.currentUserId);
-				users[currentUserIndex].matches.push(action.payload.seenUserId);
+    case types.UPDATE_MATCHES: {
+      const { seenUserId, currentUserId } = action.payload;
 
-				return { ...state, users };
-			} else return state;
-		}
-		// // if current user is also liked by user..
+      const seenUserIndex = getIndexById(seenUserId, state.users);
+      const currentUserIndex = getIndexById(currentUserId, state.users);
 
-		//     // addMessage({
-		//     //   toUserId: user.userId,
-		//     //   fromUserId: userId,
-		//     //   messageId: getUniqueId(16),
-		//     //   content: "",
-		//     //   sendTimestamp: 0,
-		//     //   read: false,
-		//     //   blocked: false, // & start convo.
-		//     // });
-		//     //insert notification function if desired
-		//   }
-		// }
-		case types.BLOCK_USER: {
-			console.log(state);
-			const users = [...state.users];
-			const index = getIndexById(Number(action.payload), users);
-			users[index].blocked.push(Number(action.payload));
-			return { ...state, users };
-		}
+      if (
+        state.users[seenUserIndex].likes.includes(currentUserId) &&
+        state.users[currentUserIndex].likes.includes(seenUserId)
+      ) {
+        const users = [...state.users];
 
-		default:
-			return state;
-	}
+        users[seenUserIndex].matches.push(currentUserId);
+        users[currentUserIndex].matches.push(seenUserId);
+
+        return { ...state, users };
+      } else return state;
+    }
+
+    case types.BLOCK_USER: {
+      console.log(state);
+      const users = [...state.users];
+
+      console.log(action.payload, users, users[getIndexById(1, users)]);
+      const index = getIndexById(Number(action.payload), users);
+      console.log(index, "i");
+
+      users[index].blocked.push(Number(action.payload));
+      return { ...state, users };
+    }
+
+    default:
+      return state;
+  }
 }

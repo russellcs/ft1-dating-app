@@ -8,20 +8,18 @@ import {
   heightFilter,
   existingKidsFilter,
   openToKidsFilter,
+  kidsPointer,
+  marriageCasualPointer,
+  religionPointer,
+  lastSeenPointer,
 } from "../utils/matching";
 import Search from "./Search";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { types } from "../redux/types";
-import { useDispatch } from "react-redux";
 
 const Matching = (props) => {
-  const dispatch = useDispatch();
-
-  const users = useSelector((state) => state.matching.users);
-
   const [currentResultIndex, setCurrentResultIndex] = useState(0);
-
   const [filterOptions, setFilterOptions] = useState({
     seenFilter: true,
     genderFilter: true,
@@ -32,19 +30,15 @@ const Matching = (props) => {
     ageFilter: true,
   });
 
-  console.log(filterOptions);
+  const users = useSelector((state) => state.matching.users);
 
+  const dispatch = useDispatch();
   // just for WiP
   const currentUserId = 1;
   let currentUser = getUserById(currentUserId, users);
 
-  //seen NEEDS WORK
-  const seenFilter = (currentUser, user) => {
-    return currentUser.seen.includes(currentUser.userId) === false;
-  };
-
+  // Filters out incompatible users (including seen) from array of potencial matches
   const potentialMatchFilter = (user) => {
-    // if (filterOptions.seenFilter) filteredUser = seenFilter(filteredUser)
     return filterOptions.distanceFilter && !distanceFilter(currentUser, user)
       ? false
       : filterOptions.ageFilter && !ageFilter(currentUser, user)
@@ -61,78 +55,18 @@ const Matching = (props) => {
       : true;
   };
 
-  // recieves array of filtered users
+  // Sorts array of potential matches to display most compatible matches first. Always displays last seen user first.
   const potentialMatchSorter = (userA, userB) => {
-    const kidsPointer = (user) => {
-      const cUserPref = currentUser.preferences.lifeStyle.openToKids;
-      const userPref = user.preferences.lifeStyle.openToKids;
-
-      // NB: want/don't want is filtered out in potentialMatchFilter
-      return cUserPref > 0 && cUserPref === userPref // neither "dont say" and both are same
-        ? 10
-        : (cUserPref === 3 && userPref === 4) ||
-          (cUserPref === 4 && userPref === 3) || // want + open
-          (cUserPref === 3 && userPref === 2) ||
-          (cUserPref === 2 && userPref === 3) // not sure + open
-        ? 5
-        : (cUserPref === 1 && userPref === 3) ||
-          (cUserPref === 3 && userPref === 1) // dont want + open
-        ? -5
-        : 0; // either doesn't say, not sure + dont want, not sure + want
-    };
-
-    const marriageCasualPointer = (user) => {
-      const cUserPref = {
-        marriage: currentUser.preferences.lifeStyle.marriage,
-        casual: currentUser.preferences.lifeStyle.casual,
-      };
-      const userPref = {
-        marriage: user.preferences.lifeStyle.marriage,
-        casual: user.preferences.lifeStyle.casual,
-      };
-
-      return cUserPref.marriage === userPref.marriage &&
-        cUserPref.casual === userPref.casual // MC MC, Mc Mc, mC mC
-        ? 10
-        : (!cUserPref.marriage &&
-            cUserPref.casual &&
-            userPref.marriage &&
-            !userPref.casual) || // mC Mc
-          (cUserPref.marriage &&
-            !cUserPref.casual &&
-            !userPref.marriage &&
-            userPref.casual) // Mc mC
-        ? -10
-        : 5; // MC mC, MC Mc
-    };
-
-    const religionPointer = (user) => {
-      const cUserRelig = currentUser.personalDetails.religion;
-      const userRelig = user.personalDetails.religion;
-
-      return cUserRelig === 0 || userRelig === 0 // cUser or user doesn't say
-        ? 0
-        : cUserRelig === userRelig // both share same religion
-        ? 10
-        : cUserRelig !== 3 && userRelig !== 3 // both are non-atheist
-        ? 5
-        : -5; // athiest and religion
-    };
-
-    const lastSeen = (user) => {
-      return currentUser.seen[-1] === user.userId ? 999 : 0;
-    };
-
     let totalPointsUserA =
-      marriageCasualPointer(userA) +
-      kidsPointer(userA) +
-      religionPointer(userA) +
-      lastSeen(userA);
+      marriageCasualPointer(currentUser, userA) +
+      kidsPointer(currentUser, userA) +
+      religionPointer(currentUser, userA) +
+      lastSeenPointer(currentUser, userA);
     let totalPointsUserB =
-      marriageCasualPointer(userB) +
-      kidsPointer(userB) +
-      religionPointer(userB) +
-      lastSeen(userA);
+      marriageCasualPointer(currentUser, userB) +
+      kidsPointer(currentUser, userB) +
+      religionPointer(currentUser, userB) +
+      lastSeenPointer(currentUser, userA);
 
     return totalPointsUserA < totalPointsUserB
       ? 1
@@ -141,17 +75,18 @@ const Matching = (props) => {
       : 0;
   };
 
+  //seen NEEDS WORK
+  const seenFilter = (currentUser, user) => {
+    return currentUser.seen.includes(currentUser.userId) === false;
+  };
+
   let filteredUsers = [...users];
-  console.log(filteredUsers);
-  filteredUsers
-    .splice(
-      filteredUsers.findIndex((user) => user === currentUser),
-      1
-    )
-    .filter(potentialMatchFilter);
-  console.log(filteredUsers);
+  filteredUsers.splice(
+    filteredUsers.findIndex((user) => user === currentUser),
+    1
+  );
+  filteredUsers = filteredUsers.filter(potentialMatchFilter);
   filteredUsers = filteredUsers.sort(potentialMatchSorter);
-  console.log(filteredUsers);
 
   let userForReview = filteredUsers[currentResultIndex];
 
@@ -164,6 +99,7 @@ const Matching = (props) => {
     // props.addToLikes(user, currentUser.userId);
     const usersToAddToLikes = { user, currentUser };
     dispatch({ type: types.ADD_TO_LIKES, payload: usersToAddToLikes });
+
     dispatch({
       type: types.UPDATE_MATCHES,
       payload: { seenUserId: user.userId, currentUserId: currentUser.userId },
@@ -179,6 +115,19 @@ const Matching = (props) => {
   const onPass = () => {
     setCurrentResultIndex(currentResultIndex + 1);
   };
+
+  //Add user being reviewed to current user's seen array.
+  useEffect(() => {
+    if (currentResultIndex < filteredUsers.length)
+      dispatch({
+        type: types.ADD_TO_SEEN,
+        payload: {
+          seenUserId: userForReview.userId,
+          currentUserId: currentUser.userId,
+        },
+      });
+  }, [currentResultIndex]);
+  //N.B: in testing, when i refresh local storage resets, is this right?
 
   return (
     <>
@@ -203,46 +152,6 @@ const Matching = (props) => {
       )}
     </>
   );
-
-  //  {props.addToSeen(userForReview.userId, currentUser.userId)}
-  // return (
-  //   <>
-  //     <Search
-  //       setFilterOptions={setFilterOptions}
-  //       filterOptions={filterOptions}
-  //     />
-
-  //     <div className="userCardContainer">
-  //       {filteredUsers
-  //         // .filter(potentialMatchFilter)
-  //         // .sort(potentialMatchSorter)
-  //         .map((user, i) => {
-  //           return (
-  //             <>
-  //               <div className="userCard" key={i}>
-  //                 <MatchedUser user={user} />
-  //               </div>
-
-  //               <button
-  //                 key={`pass${i}`}
-  //                 onClick={() => props.onLikeUpdate(user, false)}
-  //               >
-  //                 Pass
-  //               </button>
-
-  //               <button
-  //                 key={`like${i}`}
-  //                 onClick={() => props.onLikeUpdate(user, true)}
-  //               >
-  //                 Like
-  //               </button>
-  //             </>
-  //           );
-  //         })}
-  //       {/* {Controls} */}
-  //     </div>
-  //   </>
-  // );
 };
 
 export default Matching;

@@ -14,7 +14,8 @@ import { useSelector } from "react-redux";
 const Register = (props) => {
   const dispatch = useDispatch();
   const regScreen = useSelector((state) => state.onboarding.regScreen);
-  const [newUserData, setNewUserData] = useState({});
+  const newUserData = useSelector((state) => state.onboarding.newUserData);
+  // const [newUserData, setNewUserData] = useState({});
   const [errors, setErrors] = useState({});
   // const [regScreen, setRegScreen] = useState(0);
 
@@ -78,40 +79,40 @@ const Register = (props) => {
     //   value = religionArray;
     // }
 
-    if (e.target.name === "genderPref") {
-      const genderArray = [];
-      for (let index = 0; index < e.target.selectedOptions.length; index++) {
-        genderArray.push(Number(e.target.selectedOptions[index].value));
-      }
-      value = genderArray;
-    }
+    // if (e.target.name === "genderPref") {
+    //   const genderArray = [];
+    //   for (let index = 0; index < e.target.selectedOptions.length; index++) {
+    //     genderArray.push(Number(e.target.selectedOptions[index].value));
+    //   }
+    //   value = genderArray;
+    // }
 
-    if (e.target.name === "dateOfBirth") {
-      value = new Date(e.target.value).getTime();
-    }
+    // if (e.target.name === "dateOfBirth") {
+    //   value = new Date(e.target.value).getTime();
+    // }
 
-    if (e.target.name === "relationship" && value === "0") {
-      value = { marriage: true, casual: false };
-    }
+    // if (e.target.name === "relationship" && value === "0") {
+    //   value = { marriage: true, casual: false };
+    // }
 
-    if (e.target.name === "relationship" && value === "1") {
-      value = { marriage: false, casual: true };
-    }
+    // if (e.target.name === "relationship" && value === "1") {
+    //   value = { marriage: false, casual: true };
+    // }
 
-    if (e.target.name === "relationship" && value === "2") {
-      value = { marriage: true, casual: true };
-    }
+    // if (e.target.name === "relationship" && value === "2") {
+    //   value = { marriage: true, casual: true };
+    // }
 
-    if (e.target.name === "smokersPref" && value === "0") {
-      value = true;
-    }
+    // if (e.target.name === "smokersPref" && value === "0") {
+    //   value = true;
+    // }
 
-    if (e.target.name === "smokersPref" && value === "1") {
-      value = false;
-    }
+    // if (e.target.name === "smokersPref" && value === "1") {
+    //   value = false;
+    // }
 
     const newState = { ...newUserData, [e.target.name]: value };
-    setNewUserData(newState);
+    // setNewUserData(newState);
     onValidate(newState);
   };
 
@@ -120,7 +121,8 @@ const Register = (props) => {
     try {
       // await _joiInstance.validateAsync(data);
       await _joiInstance.validateAsync(data, { abortEarly: false });
-      setErrors({ errors: "" });
+      dispatch({ type: types.SET_REG_ERRORS, payload: { errors: " " } });
+      // setErrors({ errors: "" });
     } catch (errors) {
       setErrors(joiDataReorder(errors.details));
     }
@@ -137,17 +139,14 @@ const Register = (props) => {
           onInput={(e) => dispatch({ type: types.ON_INPUT_REG, payload: e })}
           name="registerForm"
         >
-          {regScreen === 0 && (
-            <RegisterPartOne errors={errors} newUserData={newUserData} />
-          )}
+          {regScreen === 0 && <RegisterPartOne errors={errors} />}
           {regScreen === 1 && <RegisterPartTwo errors={errors} />}
           {regScreen === 2 && <RegisterPartThree errors={errors} />}
           {regScreen === 3 && (
             <Preferences
               errors={errors}
               addNewUser={addNewUser}
-              newUserData={newUserData}
-              setUserData={setNewUserData}
+              // setUserData={setNewUserData}
             />
           )}
         </form>

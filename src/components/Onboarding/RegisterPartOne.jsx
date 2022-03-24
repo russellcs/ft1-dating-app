@@ -1,8 +1,10 @@
 import { errorCodes } from "../../config/formConfig";
 import { types } from "../../redux/types";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const RegisterPartOne = (props) => {
+  const newUserData = useSelector((state) => state.onboarding.newUserData);
   const dispatch = useDispatch();
   const {
     email: emailErrors,
@@ -54,7 +56,7 @@ const RegisterPartOne = (props) => {
           </p>
         </div>
         <nav>
-          {Object.keys(props.newUserData).length > 1 &&
+          {Object.keys(newUserData).length > 1 &&
             emailErrors === undefined &&
             passwordErrors === undefined &&
             firstNameErrors === undefined && (

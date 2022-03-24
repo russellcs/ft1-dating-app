@@ -1,6 +1,5 @@
 import Onboarding from "./Onboarding";
 import Matching from "./Matching";
-import Search from "./Search";
 import Messaging from "./messages/Messaging";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
