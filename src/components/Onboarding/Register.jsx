@@ -15,9 +15,6 @@ const Register = (props) => {
   const dispatch = useDispatch();
   const regScreen = useSelector((state) => state.onboarding.regScreen);
   const newUserData = useSelector((state) => state.onboarding.newUserData);
-  // const [newUserData, setNewUserData] = useState({});
-  const [errors, setErrors] = useState({});
-  // const [regScreen, setRegScreen] = useState(0);
 
   const addNewUser = async () => {
     let lifeStyleCombo = newUserData.relationship;
@@ -43,6 +40,7 @@ const Register = (props) => {
         religion: Number(newUserData.religion),
         height: Number(newUserData.height),
         gender: Number(newUserData.gender),
+        kidsAccepted: Number(newUserData.kidsAccepted),
         smokers: Number(newUserData.smokes),
       },
       preferences: {
@@ -66,65 +64,21 @@ const Register = (props) => {
     };
     dispatch({ type: types.ADD_USER, payload: newUserStructured });
     dispatch({ type: types.SET_SCREEN, payload: 1 });
-  };
-
-  const onInput = (e) => {
-    let value = e.target.value;
-
-    // if (e.target.name === "acceptedReligions") {
-    //   const religionArray = [];
-    //   for (let index = 0; index < e.target.selectedOptions.length; index++) {
-    //     religionArray.push(Number(e.target.selectedOptions[index].value));
-    //   }
-    //   value = religionArray;
-    // }
-
-    // if (e.target.name === "genderPref") {
-    //   const genderArray = [];
-    //   for (let index = 0; index < e.target.selectedOptions.length; index++) {
-    //     genderArray.push(Number(e.target.selectedOptions[index].value));
-    //   }
-    //   value = genderArray;
-    // }
-
-    // if (e.target.name === "dateOfBirth") {
-    //   value = new Date(e.target.value).getTime();
-    // }
-
-    // if (e.target.name === "relationship" && value === "0") {
-    //   value = { marriage: true, casual: false };
-    // }
-
-    // if (e.target.name === "relationship" && value === "1") {
-    //   value = { marriage: false, casual: true };
-    // }
-
-    // if (e.target.name === "relationship" && value === "2") {
-    //   value = { marriage: true, casual: true };
-    // }
-
-    // if (e.target.name === "smokersPref" && value === "0") {
-    //   value = true;
-    // }
-
-    // if (e.target.name === "smokersPref" && value === "1") {
-    //   value = false;
-    // }
-
-    const newState = { ...newUserData, [e.target.name]: value };
-    // setNewUserData(newState);
-    onValidate(newState);
+    dispatch({ type: types.SET_CURRENT_USER_ID, payload: props.newUserId }); // make this to a reducer
   };
 
   const onValidate = async (data) => {
+    console.log(data);
     const _joiInstance = Joi.object(schema);
     try {
       // await _joiInstance.validateAsync(data);
       await _joiInstance.validateAsync(data, { abortEarly: false });
-      dispatch({ type: types.SET_REG_ERRORS, payload: { errors: " " } });
-      // setErrors({ errors: "" });
+      dispatch({ type: types.SET_REG_ERRORS, payload: { errors: "" } });
     } catch (errors) {
-      setErrors(joiDataReorder(errors.details));
+      dispatch({
+        type: types.SET_REG_ERRORS,
+        payload: joiDataReorder(errors.details),
+      });
     }
   };
 
@@ -136,15 +90,17 @@ const Register = (props) => {
       <div className="containerReg">
         <form
           className="form"
-          onInput={(e) => dispatch({ type: types.ON_INPUT_REG, payload: e })}
+          onInput={(e) => {
+            dispatch({ type: types.ON_INPUT_REG, payload: e });
+            onValidate({ ...newUserData, [e.target.name]: e.target.value });
+          }}
           name="registerForm"
         >
-          {regScreen === 0 && <RegisterPartOne errors={errors} />}
-          {regScreen === 1 && <RegisterPartTwo errors={errors} />}
-          {regScreen === 2 && <RegisterPartThree errors={errors} />}
+          {regScreen === 0 && <RegisterPartOne />}
+          {regScreen === 1 && <RegisterPartTwo />}
+          {regScreen === 2 && <RegisterPartThree />}
           {regScreen === 3 && (
             <Preferences
-              errors={errors}
               addNewUser={addNewUser}
               // setUserData={setNewUserData}
             />
