@@ -1,6 +1,6 @@
 import { messagingInitialState } from "../messagingInitialState";
 import { types } from "../types";
-import { getMessageIndexById, getIndexById } from "../../utils/matching";
+import { getMessageIndexById } from "../../utils/matching";
 
 export function messagingReducer(state = messagingInitialState, action) {
 	switch (action.type) {
