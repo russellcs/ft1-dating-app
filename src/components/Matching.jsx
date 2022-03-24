@@ -18,29 +18,8 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { types } from "../redux/types";
 
-
 const Matching = (props) => {
-  const dispatch = useDispatch();
-
-  const users = useSelector((state) => state.matching.users);
-
   const [currentResultIndex, setCurrentResultIndex] = useState(0);
-  const dispatch = useDispatch();
-  // just for WiP
-  const currentUserId = 1;
-  let currentUser = getUserById(currentUserId, users);
-
-  // filteredUsers creates a filtered and sorted version of users, for currentUser to review.
-  let filteredUsers = [...users];
-  filteredUsers
-    .splice(
-      filteredUsers.findIndex((user) => user === currentUser),
-      1
-    ) // removes current User from list (don't want to review yourself)
-    .filter(potentialMatchFilter);
-  filteredUsers = filteredUsers.sort(potentialMatchSorter);
-  let userForReview = filteredUsers[currentResultIndex];
-
   const [filterOptions, setFilterOptions] = useState({
     seenFilter: true,
     genderFilter: true,
@@ -51,20 +30,15 @@ const Matching = (props) => {
     ageFilter: true,
   });
 
-  console.log(filterOptions);
+  const users = useSelector((state) => state.matching.users);
 
+  const dispatch = useDispatch();
   // just for WiP
   const currentUserId = 1;
   let currentUser = getUserById(currentUserId, users);
 
-  //seen NEEDS WORK
-  const seenFilter = (currentUser, user) => {
-    return currentUser.seen.includes(currentUser.userId) === false;
-  };
-
   // Filters out incompatible users (including seen) from array of potencial matches
   const potentialMatchFilter = (user) => {
-    // if (filterOptions.seenFilter) filteredUser = seenFilter(filteredUser)
     return filterOptions.distanceFilter && !distanceFilter(currentUser, user)
       ? false
       : filterOptions.ageFilter && !ageFilter(currentUser, user)
@@ -101,17 +75,18 @@ const Matching = (props) => {
       : 0;
   };
 
+  //seen NEEDS WORK
+  const seenFilter = (currentUser, user) => {
+    return currentUser.seen.includes(currentUser.userId) === false;
+  };
+
   let filteredUsers = [...users];
-  console.log(filteredUsers);
-  filteredUsers
-    .splice(
-      filteredUsers.findIndex((user) => user === currentUser),
-      1
-    )
-    .filter(potentialMatchFilter);
-  console.log(filteredUsers);
+  filteredUsers.splice(
+    filteredUsers.findIndex((user) => user === currentUser),
+    1
+  );
+  filteredUsers = filteredUsers.filter(potentialMatchFilter);
   filteredUsers = filteredUsers.sort(potentialMatchSorter);
-  console.log(filteredUsers);
 
   let userForReview = filteredUsers[currentResultIndex];
 
@@ -124,7 +99,7 @@ const Matching = (props) => {
     // props.addToLikes(user, currentUser.userId);
     const usersToAddToLikes = { user, currentUser };
     dispatch({ type: types.ADD_TO_LIKES, payload: usersToAddToLikes });
-    
+
     dispatch({
       type: types.UPDATE_MATCHES,
       payload: { seenUserId: user.userId, currentUserId: currentUser.userId },

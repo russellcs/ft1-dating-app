@@ -10,13 +10,20 @@ export function matchingReducer(state = matchingInitialState, action) {
       return { ...state, users };
 
     case types.ADD_TO_SEEN: {
-      const users = [...state.users];
-      const currentUser =
-        users[getIndexById(action.payload.currentUserId, users)];
-      if (!currentUser.seen.includes(action.payload.seenUserId)) {
-        currentUser.seen.push(action.payload.seenUserId);
+      const currentUserIndex = getIndexById(
+        Number(action.payload.currentUserId),
+        state.users
+      );
+
+      if (
+        !state.users[currentUserIndex].seen.includes(action.payload.seenUserId)
+      ) {
+        const users = [...state.users];
+        users[currentUserIndex].seen.push(action.payload.seenUserId);
+        return { ...state, users };
       }
-      console.log(currentUser.seen);
+      return state;
+    }
 
     case types.ADD_TO_LIKES: {
       const { user, currentUser } = action.payload;

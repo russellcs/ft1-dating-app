@@ -149,8 +149,8 @@ export const matchingInitialState = {
         location: {
           town: "London",
           postCode: "W1 0AA",
-          longitude: -0.134,
-          latitude: 51.517,
+          longitude: 177.134,
+          latitude: 151.517,
         },
         kids: false,
         religion: 0,
