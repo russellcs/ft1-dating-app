@@ -12,7 +12,7 @@ export const matchingInitialState = {
           longitude: -0.105,
           latitude: 51.43,
         },
-        kids: undefined, // undefined: not saying, false: no, true: Yes
+        kids: 0, // 0: not saying, 1: no, 2: Yes
         religion: 7,
         height: 165,
         gender: 0, // 0: female, 1: male, 2: non-binary, 3: trans, 4: intersex
@@ -20,16 +20,16 @@ export const matchingInitialState = {
       },
       preferences: {
         lifeStyle: { marriage: true, casual: false, openToKids: 1 },
-        age: { min: 24, max: 42 }, //
-        acceptedReligions: [],
-        height: { min: 130, max: 160 }, //
-        gender: [1], //
-        kidsAccepted: 2, // 0: not saying, 2: not sure, 3: open to kids, 4: want kids //Check this during merge!
-        smokers: false,
-        acceptedDistance: 20, //
+        age: { min: 24, max: 42 },
+        acceptedReligions: [], // NOT USING
+        height: { min: 130, max: 160 },
+        gender: [1, 2],
+        kidsAccepted: 2, // 0: not sure, 1: don't want parents, 2: parents OK
+        smokers: false, //NOT USING
+        acceptedDistance: 20,
       },
-      seen: [],
-      matches: [6, 3, 2],
+      seen: [2, 6],
+      matches: [3, 2],
       likes: [], // pointless? I've used matches as "likes"
       blocked: [],
       login: { email: "a@a.com", password: "abdul90" },
@@ -47,14 +47,14 @@ export const matchingInitialState = {
           longitude: -0.118,
           latitude: 51.54,
         },
-        kids: false,
+        kids: 1,
         religion: 1,
         height: 140,
         gender: 1,
         smokers: 0,
       },
       preferences: {
-        lifeStyle: { marriage: true, casual: false, openToKids: 3 },
+        lifeStyle: { marriage: true, casual: false, openToKids: 1 },
         age: { min: 28, max: 45 },
         acceptedReligions: [1, 2],
         height: { min: 100, max: 210 },
@@ -82,7 +82,7 @@ export const matchingInitialState = {
           longitude: -0.1862,
           latitude: 51.421,
         },
-        kids: false,
+        kids: 1,
         religion: 1,
         height: 158,
         gender: 0,
@@ -117,7 +117,7 @@ export const matchingInitialState = {
           longitude: -0.5685,
           latitude: 51.24,
         },
-        kids: false,
+        kids: 2,
         religion: 4,
         height: 180,
         gender: 0,
@@ -152,7 +152,7 @@ export const matchingInitialState = {
           longitude: 177.134,
           latitude: 151.517,
         },
-        kids: false,
+        kids: 1,
         religion: 0,
         height: 155,
         gender: 2,
@@ -187,7 +187,7 @@ export const matchingInitialState = {
           longitude: -0.076,
           latitude: 51.315,
         },
-        kids: undefined,
+        kids: 0,
         religion: 0,
         height: 155,
         gender: 1,
