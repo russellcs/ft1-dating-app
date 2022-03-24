@@ -11,6 +11,10 @@ export function onboardingReducer(state = onboardingInitialState, action) {
       let regScreen = action.payload;
       return { ...state, regScreen };
 
+    case types.SET_REG_ERRORS:
+      let errors = action.payload;
+      return { ...state, errors };
+
     case types.ON_INPUT_REG:
       let value = action.payload.target.value;
 
@@ -58,6 +62,7 @@ export function onboardingReducer(state = onboardingInitialState, action) {
       };
 
       return { ...state, newUserData };
+
     default:
       return state;
   }
