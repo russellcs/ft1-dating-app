@@ -14,8 +14,6 @@ const RegisterPartTwo = (props) => {
     height: heightErrors,
   } = errors;
 
-  console.log(errors.height);
-
   return (
     <>
       <h1>Please enter your details</h1>

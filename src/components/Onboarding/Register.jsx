@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { schema, joiDataReorder, timeConverter } from "../../config/formConfig";
+import { schema, joiDataReorder, timeConverter, dataConstructor } from "../../config/formConfig";
 import Joi from "joi";
 import RegisterPartOne from "./RegisterPartOne";
 import RegisterPartTwo from "./RegisterPartTwo";
@@ -71,8 +71,8 @@ const Register = (props) => {
     console.log(data);
     const _joiInstance = Joi.object(schema);
     try {
-      // await _joiInstance.validateAsync(data);
-      await _joiInstance.validateAsync(data, { abortEarly: false });
+      await _joiInstance.validateAsync(data);
+      // await _joiInstance.validateAsync(data, { abortEarly: false });
       dispatch({ type: types.SET_REG_ERRORS, payload: { errors: "" } });
     } catch (errors) {
       dispatch({
@@ -92,6 +92,8 @@ const Register = (props) => {
           className="form"
           onInput={(e) => {
             dispatch({ type: types.ON_INPUT_REG, payload: e });
+            console.log(e.target.value);
+            dataConstructor(e, e.target.value);
             onValidate({ ...newUserData, [e.target.name]: e.target.value });
           }}
           name="registerForm"

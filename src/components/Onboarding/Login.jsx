@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { getIndexByEmailAndPassword } from "../../utils/matching";
 
 const Login = (props) => {
+  console.log("HELLO")
   const users = useSelector((state) => state.matching.users);
   const [loginErrors, setLoginErrors] = useState({});
   const [data, setData] = useState({});
