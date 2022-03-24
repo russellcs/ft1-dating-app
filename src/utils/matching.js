@@ -79,12 +79,22 @@ export const heightCheck = (user1, user2) => {
     : false;
 };
 
+// filters out users that are parents from users that don't want parents
 export const existingKidsFilter = (currentUser, user) => {
+  // have kids?  0: not saying, 1: don't have kids, 2: have kids
+  // kids accepted? 0: not sure, 1: no, 2: yes
   return (
-    (currentUser.personalDetails.kids === user.preferences.kidsAccepted &&
-      user.personalDetails.kids === currentUser.preferences.kidsAccepted) ||
-    currentUser.personalDetails.kids === undefined ||
-    user.personalDetails.kids === undefined
+    (currentUser.personalDetails.kids === 2 && // user1 has kids, user2 don't mind..
+      user.preferences.kidsAccepted !== 1 &&
+      (user.personalDetails.kids !== 2 || // & user2 don't have kids.
+        (user.personalDetails.kids === 2 && // or: & user2 also has kids and user1 don't mind.
+          currentUser.preferences.kidsAccepted !== 1))) ||
+    (user.personalDetails.kids === 2 && // same as above, but swap user1 and user2
+      currentUser.preferences.kidsAccepted !== 1 &&
+      (currentUser.personalDetails.kids !== 2 ||
+        (currentUser.personalDetails.kids === 2 &&
+          user.preferences.kidsAccepted !== 1))) ||
+    (currentUser.personalDetails.kids !== 2 && user.personalDetails.kids !== 2) // neither users have kids
   );
 };
 
@@ -98,11 +108,11 @@ export const openToKidsFilter = (currentUser, user) => {
 };
 
 // POINTER functions determine which users are displayed first (i.e. match the most) for the current user to review.
-export const kidsPointer = (currentUser, user) => {
-  const cUserPref = currentUser.preferences.lifeStyle.openToKids;
-  const userPref = user.preferences.lifeStyle.openToKids;
+export const kidsPointer = (cUserPref, userPref) => {
+  // const cUserPref = currentUser.preferences.lifeStyle.openToKids;
+  // const userPref = user.preferences.lifeStyle.openToKids;
 
-  // NB: "want/don't want" combo is filtered out in potentialMatchFilter
+  // NB: "want/don't want" combo is filtered out in openToKidsFilter
   return cUserPref > 0 && cUserPref === userPref // neither "dont say" and both are same
     ? 10
     : (cUserPref === 3 && userPref === 4) ||
@@ -115,15 +125,15 @@ export const kidsPointer = (currentUser, user) => {
     : 0; // either doesn't say, not sure + dont want, not sure + want
 };
 
-export const marriageCasualPointer = (currentUser, user) => {
-  const cUserPref = {
-    marriage: currentUser.preferences.lifeStyle.marriage,
-    casual: currentUser.preferences.lifeStyle.casual,
-  };
-  const userPref = {
-    marriage: user.preferences.lifeStyle.marriage,
-    casual: user.preferences.lifeStyle.casual,
-  };
+export const marriageCasualPointer = (cUserPref, userPref) => {
+  // const cUserPref = {
+  //   marriage: currentUser.preferences.lifeStyle.marriage,
+  //   casual: currentUser.preferences.lifeStyle.casual,
+  // };
+  // const userPref = {
+  //   marriage: user.preferences.lifeStyle.marriage,
+  //   casual: user.preferences.lifeStyle.casual,
+  // };
 
   return cUserPref.marriage === userPref.marriage &&
     cUserPref.casual === userPref.casual // MC MC, Mc Mc, mC mC
@@ -140,9 +150,9 @@ export const marriageCasualPointer = (currentUser, user) => {
     : 5; // MC mC, MC Mc
 };
 
-export const religionPointer = (currentUser, user) => {
-  const cUserRelig = currentUser.personalDetails.religion;
-  const userRelig = user.personalDetails.religion;
+export const religionPointer = (cUserRelig, userRelig) => {
+  // const cUserRelig = currentUser.personalDetails.religion;
+  // const userRelig = user.personalDetails.religion;
 
   return cUserRelig === 0 || userRelig === 0 // cUser or user doesn't say
     ? 0
@@ -153,7 +163,15 @@ export const religionPointer = (currentUser, user) => {
     : -5; // athiest and religion
 };
 
+export const smokersPointer = (cUserPref, userPref) => {
+  return cUserPref !== 0 && cUserPref === userPref // users have same pref
+    ? 5
+    : (cUserPref === 1 && userPref === 3) || (userPref === 1 && cUserPref === 3) // smoke & don't smoke
+    ? -5
+    : 0; // don't say, sometimes & smoke, sometimes & don't smoke
+};
+
 // ensures last seen user is always first displayed
-export const lastSeenPointer = (currentUser, user) => {
-  return currentUser.seen[-1] === user.userId ? 999 : 0;
+export const lastSeenPointer = (currentUserSeen, userId) => {
+  return currentUserSeen[currentUserSeen.length - 1] === userId ? 999 : 0;
 };

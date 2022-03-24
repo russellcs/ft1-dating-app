@@ -12,6 +12,7 @@ import {
   marriageCasualPointer,
   religionPointer,
   lastSeenPointer,
+  smokersPointer,
 } from "../utils/matching";
 import Search from "./Search";
 import { useEffect, useState } from "react";
@@ -29,10 +30,9 @@ const Matching = (props) => {
     distanceFilter: true,
     ageFilter: true,
   });
-
   const users = useSelector((state) => state.matching.users);
-
   const dispatch = useDispatch();
+
   // just for WiP
   const currentUserId = 1;
   let currentUser = getUserById(currentUserId, users);
@@ -58,15 +58,54 @@ const Matching = (props) => {
   // Sorts array of potential matches to display most compatible matches first. Always displays last seen user first.
   const potentialMatchSorter = (userA, userB) => {
     let totalPointsUserA =
-      marriageCasualPointer(currentUser, userA) +
-      kidsPointer(currentUser, userA) +
-      religionPointer(currentUser, userA) +
-      lastSeenPointer(currentUser, userA);
+      marriageCasualPointer(
+        {
+          marriage: currentUser.preferences.lifeStyle.marriage,
+          casual: currentUser.preferences.lifeStyle.casual,
+        },
+        {
+          marriage: userA.preferences.lifeStyle.marriage,
+          casual: userA.preferences.lifeStyle.casual,
+        }
+      ) +
+      kidsPointer(
+        currentUser.preferences.lifeStyle.openToKids,
+        userA.preferences.lifeStyle.openToKids
+      ) +
+      religionPointer(
+        currentUser.personalDetails.religion,
+        userA.personalDetails.religion
+      ) +
+      smokersPointer(
+        currentUser.personalDetails.smokers,
+        userA.personalDetails.smokers
+      ) +
+      lastSeenPointer(currentUser.seen, userA.userId);
+
     let totalPointsUserB =
-      marriageCasualPointer(currentUser, userB) +
-      kidsPointer(currentUser, userB) +
-      religionPointer(currentUser, userB) +
-      lastSeenPointer(currentUser, userA);
+      marriageCasualPointer(
+        {
+          marriage: currentUser.preferences.lifeStyle.marriage,
+          casual: currentUser.preferences.lifeStyle.casual,
+        },
+        {
+          marriage: userB.preferences.lifeStyle.marriage,
+          casual: userB.preferences.lifeStyle.casual,
+        }
+      ) +
+      kidsPointer(
+        currentUser.preferences.lifeStyle.openToKids,
+        userB.preferences.lifeStyle.openToKids
+      ) +
+      religionPointer(
+        currentUser.personalDetails.religion,
+        userB.personalDetails.religion
+      ) +
+      smokersPointer(
+        currentUser.personalDetails.smokers,
+        userB.personalDetails.smokers
+      ) +
+      lastSeenPointer(currentUser.seen, userB.userId);
 
     return totalPointsUserA < totalPointsUserB
       ? 1
@@ -80,6 +119,7 @@ const Matching = (props) => {
     return currentUser.seen.includes(currentUser.userId) === false;
   };
 
+  // Creates filtered array of users for current user to review
   let filteredUsers = [...users];
   filteredUsers.splice(
     filteredUsers.findIndex((user) => user === currentUser),
@@ -87,16 +127,11 @@ const Matching = (props) => {
   );
   filteredUsers = filteredUsers.filter(potentialMatchFilter);
   filteredUsers = filteredUsers.sort(potentialMatchSorter);
-
   let userForReview = filteredUsers[currentResultIndex];
+  console.log(filteredUsers);
 
-  // useEffect(() => {
-  //   if (currentResultIndex < filteredUsers.length)
-  //     // props.addToSeen(userForReview.userId, currentUser.userId);
-  // }, [currentResultIndex]);
-
+  // add to currentUser's likes, check if they like eachother, load next user for review
   const onLike = (user) => {
-    // props.addToLikes(user, currentUser.userId);
     const usersToAddToLikes = { user, currentUser };
     dispatch({ type: types.ADD_TO_LIKES, payload: usersToAddToLikes });
 
@@ -105,13 +140,10 @@ const Matching = (props) => {
       payload: { seenUserId: user.userId, currentUserId: currentUser.userId },
     });
 
-    // check if they like eachother - in matches array
-    // initiate messages
-    // - crossover of reducers
-
-    // setCurrentResultIndex(currentResultIndex + 1);
+    setCurrentResultIndex(currentResultIndex + 1);
   };
 
+  // load next user for review
   const onPass = () => {
     setCurrentResultIndex(currentResultIndex + 1);
   };
@@ -127,7 +159,6 @@ const Matching = (props) => {
         },
       });
   }, [currentResultIndex]);
-  //N.B: in testing, when i refresh local storage resets, is this right?
 
   return (
     <>
