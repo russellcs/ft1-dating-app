@@ -9,6 +9,15 @@ export function matchingReducer(state = matchingInitialState, action) {
       users.push(action.payload);
       return { ...state, users };
 
+    case types.ADD_TO_SEEN: {
+      const users = [...state.users];
+      const currentUser =
+        users[getIndexById(action.payload.currentUserId, users)];
+      if (!currentUser.seen.includes(action.payload.seenUserId)) {
+        currentUser.seen.push(action.payload.seenUserId);
+      }
+      console.log(currentUser.seen);
+
     case types.ADD_TO_LIKES: {
       const { user, currentUser } = action.payload;
       const users = [...state.users];
