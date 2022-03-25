@@ -8,6 +8,7 @@ import {
   heightFilter,
   existingKidsFilter,
   openToKidsFilter,
+  seenFilter,
   kidsPointer,
   marriageCasualPointer,
   religionPointer,
@@ -19,18 +20,12 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { types } from "../redux/types";
 
-const Matching = (props) => {
+const Matching = () => {
   const [currentResultIndex, setCurrentResultIndex] = useState(0);
-  const [filterOptions, setFilterOptions] = useState({
-    seenFilter: true,
-    genderFilter: true,
-    heightFilter: true,
-    existingKidsFilter: true,
-    openToKidsFilter: true,
-    distanceFilter: true,
-    ageFilter: true,
-  });
+
   const users = useSelector((state) => state.matching.users);
+  const matchingFilter = useSelector((state) => state.general.matchingFilter);
+
   const dispatch = useDispatch();
 
   // just for WiP
@@ -39,18 +34,20 @@ const Matching = (props) => {
 
   // Filters out incompatible users (including seen) from array of potencial matches
   const potentialMatchFilter = (user) => {
-    return filterOptions.distanceFilter && !distanceFilter(currentUser, user)
+    return matchingFilter.distanceFilter && !distanceFilter(currentUser, user)
       ? false
-      : filterOptions.ageFilter && !ageFilter(currentUser, user)
+      : matchingFilter.ageFilter && !ageFilter(currentUser, user)
       ? false
-      : filterOptions.genderFilter && !genderFilter(currentUser, user)
+      : matchingFilter.genderFilter && !genderFilter(currentUser, user)
       ? false
-      : filterOptions.heightFilter && !heightFilter(currentUser, user)
+      : matchingFilter.heightFilter && !heightFilter(currentUser, user)
       ? false
-      : filterOptions.existingKidsFilter &&
+      : matchingFilter.existingKidsFilter &&
         !existingKidsFilter(currentUser, user)
       ? false
-      : filterOptions.openToKidsFilter && !openToKidsFilter(currentUser, user)
+      : matchingFilter.openToKidsFilter && !openToKidsFilter(currentUser, user)
+      ? false
+      : matchingFilter.seenFilter && !seenFilter(currentUser, user)
       ? false
       : true;
   };
@@ -114,12 +111,6 @@ const Matching = (props) => {
       : 0;
   };
 
-  //seen NEEDS WORK
-  const seenFilter = (currentUser, user) => {
-    return currentUser.seen.includes(currentUser.userId) === false;
-  };
-
-  // Creates filtered array of users for current user to review
   let filteredUsers = [...users];
   filteredUsers.splice(
     filteredUsers.findIndex((user) => user === currentUser),
@@ -130,11 +121,9 @@ const Matching = (props) => {
   let userForReview = filteredUsers[currentResultIndex];
   console.log(filteredUsers);
 
-  // add to currentUser's likes, check if they like eachother, load next user for review
   const onLike = (user) => {
     const usersToAddToLikes = { user, currentUser };
     dispatch({ type: types.ADD_TO_LIKES, payload: usersToAddToLikes });
-
     dispatch({
       type: types.UPDATE_MATCHES,
       payload: { seenUserId: user.userId, currentUserId: currentUser.userId },
@@ -162,10 +151,7 @@ const Matching = (props) => {
 
   return (
     <>
-      <Search
-        setFilterOptions={setFilterOptions}
-        filterOptions={filterOptions}
-      />
+      <Search />
 
       {currentResultIndex < filteredUsers.length ? (
         <>

@@ -1,67 +1,42 @@
-const Search = (props) => {
+import { types } from "../redux/types";
+import { useDispatch, useSelector } from "react-redux";
+
+const Search = () => {
+  const dispatch = useDispatch();
+  const matchingFilter = useSelector((state) => state.general.matchingFilter);
+
+  const buttons = [
+    { name: "ageFilter", displayName: "Age filter" },
+    { name: "genderFilter", displayName: "Gender filter" },
+    { name: "heightFilter", displayName: "Height filter" },
+    { name: "distanceFilter", displayName: "Location filter" },
+    { name: "existingKidsFilter", displayName: "Existing Kids filter" },
+    { name: "openToKidsFilter", displayName: "Open To Kids filter" },
+    { name: "seenFilter", displayName: "Seen filter" },
+  ];
+
   return (
     <>
       <h2>Find your someone:</h2>
       <p>search below for your perfect match</p>
 
-      <button
-        onClick={() => {
-          const newState = { ...props.filterOptions };
-          newState.ageFilter = !newState.ageFilter;
-          props.setFilterOptions(newState);
-        }}
-      >
-        {props.filterOptions.ageFilter ? "Remove" : "Add"} Age filter
-      </button>
-
-      <button
-        onClick={() => {
-          const newState = { ...props.filterOptions };
-          newState.genderFilter = !newState.genderFilter;
-          props.setFilterOptions(newState);
-        }}
-      >
-        {props.filterOptions.genderFilter ? "Remove" : "Add"} Gender filter
-      </button>
-
-      <button
-        onClick={() => {
-          const newState = { ...props.filterOptions };
-          newState.heightFilter = !newState.heightFilter;
-          props.setFilterOptions(newState);
-        }}
-      >
-        {props.filterOptions.heightFilter ? "Remove" : "Add"} Height filter
-      </button>
-
-      <button
-        onClick={() => {
-          const newState = { ...props.filterOptions };
-          newState.distanceFilter = !newState.distanceFilter;
-          props.setFilterOptions(newState);
-        }}
-      >
-        {props.filterOptions.distanceFilter ? "Remove" : "Add"} Location filter
-      </button>
-      <button
-        onClick={() => {
-          const newState = { ...props.filterOptions };
-          newState.existingKidsFilter = !newState.existingKidsFilter;
-          props.setFilterOptions(newState);
-        }}
-      >
-        {props.filterOptions.existingKidsFilter ? "Remove" : "Add"} Existing Kids filter
-      </button>
-      
-      <button
-        onClick={() => {
-          const newState = { ...props.filterOptions };
-          newState.openToKidsFilter = !newState.openToKidsFilter;
-          props.setFilterOptions(newState);
-        }}
-      >
-        {props.filterOptions.openToKidsFilter ? "Remove" : "Add"} Open To Kids filter
-      </button>
+      {buttons.map((button, index) => {
+        return (
+          <button
+            key={index}
+            name={button.name}
+            onClick={(e) => {
+              dispatch({
+                type: types.SET_FILTER_OPTIONS,
+                payload: e.target.name,
+              });
+            }}
+          >
+            {matchingFilter[button.name] ? "Remove " : "Add "}
+            {button.displayName}
+          </button>
+        );
+      })}
     </>
   );
 };

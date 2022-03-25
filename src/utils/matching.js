@@ -18,8 +18,10 @@ export const getUserById = (id, users) => {
 };
 
 export const getIndexByEmailAndPassword = (emailTest, passwordTest, users) => {
+  console.log(emailTest, passwordTest);
   return users.findIndex(
-    ({ email, password }) => email === emailTest && password === passwordTest
+    (user) =>
+      user.login.email === emailTest && user.login.password === passwordTest
   );
 };
 
@@ -105,6 +107,10 @@ export const openToKidsFilter = (currentUser, user) => {
       currentUser.preferences.lifeStyle.openToKids === 0) // cUser doesn't want kids & user does
     ? false
     : true;
+};
+
+export const seenFilter = (currentUser, user) => {
+  return currentUser.seen.includes(user.userId) === false;
 };
 
 // POINTER functions determine which users are displayed first (i.e. match the most) for the current user to review.

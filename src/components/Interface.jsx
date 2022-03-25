@@ -1,7 +1,6 @@
 import Onboarding from "./Onboarding";
 import Matching from "./Matching";
 import Messaging from "./messages/Messaging";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { types } from "../redux/types";
 import { useSelector } from "react-redux";
@@ -9,12 +8,6 @@ import { useSelector } from "react-redux";
 const Interface = (props) => {
   const dispatch = useDispatch();
   const screen = useSelector((state) => state.general.screen);
-  // const [screen, setScreen] = useState(0);
-
-  // const onLogin = (payload) => {
-  //   setScreen(1);
-  //   //save the new user data
-  // };
 
   const onMessageUpdate = (payload) => {
     //do something useful
@@ -33,7 +26,7 @@ const Interface = (props) => {
         >
           Matches
         </button>
-        {/* <button onClick={() => setScreen(2)}>Search</button> */}
+
         <button
           onClick={() => dispatch({ type: types.SET_SCREEN, payload: 2 })}
         >
@@ -49,15 +42,7 @@ const Interface = (props) => {
         />
       )}
 
-
-      {screen === 1 && (
-        <Matching 
-        // addToLikes={props.addToLikes} 
-        />
-      )}
-
-
-      {/* {screen === 2 && <Search users={props.users} />} */}
+      {screen === 1 && <Matching />}
 
       {screen === 2 && (
         <Messaging

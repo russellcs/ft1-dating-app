@@ -1,9 +1,11 @@
 import Conversation from "./Conversation";
 import { useSelector } from "react-redux";
+import { getIndexById } from "../../utils/matching";
 
 const Conversations = (props) => {
 	const users = useSelector((state) => state.matching.users);
-	const messages = useSelector((state) => state.messagingReducer.messages);
+	const messages = useSelector((state) => state.messaging.messages);
+	const currentUserId = useSelector((state) => state.general.currentUserId);
 
 	// Iterate through the messages data setting the keys for a new object to be user ID of the existing user and then saving that info in the entries object
 	// const result = {};
@@ -18,14 +20,24 @@ const Conversations = (props) => {
 		const existing = result[message.foreignId] ? result[message.foreignId] : [];
 		result[message.foreignId] = [...existing, message];
 	});
-	console.log(result);
 
+	let index = getIndexById(currentUserId, users);
+
+	let matches = users[index].matches;
+
+	for (let i = 0; i < matches.length; i++) {
+		if (result[matches[i]] === undefined) {
+			result[matches[i]] = [];
+		}
+	}
 	const entries = Object.entries(result);
 
 	// Filter through the entries object returning only the conversations which do not match (not blocked)
 	const filteredConversations = entries.filter((conversation) => {
-		return !users[0].blocked.includes(Number(conversation[0])); //TBD must not be hard coded!!
+		return !users[index].blocked.includes(Number(conversation[0])); //TBD must not be hard coded!!
 	});
+
+	console.log(entries, filteredConversations);
 
 	return (
 		<div>

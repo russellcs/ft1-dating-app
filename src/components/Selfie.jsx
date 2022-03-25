@@ -1,7 +1,7 @@
 import Webcam from "react-webcam";
 import { useState, useRef, useCallback } from "react";
 
-const Selfie = () => {
+const Selfie = (props) => {
   const webcamRef = useRef();
   const [imgSrc, setImgSrc] = useState(null);
 
@@ -9,6 +9,8 @@ const Selfie = () => {
     const imageSrc = webcamRef.current.getScreenshot();
     setImgSrc(imageSrc);
   }, [webcamRef, setImgSrc]);
+
+  console.log(imgSrc);
 
   //todo
 
@@ -22,9 +24,26 @@ const Selfie = () => {
 
   return (
     <>
+      <h1>Take a photo for your profile</h1>
       <Webcam audio={false} ref={webcamRef} screenshotFormat="image/jpeg" />
-      <button onClick={capture}>Save</button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          capture();
+        }}
+      >
+        Save
+      </button>
       <img src={imgSrc} />
+      <button
+        className="registerButton"
+        onClick={(e) => {
+          e.preventDefault();
+          props.addNewUser();
+        }}
+      >
+        Register Now
+      </button>
     </>
   );
 };
