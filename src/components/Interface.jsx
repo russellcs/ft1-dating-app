@@ -15,19 +15,19 @@ const Interface = (props) => {
 
   return (
     <>
-      <nav>
-        <button
+      <nav className="nav nav-pills flex-column flex-sm-row bg-light">
+        <button className="nav-link"
           onClick={() => dispatch({ type: types.SET_SCREEN, payload: 0 })}
         >
           Onboarding
         </button>
-        <button
+        <button className="nav-link"
           onClick={() => dispatch({ type: types.SET_SCREEN, payload: 1 })}
         >
           Matches
         </button>
 
-        <button
+        <button className="nav-link"
           onClick={() => dispatch({ type: types.SET_SCREEN, payload: 2 })}
         >
           Messages

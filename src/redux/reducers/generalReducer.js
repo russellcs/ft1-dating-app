@@ -8,8 +8,7 @@ export function generalReducer(
   state = generalInitialStateFromDisk || generalInitialState,
   action
 ) {
-  console.log("helloWorld", generalInitialStateFromDisk);
-  console.log(action);
+  // console.log(action);
   switch (action.type) {
     case types.SET_USER_INPUT: {
       const result = { ...state, userInput: action.payload };

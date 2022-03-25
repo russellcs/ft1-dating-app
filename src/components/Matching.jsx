@@ -25,12 +25,13 @@ const Matching = () => {
 
   const users = useSelector((state) => state.matching.users);
   const matchingFilter = useSelector((state) => state.general.matchingFilter);
+  const currentUserId = useSelector((state) => state.general.currentUserId)
 
   const dispatch = useDispatch();
 
-  // just for WiP
-  const currentUserId = 1;
   let currentUser = getUserById(currentUserId, users);
+  console.log(currentUser)
+  console.log(currentUserId)
 
   // Filters out incompatible users (including seen) from array of potencial matches
   const potentialMatchFilter = (user) => {
@@ -54,6 +55,7 @@ const Matching = () => {
 
   // Sorts array of potential matches to display most compatible matches first. Always displays last seen user first.
   const potentialMatchSorter = (userA, userB) => {
+    console.log(userA, userB)
     let totalPointsUserA =
       marriageCasualPointer(
         {
@@ -119,7 +121,7 @@ const Matching = () => {
   filteredUsers = filteredUsers.filter(potentialMatchFilter);
   filteredUsers = filteredUsers.sort(potentialMatchSorter);
   let userForReview = filteredUsers[currentResultIndex];
-  console.log(filteredUsers);
+
 
   const onLike = (user) => {
     const usersToAddToLikes = { user, currentUser };
