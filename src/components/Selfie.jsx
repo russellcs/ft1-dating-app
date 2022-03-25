@@ -25,7 +25,15 @@ const Selfie = (props) => {
   return (
     <>
       <h1>Take a photo for your profile</h1>
-      <Webcam audio={false} ref={webcamRef} screenshotFormat="image/jpeg" />
+      <div>
+        <div>
+          <Webcam audio={false} ref={webcamRef} screenshotFormat="image/jpeg" />
+        </div>
+
+        <div>
+          <img src={imgSrc} />{" "}
+        </div>
+      </div>
       <button
         onClick={(e) => {
           e.preventDefault();
@@ -34,12 +42,11 @@ const Selfie = (props) => {
       >
         Save
       </button>
-      <img src={imgSrc} />
       <button
         className="registerButton"
         onClick={(e) => {
           e.preventDefault();
-          props.addNewUser();
+          props.addNewUser(imgSrc);
         }}
       >
         Register Now

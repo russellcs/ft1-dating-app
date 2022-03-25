@@ -22,7 +22,7 @@ const Register = (props) => {
   const regScreen = useSelector((state) => state.onboarding.regScreen);
   const newUserData = useSelector((state) => state.onboarding.newUserData);
 
-  const addNewUser = async () => {
+  const addNewUser = async (image) => {
     let lifeStyleCombo = newUserData.relationship;
     let openToKids = Number(newUserData.wantKids);
     lifeStyleCombo = { ...lifeStyleCombo, openToKids };
@@ -35,6 +35,7 @@ const Register = (props) => {
           firstName: newUserData.firstName,
           lastName: newUserData.lastName,
         },
+        selfie: { image },
         dob: timeConverter(newUserData.dateOfBirth),
         location: {
           town: newUserData.town,
