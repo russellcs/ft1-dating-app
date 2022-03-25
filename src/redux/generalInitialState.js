@@ -9,4 +9,5 @@ export const generalInitialState = {
     openToKidsFilter: true,
     seenFilter: true,
   },
+  currentUserId: 1,
 };

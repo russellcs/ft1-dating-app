@@ -71,7 +71,7 @@ const Register = (props) => {
     };
     dispatch({ type: types.ADD_USER, payload: newUserStructured });
     dispatch({ type: types.SET_SCREEN, payload: 1 });
-    dispatch({ type: types.SET_CURRENT_USER_ID, payload: getUniqueId(16) });
+    dispatch({ type: types.SET_CURRENT_USER_ID, payload: props.newUserId });
     dispatch({ type: types.SET_LOGGED_IN_STATUS, payload: true });
   };
 

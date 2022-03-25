@@ -14,6 +14,7 @@ export const getAge = (dob) => {
 };
 
 export const getUserById = (id, users) => {
+  console.log(id, users)
   return users.find(({ userId }) => userId === id);
 };
 
@@ -40,6 +41,7 @@ export const distanceFilter = (currentUser, user) => {
 };
 
 export const distanceCheck = (user1, user2) => {
+  console.log(user1, user2)
   const user1Location = user1.personalDetails.location;
   const user1AcceptedDistance = user1.preferences.acceptedDistance;
   const user2Location = user2.personalDetails.location;
@@ -63,6 +65,7 @@ export const ageCheck = (user1, user2) => {
 };
 
 export const genderFilter = (currentUser, user) => {
+  console.log(currentUser, user)
   return (
     currentUser.preferences.gender.includes(user.personalDetails.gender) &&
     user.preferences.gender.includes(currentUser.personalDetails.gender)
@@ -110,7 +113,10 @@ export const openToKidsFilter = (currentUser, user) => {
 };
 
 export const seenFilter = (currentUser, user) => {
-  return currentUser.seen.includes(user.userId) === false;
+  if (currentUser.seen.length > 0 ) {
+    return currentUser.seen.includes(user.userId) === false;
+  }
+return true
 };
 
 // POINTER functions determine which users are displayed first (i.e. match the most) for the current user to review.

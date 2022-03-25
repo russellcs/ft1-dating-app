@@ -1,43 +1,47 @@
 import { types } from "../redux/types";
 import { useDispatch, useSelector } from "react-redux";
+import "./matching/search.scss";
 
 const Search = () => {
   const dispatch = useDispatch();
   const matchingFilter = useSelector((state) => state.general.matchingFilter);
 
   const buttons = [
-    { name: "ageFilter", displayName: "Age filter" },
-    { name: "genderFilter", displayName: "Gender filter" },
-    { name: "heightFilter", displayName: "Height filter" },
-    { name: "distanceFilter", displayName: "Location filter" },
-    { name: "existingKidsFilter", displayName: "Existing Kids filter" },
-    { name: "openToKidsFilter", displayName: "Open To Kids filter" },
-    { name: "seenFilter", displayName: "Seen filter" },
+    { name: "ageFilter", displayName: "Age" },
+    { name: "genderFilter", displayName: "Gender" },
+    { name: "heightFilter", displayName: "Height" },
+    { name: "distanceFilter", displayName: "Location" },
+    { name: "existingKidsFilter", displayName: "Existing Kids" },
+    { name: "openToKidsFilter", displayName: "Open To Kids" },
+    { name: "seenFilter", displayName: "Seen" },
   ];
 
   return (
-    <>
+    <div className="search">
       <h2>Find your someone:</h2>
-      <p>search below for your perfect match</p>
-
-      {buttons.map((button, index) => {
-        return (
-          <button
-            key={index}
-            name={button.name}
-            onClick={(e) => {
-              dispatch({
-                type: types.SET_FILTER_OPTIONS,
-                payload: e.target.name,
-              });
-            }}
-          >
-            {matchingFilter[button.name] ? "Remove " : "Add "}
-            {button.displayName}
-          </button>
-        );
-      })}
-    </>
+      <p>Search below for your perfect match</p>
+      <p>Remove some filters to amend your search </p>
+      <div>
+        {buttons.map((button, index) => {
+          return (
+            <button
+              className="btn btn-light"
+              key={index}
+              name={button.name}
+              onClick={(e) => {
+                dispatch({
+                  type: types.SET_FILTER_OPTIONS,
+                  payload: e.target.name,
+                });
+              }}
+            >
+              {matchingFilter[button.name] ? "Remove " : "Add "}
+              <span>{button.displayName}</span> 
+            </button>
+          );
+        })}
+      </div>
+    </div>
   );
 };
 
