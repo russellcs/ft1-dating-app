@@ -1,1 +1,1 @@
-export const initialState = { screen: 0 };
+export const initialState = { screen: 0, currentUserId: 1 };
