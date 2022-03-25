@@ -119,7 +119,6 @@ const Matching = () => {
   filteredUsers = filteredUsers.filter(potentialMatchFilter);
   filteredUsers = filteredUsers.sort(potentialMatchSorter);
   let userForReview = filteredUsers[currentResultIndex];
-  console.log(filteredUsers);
 
   const onLike = (user) => {
     const usersToAddToLikes = { user, currentUser };
