@@ -7,7 +7,9 @@ export function matchingReducer(state = matchingInitialState, action) {
     case types.ADD_USER:
       const users = [...state.users];
       users.push(action.payload);
-      return { ...state, users };
+      result = { ...state, users };
+      storeData("generalInitialStateFromDisk", result);
+      return result;
 
     case types.ADD_TO_SEEN: {
       const currentUserIndex = getIndexById(
@@ -20,7 +22,9 @@ export function matchingReducer(state = matchingInitialState, action) {
       ) {
         const users = [...state.users];
         users[currentUserIndex].seen.push(action.payload.seenUserId);
-        return { ...state, users };
+        result = { ...state, users };
+        storeData("generalInitialStateFromDisk", result);
+        return result;
       }
       return state;
     }
@@ -29,8 +33,9 @@ export function matchingReducer(state = matchingInitialState, action) {
       const { user, currentUser } = action.payload;
       const users = [...state.users];
       currentUser.likes.push(user.userId);
-
-      return { ...state, users };
+      result = { ...state, users };
+      storeData("generalInitialStateFromDisk", result);
+      return result;
     }
 
     case types.UPDATE_MATCHES: {
@@ -48,7 +53,9 @@ export function matchingReducer(state = matchingInitialState, action) {
         users[seenUserIndex].matches.push(currentUserId);
         users[currentUserIndex].matches.push(seenUserId);
 
-        return { ...state, users };
+        result = { ...state, users };
+        storeData("generalInitialStateFromDisk", result);
+        return result;
       } else return state;
     }
 
@@ -58,7 +65,9 @@ export function matchingReducer(state = matchingInitialState, action) {
       const index = getIndexById(Number(1), users);
 
       users[index].blocked.push(Number(action.payload));
-      return { ...state, users };
+      result = { ...state, users };
+      storeData("generalInitialStateFromDisk", result);
+      return result;
     }
 
     // case "LOGIN":
