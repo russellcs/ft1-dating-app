@@ -16,7 +16,9 @@ const MatchedUser = (props) => {
   return (
     <>
       <UserName name={user.personalDetails.name.firstName} />
-      <UserImage image={user.personalDetails.selfie.image} />
+      {user.personalDetails.selfie && (
+        <UserImage image={user.personalDetails.selfie.image} />
+      )}
       <ul className="userDetails">
         <li>
           <UserAge age={getAge(user.personalDetails.dob)} />

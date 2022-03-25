@@ -1,14 +1,20 @@
 import { matchingInitialState } from "../matchingInitialState";
 import { types } from "../types";
 import { getIndexById } from "../../utils/matching";
+import { getData, storeData } from "../../storage";
 
-export function matchingReducer(state = matchingInitialState, action) {
+const matchingInitialStateFromDisk = getData("matchingInitialStateFromDisk");
+
+export function matchingReducer(
+  state = matchingInitialStateFromDisk || matchingInitialState,
+  action
+) {
   switch (action.type) {
     case types.ADD_USER:
       const users = [...state.users];
       users.push(action.payload);
-      result = { ...state, users };
-      storeData("generalInitialStateFromDisk", result);
+      const result = { ...state, users };
+      storeData("matchingInitialStateFromDisk", result);
       return result;
 
     case types.ADD_TO_SEEN: {
@@ -22,8 +28,8 @@ export function matchingReducer(state = matchingInitialState, action) {
       ) {
         const users = [...state.users];
         users[currentUserIndex].seen.push(action.payload.seenUserId);
-        result = { ...state, users };
-        storeData("generalInitialStateFromDisk", result);
+        const result = { ...state, users };
+        storeData("matchingInitialStateFromDisk", result);
         return result;
       }
       return state;
@@ -33,8 +39,8 @@ export function matchingReducer(state = matchingInitialState, action) {
       const { user, currentUser } = action.payload;
       const users = [...state.users];
       currentUser.likes.push(user.userId);
-      result = { ...state, users };
-      storeData("generalInitialStateFromDisk", result);
+      const result = { ...state, users };
+      storeData("matchingInitialStateFromDisk", result);
       return result;
     }
 
@@ -53,8 +59,8 @@ export function matchingReducer(state = matchingInitialState, action) {
         users[seenUserIndex].matches.push(currentUserId);
         users[currentUserIndex].matches.push(seenUserId);
 
-        result = { ...state, users };
-        storeData("generalInitialStateFromDisk", result);
+        const result = { ...state, users };
+        storeData("matchingInitialStateFromDisk", result);
         return result;
       } else return state;
     }
@@ -65,8 +71,8 @@ export function matchingReducer(state = matchingInitialState, action) {
       const index = getIndexById(Number(1), users);
 
       users[index].blocked.push(Number(action.payload));
-      result = { ...state, users };
-      storeData("generalInitialStateFromDisk", result);
+      const result = { ...state, users };
+      storeData("matchingInitialStateFromDisk", result);
       return result;
     }
 

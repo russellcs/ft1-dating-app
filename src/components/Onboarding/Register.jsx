@@ -66,6 +66,10 @@ const Register = (props) => {
         smokers: newUserData.smokersPref,
         acceptedDistance: Number(newUserData.acceptedDistance),
       },
+      seen: [],
+      likes: [],
+      matches: [],
+      blocked: [],
       login: { email: newUserData.email, password: newUserData.password },
       status: { type: "member", lastLoginTimestamp: Date.now() },
     };
