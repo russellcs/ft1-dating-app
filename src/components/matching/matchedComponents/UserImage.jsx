@@ -1,9 +1,5 @@
 const UserImage = (props) => {
-  return (
-    <div className="userImage">
-      Image of {props.user.personalDetails.name.firstName}
-    </div>
-  );
+  return <div className="userImage">Image of user.</div>;
 };
 
 export default UserImage;

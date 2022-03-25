@@ -4,7 +4,7 @@ const UserCasual = (props) => {
   return (
     <>
       <span className="matchedIcon">{matchedIcons.rings}</span>
-      {props.user.preferences.lifeStyle.marriage ? " Yes" : " No"}
+      {props.marriage ? " Yes" : " No"}
     </>
   );
 };

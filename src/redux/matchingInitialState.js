@@ -19,7 +19,7 @@ export const matchingInitialState = {
         smokers: 1, // 0: undefined: 1: no, 2: sometimes, 3: yes
       },
       preferences: {
-        lifeStyle: { marriage: true, casual: false, openToKids: 1 },
+        lifeStyle: { marriage: true, casual: false, openToKids: 1 }, // 0: don't want, 1: not sure, 2: open, 3: want
         age: { min: 24, max: 42 },
         acceptedReligions: [], // NOT USING
         height: { min: 130, max: 160 },
@@ -194,7 +194,7 @@ export const matchingInitialState = {
         smokers: 3,
       },
       preferences: {
-        lifeStyle: { marriage: false, casual: true, openToKids: 4 },
+        lifeStyle: { marriage: false, casual: true, openToKids: 3 },
         age: { min: 21, max: 30 },
         acceptedReligions: [],
         height: { min: 120, max: 165 },

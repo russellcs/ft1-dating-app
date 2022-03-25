@@ -5,7 +5,7 @@ const UserSmokes = (props) => {
   return (
     <>
       <span className="matchedIcon">{matchedIcons.smoking}</span>
-      {smokes[props.user.personalDetails.smokers]}
+      {smokes[props.smoker]}
     </>
   );
 };

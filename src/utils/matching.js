@@ -99,42 +99,31 @@ export const existingKidsFilter = (currentUser, user) => {
 };
 
 export const openToKidsFilter = (currentUser, user) => {
-  return (currentUser.preferences.lifeStyle.openToKids === 4 &&
-    user.preferences.lifeStyle.openToKids === 1) || // cUser wants kids & user doesn't
-    (user.preferences.lifeStyle.openToKids === 4 &&
-      currentUser.preferences.lifeStyle.openToKids === 1) // cUser doesn't want kids & user does
+  return (currentUser.preferences.lifeStyle.openToKids === 3 &&
+    user.preferences.lifeStyle.openToKids === 0) || // cUser wants kids & user doesn't
+    (user.preferences.lifeStyle.openToKids === 3 &&
+      currentUser.preferences.lifeStyle.openToKids === 0) // cUser doesn't want kids & user does
     ? false
     : true;
 };
 
 // POINTER functions determine which users are displayed first (i.e. match the most) for the current user to review.
 export const kidsPointer = (cUserPref, userPref) => {
-  // const cUserPref = currentUser.preferences.lifeStyle.openToKids;
-  // const userPref = user.preferences.lifeStyle.openToKids;
-
-  // NB: "want/don't want" combo is filtered out in openToKidsFilter
-  return cUserPref > 0 && cUserPref === userPref // neither "dont say" and both are same
+  // 0: don't want kids, 1: not sure, 2: open, 3: want
+  return cUserPref === userPref // both are same
     ? 10
-    : (cUserPref === 3 && userPref === 4) ||
-      (cUserPref === 4 && userPref === 3) || // want + open
+    : (cUserPref === 2 && userPref === 3) || // want + open
       (cUserPref === 3 && userPref === 2) ||
-      (cUserPref === 2 && userPref === 3) // not sure + open
+      (cUserPref === 2 && userPref === 1) || // not sure + open
+      (cUserPref === 1 && userPref === 2)
     ? 5
-    : (cUserPref === 1 && userPref === 3) || (cUserPref === 3 && userPref === 1) // dont want + open
+    : (cUserPref === 0 && userPref === 2) || (cUserPref === 2 && userPref === 0) // dont want + open
     ? -5
-    : 0; // either doesn't say, not sure + dont want, not sure + want
+    : 0; // not sure + dont want, not sure + want
+  // NB: "want/don't want" combo is filtered out in openToKidsFilter
 };
 
 export const marriageCasualPointer = (cUserPref, userPref) => {
-  // const cUserPref = {
-  //   marriage: currentUser.preferences.lifeStyle.marriage,
-  //   casual: currentUser.preferences.lifeStyle.casual,
-  // };
-  // const userPref = {
-  //   marriage: user.preferences.lifeStyle.marriage,
-  //   casual: user.preferences.lifeStyle.casual,
-  // };
-
   return cUserPref.marriage === userPref.marriage &&
     cUserPref.casual === userPref.casual // MC MC, Mc Mc, mC mC
     ? 10
@@ -151,9 +140,6 @@ export const marriageCasualPointer = (cUserPref, userPref) => {
 };
 
 export const religionPointer = (cUserRelig, userRelig) => {
-  // const cUserRelig = currentUser.personalDetails.religion;
-  // const userRelig = user.personalDetails.religion;
-
   return cUserRelig === 0 || userRelig === 0 // cUser or user doesn't say
     ? 0
     : cUserRelig === userRelig // both share same religion
