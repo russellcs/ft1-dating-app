@@ -1,4 +1,4 @@
-export const initialState = {
+export const generalInitialState = {
   screen: 0,
   matchingFilter: {
     ageFilter: true,

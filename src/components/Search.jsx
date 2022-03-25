@@ -5,74 +5,38 @@ const Search = () => {
   const dispatch = useDispatch();
   const matchingFilter = useSelector((state) => state.general.matchingFilter);
 
+  const buttons = [
+    { name: "ageFilter", displayName: "Age filter" },
+    { name: "genderFilter", displayName: "Gender filter" },
+    { name: "heightFilter", displayName: "Height filter" },
+    { name: "distanceFilter", displayName: "Location filter" },
+    { name: "existingKidsFilter", displayName: "Existing Kids filter" },
+    { name: "openToKidsFilter", displayName: "Open To Kids filter" },
+    { name: "seenFilter", displayName: "Seen filter" },
+  ];
+
   return (
     <>
       <h2>Find your someone:</h2>
       <p>search below for your perfect match</p>
 
-      <button
-        name="ageFilter"
-        onClick={(e) => {
-          dispatch({ type: types.SET_FILTER_OPTIONS, payload: e.target.name });
-        }}
-      >
-        {matchingFilter.ageFilter ? "Remove" : "Add"} Age filter
-      </button>
-
-      <button
-        name="genderFilter"
-        onClick={(e) => {
-          dispatch({ type: types.SET_FILTER_OPTIONS, payload: e.target.name });
-        }}
-      >
-        {matchingFilter.genderFilter ? "Remove" : "Add"} Gender filter
-      </button>
-
-      <button
-        name="heightFilter"
-        onClick={(e) => {
-          dispatch({ type: types.SET_FILTER_OPTIONS, payload: e.target.name });
-        }}
-      >
-        {matchingFilter.heightFilter ? "Remove" : "Add"} Height filter
-      </button>
-
-      <button
-        name="distanceFilter"
-        onClick={(e) => {
-          dispatch({ type: types.SET_FILTER_OPTIONS, payload: e.target.name });
-        }}
-      >
-        {matchingFilter.distanceFilter ? "Remove" : "Add"} Distance filter
-      </button>
-
-      <button
-        name="existingKidsFilter"
-        onClick={(e) => {
-          dispatch({ type: types.SET_FILTER_OPTIONS, payload: e.target.name });
-        }}
-      >
-        {matchingFilter.existingKidsFilter ? "Remove" : "Add"} Existing Kids
-        filter
-      </button>
-
-      <button
-        name="openToKidsFilter"
-        onClick={(e) => {
-          dispatch({ type: types.SET_FILTER_OPTIONS, payload: e.target.name });
-        }}
-      >
-        {matchingFilter.openToKidsFilter ? "Remove" : "Add"} Open To Kids filter
-      </button>
-
-      <button
-        name="seenFilter"
-        onClick={(e) => {
-          dispatch({ type: types.SET_FILTER_OPTIONS, payload: e.target.name });
-        }}
-      >
-        {matchingFilter.seenFilter ? "Remove" : "Add"} Seen filter
-      </button>
+      {buttons.map((button, index) => {
+        return (
+          <button
+            key={index}
+            name={button.name}
+            onClick={(e) => {
+              dispatch({
+                type: types.SET_FILTER_OPTIONS,
+                payload: e.target.name,
+              });
+            }}
+          >
+            {matchingFilter[button.name] ? "Remove " : "Add "}
+            {button.displayName}
+          </button>
+        );
+      })}
     </>
   );
 };
