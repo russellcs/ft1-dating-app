@@ -47,12 +47,13 @@ const Conversation = (props) => {
 
 	return (
 		<div
-			style={{
-				border: "solid 1px black",
-				margin: "10px",
-				padding: "10px",
-				width: "280px",
-			}}
+			// style={{
+			// 	border: "solid 1px black",
+			// 	margin: "10px",
+			// 	padding: "10px",
+			// 	width: "280px",
+			// }}
+			className="card"
 		>
 			<p>User ID is {props.conversation[0]}</p>
 			<Block
