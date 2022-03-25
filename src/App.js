@@ -85,7 +85,6 @@ const App = () => {
 				// users={users}
 				messages={messages}
 				addMessage={addMessage}
-				// addToLikes={addToLikes}
 // 				addToSeen={addToSeen}
 				blockUserId={blockUserId}
 				addUser={addUser}

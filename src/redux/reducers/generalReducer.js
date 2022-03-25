@@ -10,6 +10,14 @@ export function generalReducer(state = initialState, action) {
       let screen = action.payload;
       return { ...state, screen };
 
+    case types.SET_FILTER_OPTIONS:
+      const filterName = action.payload;
+
+      const matchingFilter = { ...state.matchingFilter };
+      matchingFilter[filterName] = !matchingFilter[filterName];
+
+      return { ...state, matchingFilter };
+
     default:
       return state;
   }
