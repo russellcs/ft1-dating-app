@@ -171,13 +171,12 @@ const Preferences = (props) => {
           minHeightErrors === undefined &&
           maxHeightErrors === undefined && (
             <button
-              className="registerButton"
-              onClick={(e) => {
-                e.preventDefault();
-                props.addNewUser();
-              }}
+              className="nextButton"
+              onClick={() =>
+                dispatch({ type: types.SET_REGISTER_SCREEN, payload: 4 })
+              }
             >
-              Register Now
+              Next
             </button>
           )}
       </nav>

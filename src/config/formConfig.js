@@ -144,3 +144,41 @@ export function timeConverter(UNIX_timestamp) {
   var time = { year: newYear, months: newMonth, day: newDate };
   return time;
 }
+
+export function dataConstructor(e) {
+  let value = e.target.value;
+  if (e.target.name === "genderPref") {
+    const genderArray = [];
+    for (let index = 0; index < e.target.selectedOptions.length; index++) {
+      genderArray.push(Number(e.target.selectedOptions[index].value));
+    }
+    value = genderArray;
+  }
+
+  if (e.target.name === "dateOfBirth") {
+    console.log(e.target.value);
+    value = new Date(value).getTime();
+    console.log(value);
+  }
+
+  if (e.target.name === "relationship" && value === "0") {
+    value = { marriage: true, casual: false };
+  }
+
+  if (e.target.name === "relationship" && value === "1") {
+    value = { marriage: false, casual: true };
+  }
+
+  if (e.target.name === "relationship" && value === "2") {
+    value = { marriage: true, casual: true };
+  }
+
+  if (e.target.name === "smokersPref" && value === "0") {
+    value = true;
+  }
+
+  if (e.target.name === "smokersPref" && value === "1") {
+    value = false;
+  }
+  return value;
+}
