@@ -5,7 +5,7 @@ const UserReligion = (props) => {
   return (
     <>
       <span className="matchedIcon">{matchedIcons.praying}</span>
-      {religions[props.user.personalDetails.religion]}
+      {religions[props.religion]}
     </>
   );
 };

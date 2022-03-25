@@ -5,7 +5,7 @@ const UserGender = (props) => {
   return (
     <>
       <span className="matchedIcon">{matchedIcons.person}</span>{" "}
-      {genders[props.user.personalDetails.gender]}
+      {genders[props.gender]}
     </>
   );
 };

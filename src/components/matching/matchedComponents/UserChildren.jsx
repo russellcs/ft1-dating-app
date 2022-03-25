@@ -4,9 +4,7 @@ const UserChildren = (props) => {
   return (
     <>
       <span className="matchedIcon">{matchedIcons.child}</span>
-      {props.user.personalDetails.kids
-        ? " Have children"
-        : "Don't have children"}
+      {props.haveKids ? " Have children" : "Don't have children"}
     </>
   );
 };
