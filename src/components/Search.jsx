@@ -20,7 +20,7 @@ const Search = () => {
     <div className="search">
       <h2>Find your someone:</h2>
       <p>Search below for your perfect match</p>
-      <p>Remove some filters to ammend your search </p>
+      <p>Remove some filters to amend your search </p>
       <div>
         {buttons.map((button, index) => {
           return (
