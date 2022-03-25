@@ -33,9 +33,6 @@ const Login = (props) => {
       alert("Invalid email / password");
     }
   };
-
-  console.log(data);
-
   // test
   // email: a@a.com
   // password: abdul90
@@ -45,24 +42,31 @@ const Login = (props) => {
       <div className="containerReg">
         <form onInput={onLoginInput} name="registerForm">
           <h1>Please Log In</h1>
-          <div className="formRow">
-            <label>
+          <div className="mb-3">
+            <label className="form-label">
               Email Address:
-              <input type="email" placeholder="Email" name="email" />
+              <input
+                type="email"
+                placeholder="Email"
+                name="email"
+                className="form-control"
+              />
             </label>
           </div>
-          <div className="formRow">
+          <div className="mb-3">
             <label>
               Password:
               <input
                 type="password"
                 placeholder="Password"
                 name="password"
+                className="form-control"
                 required
               />
             </label>
           </div>
           <button
+            className="btn btn-primary"
             onClick={(e) => {
               e.preventDefault();
               loginSubmit();

@@ -26,10 +26,10 @@ const Preferences = (props) => {
   return (
     <>
       <h1>What are you looking for?</h1>
-      <div className="formRow">
+      <div className="row">
         <label>
           Type of relationship you are looking for?:
-          <select defaultValue="" name="relationship">
+          <select defaultValue="" name="relationship" className="form-select">
             <option value="" disabled>
               Select
             </option>
@@ -42,9 +42,9 @@ const Preferences = (props) => {
           </p>
         </label>
       </div>
-      <div className="formRow">
-        <label>Gender:</label>
-        <select name="genderPref" multiple size="6">
+      <div>
+        <label>Gender: (select all that apply)</label>
+        <select name="genderPref" multiple size="6" className="form-select">
           {gendersPref.map((gender, index) => (
             <option key={index} value={index}>
               {gender}
@@ -55,21 +55,31 @@ const Preferences = (props) => {
           {genderPrefErrors && errorCodes.genderPref}
         </p>
       </div>
-      <div className="formRow">
+      <div>
         <label>
           Minimum age you would consider?
-          <input type="number" placeholder="Minimum age" name="minAge" />
-          <p>{minAgeErrors && errorCodes.minAge}</p>
+          <input
+            type="number"
+            placeholder="Minimum age"
+            name="minAge"
+            className="form-control"
+          />
+          <p className="errorMessage">{minAgeErrors && errorCodes.minAge}</p>
         </label>
       </div>
-      <div className="formRow">
+      <div>
         <label>
           Maximum age you would consider?
-          <input type="number" placeholder="Maximum age" name="maxAge" />
+          <input
+            type="number"
+            placeholder="Maximum age"
+            name="maxAge"
+            className="form-control"
+          />
           <p className="errorMessage">{maxAgeErrors && errorCodes.maxAge}</p>
         </label>
       </div>
-      <div className="formRow">
+      <div>
         <label>
           Minimum height you would like?:
           <input
@@ -77,13 +87,14 @@ const Preferences = (props) => {
             name="minHeight"
             placeholder="in cm"
             id="minHeight"
+            className="form-control"
           />
           <p className="errorMessage">
             {minHeightErrors && errorCodes.minHeight}
           </p>
         </label>
       </div>
-      <div className="formRow">
+      <div>
         <label>
           Maximum height you would like?:
           <input
@@ -91,40 +102,31 @@ const Preferences = (props) => {
             name="maxHeight"
             placeholder="in cm"
             id="maxHeight"
+            className="form-control"
           />
           <p className="errorMessage">
             {maxHeightErrors && errorCodes.maxHeight}
           </p>
         </label>
       </div>
-      {/* <div className="formRow">
-        <label>
-          Religions you would be happy to match with:
-          <select name="acceptedReligions" multiple size="10">
-            {religionsPref.map((religion, index) => (
-              <option key={index} value={index}>
-                {religion}
-              </option>
-            ))}
-          </select>
-          <p className="errorMessage">
-            {acceptedReligionsErrors && errorCodes.acceptedReligions}
-          </p>
-        </label>
-      </div> */}
-      <div className="formRow">
+      <div>
         <label>
           Maximum distance you would be willing to travel for romance?
-          <input type="number" placeholder="in km" name="acceptedDistance" />
+          <input
+            type="number"
+            placeholder="in km"
+            name="acceptedDistance"
+            className="form-control"
+          />
           <p className="errorMessage">
             {acceptedDistanceErrors && errorCodes.acceptedDistance}
           </p>
         </label>
       </div>
-      <div className="formRow">
+      <div>
         <label>
           Would you consider matches that have kids?:
-          <select defaultValue="" name="kidsAccepted">
+          <select defaultValue="" name="kidsAccepted" className="form-select">
             <option value="" disabled>
               Select
             </option>
@@ -137,10 +139,10 @@ const Preferences = (props) => {
           </p>
         </label>
       </div>
-      <div className="formRow">
+      <div>
         <label>
           Do you want to be match with smokers?:
-          <select defaultValue="" name="smokersPref">
+          <select defaultValue="" name="smokersPref" className="form-select">
             <option value="" disabled>
               Select
             </option>
@@ -154,7 +156,7 @@ const Preferences = (props) => {
       </div>
       <nav>
         <button
-          className="backButton"
+          className="btn btn-secondary"
           onClick={() =>
             dispatch({ type: types.SET_REGISTER_SCREEN, payload: 2 })
           }
@@ -171,7 +173,8 @@ const Preferences = (props) => {
           minHeightErrors === undefined &&
           maxHeightErrors === undefined && (
             <button
-              className="nextButton"
+              className="btn btn-success"
+              style={{ float: "right" }}
               onClick={() =>
                 dispatch({ type: types.SET_REGISTER_SCREEN, payload: 4 })
               }

@@ -28,7 +28,7 @@ const Register = (props) => {
     lifeStyleCombo = { ...lifeStyleCombo, openToKids };
     const coords = await getLngLat(newUserData.postCode);
     const newUserStructured = {
-      userId: props.newUserId,
+      userId: getUniqueId(16),
       signUpTimeStamp: Date.now(),
       personalDetails: {
         name: {
@@ -71,16 +71,18 @@ const Register = (props) => {
     };
     dispatch({ type: types.ADD_USER, payload: newUserStructured });
     dispatch({ type: types.SET_SCREEN, payload: 1 });
-    dispatch({ type: types.SET_CURRENT_USER_ID, payload: getUniqueId(16) });
+    dispatch({
+      type: types.SET_CURRENT_USER_ID,
+      payload: newUserStructured.userId,
+    });
     dispatch({ type: types.SET_LOGGED_IN_STATUS, payload: true });
   };
 
   const onValidate = async (data) => {
-    console.log(data);
     const _joiInstance = Joi.object(schema);
     try {
-      // await _joiInstance.validateAsync(data);
-      await _joiInstance.validateAsync(data, { abortEarly: false });
+      await _joiInstance.validateAsync(data);
+      // await _joiInstance.validateAsync(data, { abortEarly: false });
       dispatch({ type: types.SET_REG_ERRORS, payload: { errors: "" } });
     } catch (errors) {
       dispatch({
@@ -90,7 +92,6 @@ const Register = (props) => {
     }
   };
 
-  console.log(newUserData);
   return (
     <>
       <div className="containerReg">
@@ -98,7 +99,6 @@ const Register = (props) => {
           className="form"
           onInput={(e) => {
             dispatch({ type: types.ON_INPUT_REG, payload: e });
-            console.log(e.target.value);
             {
               let value = dataConstructor(e);
               onValidate({ ...newUserData, [e.target.name]: value });

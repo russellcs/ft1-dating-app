@@ -18,14 +18,19 @@ const RegisterPartOne = (props) => {
     <>
       <div>
         <h1>Registration form</h1>
-        <div className="formRow">
+        <div className="row">
           <label>
             Email Address:
-            <input type="email" placeholder="Email" name="email" />
+            <input
+              type="email"
+              placeholder="Email"
+              name="email"
+              className="form-control"
+            />
             <p className="errorMessage">{emailErrors && errorCodes.email}</p>
           </label>
         </div>
-        <div className="formRow">
+        <div className="row">
           <label>
             Password:
             <input
@@ -33,24 +38,35 @@ const RegisterPartOne = (props) => {
               placeholder="Password (8 characters minimum)"
               name="password"
               minLength="8"
+              className="form-control"
               required
             />
             <p className="errorMessage">{passwordErrors} </p>
           </label>
         </div>
-        <div className="formRow">
+        <div className="row">
           <label>
             First Name:
-            <input type="name" placeholder="First Name" name="firstName" />
+            <input
+              type="name"
+              placeholder="First Name"
+              name="firstName"
+              className="form-control"
+            />
           </label>
           <p className="errorMessage">
             {firstNameErrors && errorCodes.firstName}
           </p>
         </div>
-        <div className="formRow">
+        <div className="row">
           <label>
             Last Name:
-            <input type="name" placeholder="Last Name" name="lastName" />
+            <input
+              type="name"
+              placeholder="Last Name"
+              name="lastName"
+              className="form-control"
+            />
           </label>
           <p className="errorMessage">
             {lastNameErrors && errorCodes.lastName}
@@ -62,7 +78,8 @@ const RegisterPartOne = (props) => {
             passwordErrors === undefined &&
             firstNameErrors === undefined && (
               <button
-                className="nextButton"
+                className="btn btn-success"
+                style={{ float: "right" }}
                 onClick={() =>
                   dispatch({ type: types.SET_REGISTER_SCREEN, payload: 1 })
                 }
