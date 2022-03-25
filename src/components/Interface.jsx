@@ -33,7 +33,7 @@ const Interface = (props) => {
         >
           Matches
         </button>
-        {/* <button onClick={() => setScreen(2)}>Search</button> */}
+
         <button
           onClick={() => dispatch({ type: types.SET_SCREEN, payload: 2 })}
         >
@@ -49,15 +49,7 @@ const Interface = (props) => {
         />
       )}
 
-
-      {screen === 1 && (
-        <Matching 
-        // addToLikes={props.addToLikes} 
-        />
-      )}
-
-
-      {/* {screen === 2 && <Search users={props.users} />} */}
+      {screen === 1 && <Matching />}
 
       {screen === 2 && (
         <Messaging

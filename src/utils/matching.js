@@ -91,6 +91,10 @@ export const openToKidsFilter = (currentUser, user) => {
     : true;
 };
 
+export const seenFilter = (currentUser, user) => {
+  return currentUser.seen.includes(user.userId) === false;
+};
+
 // POINTER functions determine which users are displayed first (i.e. match the most) for the current user to review.
 export const kidsPointer = (currentUser, user) => {
   const cUserPref = currentUser.preferences.lifeStyle.openToKids;
