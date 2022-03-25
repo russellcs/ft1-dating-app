@@ -15,22 +15,20 @@ const App = () => {
   const [userId, setUserId] = useState(getUniqueId(16));
 
   //  set the state from the disk
-//   useEffect(() => {
-//     const data = getData();
-//     if (data.users && data.messages) {
-//       setUsers(data.users);
-//       setMessages(data.messages);
-//     }
-//   }, []);
-//   // when the state changes, save the changes to the disk
-//   useEffect(() => {
-//     storeData("users", users);
-//   }, [users]);
-//   useEffect(() => {
-//     storeData("messages", messages);
-//   }, [messages]);
-
-
+  //   useEffect(() => {
+  //     const data = getData();
+  //     if (data.users && data.messages) {
+  //       setUsers(data.users);
+  //       setMessages(data.messages);
+  //     }
+  //   }, []);
+  //   // when the state changes, save the changes to the disk
+  //   useEffect(() => {
+  //     storeData("users", users);
+  //   }, [users]);
+  //   useEffect(() => {
+  //     storeData("messages", messages);
+  //   }, [messages]);
 
   // Adds the current user ID to the blocked array in the data
   const blockUserId = (fId) => {
@@ -77,6 +75,7 @@ const App = () => {
   return (
     <>
       <button
+        className="btn btn-primary"
         onClick={() => {
           localStorage.clear();
         }}

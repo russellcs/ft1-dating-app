@@ -66,6 +66,4 @@ const MatchedUser = (props) => {
   );
 };
 
-//ADD CHAT BUTTON? AND REJECT BUTTON?
-
 export default MatchedUser;
