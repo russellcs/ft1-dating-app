@@ -37,7 +37,7 @@ export const errorCodes = {
   firstName: "Please enter your first name",
   dateOfBirth: "You must be over 18 years old to register",
   gender: "Please select your gender",
-  postCode: "Please enter a valid UK postcde",
+  postCode: "Please enter a valid UK postcode",
   height: "Please enter your height in cm", //should add logic for while range exists?
   smokes: "Please select your smoking preference",
   haveKids: "Please select if you have any kids",
@@ -47,13 +47,14 @@ export const errorCodes = {
   genderPref: "Please select your gender preference",
   minAge: "Please enter a valid minimum age you would consider",
   maxAge: "Please enter a valid maximum age you would consider",
+  minHeight: "Height must be higher than 0cm and lower than 252cm",
+  maxHeight: "Height must be higher than minimum height and lower than 252cm",
   acceptedDistance:
     "Please enter the maximum distance you would be willing to travel",
   kidsAccepted: "Please select if you would consider matches that have kids",
   smokersPref: "Please select if you want to be matched with smokers",
-  minHeight: "Height must be higher than 0cm and lower than 252cm",
-  maxHeight: "Height must be higher than minimum height and lower than 252cm",
-  acceptedReligions: "Please select religions you want to be matched with",
+
+  // acceptedReligions: "Please select religions you want to be matched with",
 };
 
 export const wantKids = [
@@ -110,16 +111,16 @@ export const schema = {
     .less(125)
     .greater(Joi.ref("minAge"))
     .required(),
-  acceptedReligions: Joi.required(),
-  acceptedDistance: Joi.number().integer().positive().required(),
-  kidsAccepted: Joi.required(),
-  smokersPref: Joi.required(),
+  // acceptedReligions: Joi.required(),
   minHeight: Joi.number().required().positive().integer(),
   maxHeight: Joi.number()
     .required()
     .positive()
     .integer()
     .greater(Joi.ref("minHeight")),
+  acceptedDistance: Joi.number().integer().positive().required(),
+  kidsAccepted: Joi.required(),
+  smokersPref: Joi.required(),
 };
 
 export function joiDataReorder(details) {

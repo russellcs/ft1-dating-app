@@ -6,7 +6,7 @@ const Selfie = (props) => {
   const [imgSrc, setImgSrc] = useState(null);
 
   const capture = useCallback(() => {
-    const imageSrc = webcamRef.current.getScreenshot();
+    let imageSrc = webcamRef.current.getScreenshot();
     setImgSrc(imageSrc);
   }, [webcamRef, setImgSrc]);
 
@@ -22,15 +22,17 @@ const Selfie = (props) => {
 
   //4 styling
 
+  const deletePhoto = () => setImgSrc("");
+
   return (
     <>
       <h1>Take a photo for your profile</h1>
-      <div>
-        <div>
+      <div className="selfieContainer">
+        <div className="webcam">
           <Webcam audio={false} ref={webcamRef} screenshotFormat="image/jpeg" />
         </div>
 
-        <div>
+        <div className="selfie">
           <img src={imgSrc} />{" "}
         </div>
       </div>
@@ -40,13 +42,21 @@ const Selfie = (props) => {
           capture();
         }}
       >
-        Save
+        Take photo
+      </button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          deletePhoto();
+        }}
+      >
+        Take another photo
       </button>
       <button
         className="registerButton"
         onClick={(e) => {
           e.preventDefault();
-          props.addNewUser(imgSrc);
+          props.addNewUser();
         }}
       >
         Register Now

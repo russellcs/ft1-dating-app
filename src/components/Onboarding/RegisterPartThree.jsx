@@ -21,10 +21,10 @@ const RegisterPartThree = (props) => {
   return (
     <>
       <h1>a few more details...</h1>
-      <div className="formRow">
+      <div className="row">
         <label>
           Do you smoke?:
-          <select defaultValue="" name="smokes">
+          <select defaultValue="" name="smokes" className="form-select">
             <option value="" disabled>
               Select
             </option>
@@ -37,10 +37,10 @@ const RegisterPartThree = (props) => {
           <p className="errorMessage">{smokesErrors && errorCodes.smokes}</p>
         </label>
       </div>
-      <div className="formRow">
+      <div className="row">
         <label>
           Do you have any kids?:
-          <select defaultValue="" name="haveKids">
+          <select defaultValue="" name="haveKids" className="form-select">
             <option value="" disabled>
               Select
             </option>
@@ -51,10 +51,10 @@ const RegisterPartThree = (props) => {
         </label>
         <p className="errorMessage">{haveKidsErrors && errorCodes.haveKids}</p>
       </div>
-      <div className="formRow">
+      <div className="row">
         <label>
           Do you want kids in the future?
-          <select defaultValue="" name="wantKids">
+          <select defaultValue="" name="wantKids" className="form-select">
             <option value="" disabled>
               Select
             </option>
@@ -69,10 +69,10 @@ const RegisterPartThree = (props) => {
           </p>
         </label>
       </div>
-      <div className="formRow">
+      <div className="row">
         <label>
           Religion:
-          <select defaultValue="" name="religion">
+          <select defaultValue="" name="religion" className="form-select">
             <option value="" disabled>
               Select
             </option>
@@ -89,7 +89,7 @@ const RegisterPartThree = (props) => {
       </div>
       <nav>
         <button
-          className="backButton"
+          className="btn btn-secondary"
           onClick={() =>
             dispatch({ type: types.SET_REGISTER_SCREEN, payload: 1 })
           }
@@ -101,7 +101,8 @@ const RegisterPartThree = (props) => {
           wantKidsErrors === undefined &&
           religionErrors === undefined && (
             <button
-              className="nextButton"
+              className="btn btn-success"
+              style={{ float: "right" }}
               onClick={() =>
                 dispatch({ type: types.SET_REGISTER_SCREEN, payload: 3 })
               }

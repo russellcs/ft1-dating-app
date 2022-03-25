@@ -17,19 +17,19 @@ const RegisterPartTwo = (props) => {
   return (
     <>
       <h1>Please enter your details</h1>
-      <div className="formRow">
+      <div>
         <label>
           Date of Birth:
-          <input type="date" name="dateOfBirth" />
+          <input type="date" name="dateOfBirth" className="form-control" />
           <p className="errorMessage">
             {dateOfBirthErrors && errorCodes.dateOfBirth}
           </p>
         </label>
       </div>
-      <div className="formRow">
+      <div>
         <label>
           Gender:
-          <select defaultValue="" name="gender">
+          <select defaultValue="" name="gender" className="form-select">
             <option value="" disabled>
               Select
             </option>
@@ -42,24 +42,48 @@ const RegisterPartTwo = (props) => {
           <p className="errorMessage">{genderErrors && errorCodes.gender}</p>
         </label>
       </div>
-      <div className="formRow">
+      <div className="row">
         <label>
           Location:
-          <input type="name" name="town" placeholder="Town" />
-          <input type="name" name="postCode" placeholder="Postcode" />
+          <div className="col">
+            <input
+              type="name"
+              name="town"
+              placeholder="Town"
+              className="form-control"
+            />
+            <p>{townErrors && "Please enter your town"}</p>
+          </div>
+          <div className="col">
+            <input
+              type="name"
+              name="postCode"
+              placeholder="Postcode"
+              className="form-control"
+            />
+            <p className="errorMessage">
+              {postCodeErrors && errorCodes.postCode}
+            </p>
+          </div>
         </label>
-        <p>{townErrors && "Please enter your town"}</p>
-        <p className="errorMessage">{postCodeErrors && errorCodes.postCode}</p>
       </div>
-      <div className="formRow">
+
+      <div>
         <label>
           Height:
-          <input type="number" placeholder="in cm" name="height" id="height" />
+          <input
+            type="number"
+            placeholder="in cm"
+            name="height"
+            id="height"
+            className="form-control"
+          />
           <p className="errorMessage">{heightErrors && errorCodes.height}</p>
         </label>
       </div>
       <nav>
         <button
+          className="btn btn-secondary"
           onClick={() =>
             dispatch({ type: types.SET_REGISTER_SCREEN, payload: 0 })
           }
@@ -72,7 +96,8 @@ const RegisterPartTwo = (props) => {
           postCodeErrors === undefined &&
           heightErrors === undefined && (
             <button
-              className="nextButton"
+              className="btn btn-success"
+              style={{ float: "right" }}
               onClick={() =>
                 dispatch({ type: types.SET_REGISTER_SCREEN, payload: 2 })
               }

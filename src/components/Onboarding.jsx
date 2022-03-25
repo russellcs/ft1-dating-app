@@ -13,6 +13,7 @@ const Onboarding = (props) => {
     <>
       <nav className="onBoarding">
         <button
+          className="btn btn-outline-dark"
           onClick={() =>
             dispatch({ type: types.SET_ONBOARDING_SCREEN, payload: 0 })
           }
@@ -20,6 +21,7 @@ const Onboarding = (props) => {
           Register
         </button>
         <button
+          className="btn btn-outline-dark"
           onClick={() =>
             dispatch({ type: types.SET_ONBOARDING_SCREEN, payload: 1 })
           }

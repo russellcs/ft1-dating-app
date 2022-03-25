@@ -5,9 +5,9 @@
   height: 100vh;
 }
 
-.formRow {
+/* .formRow {
   padding: 8px 0px;
-}
+} */
 
 .submit {
   width: 40vw;
@@ -16,22 +16,22 @@
 }
 
 input {
-  margin: 0px 10px;
+  /* margin: 0px 10px; */
   border-radius: 3px;
   box-sizing: border-box;
   border: 0;
   font-size: 13px;
 }
 
-input[type="password"] {
+/* input[type="password"] {
   width: 250px;
-}
+} */
 
 select {
   margin: 0px 5px;
 }
 
-.nextButton {
+.btn btn-success {
   float: right;
 }
 
@@ -60,4 +60,20 @@ h1 {
   font-style: italic;
   font-size: 12px;
   font-weight: 500;
+}
+
+.webcam {
+  display: block;
+  margin: auto;
+}
+
+.selfieContainer {
+  position: relative;
+  height: auto;
+  width: 25%;
+}
+
+.selfie {
+  position: absolute;
+  top: 0;
 }
