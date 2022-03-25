@@ -1,7 +1,7 @@
 import { findDistanceFromLongsAndLats } from "./general";
 
-export const getAge = (user) => {
-  const dateString = `${user.personalDetails.dob.year}-${user.personalDetails.dob.months}-${user.personalDetails.dob.day}`;
+export const getAge = (dob) => {
+  const dateString = `${dob.year}-${dob.months}-${dob.day}`;
   let birthDate = new Date(dateString);
   let now = new Date();
   let currentYear = now.getFullYear();
@@ -54,8 +54,8 @@ export const ageFilter = (currentUser, user) => {
 };
 
 export const ageCheck = (user1, user2) => {
-  return getAge(user1) >= user2.preferences.age.min &&
-    getAge(user1) <= user2.preferences.age.max
+  return getAge(user1.personalDetails.dob) >= user2.preferences.age.min &&
+    getAge(user1.personalDetails.dob) <= user2.preferences.age.max
     ? true
     : false;
 };
