@@ -1,38 +1,49 @@
 import { useState } from "react";
-import Joi from "joi";
-import { schema, joiDataReorder } from "../../config/formConfig";
 import "../Onboarding/register.css";
+import { useSelector } from "react-redux";
+import { getIndexByEmailAndPassword } from "../../utils/matching";
+import { useDispatch } from "react-redux";
+import { types } from "../../redux/types";
 
 const Login = (props) => {
-  const [loginErrors, setLoginErrors] = useState({});
+  const users = useSelector((state) => state.matching.users);
+  const dispatch = useDispatch();
   const [data, setData] = useState({});
 
   const onLoginInput = (e) => {
     const newState = { ...data, [e.target.name]: e.target.value };
     setData(newState);
-    onValidate(newState);
   };
 
-  const onValidate = async (data) => {
-    const _joiInstance = Joi.object(schema);
-    try {
-      await _joiInstance.validateAsync(data);
-      setLoginErrors({ errors: "" });
-    } catch (errors) {
-      setLoginErrors({ errors: joiDataReorder(errors.details) });
+  const loginSubmit = () => {
+    const currentUserIndex = getIndexByEmailAndPassword(
+      data.email,
+      data.password,
+      users
+    );
+    console.log(currentUserIndex);
+    if (currentUserIndex > -1) {
+      dispatch({
+        type: types.SET_CURRENT_USER_ID,
+        payload: users[currentUserIndex].userId,
+      });
+      dispatch({ type: types.SET_SCREEN, payload: 1 });
+      dispatch({ type: types.SET_LOGGED_IN_STATUS, payload: true });
+    } else {
+      alert("Invalid email / password");
     }
   };
 
-  const onSubmit = () => {
-    props.setLoggedStatus(true);
-  };
+  console.log(data);
 
-  console.log(loginErrors);
+  // test
+  // email: a@a.com
+  // password: abdul90
 
   return (
     <>
       <div className="containerReg">
-        <form onInput={onLoginInput} onSubmit={onSubmit} name="registerForm">
+        <form onInput={onLoginInput} name="registerForm">
           <h1>Please Log In</h1>
           <div className="formRow">
             <label>
@@ -45,16 +56,22 @@ const Login = (props) => {
               Password:
               <input
                 type="password"
-                placeholder="Password (8 characters minimum)"
+                placeholder="Password"
                 name="password"
-                minLength="8"
                 required
               />
             </label>
           </div>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              loginSubmit();
+            }}
+          >
+            Login
+          </button>
         </form>
       </div>
-      <input className="submit" type="submit" value="Sign In"></input>
     </>
   );
 };

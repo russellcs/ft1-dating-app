@@ -1,1 +1,5 @@
-export const onboardingInitialState = { regScreen: 0, newUserData: {} };
+export const onboardingInitialState = {
+  regScreen: 0,
+  newUserData: {},
+  errors: {},
+};

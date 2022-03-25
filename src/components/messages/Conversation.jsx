@@ -23,8 +23,7 @@ const Conversation = (props) => {
 			type: types.ADD_MESSAGE,
 			payload: {
 				content: draft,
-				toUserId: Number(props.conversation[0]),
-				fromUserId: 1, //Number(conversation[1][0]).fromUserId,
+				foreignId: Number(props.conversation[0]), //Number(conversation[1][0]).fromUserId,
 				messageId: getUniqueId(16),
 			},
 		});

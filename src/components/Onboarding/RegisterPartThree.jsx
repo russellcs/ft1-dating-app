@@ -6,15 +6,17 @@ import {
 } from "../../config/formConfig";
 import { types } from "../../redux/types";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const RegisterPartThree = (props) => {
+  const errors = useSelector((state) => state.onboarding.errors);
   const dispatch = useDispatch();
   const {
     smokes: smokesErrors,
     haveKids: haveKidsErrors,
     wantKids: wantKidsErrors,
     religion: religionErrors,
-  } = props.errors;
+  } = errors;
 
   return (
     <>

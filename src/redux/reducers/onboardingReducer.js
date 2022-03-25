@@ -1,5 +1,6 @@
 import { onboardingInitialState } from "../onboardingInitialState";
 import { types } from "../types";
+import { dataConstructor } from "../../config/formConfig";
 
 export function onboardingReducer(state = onboardingInitialState, action) {
   switch (action.type) {
@@ -16,50 +17,56 @@ export function onboardingReducer(state = onboardingInitialState, action) {
       return { ...state, errors };
 
     case types.ON_INPUT_REG:
-      let value = action.payload.target.value;
+      // let value = action.payload.target.value;
 
-      if (action.payload.target.name === "genderPref") {
-        const genderArray = [];
-        for (
-          let index = 0;
-          index < action.payload.target.selectedOptions.length;
-          index++
-        ) {
-          genderArray.push(
-            Number(action.payload.target.selectedOptions[index].value)
-          );
-        }
-        value = genderArray;
-      }
+      let value = dataConstructor(action.payload);
 
-      if (action.payload.target.name === "dateOfBirth") {
-        value = new Date(action.payload.target.value).getTime();
-      }
+      //move if statements to a utils
 
-      if (action.payload.target.name === "relationship" && value === "0") {
-        value = { marriage: true, casual: false };
-      }
+      // if (action.payload.target.name === "genderPref") {
+      //   const genderArray = [];
+      //   for (
+      //     let index = 0;
+      //     index < action.payload.target.selectedOptions.length;
+      //     index++
+      //   ) {
+      //     genderArray.push(
+      //       Number(action.payload.target.selectedOptions[index].value)
+      //     );
+      //   }
+      //   value = genderArray;
+      // }
 
-      if (action.payload.target.name === "relationship" && value === "1") {
-        value = { marriage: false, casual: true };
-      }
+      // if (action.payload.target.name === "dateOfBirth") {
+      //   value = new Date(value).getTime();
+      // }
 
-      if (action.payload.target.name === "relationship" && value === "2") {
-        value = { marriage: true, casual: true };
-      }
+      // if (action.payload.target.name === "relationship" && value === "0") {
+      //   value = { marriage: true, casual: false };
+      // }
 
-      if (action.payload.target.name === "smokersPref" && value === "0") {
-        value = true;
-      }
+      // if (action.payload.target.name === "relationship" && value === "1") {
+      //   value = { marriage: false, casual: true };
+      // }
 
-      if (action.payload.target.name === "smokersPref" && value === "1") {
-        value = false;
-      }
+      // if (action.payload.target.name === "relationship" && value === "2") {
+      //   value = { marriage: true, casual: true };
+      // }
+
+      // if (action.payload.target.name === "smokersPref" && value === "0") {
+      //   value = true;
+      // }
+
+      // if (action.payload.target.name === "smokersPref" && value === "1") {
+      //   value = false;
+      // }
 
       let newUserData = {
         ...state.newUserData,
         [action.payload.target.name]: value,
       };
+
+      console.log(newUserData);
 
       return { ...state, newUserData };
 

@@ -1,16 +1,18 @@
 import { genders, errorCodes } from "../../config/formConfig";
 import { types } from "../../redux/types";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const RegisterPartTwo = (props) => {
   const dispatch = useDispatch();
+  const errors = useSelector((state) => state.onboarding.errors);
   const {
     dateOfBirth: dateOfBirthErrors,
     gender: genderErrors,
     town: townErrors,
     postCode: postCodeErrors,
     height: heightErrors,
-  } = props.errors;
+  } = errors;
 
   return (
     <>
