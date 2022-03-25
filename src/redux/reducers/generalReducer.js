@@ -15,6 +15,10 @@ export function generalReducer(state = initialState, action) {
       let currentUserId = action.payload;
       return { ...state, currentUserId };
 
+    case types.SET_LOGGED_IN_STATUS:
+      let loggedIn = action.payload;
+      return { ...state, loggedIn };
+
     default:
       return state;
   }

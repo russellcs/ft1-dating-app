@@ -1,6 +1,5 @@
 import Login from "./Onboarding/Login";
 import Register from "./Onboarding/Register";
-import { useState } from "react";
 import "./Onboarding/onboarding.css";
 import { types } from "../redux/types";
 import { useDispatch } from "react-redux";
@@ -9,10 +8,6 @@ import { useSelector } from "react-redux";
 const Onboarding = (props) => {
   const dispatch = useDispatch();
   const screen = useSelector((state) => state.onboarding.screen);
-  const [loggedStatus, setLoggedStatus] = useState(false);
-
-  // console.log(loggedStatus);
-  // console.log(props);
 
   return (
     <>
@@ -37,11 +32,7 @@ const Onboarding = (props) => {
           <Register newUserId={props.newUserId} setScreen={props.setScreen} />
         )}
       </div>
-      <div>
-        {screen === 1 && (
-          <Login users={props.users} setLoggedStatus={setLoggedStatus} />
-        )}
-      </div>
+      <div>{screen === 1 && <Login />}</div>
     </>
   );
 };

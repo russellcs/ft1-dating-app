@@ -145,7 +145,8 @@ export function timeConverter(UNIX_timestamp) {
   return time;
 }
 
-export function dataConstructor(e, value) {
+export function dataConstructor(e) {
+  let value = e.target.value;
   if (e.target.name === "genderPref") {
     const genderArray = [];
     for (let index = 0; index < e.target.selectedOptions.length; index++) {
@@ -155,7 +156,9 @@ export function dataConstructor(e, value) {
   }
 
   if (e.target.name === "dateOfBirth") {
+    console.log(e.target.value);
     value = new Date(value).getTime();
+    console.log(value);
   }
 
   if (e.target.name === "relationship" && value === "0") {
@@ -177,4 +180,5 @@ export function dataConstructor(e, value) {
   if (e.target.name === "smokersPref" && value === "1") {
     value = false;
   }
+  return value;
 }

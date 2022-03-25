@@ -17,9 +17,9 @@ export function onboardingReducer(state = onboardingInitialState, action) {
       return { ...state, errors };
 
     case types.ON_INPUT_REG:
-      let value = action.payload.target.value;
+      // let value = action.payload.target.value;
 
-      // dataConstructor(action.payload, value);
+      let value = dataConstructor(action.payload);
 
       //move if statements to a utils
 

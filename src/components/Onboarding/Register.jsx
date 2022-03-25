@@ -1,5 +1,9 @@
-import { useState } from "react";
-import { schema, joiDataReorder, timeConverter, dataConstructor } from "../../config/formConfig";
+import {
+  schema,
+  joiDataReorder,
+  timeConverter,
+  dataConstructor,
+} from "../../config/formConfig";
 import Joi from "joi";
 import RegisterPartOne from "./RegisterPartOne";
 import RegisterPartTwo from "./RegisterPartTwo";
@@ -10,6 +14,8 @@ import { getLngLat } from "../../utils/general";
 import { types } from "../../redux/types";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { getUniqueId } from "../../utils/general";
+import Selfie from "../Selfie";
 
 const Register = (props) => {
   const dispatch = useDispatch();
@@ -44,7 +50,7 @@ const Register = (props) => {
         smokers: Number(newUserData.smokes),
       },
       preferences: {
-        lifeStyle: lifeStyleCombo, // can I push want kids to this?
+        lifeStyle: lifeStyleCombo,
         age: {
           min: Number(newUserData.minAge),
           max: Number(newUserData.maxAge),
@@ -64,15 +70,16 @@ const Register = (props) => {
     };
     dispatch({ type: types.ADD_USER, payload: newUserStructured });
     dispatch({ type: types.SET_SCREEN, payload: 1 });
-    dispatch({ type: types.SET_CURRENT_USER_ID, payload: props.newUserId }); // make this to a reducer
+    dispatch({ type: types.SET_CURRENT_USER_ID, payload: getUniqueId(16) });
+    dispatch({ type: types.SET_LOGGED_IN_STATUS, payload: true });
   };
 
   const onValidate = async (data) => {
     console.log(data);
     const _joiInstance = Joi.object(schema);
     try {
-      await _joiInstance.validateAsync(data);
-      // await _joiInstance.validateAsync(data, { abortEarly: false });
+      // await _joiInstance.validateAsync(data);
+      await _joiInstance.validateAsync(data, { abortEarly: false });
       dispatch({ type: types.SET_REG_ERRORS, payload: { errors: "" } });
     } catch (errors) {
       dispatch({
@@ -83,8 +90,6 @@ const Register = (props) => {
   };
 
   console.log(newUserData);
-  console.log(props);
-  // console.log(errors);
   return (
     <>
       <div className="containerReg">
@@ -93,20 +98,18 @@ const Register = (props) => {
           onInput={(e) => {
             dispatch({ type: types.ON_INPUT_REG, payload: e });
             console.log(e.target.value);
-            dataConstructor(e, e.target.value);
-            onValidate({ ...newUserData, [e.target.name]: e.target.value });
+            {
+              let value = dataConstructor(e);
+              onValidate({ ...newUserData, [e.target.name]: value });
+            }
           }}
           name="registerForm"
         >
           {regScreen === 0 && <RegisterPartOne />}
           {regScreen === 1 && <RegisterPartTwo />}
           {regScreen === 2 && <RegisterPartThree />}
-          {regScreen === 3 && (
-            <Preferences
-              addNewUser={addNewUser}
-              // setUserData={setNewUserData}
-            />
-          )}
+          {regScreen === 3 && <Preferences />}
+          {regScreen === 4 && <Selfie addNewUser={addNewUser} />}
         </form>
       </div>
     </>
