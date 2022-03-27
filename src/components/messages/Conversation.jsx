@@ -12,6 +12,7 @@ const Conversation = (props) => {
 	const [draft, setDraft] = useState();
 	const [blockClicked, setBlockClicked] = useState(false);
 	const dispatch = useDispatch();
+	console.log(users);
 
 	// Calls the function on Send button
 	const onMessageClick = () => onMessageSave();
@@ -47,15 +48,10 @@ const Conversation = (props) => {
 
 	return (
 		<div
-			// style={{
-			// 	border: "solid 1px black",
-			// 	margin: "10px",
-			// 	padding: "10px",
-			// 	width: "280px",
-			// }}
-			className="card"
+			className="card container-sm mt-5 pb-2 shadow"
+			style={{ backgroundColor: "#dae9f6" }}
 		>
-			<p>User ID is {props.conversation[0]}</p>
+			<h3 className="mx-auto mt-4">User ID is {props.conversation[0]}</h3>
 			<Block
 				blockUser={blockUser}
 				// blockButtonText={blockButtonText}

@@ -37,8 +37,6 @@ const Conversations = (props) => {
 		return !users[index].blocked.includes(Number(conversation[0])); //TBD must not be hard coded!!
 	});
 
-	console.log(entries, filteredConversations);
-
 	return (
 		<div>
 			{filteredConversations.map((conversation, index) => {

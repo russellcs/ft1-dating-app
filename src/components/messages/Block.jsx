@@ -7,8 +7,9 @@ const Block = (props) => {
 	const { userId } = props;
 
 	return (
-		<div style={{ margin: "20px" }}>
+		<div className="m-4">
 			<button
+				className="btn btn-danger btn-sm"
 				onClick={() => {
 					dispatch({ type: types.BLOCK_USER, payload: userId });
 				}}
