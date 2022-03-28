@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 const Interface = (props) => {
   const dispatch = useDispatch();
   const screen = useSelector((state) => state.general.screen);
+  const loggedIn = useSelector((state) => state.general.loggedIn);
 
   const onMessageUpdate = (payload) => {
     //do something useful
@@ -16,18 +17,23 @@ const Interface = (props) => {
   return (
     <>
       <nav className="nav nav-pills flex-column flex-sm-row bg-light">
-        <button className="nav-link"
-          onClick={() => dispatch({ type: types.SET_SCREEN, payload: 0 })}
-        >
-          Onboarding
-        </button>
-        <button className="nav-link"
+        {loggedIn === false && (
+          <button
+            className="nav-link"
+            onClick={() => dispatch({ type: types.SET_SCREEN, payload: 0 })}
+          >
+            Onboarding
+          </button>
+        )}
+        <button
+          className="nav-link"
           onClick={() => dispatch({ type: types.SET_SCREEN, payload: 1 })}
         >
           Matches
         </button>
 
-        <button className="nav-link"
+        <button
+          className="nav-link"
           onClick={() => dispatch({ type: types.SET_SCREEN, payload: 2 })}
         >
           Messages

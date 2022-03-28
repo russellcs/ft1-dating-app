@@ -10,4 +10,5 @@ export const generalInitialState = {
     seenFilter: true,
   },
   currentUserId: 1,
+  loggedIn: false,
 };
