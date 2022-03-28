@@ -33,7 +33,6 @@ const Message = (props) => {
 							payload: message.messageId,
 						});
 					}}
-					style={{ display: "block" }}
 				>
 					Delete message
 				</button>

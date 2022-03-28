@@ -1,21 +1,30 @@
 import { messagingInitialState } from "../messagingInitialState";
 import { types } from "../types";
 import { getMessageIndexById } from "../../utils/matching";
+import { storeData, getData } from "../../storage";
 
-export function messagingReducer(state = messagingInitialState, action) {
+const matchingInitialStateFromDisk = getData("matchingInitialStateFromDisk");
+
+export function messagingReducer(
+	state = matchingInitialStateFromDisk || messagingInitialState,
+	action
+) {
 	switch (action.type) {
 		case types.ADD_MESSAGE: {
 			const messages = [...state.messages];
 			messages.push(action.payload);
-			return { ...state, messages };
+			const result = { ...state, messages };
+			storeData("matchingInitialStateFromDisk", result);
+			return result;
 		}
 
 		case types.DELETE_MESSAGE: {
 			const messages = [...state.messages];
 			const index = getMessageIndexById(action.payload, messages);
-			console.log(index);
 			messages.splice(index, 1);
-			return { ...state, messages };
+			const result = { ...state, messages };
+			storeData("matchingInitialStateFromDisk", result);
+			return result;
 		}
 
 		default:
