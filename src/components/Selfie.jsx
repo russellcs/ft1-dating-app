@@ -22,7 +22,7 @@ const Selfie = (props) => {
 
   //4 styling
 
-  const deletePhoto = () => setImgSrc("");
+  const deletePhoto = () => setImgSrc(null);
 
   return (
     <>
@@ -36,31 +36,39 @@ const Selfie = (props) => {
           <img src={imgSrc} />{" "}
         </div>
       </div>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          capture();
-        }}
-      >
-        Take photo
-      </button>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          deletePhoto();
-        }}
-      >
-        Take another photo
-      </button>
-      <button
-        className="registerButton"
-        onClick={(e) => {
-          e.preventDefault();
-          props.addNewUser();
-        }}
-      >
-        Register Now
-      </button>
+      {imgSrc === null && (
+        <button
+          className="selfieBtn btn btn-primary"
+          onClick={(e) => {
+            e.preventDefault();
+            capture();
+          }}
+        >
+          Take photo
+        </button>
+      )}
+      {imgSrc !== null && (
+        <button
+          className="btn btn-light"
+          onClick={(e) => {
+            e.preventDefault();
+            deletePhoto();
+          }}
+        >
+          Take another photo
+        </button>
+      )}
+      {imgSrc !== null && (
+        <button
+          className="registerButton btn btn-success"
+          onClick={(e) => {
+            e.preventDefault();
+            props.addNewUser();
+          }}
+        >
+          Register Now
+        </button>
+      )}
     </>
   );
 };

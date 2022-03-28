@@ -6,9 +6,12 @@ import { getIndexById, getMessageIndexById } from "./utils/matching";
 import { storeData, getData } from "./storage";
 import { getUniqueId } from "./utils/general";
 import { useDispatch } from "react-redux";
+import { types } from "./redux/types";
+import { useSelector } from "react-redux";
 
 const App = () => {
   const dispatch = useDispatch();
+  const loggedIn = useSelector((state) => state.general.loggedIn);
 
   const [users, setUsers] = useState(mockUsers);
   const [messages, setMessages] = useState(mockMessages);
@@ -82,6 +85,16 @@ const App = () => {
       >
         Clear localStorage
       </button>
+      {loggedIn === true && (
+        <button
+          className="btn btn-dark"
+          onClick={() => {
+            dispatch({ type: types.LOG_OUT });
+          }}
+        >
+          Log Out
+        </button>
+      )}
       <Interface
         // users={users}
         messages={messages}

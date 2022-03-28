@@ -37,10 +37,18 @@ export function generalReducer(
       let currentUserId = action.payload;
       return { ...state, currentUserId };
 
-    case types.SET_LOGGED_IN_STATUS:
+    case types.SET_LOGGED_IN_STATUS: {
       let loggedIn = action.payload;
       return { ...state, loggedIn };
+    }
 
+    case types.LOG_OUT: {
+      let loggedIn = false;
+      let currentUserId = null;
+      let screen = 0;
+
+      return { ...state, loggedIn, currentUserId, screen };
+    }
     default:
       return state;
   }

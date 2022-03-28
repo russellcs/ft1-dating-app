@@ -77,3 +77,8 @@ h1 {
   position: absolute;
   top: 0;
 }
+
+.selfieBtn {
+  display: block;
+  margin: auto;
+}
