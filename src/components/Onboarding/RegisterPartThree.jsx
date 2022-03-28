@@ -8,7 +8,7 @@ import { types } from "../../redux/types";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
-const RegisterPartThree = (props) => {
+const RegisterPartThree = () => {
   const errors = useSelector((state) => state.onboarding.errors);
   const dispatch = useDispatch();
   const {

@@ -20,6 +20,7 @@ const App = () => {
       {loggedIn === true && (
         <button
           className="btn btn-dark"
+          style={{ float: "right" }}
           onClick={() => {
             dispatch({ type: types.LOG_OUT });
           }}
