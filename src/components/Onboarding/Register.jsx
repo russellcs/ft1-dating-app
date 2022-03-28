@@ -17,7 +17,7 @@ import { useSelector } from "react-redux";
 import { getUniqueId } from "../../utils/general";
 import Selfie from "../Selfie";
 
-const Register = (props) => {
+const Register = () => {
   const dispatch = useDispatch();
   const regScreen = useSelector((state) => state.onboarding.regScreen);
   const newUserData = useSelector((state) => state.onboarding.newUserData);
