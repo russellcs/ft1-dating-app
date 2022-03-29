@@ -4,6 +4,7 @@ import { types } from "./redux/types";
 import { useSelector } from "react-redux";
 
 const App = () => {
+
   const dispatch = useDispatch();
   const loggedIn = useSelector((state) => state.general.loggedIn);
 

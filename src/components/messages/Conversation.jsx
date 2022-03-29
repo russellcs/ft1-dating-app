@@ -8,11 +8,9 @@ import { types } from "../../redux/types";
 import { useSelector } from "react-redux";
 
 const Conversation = (props) => {
-	const users = useSelector((state) => state.matching.users);
 	const [draft, setDraft] = useState();
 	const [blockClicked, setBlockClicked] = useState(false);
 	const dispatch = useDispatch();
-	console.log(users);
 
 	// Calls the function on Send button
 	const onMessageClick = () => onMessageSave();
@@ -60,15 +58,7 @@ const Conversation = (props) => {
 				userId={props.conversation[0]}
 			/>
 			{props.conversation[1].map((message, index) => {
-				return (
-					message.content && (
-						<Message
-							message={message}
-							deleteMessage={props.deleteMessage}
-							key={index}
-						/>
-					)
-				);
+				return message.content && <Message message={message} key={index} />;
 			})}
 			<Input
 				onInput={onInput}

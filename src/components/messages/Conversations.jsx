@@ -8,13 +8,6 @@ const Conversations = (props) => {
 	const currentUserId = useSelector((state) => state.general.currentUserId);
 
 	// Iterate through the messages data setting the keys for a new object to be user ID of the existing user and then saving that info in the entries object
-	// const result = {};
-	// messages.forEach((message) => {
-	// 	const existing = result[message.fromUserId]
-	// 		? result[message.fromUserId]
-	// 		: [];
-	// 	result[message.fromUserId] = [...existing, message];
-	// });
 	const result = {};
 	messages.forEach((message) => {
 		const existing = result[message.foreignId] ? result[message.foreignId] : [];
