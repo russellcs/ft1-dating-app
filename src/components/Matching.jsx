@@ -30,8 +30,8 @@ const Matching = () => {
   const dispatch = useDispatch();
 
   let currentUser = getUserById(currentUserId, users);
-  console.log(currentUser)
-  console.log(currentUserId)
+  // console.log(currentUser)
+  // console.log(currentUserId)
 
   // Filters out incompatible users (including seen) from array of potencial matches
   const potentialMatchFilter = (user) => {

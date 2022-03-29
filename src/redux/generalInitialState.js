@@ -2,9 +2,9 @@ export const generalInitialState = {
   screen: 0,
   matchingFilter: {
     ageFilter: true,
-    genderFilter: true,
+    genderFilter: false,
     heightFilter: true,
-    distanceFilter: true,
+    distanceFilter: false,
     existingKidsFilter: true,
     openToKidsFilter: true,
     seenFilter: true,

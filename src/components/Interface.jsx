@@ -4,6 +4,9 @@ import Messaging from "./messages/Messaging";
 import { useDispatch } from "react-redux";
 import { types } from "../redux/types";
 import { useSelector } from "react-redux";
+import Footer from "./Footer/Footer";
+import BypassOnboarding from "./BypassOnboarding/BypassOnboarding";
+import Navbar from "./Navbar";
 
 const Interface = (props) => {
   const dispatch = useDispatch();
@@ -16,29 +19,8 @@ const Interface = (props) => {
 
   return (
     <>
-      <nav className="nav nav-pills flex-column flex-sm-row bg-light">
-        {loggedIn === false && (
-          <button
-            className="nav-link"
-            onClick={() => dispatch({ type: types.SET_SCREEN, payload: 0 })}
-          >
-            Onboarding
-          </button>
-        )}
-        <button
-          className="nav-link"
-          onClick={() => dispatch({ type: types.SET_SCREEN, payload: 1 })}
-        >
-          Matches
-        </button>
-
-        <button
-          className="nav-link"
-          onClick={() => dispatch({ type: types.SET_SCREEN, payload: 2 })}
-        >
-          Messages
-        </button>
-      </nav>
+      {screen === 0 ? null : <Navbar /> }
+      {/* <Navbar /> */}
 
       {screen === 0 && (
         <Onboarding
@@ -59,6 +41,8 @@ const Interface = (props) => {
           deleteMessage={props.deleteMessage}
         />
       )}
+      <BypassOnboarding />
+      <Footer />
     </>
   );
 };
