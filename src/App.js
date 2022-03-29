@@ -17,6 +17,7 @@ const App = () => {
       >
         Clear localStorage
       </button>
+      <h1>Sparks</h1>
       {loggedIn === true && (
         <button
           className="btn btn-dark"
