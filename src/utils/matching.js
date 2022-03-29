@@ -14,8 +14,7 @@ export const getAge = (dob) => {
 };
 
 export const getUserById = (id, users) => {
-	console.log(id, users);
-	return users.find(({ userId }) => userId === id);
+  return users.find(({ userId }) => userId === id);
 };
 
 export const getIndexByEmailAndPassword = (emailTest, passwordTest, users) => {
@@ -41,14 +40,13 @@ export const distanceFilter = (currentUser, user) => {
 };
 
 export const distanceCheck = (user1, user2) => {
-	console.log(user1, user2);
-	const user1Location = user1.personalDetails.location;
-	const user1AcceptedDistance = user1.preferences.acceptedDistance;
-	const user2Location = user2.personalDetails.location;
-	return (
-		findDistanceFromLongsAndLats(user1Location, user2Location) <
-		user1AcceptedDistance
-	);
+  const user1Location = user1.personalDetails.location;
+  const user1AcceptedDistance = user1.preferences.acceptedDistance;
+  const user2Location = user2.personalDetails.location;
+  return (
+    findDistanceFromLongsAndLats(user1Location, user2Location) <
+    user1AcceptedDistance
+  );
 };
 
 export const ageFilter = (currentUser, user) => {

@@ -5,7 +5,7 @@ import { getIndexByEmailAndPassword } from "../../utils/matching";
 import { useDispatch } from "react-redux";
 import { types } from "../../redux/types";
 
-const Login = (props) => {
+const Login = () => {
   const users = useSelector((state) => state.matching.users);
   const dispatch = useDispatch();
   const [data, setData] = useState({});
@@ -21,7 +21,6 @@ const Login = (props) => {
       data.password,
       users
     );
-    console.log(currentUserIndex);
     if (currentUserIndex > -1) {
       dispatch({
         type: types.SET_CURRENT_USER_ID,
@@ -33,9 +32,6 @@ const Login = (props) => {
       alert("Invalid email / password");
     }
   };
-  // test
-  // email: a@a.com
-  // password: abdul90
 
   return (
     <>
