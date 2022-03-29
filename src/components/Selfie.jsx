@@ -10,8 +10,6 @@ const Selfie = (props) => {
     setImgSrc(imageSrc);
   }, [webcamRef, setImgSrc]);
 
-  console.log(imgSrc);
-
   //todo
 
   //1 place the captured image on top of the live image on save

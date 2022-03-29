@@ -11,30 +11,32 @@ const Onboarding = (props) => {
 
   return (
     <>
-      <nav className="onBoarding">
-        <button
-          className="btn btn-outline-dark"
-          onClick={() =>
-            dispatch({ type: types.SET_ONBOARDING_SCREEN, payload: 0 })
-          }
-        >
-          Register
-        </button>
-        <button
-          className="btn btn-outline-dark"
-          onClick={() =>
-            dispatch({ type: types.SET_ONBOARDING_SCREEN, payload: 1 })
-          }
-        >
-          Log In
-        </button>
-      </nav>
       <div>
-        {screen === 0 && (
-          <Register newUserId={props.newUserId} setScreen={props.setScreen} />
-        )}
+        <nav className="onBoarding">
+          <button
+            className="btn btn-outline-dark"
+            onClick={() =>
+              dispatch({ type: types.SET_ONBOARDING_SCREEN, payload: 0 })
+            }
+          >
+            Register
+          </button>
+          <button
+            className="btn btn-outline-dark"
+            onClick={() =>
+              dispatch({ type: types.SET_ONBOARDING_SCREEN, payload: 1 })
+            }
+          >
+            Log In
+          </button>
+        </nav>
+        <div>
+          {screen === 0 && (
+            <Register newUserId={props.newUserId} setScreen={props.setScreen} />
+          )}
+        </div>
+        <div>{screen === 1 && <Login />}</div>
       </div>
-      <div>{screen === 1 && <Login />}</div>
     </>
   );
 };
