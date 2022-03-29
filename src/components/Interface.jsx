@@ -20,7 +20,6 @@ const Interface = (props) => {
   return (
     <>
       {screen === 0 ? null : <Navbar /> }
-      {/* <Navbar /> */}
 
       {screen === 0 && (
         <Onboarding
@@ -41,6 +40,7 @@ const Interface = (props) => {
           deleteMessage={props.deleteMessage}
         />
       )}
+      
       <BypassOnboarding />
       <Footer />
     </>

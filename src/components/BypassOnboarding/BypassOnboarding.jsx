@@ -20,8 +20,7 @@ const BypassOnboarding = () => {
 
   return (
     <div className="BypassOnboarding">
-      {/* <button onClick={() => hiddenClicked()}>Hidden Message</button> */}
-      <button onClick={() => dispatch({type: types.BYPASS_ONBOARDING})}>Hidden Message - Bypass Onboarding</button>
+      <button className="btn" onClick={() => dispatch({type: types.BYPASS_ONBOARDING})}>Hidden Message - Bypass Onboarding</button>
     </div>
   );
 };

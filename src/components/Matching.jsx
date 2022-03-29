@@ -26,12 +26,9 @@ const Matching = () => {
   const users = useSelector((state) => state.matching.users);
   const matchingFilter = useSelector((state) => state.general.matchingFilter);
   const currentUserId = useSelector((state) => state.general.currentUserId)
-
   const dispatch = useDispatch();
 
   let currentUser = getUserById(currentUserId, users);
-  // console.log(currentUser)
-  // console.log(currentUserId)
 
   // Filters out incompatible users (including seen) from array of potencial matches
   const potentialMatchFilter = (user) => {
@@ -55,7 +52,7 @@ const Matching = () => {
 
   // Sorts array of potential matches to display most compatible matches first. Always displays last seen user first.
   const potentialMatchSorter = (userA, userB) => {
-    console.log(userA, userB)
+    // console.log(userA, userB)
     let totalPointsUserA =
       marriageCasualPointer(
         {

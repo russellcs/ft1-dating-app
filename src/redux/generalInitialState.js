@@ -7,7 +7,7 @@ export const generalInitialState = {
     distanceFilter: false,
     existingKidsFilter: true,
     openToKidsFilter: true,
-    seenFilter: true,
+    seenFilter: false,
   },
   currentUserId: 1,
   loggedIn: false,
