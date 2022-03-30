@@ -19,7 +19,7 @@ const Onboarding = (props) => {
 
   const onLeave = ({ currentTarget }) => {
     gsap.to(currentTarget, {
-      backgroundColor: "rgb(213,231,245)",
+      backgroundColor: "rgb(247, 248, 249)",
       fontWeight: "400",
     });
   };

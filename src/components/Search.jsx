@@ -1,6 +1,7 @@
 import { types } from "../redux/types";
 import { useDispatch, useSelector } from "react-redux";
 import "./matching/search.scss";
+import gsap from "gsap";
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -13,59 +14,44 @@ const Search = () => {
     { name: "distanceFilter", displayName: "Location" },
     { name: "existingKidsFilter", displayName: "Existing Kids" },
     { name: "openToKidsFilter", displayName: "Open To Kids" },
-    { name: "seenFilter", displayName: "Seen" },
+    // { name: "seenFilter", displayName: "Seen" },
   ];
 
+  const onEnter = ({ currentTarget }) => {
+    const newColour = matchingFilter[currentTarget.name] ? "#FFBC49" : "coral";
+    gsap.to(currentTarget, { backgroundColor: newColour });
+  };
+
+  const onLeave = ({ currentTarget }) => {
+    gsap.to(currentTarget, { backgroundColor: "#f8f9fa" });
+  };
+
   return (
-    <div className="search">
+    <div className="search ">
       <h2>Find your someone:</h2>
-      <p>Search below for your perfect match</p>
-      <p>Remove some filters to amend your search </p>
-      <div>
+      <p>
+        See below for your matches, toggle the filters to amend your
+        search
+      </p>
+      <div className="searchButtons">
         {buttons.map((button, index) => {
           return (
-            <>
-              <button
-                className="btn btn-light"
-                key={index}
-                name={button.name}
-                onClick={(e) => {
-                  dispatch({
-                    type: types.SET_FILTER_OPTIONS,
-                    payload: e.target.name,
-                  });
-                }}
-              >
-                {matchingFilter[button.name] ? "Remove " : "Add "}
-                <span>{button.displayName}</span>
-              </button>
-              {/* <svg
-                id="demo"
-                xmlns="http://www.w3.org/2000/svg"
-                width="220"
-                height="60"
-                viewBox="0 0 220 60"
-              >
-                <rect
-                  x="0"
-                  y="0"
-                  width="60"
-                  height="60"
-                  rx="30"
-                  ry="30"
-                  // fill="#FFCC66"
-                  // style="opacity: 0.4;"
-                />
-                <text
-                  transform="translate(80 38)"
-                  text-anchor="middle"
-                  font-size="20"
-                  fill="#000"
-                >
-                  READ MORE
-                </text>
-              </svg> */}
-            </>
+            <button
+              className="btn btn-light "
+              key={index}
+              name={button.name}
+              onClick={(e) => {
+                dispatch({
+                  type: types.SET_FILTER_OPTIONS,
+                  payload: e.target.name,
+                });
+              }}
+              onMouseEnter={onEnter}
+              onMouseLeave={onLeave}
+            >
+              {matchingFilter[button.name] ? "Remove " : "Add "}
+              <span>{button.displayName}</span> 
+            </button>
           );
         })}
       </div>

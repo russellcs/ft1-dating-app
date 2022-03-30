@@ -227,7 +227,7 @@ const Title = () => {
             />
           </g>
         </svg>
-        <h1>Sparks</h1>
+        <h1>Find Sparks</h1>
         <svg
           width="50"
           height="45"
