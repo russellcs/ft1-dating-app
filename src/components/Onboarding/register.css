@@ -59,8 +59,6 @@ h1 {
 
 .selfieContainer {
   position: relative;
-  height: auto;
-  width: 25%;
 }
 
 .selfie {
@@ -71,4 +69,8 @@ h1 {
 .selfieBtn {
   display: block;
   margin: auto;
+}
+
+.margin-top {
+  margin-top: 10px;
 }
