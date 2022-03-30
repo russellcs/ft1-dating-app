@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { getUniqueId } from "../../utils/general";
-import Block from "./Block";
+import Block2 from "./Block2";
 import Input from "./Input";
 import Message from "./Message";
 import { useDispatch } from "react-redux";
 import { types } from "../../redux/types";
-import { useSelector } from "react-redux";
+import UserImage from "./UserImage";
 
 const Conversation = (props) => {
 	const [draft, setDraft] = useState();
@@ -34,7 +34,7 @@ const Conversation = (props) => {
 		}
 	};
 
-	// Toggles the Block button as well as calling the blockUserId function from App.js
+	// Calls the blockUserId function from App.js
 	const blockUser = () => {
 		console.log("block clicked");
 		setBlockClicked(blockClicked === false ? true : false);
@@ -46,11 +46,12 @@ const Conversation = (props) => {
 
 	return (
 		<div
-			className="card container-sm mt-5 pb-2 shadow"
-			style={{ backgroundColor: "#dae9f6" }}
+			className="card container-sm mt-4 pb-2 shadow"
+			style={{ backgroundColor: "#dae9f6", width: "500px" }}
 		>
+			<UserImage />
 			<h3 className="mx-auto mt-4">User ID is {props.conversation[0]}</h3>
-			<Block
+			<Block2
 				blockUser={blockUser}
 				// blockButtonText={blockButtonText}
 				blockClicked={blockClicked}
