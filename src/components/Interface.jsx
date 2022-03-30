@@ -42,7 +42,7 @@ const Interface = (props) => {
       )}
 
       <BypassOnboarding />
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };
