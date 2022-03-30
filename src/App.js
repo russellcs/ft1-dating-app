@@ -2,6 +2,7 @@ import Interface from "./components/Interface";
 import { useDispatch } from "react-redux";
 import { types } from "./redux/types";
 import { useSelector } from "react-redux";
+import Title from "./components/Title";
 
 const App = () => {
 
@@ -18,7 +19,7 @@ const App = () => {
       >
         Clear localStorage
       </button>
-      <h1>Sparks</h1>
+      <Title />
       {loggedIn === true && (
         <button
           className="btn btn-dark"

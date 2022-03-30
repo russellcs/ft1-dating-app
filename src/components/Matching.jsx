@@ -25,10 +25,11 @@ const Matching = () => {
 
   const users = useSelector((state) => state.matching.users);
   const matchingFilter = useSelector((state) => state.general.matchingFilter);
-  const currentUserId = useSelector((state) => state.general.currentUserId)
+  const currentUserId = useSelector((state) => state.general.currentUserId);
   const dispatch = useDispatch();
 
   let currentUser = getUserById(currentUserId, users);
+  console.log(currentUser)
 
   // Filters out incompatible users (including seen) from array of potencial matches
   const potentialMatchFilter = (user) => {
@@ -118,7 +119,6 @@ const Matching = () => {
   filteredUsers = filteredUsers.filter(potentialMatchFilter);
   filteredUsers = filteredUsers.sort(potentialMatchSorter);
   let userForReview = filteredUsers[currentResultIndex];
-
 
   const onLike = (user) => {
     const usersToAddToLikes = { user, currentUser };

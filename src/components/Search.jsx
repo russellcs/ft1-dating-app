@@ -24,20 +24,48 @@ const Search = () => {
       <div>
         {buttons.map((button, index) => {
           return (
-            <button
-              className="btn btn-light"
-              key={index}
-              name={button.name}
-              onClick={(e) => {
-                dispatch({
-                  type: types.SET_FILTER_OPTIONS,
-                  payload: e.target.name,
-                });
-              }}
-            >
-              {matchingFilter[button.name] ? "Remove " : "Add "}
-              <span>{button.displayName}</span> 
-            </button>
+            <>
+              <button
+                className="btn btn-light"
+                key={index}
+                name={button.name}
+                onClick={(e) => {
+                  dispatch({
+                    type: types.SET_FILTER_OPTIONS,
+                    payload: e.target.name,
+                  });
+                }}
+              >
+                {matchingFilter[button.name] ? "Remove " : "Add "}
+                <span>{button.displayName}</span>
+              </button>
+              {/* <svg
+                id="demo"
+                xmlns="http://www.w3.org/2000/svg"
+                width="220"
+                height="60"
+                viewBox="0 0 220 60"
+              >
+                <rect
+                  x="0"
+                  y="0"
+                  width="60"
+                  height="60"
+                  rx="30"
+                  ry="30"
+                  // fill="#FFCC66"
+                  // style="opacity: 0.4;"
+                />
+                <text
+                  transform="translate(80 38)"
+                  text-anchor="middle"
+                  font-size="20"
+                  fill="#000"
+                >
+                  READ MORE
+                </text>
+              </svg> */}
+            </>
           );
         })}
       </div>
