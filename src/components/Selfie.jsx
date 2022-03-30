@@ -4,6 +4,11 @@ import { useState, useRef, useCallback } from "react";
 const Selfie = (props) => {
   const webcamRef = useRef();
   const [imgSrc, setImgSrc] = useState(null);
+  const videoConstraints = {
+    width: 500,
+    height: 400,
+    facingMode: "user",
+  };
 
   const capture = useCallback(() => {
     let imageSrc = webcamRef.current.getScreenshot();
@@ -27,11 +32,16 @@ const Selfie = (props) => {
       <h1>Take a photo for your profile</h1>
       <div className="selfieContainer">
         <div className="webcam">
-          <Webcam audio={false} ref={webcamRef} screenshotFormat="image/jpeg" />
+          <Webcam
+            audio={false}
+            ref={webcamRef}
+            screenshotFormat="image/jpeg"
+            videoConstraints={videoConstraints}
+          />
         </div>
 
         <div className="selfie">
-          <img src={imgSrc} />{" "}
+          <img src={imgSrc} />
         </div>
       </div>
       {imgSrc === null && (
@@ -47,7 +57,7 @@ const Selfie = (props) => {
       )}
       {imgSrc !== null && (
         <button
-          className="btn btn-light"
+          className="btn btn-light selfieBtn"
           onClick={(e) => {
             e.preventDefault();
             deletePhoto();
@@ -58,10 +68,10 @@ const Selfie = (props) => {
       )}
       {imgSrc !== null && (
         <button
-          className="registerButton btn btn-success"
+          className="registerButton btn btn-success margin-top"
           onClick={(e) => {
             e.preventDefault();
-            props.addNewUser();
+            props.addNewUser(imgSrc);
           }}
         >
           Register Now
