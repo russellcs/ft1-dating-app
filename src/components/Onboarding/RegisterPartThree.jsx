@@ -21,7 +21,7 @@ const RegisterPartThree = () => {
   return (
     <>
       <h1>a few more details...</h1>
-      <div className="row">
+      <div>
         <label>
           Do you smoke?:
           <select defaultValue="" name="smokes" className="form-select">
@@ -37,7 +37,7 @@ const RegisterPartThree = () => {
           <p className="errorMessage">{smokesErrors && errorCodes.smokes}</p>
         </label>
       </div>
-      <div className="row">
+      <div>
         <label>
           Do you have any kids?:
           <select defaultValue="" name="haveKids" className="form-select">
@@ -51,7 +51,7 @@ const RegisterPartThree = () => {
         </label>
         <p className="errorMessage">{haveKidsErrors && errorCodes.haveKids}</p>
       </div>
-      <div className="row">
+      <div>
         <label>
           Do you want kids in the future?
           <select defaultValue="" name="wantKids" className="form-select">
@@ -69,7 +69,7 @@ const RegisterPartThree = () => {
           </p>
         </label>
       </div>
-      <div className="row">
+      <div>
         <label>
           Religion:
           <select defaultValue="" name="religion" className="form-select">

@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import Title from "./components/Title";
 
 const App = () => {
-
   const dispatch = useDispatch();
   const loggedIn = useSelector((state) => state.general.loggedIn);
 
@@ -19,10 +18,10 @@ const App = () => {
       >
         Clear localStorage
       </button>
-      <Title />
+
       {loggedIn === true && (
         <button
-          className="btn btn-dark"
+          className="btn btn-dark log-out"
           style={{ float: "right" }}
           onClick={() => {
             dispatch({ type: types.LOG_OUT });
@@ -31,6 +30,7 @@ const App = () => {
           Log Out
         </button>
       )}
+      <Title />
       <Interface />
     </>
   );
