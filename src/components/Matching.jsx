@@ -19,13 +19,14 @@ import Search from "./Search";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { types } from "../redux/types";
+import { gsap } from "gsap";
 
 const Matching = () => {
   const [currentResultIndex, setCurrentResultIndex] = useState(0);
 
   const users = useSelector((state) => state.matching.users);
   const matchingFilter = useSelector((state) => state.general.matchingFilter);
-  const currentUserId = useSelector((state) => state.general.currentUserId)
+  const currentUserId = useSelector((state) => state.general.currentUserId);
   const dispatch = useDispatch();
 
   let currentUser = getUserById(currentUserId, users);
@@ -119,7 +120,6 @@ const Matching = () => {
   filteredUsers = filteredUsers.sort(potentialMatchSorter);
   let userForReview = filteredUsers[currentResultIndex];
 
-
   const onLike = (user) => {
     const usersToAddToLikes = { user, currentUser };
     dispatch({ type: types.ADD_TO_LIKES, payload: usersToAddToLikes });
@@ -134,6 +134,7 @@ const Matching = () => {
   // load next user for review
   const onPass = () => {
     setCurrentResultIndex(currentResultIndex + 1);
+    gsap.fromTo(".btn-pass", { color: "#000" }, { color: "#fff", duration: 1 });
   };
 
   //Add user being reviewed to current user's seen array.
@@ -153,13 +154,25 @@ const Matching = () => {
       <Search />
 
       {currentResultIndex < filteredUsers.length ? (
-        <>
-          <div className="userCard">
+        <div className="container">
+          <div className="userCard row">
             <MatchedUser user={userForReview} />
           </div>
-          <button onClick={() => onLike(userForReview)}>Like</button>
-          <button onClick={() => onPass()}>Pass</button>{" "}
-        </>
+          <div className="row">
+            <button
+              className="col btn btn-love btn-circle btn-lg ml-1"
+              onClick={() => onLike(userForReview)}
+            >
+              Like
+            </button>
+            <button
+              className="col btn btn-pass btn-circle btn-lg mr-4"
+              onClick={() => onPass()}
+            >
+              Pass
+            </button>{" "}
+          </div>
+        </div>
       ) : (
         <p>
           You've seen all potential matches in current search parameters, try
