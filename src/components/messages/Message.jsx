@@ -26,7 +26,7 @@ const Message = (props) => {
 				{likeClicked && <p className="mb-0">Message liked</p>}
 
 				<button
-					className="btn btn-sm btn-dark position-absolute top-0 end-0"
+					className="btn btn-sm btn-dark position-absolute top-0 end-0 shadow"
 					onClick={() => {
 						dispatch({
 							type: types.DELETE_MESSAGE,
