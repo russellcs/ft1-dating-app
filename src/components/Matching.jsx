@@ -30,7 +30,6 @@ const Matching = () => {
   const dispatch = useDispatch();
 
   let currentUser = getUserById(currentUserId, users);
-  // console.log(currentUser)
 
   // Filters out incompatible users (including seen) from array of potencial matches
   const potentialMatchFilter = (user) => {
@@ -112,6 +111,7 @@ const Matching = () => {
       : 0;
   };
 
+  // Creates duplicate of all users, filtered and sorted according to compatabilities with current user.
   let filteredUsers = [...users];
   filteredUsers.splice(
     filteredUsers.findIndex((user) => user === currentUser),
@@ -121,6 +121,7 @@ const Matching = () => {
   filteredUsers = filteredUsers.sort(potentialMatchSorter);
   let userForReview = filteredUsers[currentResultIndex];
 
+  // update current user's likes, check if they like eachother, load next user for review.
   const onLike = (user) => {
     const usersToAddToLikes = { user, currentUser };
     dispatch({ type: types.ADD_TO_LIKES, payload: usersToAddToLikes });
@@ -159,26 +160,28 @@ const Matching = () => {
           <div className="userCard row">
             <MatchedUser user={userForReview} />
           </div>
-          <div className="row">
+          <div className="row my-2">
             <button
-              className="col btn btn-love btn-circle btn-lg ml-1"
+              className="col btn btn-love btn-round btn-lg me-1 ms-2"
               onClick={() => onLike(userForReview)}
             >
               Like
             </button>
             <button
-              className="col btn btn-pass btn-circle btn-lg mr-4"
+              className="col btn btn-pass btn-round btn-lg ms-1 me-2"
               onClick={() => onPass()}
             >
               Pass
-            </button>{" "}
+            </button>
           </div>
         </div>
       ) : (
-        <p>
-          You've seen all potential matches in current search parameters, try
-          again later or be less picky!
-        </p>
+        <div>
+          <p>
+            You've seen all potential matches in current search parameters, try
+            again later or be less picky!
+          </p>
+        </div>
       )}
     </>
   );
