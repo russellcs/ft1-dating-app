@@ -1,0 +1,6 @@
+.title {
+  display: flex;
+  justify-content: center;
+  column-gap: 5px;
+  margin-top: 5px;
+}
