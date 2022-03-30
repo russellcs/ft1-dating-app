@@ -4,10 +4,9 @@ const Footer = () => {
   return (
     <footer>
       <div className="container">
-
-          <div className="site-logo">
-            <a href="#">Sparks</a>
-          </div>
+        <div className="site-logo">
+          <a href="#">Sparks</a>
+        </div>
 
         <div className="copyright">
           <p>
