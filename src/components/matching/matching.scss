@@ -27,12 +27,26 @@
   height: 100px;
 }
 
-.matchedIcon {
-  width: 25px;
-  height: 25px;
+.userDetails {
+  margin: 0;
+  display: flex;
   position: relative;
-  top: 5px;
+  flex-wrap: wrap;
+  align-content: space-around;
+  & li {
+    width: 50%;
+    margin-top: 10px;
+    font-size: 16px;
+  }
+}
+
+.matchedIcon {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  // top: 5px;
   display: inline-block;
+  margin-right: 2px;
 }
 
 // custom boostrap classes

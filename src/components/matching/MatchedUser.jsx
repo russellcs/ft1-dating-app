@@ -41,13 +41,6 @@ const MatchedUser = (props) => {
             <UserCasual casual={user.preferences.lifeStyle.casual} />
           </li>
         )}
-        {user.preferences.lifeStyle.openToKids ? (
-          <li>
-            <UserOpenToKids
-              openToKids={user.preferences.lifeStyle.openToKids}
-            />
-          </li>
-        ) : null}
         {user.personalDetails.religion ? (
           <li>
             <UserReligion religion={user.personalDetails.religion} />
@@ -58,7 +51,14 @@ const MatchedUser = (props) => {
             <UserChildren haveKids={user.personalDetails.kids} />
           </li>
         )}
-        {user.personalDetails.smokers === undefined ? null : (
+        {user.preferences.lifeStyle.openToKids ? (
+          <li>
+            <UserOpenToKids
+              openToKids={user.preferences.lifeStyle.openToKids}
+            />
+          </li>
+        ) : null}
+        {user.personalDetails.smokers === 0 ? null : (
           <li>
             <UserSmokes smoker={user.personalDetails.smokers} />
           </li>
