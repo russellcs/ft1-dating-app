@@ -18,7 +18,7 @@ const RegisterPartOne = () => {
     <>
       <div>
         <h1>Registration form</h1>
-        <div className="row">
+        <div className="form-group">
           <label>
             Email Address:
             <input
@@ -27,24 +27,24 @@ const RegisterPartOne = () => {
               name="email"
               className="form-control"
             />
-            <p className="errorMessage">{emailErrors && errorCodes.email}</p>
           </label>
         </div>
-        <div className="row">
+        <p className="errorMessage1">{emailErrors && errorCodes.email}</p>
+        <div className="form-group">
           <label>
             Password:
             <input
               type="password"
-              placeholder="Password (8 characters minimum)"
+              placeholder="(4 characters minimum)"
               name="password"
               minLength="8"
               className="form-control"
               required
             />
-            <p className="errorMessage">{passwordErrors} </p>
           </label>
         </div>
-        <div className="row">
+        <p className="errorMessage1">{passwordErrors} </p>
+        <div className="form-group">
           <label>
             First Name:
             <input
@@ -54,11 +54,11 @@ const RegisterPartOne = () => {
               className="form-control"
             />
           </label>
-          <p className="errorMessage">
-            {firstNameErrors && errorCodes.firstName}
-          </p>
         </div>
-        <div className="row">
+        <p className="errorMessage1">
+          {firstNameErrors && errorCodes.firstName}
+        </p>
+        <div className="form-group">
           <label>
             Last Name:
             <input
@@ -68,10 +68,8 @@ const RegisterPartOne = () => {
               className="form-control"
             />
           </label>
-          <p className="errorMessage">
-            {lastNameErrors && errorCodes.lastName}
-          </p>
         </div>
+        <p className="errorMessage1">{lastNameErrors && errorCodes.lastName}</p>
         <nav>
           {Object.keys(newUserData).length > 1 &&
             emailErrors === undefined &&
