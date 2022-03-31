@@ -13,6 +13,7 @@ const Input = (props) => {
 				autoCapitalize="sentences"
 				className="w-75 py-1 px-2 shadow-sm border-0 rounded"
 				onInput={onInput}
+				value={props.draft}
 				onKeyDown={onKeyDown}
 			/>
 			<button
