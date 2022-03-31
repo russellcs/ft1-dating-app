@@ -6,7 +6,7 @@ const UserImage = (props) => {
 	const index = getIndexById(props.foreignId, users);
 	return (
 		<img
-			className="w-25 rounded-circle ms-2"
+			className="w-50 rounded-circle ms-2 shadow-lg"
 			src={users[index].personalDetails.selfie.image}
 			alt="user"
 		/>
