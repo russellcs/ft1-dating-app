@@ -1,20 +1,6 @@
 import MatchedUser from "./matching/MatchedUser";
 import "./matching/matching.scss";
-import {
-  getUserById,
-  distanceFilter,
-  ageFilter,
-  genderFilter,
-  heightFilter,
-  existingKidsFilter,
-  openToKidsFilter,
-  seenFilter,
-  kidsPointer,
-  marriageCasualPointer,
-  religionPointer,
-  lastSeenPointer,
-  smokersPointer,
-} from "../utils/matching";
+import * from "../utils/matching";
 import Search from "./Search";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
