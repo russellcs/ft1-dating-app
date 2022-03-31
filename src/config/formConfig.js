@@ -48,7 +48,7 @@ export const errorCodes = {
   minAge: "Please enter a valid minimum age you would consider",
   maxAge: "Please enter a valid maximum age you would consider",
   minHeight: "Height must be higher than 0cm and lower than 252cm",
-  maxHeight: "Height must be higher than minimum height and lower than 252cm",
+  maxHeight: "Height must be higher than minimum height",
   acceptedDistance:
     "Please enter the maximum distance you would be willing to travel",
   kidsAccepted: "Please select if you would consider matches that have kids",
@@ -157,9 +157,7 @@ export function dataConstructor(e) {
   }
 
   if (e.target.name === "dateOfBirth") {
-    console.log(e.target.value);
     value = new Date(value).getTime();
-    console.log(value);
   }
 
   if (e.target.name === "relationship" && value === "0") {

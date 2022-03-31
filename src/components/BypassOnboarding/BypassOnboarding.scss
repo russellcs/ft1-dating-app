@@ -2,10 +2,8 @@
   button {
     background-color: seagreen;
     float: right;
-    // display: none;
-    // height: 100px;
-    // bottom: 100px;
-    // width: 100px;
-    // z-index: 50;
+    background: transparent;
+    border: none !important;
+    font-size:0;
   }
 }

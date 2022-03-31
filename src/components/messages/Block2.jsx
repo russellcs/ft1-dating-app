@@ -9,7 +9,7 @@ const Block = (props) => {
 	return (
 		<div className="m-4">
 			<button
-				className="btn btn-danger btn-sm"
+				className="btn btn-danger btn-sm shadow"
 				onClick={() => {
 					dispatch({ type: types.BLOCK_USER, payload: userId });
 				}}

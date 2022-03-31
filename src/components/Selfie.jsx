@@ -1,5 +1,5 @@
 import Webcam from "react-webcam";
-import { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback } from "react";
 
 const Selfie = (props) => {
   const webcamRef = useRef();
@@ -15,6 +15,8 @@ const Selfie = (props) => {
     setImgSrc(imageSrc);
   }, [webcamRef, setImgSrc]);
 
+  const deletePhoto = () => setImgSrc(null);
+
   //todo
 
   //1 place the captured image on top of the live image on save
@@ -25,11 +27,10 @@ const Selfie = (props) => {
 
   //4 styling
 
-  const deletePhoto = () => setImgSrc(null);
-
   return (
     <>
       <h1>Take a photo for your profile</h1>
+      <p className="camera_permissions">Please allow camera permissions</p>
       <div className="selfieContainer">
         <div className="webcam">
           <Webcam
@@ -57,7 +58,7 @@ const Selfie = (props) => {
       )}
       {imgSrc !== null && (
         <button
-          className="btn btn-light selfieBtn"
+          className="btn btn-secondary selfieBtn"
           onClick={(e) => {
             e.preventDefault();
             deletePhoto();

@@ -63,7 +63,7 @@ export const ageCheck = (user1, user2) => {
 };
 
 export const genderFilter = (currentUser, user) => {
-	console.log(currentUser, user);
+	// console.log(currentUser, user);
 	return (
 		currentUser.preferences.gender.includes(user.personalDetails.gender) &&
 		user.preferences.gender.includes(currentUser.personalDetails.gender)

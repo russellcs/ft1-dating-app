@@ -10,20 +10,23 @@
   background-color: #daeaf6;
   margin: 5px 0px;
 
-  // .searchButtons {
-  //   display: flex;
-  //   justify-content: center;
-  // }
+  .searchButtons {
+    text-align: center;
+  }
 
   button,
   h2,
   p {
-    margin: 10px;
+    margin: 5px;
+    font-size: 15px;
+    border: none;
+    text-align: center;
   }
+
   span {
     font-weight: 500;
   }
-  
+
   #demo {
     font-weight: 700;
     overflow: visible;

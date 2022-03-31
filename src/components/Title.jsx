@@ -227,7 +227,11 @@ const Title = () => {
             />
           </g>
         </svg>
-        <h1>Sparks</h1>
+        <h1>
+          <a className="text-decoration-none text-black" href="/">
+            Find Sparks
+          </a>
+        </h1>
         <svg
           width="50"
           height="45"

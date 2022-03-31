@@ -33,13 +33,17 @@ export function generalReducer(
       return result;
     }
 
-    case types.SET_CURRENT_USER_ID:
+    case types.SET_CURRENT_USER_ID: {
       let currentUserId = action.payload;
-      return { ...state, currentUserId };
-
+      const result = { ...state, currentUserId };
+      storeData("generalInitialStateFromDisk", result);
+      return result;
+    }
     case types.SET_LOGGED_IN_STATUS: {
       let loggedIn = action.payload;
-      return { ...state, loggedIn };
+      const result = { ...state, loggedIn };
+      storeData("generalInitialStateFromDisk", result);
+      return result;
     }
 
     case types.LOG_OUT: {
@@ -53,7 +57,7 @@ export function generalReducer(
     case types.BYPASS_ONBOARDING: {
       let screen = 1;
 
-      return { ...state, screen};
+      return { ...state, screen };
     }
     default:
       return state;
