@@ -21,13 +21,11 @@ const MatchedUser = (props) => {
       )}
       <ul className="userDetails">
         <li>
+          <UserGender gender={user.personalDetails.gender} />
+        </li>
+        <li>
           <UserAge age={getAge(user.personalDetails.dob)} />
         </li>
-        {user.personalDetails.gender ? (
-          <li>
-            <UserGender gender={user.personalDetails.gender} />
-          </li>
-        ) : null}
         <li>
           <UserHeight height={user.personalDetails.height} />
         </li>

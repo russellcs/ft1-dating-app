@@ -18,11 +18,11 @@ export const religions = [
 
 export const religionsPref = [
   "No preference",
-  "African Traditional & Diasporic",
+  "African Traditional",
   "Agnostic",
   "Atheist",
   "Buddhism",
-  "Chinese traditional religion",
+  "Chinese Traditional",
   "Christianity",
   "Hinduism",
   "Islam",

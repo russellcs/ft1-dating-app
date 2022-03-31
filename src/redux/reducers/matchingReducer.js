@@ -69,6 +69,7 @@ export function matchingReducer(
       console.log(state);
       const users = [...state.users];
       const index = getIndexById(Number(1), users);
+      // NEEDS FIX to not be hardcoded user.
 
       users[index].blocked.push(Number(action.payload));
       const result = { ...state, users };
