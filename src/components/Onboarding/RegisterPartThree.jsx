@@ -96,10 +96,10 @@ const RegisterPartThree = () => {
         >
           Back
         </button>
-        {smokesErrors === undefined &&
-          haveKidsErrors === undefined &&
-          wantKidsErrors === undefined &&
-          religionErrors === undefined && (
+        {!smokesErrors &&
+          !haveKidsErrors &&
+          !wantKidsErrors &&
+          !religionErrors && (
             <button
               className="btn btn-success"
               style={{ float: "right" }}

@@ -2,11 +2,11 @@ import Joi from "joi";
 
 export const religions = [
   "Prefer not to say",
-  "African Traditional & Diasporic",
+  "African Traditional",
   "Agnostic",
   "Atheist",
   "Buddhism",
-  "Chinese traditional religion",
+  "Chinese Traditional",
   "Christianity",
   "Hinduism",
   "Islam",
@@ -14,21 +14,6 @@ export const religions = [
   "Sikhism",
   "Spiritism",
   "Other",
-];
-
-export const religionsPref = [
-  "No preference",
-  "African Traditional & Diasporic",
-  "Agnostic",
-  "Atheist",
-  "Buddhism",
-  "Chinese traditional religion",
-  "Christianity",
-  "Hinduism",
-  "Islam",
-  "Judaism",
-  "Sikhism",
-  "Spiritism",
 ];
 
 export const errorCodes = {
@@ -53,8 +38,6 @@ export const errorCodes = {
     "Please enter the maximum distance you would be willing to travel",
   kidsAccepted: "Please select if you would consider matches that have kids",
   smokersPref: "Please select if you want to be matched with smokers",
-
-  // acceptedReligions: "Please select religions you want to be matched with",
 };
 
 export const wantKids = [
@@ -106,12 +89,7 @@ export const schema = {
   relationship: Joi.required(),
   genderPref: Joi.required(),
   minAge: Joi.number().integer().less(125).greater(17).required(),
-  maxAge: Joi.number()
-    .integer()
-    .less(125)
-    .greater(Joi.ref("minAge"))
-    .required(),
-  // acceptedReligions: Joi.required(),
+  maxAge: Joi.number().integer().greater(Joi.ref("minAge")).required(),
   minHeight: Joi.number().required().positive().integer(),
   maxHeight: Joi.number()
     .required()

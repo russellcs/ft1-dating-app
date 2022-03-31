@@ -10,11 +10,14 @@ const Login = () => {
   const dispatch = useDispatch();
   const [data, setData] = useState({});
 
+  // adds input into the state
   const onLoginInput = (e) => {
     const newState = { ...data, [e.target.name]: e.target.value };
     setData(newState);
   };
 
+  // checks if email and password combo exists in users data
+  // if true, then sets currentUserId, loggedInStatus and changes the screen
   const loginSubmit = () => {
     const currentUserIndex = getIndexByEmailAndPassword(
       data.email,

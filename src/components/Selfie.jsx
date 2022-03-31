@@ -15,17 +15,9 @@ const Selfie = (props) => {
     setImgSrc(imageSrc);
   }, [webcamRef, setImgSrc]);
 
+  //react-webcam from https://www.npmjs.com/package/react-webcam
+
   const deletePhoto = () => setImgSrc(null);
-
-  //todo
-
-  //1 place the captured image on top of the live image on save
-
-  //2 on image save offer confirm option
-
-  //3 on confirm send base 64 encoded string to user object in users array
-
-  //4 styling
 
   return (
     <>
