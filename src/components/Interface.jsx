@@ -8,15 +8,14 @@ import Navbar from "./Navbar";
 import Conversations from "./messages/Conversations";
 
 const Interface = (props) => {
+
 	const screen = useSelector((state) => state.general.screen);
 
 	return (
 		<>
 			{screen === 0 ? null : <Navbar />}
 
-			{screen === 0 && (
-				<Onboarding addUser={props.addUser} newUserId={props.newUserId} />
-			)}
+      {screen === 0 && <Onboarding />}
 
 			{screen === 1 && <Matching />}
 

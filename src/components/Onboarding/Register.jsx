@@ -22,6 +22,7 @@ const Register = () => {
   const regScreen = useSelector((state) => state.onboarding.regScreen);
   const newUserData = useSelector((state) => state.onboarding.newUserData);
 
+  // Constructs user object structure, adds new user to database, changes screen and sets logged in status
   const addNewUser = async (image) => {
     let lifeStyleCombo = newUserData.relationship;
     let openToKids = Number(newUserData.wantKids);
@@ -56,7 +57,6 @@ const Register = () => {
           min: Number(newUserData.minAge),
           max: Number(newUserData.maxAge),
         },
-        // acceptedReligions: newUserData.acceptedReligions,
         height: {
           min: Number(newUserData.minHeight),
           max: Number(newUserData.maxHeight),
@@ -83,6 +83,7 @@ const Register = () => {
     dispatch({ type: types.SET_LOGGED_IN_STATUS, payload: true });
   };
 
+  // Joi (not so much joy...) validation
   const onValidate = async (data) => {
     const _joiInstance = Joi.object(schema);
     try {

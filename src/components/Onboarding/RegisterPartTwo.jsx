@@ -90,11 +90,11 @@ const RegisterPartTwo = () => {
         >
           Back
         </button>
-        {dateOfBirthErrors === undefined &&
-          genderErrors === undefined &&
-          townErrors === undefined &&
-          postCodeErrors === undefined &&
-          heightErrors === undefined && (
+        {!dateOfBirthErrors &&
+          !genderErrors &&
+          !townErrors &&
+          !postCodeErrors &&
+          !heightErrors && (
             <button
               className="btn btn-success"
               style={{ float: "right" }}
