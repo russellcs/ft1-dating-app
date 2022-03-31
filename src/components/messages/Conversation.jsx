@@ -18,7 +18,9 @@ const Conversation = (props) => {
 	// Calls the function on click of the Send button
 	const onMessageClick = () => onMessageSave();
 
-	const onInput = (e) => setDraft(e.target.value);
+	const onInput = (e) => {
+		setDraft(e.target.value);
+	};
 	// Calls the addMessage function from App.js
 	const onMessageSave = () => {
 		dispatch({
@@ -29,6 +31,7 @@ const Conversation = (props) => {
 				messageId: getUniqueId(16),
 			},
 		});
+		setDraft("");
 	};
 	// Allows the user to use the Enter key as well as clicking Send
 	const onKeyDown = (e) => {
@@ -58,6 +61,7 @@ const Conversation = (props) => {
 				onInput={onInput}
 				onKeyDown={onKeyDown}
 				onMessageClick={onMessageClick}
+				draft={draft}
 			/>
 		</div>
 	);
