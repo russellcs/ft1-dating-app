@@ -3,10 +3,10 @@ import { types } from "../types";
 import { getMessageIndexById } from "../../utils/matching";
 import { storeData, getData } from "../../storage";
 
-const matchingInitialStateFromDisk = getData("matchingInitialStateFromDisk");
+const messagingInitialStateFromDisk = getData("messagingInitialStateFromDisk");
 
 export function messagingReducer(
-	state = matchingInitialStateFromDisk || messagingInitialState,
+	state = messagingInitialStateFromDisk || messagingInitialState,
 	action
 ) {
 	switch (action.type) {
@@ -14,7 +14,7 @@ export function messagingReducer(
 			const messages = [...state.messages];
 			messages.push(action.payload);
 			const result = { ...state, messages };
-			storeData("matchingInitialStateFromDisk", result);
+			storeData("messagingInitialStateFromDisk", result);
 			return result;
 		}
 
@@ -23,7 +23,7 @@ export function messagingReducer(
 			const index = getMessageIndexById(action.payload, messages);
 			messages.splice(index, 1);
 			const result = { ...state, messages };
-			storeData("matchingInitialStateFromDisk", result);
+			storeData("messagingInitialStateFromDisk", result);
 			return result;
 		}
 
