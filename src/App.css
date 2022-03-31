@@ -3,8 +3,11 @@
   justify-content: center;
   column-gap: 5px;
   margin-top: 5px;
+  text-decoration: none;
 }
 
 .log-out {
   margin: 2px 2px;
+  background-color: rgb(163, 172, 181);
+  color: white;
 }
