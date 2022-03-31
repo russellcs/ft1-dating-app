@@ -67,21 +67,13 @@ export function matchingReducer(
 
 		case types.BLOCK_USER: {
 			const users = [...state.users];
-			const index = getIndexById(Number(1), users);
+			const index = getIndexById(Number(action.payload.userId), users);
 
-			users[index].blocked.push(Number(action.payload));
+			users[index].blocked.push(Number(action.payload.foreignId));
 			const result = { ...state, users };
 			storeData("matchingInitialStateFromDisk", result);
 			return result;
 		}
-
-		// case "LOGIN":
-		//   const currentUserIndex = getIndexByEmail(action.payload, state.users);
-
-		//   if (state.users[currentUserIndex].password === action.payload2) {
-		//     // loggedInStatus = true and set currentUserId
-		//   }
-		//   return;
 
 		default:
 			return state;

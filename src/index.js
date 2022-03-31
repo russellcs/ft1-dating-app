@@ -11,9 +11,9 @@ import { messagingReducer } from "./redux/reducers/messagingReducer";
 import { onboardingReducer } from "./redux/reducers/onboardingReducer";
 
 const rootReducer = combineReducers({
+	messaging: messagingReducer,
 	general: generalReducer,
 	matching: matchingReducer,
-	messaging: messagingReducer,
 	onboarding: onboardingReducer,
 });
 

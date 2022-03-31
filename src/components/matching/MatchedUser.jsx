@@ -9,6 +9,7 @@ import UserGender from "./matchedComponents/UserGender";
 import UserAge from "./matchedComponents/UserAge";
 import UserImage from "./matchedComponents/UserImage";
 import UserName from "./matchedComponents/UserName";
+import UserTown from "./matchedComponents/UserTown";
 import { getAge } from "../../utils/matching";
 
 const MatchedUser = (props) => {
@@ -21,13 +22,14 @@ const MatchedUser = (props) => {
       )}
       <ul className="userDetails">
         <li>
+          <UserGender gender={user.personalDetails.gender} />
+        </li>
+        <li>
+          <UserTown town={user.personalDetails.location.town} />
+        </li>
+        <li>
           <UserAge age={getAge(user.personalDetails.dob)} />
         </li>
-        {user.personalDetails.gender ? (
-          <li>
-            <UserGender gender={user.personalDetails.gender} />
-          </li>
-        ) : null}
         <li>
           <UserHeight height={user.personalDetails.height} />
         </li>
@@ -41,24 +43,22 @@ const MatchedUser = (props) => {
             <UserCasual casual={user.preferences.lifeStyle.casual} />
           </li>
         )}
-        {user.personalDetails.religion ? (
-          <li>
-            <UserReligion religion={user.personalDetails.religion} />
-          </li>
-        ) : null}
+
         {user.personalDetails.kids === undefined ? null : (
           <li>
             <UserChildren haveKids={user.personalDetails.kids} />
           </li>
         )}
-        {user.preferences.lifeStyle.openToKids ? (
+
+        <li>
+          <UserOpenToKids openToKids={user.preferences.lifeStyle.openToKids} />
+        </li>
+        {user.personalDetails.religion ? (
           <li>
-            <UserOpenToKids
-              openToKids={user.preferences.lifeStyle.openToKids}
-            />
+            <UserReligion religion={user.personalDetails.religion} />
           </li>
         ) : null}
-        {user.personalDetails.smokers === 0 ? null : (
+        {user.personalDetails.smokers === 10 ? null : (
           <li>
             <UserSmokes smoker={user.personalDetails.smokers} />
           </li>
