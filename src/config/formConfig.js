@@ -2,11 +2,11 @@ import Joi from "joi";
 
 export const religions = [
   "Prefer not to say",
-  "African Traditional & Diasporic",
+  "African Traditional",
   "Agnostic",
   "Atheist",
   "Buddhism",
-  "Chinese traditional religion",
+  "Chinese traditional",
   "Christianity",
   "Hinduism",
   "Islam",

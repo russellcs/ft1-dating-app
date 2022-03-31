@@ -11,7 +11,6 @@
 .userCard {
   border: black solid 1px;
   padding: 10px;
-  position: relative;
   ul {
     list-style: none;
   }
@@ -33,18 +32,33 @@
   position: relative;
   flex-wrap: wrap;
   align-content: space-around;
-  & li {
+  font-weight: 500;
+  li {
+    // display: flex;
     width: 50%;
+    flex-grow: 1;
     margin-top: 10px;
     font-size: 16px;
+    // background-color: lightblue;
   }
+  & :nth-child(even) {
+    // background-color: lightcoral;
+  }
+  // & :nth-child(-n + 3) {
+  //   // width: calc(100% / 3);
+  //   // flex-grow: 3;
+  //   background-color: green;
+  // }
+
+  // li:nth-of-type(-n + 3) {
+  //   // background-color: green;
+  //   min-width: calc(100% / 3);
+  // }
 }
 
 .matchedIcon {
   width: 40px;
   height: 40px;
-  position: relative;
-  // top: 5px;
   display: inline-block;
   margin-right: 2px;
 }
