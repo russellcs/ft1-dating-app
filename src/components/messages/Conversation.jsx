@@ -14,6 +14,7 @@ const Conversation = (props) => {
 
 	const users = useSelector((state) => state.matching.users);
 	const index = getIndexById(Number(props.conversation[0]), users);
+	const userId = useSelector((state) => state.general.currentUserId);
 
 	// Calls the function on click of the Send button
 	const onMessageClick = () => onMessageSave();
@@ -51,7 +52,7 @@ const Conversation = (props) => {
 					{users[index].personalDetails.name.firstName}
 				</h3>
 			</div>
-			<Block2 userId={props.conversation[0]} />
+			<Block2 foreignId={props.conversation[0]} userId={userId} />
 
 			{props.conversation[1].map((message, index) => {
 				return message.content && <Message message={message} key={index} />;

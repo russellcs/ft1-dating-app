@@ -5,11 +5,13 @@ import { types } from "../redux/types";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { gsap } from "gsap";
+import Motto from "./Onboarding/Motto";
 
 const Onboarding = (props) => {
   const dispatch = useDispatch();
   const screen = useSelector((state) => state.onboarding.screen);
 
+  //gsap on buttons
   const onEnter = ({ currentTarget }) => {
     gsap.to(currentTarget, {
       backgroundColor: "rgb(36,157,61)",
@@ -49,12 +51,9 @@ const Onboarding = (props) => {
             Log In
           </button>
         </nav>
-        <div>
-          {screen === 0 && (
-            <Register newUserId={props.newUserId} setScreen={props.setScreen} />
-          )}
-        </div>
+        <div>{screen === 0 && <Register setScreen={props.setScreen} />}</div>
         <div>{screen === 1 && <Login />}</div>
+        <Motto />
       </div>
     </>
   );

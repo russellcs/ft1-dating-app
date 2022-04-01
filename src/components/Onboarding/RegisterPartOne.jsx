@@ -35,7 +35,7 @@ const RegisterPartOne = () => {
             Password:
             <input
               type="password"
-              placeholder="(4 characters minimum)"
+              placeholder="(4 chars minimum)"
               name="password"
               minLength="8"
               className="form-control"
@@ -72,9 +72,9 @@ const RegisterPartOne = () => {
         <p className="errorMessage1">{lastNameErrors && errorCodes.lastName}</p>
         <nav>
           {Object.keys(newUserData).length > 1 &&
-            emailErrors === undefined &&
-            passwordErrors === undefined &&
-            firstNameErrors === undefined && (
+            !emailErrors &&
+            !passwordErrors &&
+            !firstNameErrors && (
               <button
                 className="btn btn-success"
                 style={{ float: "right" }}

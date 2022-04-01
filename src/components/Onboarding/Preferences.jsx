@@ -15,7 +15,6 @@ const Preferences = (props) => {
     genderPref: genderPrefErrors,
     minAge: minAgeErrors,
     maxAge: maxAgeErrors,
-    // acceptedReligions: acceptedReligionsErrors,
     acceptedDistance: acceptedDistanceErrors,
     kidsAccepted: kidsAcceptedErrors,
     smokersPref: smokersPrefErrors,
@@ -163,15 +162,15 @@ const Preferences = (props) => {
         >
           Back
         </button>
-        {relationshipErrors === undefined &&
-          genderPrefErrors === undefined &&
-          minAgeErrors === undefined &&
-          maxAgeErrors === undefined &&
-          acceptedDistanceErrors === undefined &&
-          kidsAcceptedErrors === undefined &&
-          smokersPrefErrors === undefined &&
-          minHeightErrors === undefined &&
-          maxHeightErrors === undefined && (
+        {!relationshipErrors &&
+          !genderPrefErrors &&
+          !minAgeErrors &&
+          !maxAgeErrors &&
+          !acceptedDistanceErrors &&
+          !kidsAcceptedErrors &&
+          !smokersPrefErrors &&
+          !minHeightErrors &&
+          !maxHeightErrors && (
             <button
               className="btn btn-success"
               style={{ float: "right" }}

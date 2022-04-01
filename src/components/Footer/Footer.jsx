@@ -5,7 +5,7 @@ const Footer = () => {
     <footer>
       <div className="container">
         <div className="site-logo">
-          <a href="#">Sparks</a>
+          <a href="#">Back to Top</a>
         </div>
 
         <div className="copyright">
