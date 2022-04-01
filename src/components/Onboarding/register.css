@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   background-color: rgb(247, 248, 249);
-  height: 80vh;
 }
 
 .submit {
@@ -95,4 +94,12 @@ h1 {
   font-size: 16px;
   font-weight: 500;
   color: rgb(215, 46, 61);
+}
+
+.form {
+  margin: 0 5px;
+}
+
+.motto {
+  text-align: center;
 }
