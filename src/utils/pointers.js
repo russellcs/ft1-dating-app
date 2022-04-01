@@ -7,7 +7,6 @@ export function sortingUsers(users, currentUserArgument) {
 
 // Sorts array of potential matches to display most compatible matches first. Always displays last seen user first.
 const potentialMatchSorter = (userA, userB) => {
-  // console.log(userA, userB)
   let totalPointsUserA =
     marriageCasualPointer(
       {
