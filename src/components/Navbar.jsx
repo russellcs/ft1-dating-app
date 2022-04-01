@@ -16,7 +16,6 @@ const Navbar = () => {
   return (
     <nav
       className="nav nav-pills flex-column flex-sm-row bg-light d-flex justify-content-center"
-      // style={{ margin: "auto" }}
     >
       <button
         className="nav-link"
