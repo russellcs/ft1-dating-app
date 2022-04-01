@@ -71,7 +71,7 @@ const Matching = () => {
 
       {currentResultIndex < sortedUsers.length ? (
         <div className="container">
-          <div className="userCard row card container-sm mt-4 shadow">
+          <div className="userCard row card container-sm shadow">
             <MatchedUser user={userForReview} />
           </div>
           <div className="row my-2">
