@@ -1,5 +1,5 @@
-import { generalInitialState } from "../generalInitialState";
-import { types } from "../types";
+import { generalInitialState } from "../initialStates/generalInitialState";
+import { types } from "../types/types";
 import { getData, storeData } from "../../storage";
 
 const generalInitialStateFromDisk = getData("generalInitialStateFromDisk");
@@ -27,7 +27,6 @@ export function generalReducer(
       const filterName = action.payload;
       const matchingFilter = { ...state.matchingFilter };
       matchingFilter[filterName] = !matchingFilter[filterName];
-
       const result = { ...state, matchingFilter };
       storeData("generalInitialStateFromDisk", result);
       return result;

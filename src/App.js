@@ -1,8 +1,9 @@
-import Interface from "./components/Interface";
+import Interface from "./components/general/Interface";
 import { useDispatch } from "react-redux";
-import { types } from "./redux/types";
+import { types } from "./redux/types/types";
 import { useSelector } from "react-redux";
-import Title from "./components/Title";
+import Title from "./components/general/Title";
+import "./App.css";
 
 const App = () => {
   const dispatch = useDispatch();

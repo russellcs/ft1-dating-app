@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { types } from "../redux/types";
+import { types } from "../../redux/types/types";
 import gsap from "gsap";
 
 const Navbar = () => {
@@ -14,9 +14,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav
-      className="nav nav-pills flex-column flex-sm-row bg-light d-flex justify-content-center"
-    >
+    <nav className="nav nav-pills flex-column flex-sm-row bg-light d-flex justify-content-center">
       <button
         className="nav-link"
         style={{ color: "black" }}

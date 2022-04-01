@@ -10,7 +10,7 @@ import UserAge from "./matchedComponents/UserAge";
 import UserImage from "./matchedComponents/UserImage";
 import UserName from "./matchedComponents/UserName";
 import UserTown from "./matchedComponents/UserTown";
-import { getAge } from "../../utils/matching";
+import { getAge } from "../../utils/general";
 
 const MatchedUser = (props) => {
   const { user } = props;

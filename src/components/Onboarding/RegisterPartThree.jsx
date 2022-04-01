@@ -4,7 +4,7 @@ import {
   smokes,
   errorCodes,
 } from "../../config/formConfig";
-import { types } from "../../redux/types";
+import { types } from "../../redux/types/types";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 

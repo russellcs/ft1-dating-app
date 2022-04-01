@@ -1,9 +1,9 @@
 import { useState } from "react";
-import "../Onboarding/register.css";
+import "./register.css";
 import { useSelector } from "react-redux";
-import { getIndexByEmailAndPassword } from "../../utils/matching";
+import { getIndexByEmailAndPassword } from "../../utils/general";
 import { useDispatch } from "react-redux";
-import { types } from "../../redux/types";
+import { types } from "../../redux/types/types";
 
 const Login = () => {
   const users = useSelector((state) => state.matching.users);

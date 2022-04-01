@@ -1,6 +1,6 @@
-import { types } from "../redux/types";
+import { types } from "../../redux/types/types";
 import { useDispatch, useSelector } from "react-redux";
-import "./matching/search.scss";
+import "./search.scss";
 import gsap from "gsap";
 
 const Search = () => {
@@ -29,11 +29,16 @@ const Search = () => {
   return (
     <div className="search ">
       <h2>Find your someone:</h2>
-      <p>
-        See below for your matches, toggle the filters to amend your
-        search
-      </p>
-      <div className="searchButtons">
+      <p>See below for your matches, toggle the filters to amend your search</p>
+      <a
+        data-toggle="collapse"
+        href="#searchButtonsCollapse"
+        role="button"
+        aria-expanded="false"
+      >
+        Search Options
+      </a>
+      <div className="searchButtons collapse" id="searchButtonsCollapse">
         {buttons.map((button, index) => {
           return (
             <button
@@ -50,7 +55,9 @@ const Search = () => {
               onMouseLeave={onLeave}
             >
               {matchingFilter[button.name] ? "Remove " : "Add "}
-              <span>{button.displayName}</span> 
+              <span style={{ pointerEvents: "none" }}>
+                {button.displayName}
+              </span>
             </button>
           );
         })}

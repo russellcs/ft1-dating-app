@@ -1,6 +1,6 @@
 import "./BypassOnboarding.scss";
 import { useDispatch } from "react-redux";
-import { types } from "../../redux/types";
+import { types } from "../../redux/types/types";
 
 const BypassOnboarding = () => {
   const dispatch = useDispatch();

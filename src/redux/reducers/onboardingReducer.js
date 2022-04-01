@@ -1,5 +1,5 @@
-import { onboardingInitialState } from "../onboardingInitialState";
-import { types } from "../types";
+import { onboardingInitialState } from "../initialStates/onboardingInitialState";
+import { types } from "../types/types";
 import { dataConstructor } from "../../config/formConfig";
 import { getData, storeData } from "../../storage";
 

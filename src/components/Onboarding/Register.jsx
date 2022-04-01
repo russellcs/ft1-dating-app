@@ -8,14 +8,14 @@ import Joi from "joi";
 import RegisterPartOne from "./RegisterPartOne";
 import RegisterPartTwo from "./RegisterPartTwo";
 import RegisterPartThree from "./RegisterPartThree";
-import "../Onboarding/register.css";
+import "./register.css";
 import Preferences from "./Preferences";
-import { getLngLat } from "../../utils/general";
-import { types } from "../../redux/types";
+import { getLngLat } from "../../utils/generic";
+import { types } from "../../redux/types/types";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { getUniqueId } from "../../utils/general";
-import Selfie from "../Selfie";
+import { getUniqueId } from "../../utils/generic";
+import Selfie from "./Selfie";
 
 const Register = () => {
   const dispatch = useDispatch();

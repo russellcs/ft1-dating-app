@@ -1,13 +1,12 @@
-import Onboarding from "./Onboarding";
-import Matching from "./Matching";
-import { useDispatch } from "react-redux";
+import Onboarding from "../onboarding/Onboarding";
+import Matching from "../matching/Matching";
 import { useSelector } from "react-redux";
-import Footer from "./Footer/Footer";
-import BypassOnboarding from "./BypassOnboarding/BypassOnboarding";
+import Footer from "./Footer";
+import BypassOnboarding from "../bypassOnboarding/BypassOnboarding";
 import Navbar from "./Navbar";
-import Conversations from "./messages/Conversations";
+import Conversations from "../messages/Conversations";
 
-const Interface = (props) => {
+const Interface = () => {
   const screen = useSelector((state) => state.general.screen);
 
   return (

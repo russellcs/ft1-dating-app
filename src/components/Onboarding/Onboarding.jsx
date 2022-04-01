@@ -1,11 +1,11 @@
-import Login from "./Onboarding/Login";
-import Register from "./Onboarding/Register";
-import "./Onboarding/onboarding.css";
-import { types } from "../redux/types";
+import Login from "./Login";
+import Register from "./Register";
+import "./onboarding.css";
+import { types } from "../../redux/types/types";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { gsap } from "gsap";
-import Motto from "./Onboarding/Motto";
+import Motto from "./Motto";
 
 const Onboarding = (props) => {
   const dispatch = useDispatch();
