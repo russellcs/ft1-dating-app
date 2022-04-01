@@ -4,13 +4,12 @@
   box-sizing: border-box;
 }
 
-.userCardContainer {
-  padding: 10px;
-}
-
 .userCard {
-  border: black solid 1px;
-  padding: 10px;
+  padding: 12px;
+  background-color: rgb(252, 235, 203);
+  margin: auto;
+  width: 100%;
+  position: relative;
   ul {
     list-style: none;
   }
@@ -18,15 +17,11 @@
 
 .userName {
   font-size: 30px;
-}
-
-.userImage {
-  background-color: lightcoral;
-  width: 100%;
+  // text-align: center;
 }
 
 .userDetails {
-  background-color: rgb(252, 235, 203);
+  padding-inline-start: 0;
   margin: 0;
   display: flex;
   position: relative;
@@ -34,26 +29,11 @@
   align-content: space-around;
   font-weight: 500;
   li {
-    // display: flex;
     width: 50%;
-    flex-grow: 1;
     margin-top: 10px;
     font-size: 16px;
-    // background-color: lightblue;
+    padding-right: 5px;
   }
-  & :nth-child(even) {
-    // background-color: lightcoral;
-  }
-  // & :nth-child(-n + 3) {
-  //   // width: calc(100% / 3);
-  //   // flex-grow: 3;
-  //   background-color: green;
-  // }
-
-  // li:nth-of-type(-n + 3) {
-  //   // background-color: green;
-  //   min-width: calc(100% / 3);
-  // }
 }
 
 .matchedIcon {
@@ -61,6 +41,15 @@
   height: 40px;
   display: inline-block;
   margin-right: 2px;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.religHover:hover {
 }
 
 // custom boostrap classes

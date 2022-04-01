@@ -27,9 +27,8 @@ const Matching = () => {
   const users = useSelector((state) => state.matching.users);
   const matchingFilter = useSelector((state) => state.general.matchingFilter);
   const currentUserId = useSelector((state) => state.general.currentUserId);
-  const dispatch = useDispatch();
-
   let currentUser = getUserById(currentUserId, users);
+  const dispatch = useDispatch();
 
   // Filters out incompatible users (including seen) from array of potencial matches
   const potentialMatchFilter = (user) => {
@@ -157,18 +156,18 @@ const Matching = () => {
 
       {currentResultIndex < filteredUsers.length ? (
         <div className="container">
-          <div className="userCard row">
+          <div className="userCard row card container-sm mt-4 shadow">
             <MatchedUser user={userForReview} />
           </div>
           <div className="row my-2">
             <button
-              className="col btn btn-love btn-round btn-lg me-1 ms-2"
+              className="col btn btn-love btn-round btn-lg ms-3 me-1"
               onClick={() => onLike(userForReview)}
             >
               Like
             </button>
             <button
-              className="col btn btn-pass btn-round btn-lg ms-1 me-2"
+              className="col btn btn-pass btn-round btn-lg ms-1 me-3"
               onClick={() => onPass()}
             >
               Pass

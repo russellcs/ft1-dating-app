@@ -3,10 +3,10 @@ import { matchedIcons } from "../matchedIcons";
 
 const UserOpenToKids = (props) => {
   const wantKids = [
-    "Don't want child",
+    "Don't want kids",
     "Not sure yet",
-    "Open to child",
-    "Want child",
+    "Open to kids",
+    "Want kids",
   ];
   return (
     <>
