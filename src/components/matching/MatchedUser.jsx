@@ -15,7 +15,7 @@ import { getAge } from "../../utils/matching";
 const MatchedUser = (props) => {
   const { user } = props;
   return (
-    <>
+    <div>
       <UserName name={user.personalDetails.name.firstName} />
       {user.personalDetails.selfie && (
         <UserImage image={user.personalDetails.selfie.image} />
@@ -33,38 +33,32 @@ const MatchedUser = (props) => {
         <li>
           <UserHeight height={user.personalDetails.height} />
         </li>
-        {user.preferences.lifeStyle.marriage === undefined ? null : (
-          <li>
-            <UserMarriage marriage={user.preferences.lifeStyle.marriage} />
-          </li>
-        )}
-        {user.preferences.lifeStyle.casual === undefined ? null : (
-          <li>
-            <UserCasual casual={user.preferences.lifeStyle.casual} />
-          </li>
-        )}
+        <li>
+          <UserMarriage marriage={user.preferences.lifeStyle.marriage} />
+        </li>
+        <li>
+          <UserCasual casual={user.preferences.lifeStyle.casual} />
+        </li>
 
-        {user.personalDetails.kids === undefined ? null : (
-          <li>
-            <UserChildren haveKids={user.personalDetails.kids} />
-          </li>
-        )}
+        <li>
+          <UserChildren haveKids={user.personalDetails.kids} />
+        </li>
 
         <li>
           <UserOpenToKids openToKids={user.preferences.lifeStyle.openToKids} />
         </li>
         {user.personalDetails.religion ? (
-          <li>
+          <li className="truncate">
             <UserReligion religion={user.personalDetails.religion} />
           </li>
         ) : null}
-        {user.personalDetails.smokers === 10 ? null : (
+        {user.personalDetails.smokers ? (
           <li>
             <UserSmokes smoker={user.personalDetails.smokers} />
           </li>
-        )}
+        ) : null}
       </ul>
-    </>
+    </div>
   );
 };
 
