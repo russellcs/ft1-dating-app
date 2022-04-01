@@ -53,7 +53,7 @@ const Onboarding = (props) => {
         </nav>
         <div>{screen === 0 && <Register setScreen={props.setScreen} />}</div>
         <div>{screen === 1 && <Login />}</div>
-        <Motto />
+        {screen === undefined && <Motto />}
       </div>
     </>
   );
