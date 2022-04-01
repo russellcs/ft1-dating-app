@@ -129,6 +129,7 @@ const Matching = () => {
       type: types.UPDATE_MATCHES,
       payload: { seenUserId: user.userId, currentUserId: currentUser.userId },
     });
+    //foreign ID convention not seenUser
 
     setCurrentResultIndex(currentResultIndex + 1);
   };
@@ -149,7 +150,7 @@ const Matching = () => {
           currentUserId: currentUser.userId,
         },
       });
-  }, [currentResultIndex]);
+  }, [currentResultIndex, currentUser.userId, filteredUsers.length, userForReview.userId, dispatch]);
 
   return (
     <>
