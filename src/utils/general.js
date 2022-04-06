@@ -25,7 +25,7 @@ export const getIndexByEmailAndPassword = (emailTest, passwordTest, users) => {
 
 export const getIndexById = (id, users) => {
   // console.log(users, id);
-  return users.findIndex(({ userId }) => userId === id);
+  return users.findIndex(({ userId }) => userId == id);
 };
 
 export const getMessageIndexById = (id, messages) => {

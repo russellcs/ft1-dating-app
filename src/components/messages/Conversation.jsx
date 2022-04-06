@@ -44,7 +44,7 @@ const Conversation = (props) => {
   return (
     <div
       className="card container-sm mt-4 pb-2 shadow"
-      style={{ backgroundColor: "#dae9f6", width: "500px" }}
+      style={{ backgroundColor: "#dae9f6" }}
     >
       <div className="d-flex justify-content-between mt-4 mb-1 ms-3 me-5">
         <UserImage foreignId={Number(props.conversation[0])} />
