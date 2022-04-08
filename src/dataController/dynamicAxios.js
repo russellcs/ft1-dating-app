@@ -7,7 +7,6 @@ export const callAxios = async (method, url, payload) => {
 			alert(result.data.error);
 		}
 		return result;
-		console.log(result);
 	} catch (error) {
 		alert("API down");
 	}

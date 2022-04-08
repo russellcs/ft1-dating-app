@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUniqueId } from "../../utils/generic";
 import { getIndexById } from "../../utils/general";
 import { types } from "../../redux/types/types";
-import { callAPI } from "../../dataController";
+import { callAPI } from "../../dataController/messages";
 
 const Conversation = (props) => {
 	const [draft, setDraft] = useState();
@@ -25,7 +25,7 @@ const Conversation = (props) => {
 	};
 	// Calls the addMessage function from App.js
 	const onMessageSave = () => {
-		callAPI("ADD_MESSAGE", {
+		callAPI(types.ADD_MESSAGE, {
 			userId,
 			content: draft,
 			foreignId: Number(props.conversation[0]),
@@ -47,18 +47,18 @@ const Conversation = (props) => {
 		}
 	};
 
-  return (
-    <div
-      className="card container-sm mt-4 pb-2 shadow"
-      style={{ backgroundColor: "#dae9f6" }}
-    >
-      <div className="d-flex justify-content-between mt-4 mb-1 ms-3 me-5">
-        <UserImage foreignId={Number(props.conversation[0])} />
-        <h3 className="mx-auto mt-4 me-4">
-          {users[index].personalDetails.name.firstName}
-        </h3>
-      </div>
-      <Block foreignId={props.conversation[0]} userId={userId} />
+	return (
+		<div
+			className="card container-sm mt-4 pb-2 shadow"
+			style={{ backgroundColor: "#dae9f6" }}
+		>
+			<div className="d-flex justify-content-between mt-4 mb-1 ms-3 me-5">
+				<UserImage foreignId={Number(props.conversation[0])} />
+				<h3 className="mx-auto mt-4 me-4">
+					{users[index].personalDetails.name.firstName}
+				</h3>
+			</div>
+			<Block foreignId={props.conversation[0]} userId={userId} />
 
 			{props.conversation[1].map((message, index) => {
 				return message.content && <Message message={message} key={index} />;
