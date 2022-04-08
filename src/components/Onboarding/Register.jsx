@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getUniqueId } from "../../utils/generic";
 import Selfie from "./Selfie";
+import { callAPI } from "../../dataController/onboarding";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -29,8 +30,8 @@ const Register = () => {
     lifeStyleCombo = { ...lifeStyleCombo, openToKids };
     const coords = await getLngLat(newUserData.postCode);
     const newUserStructured = {
-      userId: getUniqueId(16),
-      signUpTimeStamp: Date.now(),
+      // userId: getUniqueId(16),
+      // signUpTimeStamp: Date.now(),
       personalDetails: {
         name: {
           firstName: newUserData.firstName,
@@ -66,13 +67,15 @@ const Register = () => {
         smokers: newUserData.smokersPref,
         acceptedDistance: Number(newUserData.acceptedDistance),
       },
-      seen: [],
-      likes: [],
-      matches: [],
-      blocked: [],
+      // seen: [],
+      // likes: [],
+      // matches: [],
+      // blocked: [],
       login: { email: newUserData.email, password: newUserData.password },
-      status: { type: "member", lastLoginTimestamp: Date.now() },
+      // status: { type: "member", lastLoginTimestamp: Date.now() },
     };
+    callAPI("ADD_USER", newUserStructured);
+    callAPI("ADD_SELFIE", newUserStructured);
     dispatch({ type: types.ADD_USER, payload: newUserStructured });
     dispatch({ type: types.SET_SCREEN, payload: 1 });
     dispatch({

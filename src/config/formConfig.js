@@ -120,7 +120,8 @@ export function timeConverter(UNIX_timestamp) {
   var newYear = a.getFullYear();
   var newMonth = months[a.getMonth()];
   var newDate = a.getDate();
-  var time = { year: newYear, months: newMonth, day: newDate };
+  // var time = { year: newYear, months: newMonth, day: newDate };
+  var time = `${newYear}-${newMonth}-${newDate}`;
   return time;
 }
 
