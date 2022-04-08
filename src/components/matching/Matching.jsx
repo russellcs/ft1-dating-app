@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { types } from "../../redux/types/types";
 import { gsap } from "gsap";
+import { callAPI } from "../../dataController/matching";
 
 const Matching = () => {
   const [currentResultIndex, setCurrentResultIndex] = useState(0);
@@ -31,6 +32,12 @@ const Matching = () => {
   // update current user's likes, check if they like eachother, load next user for review.
   const onLike = (user) => {
     const usersToAddToLikes = { user, currentUser };
+    callAPI("ADD_TO_LIKES", {
+      userId: currentUser.userId,
+      foreignUserId: user.userId,
+    });
+
+
     dispatch({ type: types.ADD_TO_LIKES, payload: usersToAddToLikes });
     dispatch({
       type: types.UPDATE_MATCHES,
@@ -49,14 +56,20 @@ const Matching = () => {
 
   //Add user being reviewed to current user's seen array.
   useEffect(() => {
-    if (currentResultIndex < sortedUsers.length)
-      dispatch({
-        type: types.ADD_TO_SEEN,
-        payload: {
-          seenUserId: userForReview.userId,
-          currentUserId: currentUser.userId,
-        },
+    if (currentResultIndex < sortedUsers.length) {
+      callAPI("ADD_TO_SEEN", {
+        userId: currentUser.userId,
+        foreignUserId: userForReview.userId,
       });
+
+      // dispatch({
+      //   type: types.ADD_TO_SEEN,
+      //   payload: {
+      //     seenUserId: userForReview.userId,
+      //     currentUserId: currentUser.userId,
+      //   },
+      // });
+    }
   }, [
     currentResultIndex,
     // currentUser.userId,
