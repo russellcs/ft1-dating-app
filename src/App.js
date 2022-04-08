@@ -1,16 +1,16 @@
 import Interface from "./components/general/Interface";
+import Title from "./components/general/Title";
 import { useDispatch } from "react-redux";
 import { types } from "./redux/types/types";
 import { useSelector } from "react-redux";
-import Title from "./components/general/Title";
-import { callAPI } from "./dataController";
+import { callAPI } from "./dataController/messages";
 import "./App.css";
 
 const App = () => {
 	const dispatch = useDispatch();
 	const loggedIn = useSelector((state) => state.general.loggedIn);
 
-	callAPI("GET_USER_MESSAGES", { userId: 1 });
+	callAPI(types.GET_USER_MESSAGES, { userId: 1 });
 
 	return (
 		<>

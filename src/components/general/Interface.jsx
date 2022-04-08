@@ -1,8 +1,8 @@
-import Onboarding from "../onboarding/Onboarding";
+import Onboarding from "../Onboarding/Onboarding";
 import Matching from "../matching/Matching";
 import { useSelector } from "react-redux";
 import Footer from "./Footer";
-import BypassOnboarding from "../bypassOnboarding/BypassOnboarding";
+import BypassOnboarding from "../BypassOnboarding/BypassOnboarding";
 import Navbar from "./Navbar";
 import Conversations from "../messages/Conversations";
 
