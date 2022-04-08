@@ -22,7 +22,7 @@ export function matchingReducer(
         Number(action.payload.currentUserId),
         state.users
       );
-
+      console.log(currentUserIndex, action.payload.currentUserId);
       if (
         !state.users[currentUserIndex].seen.includes(action.payload.seenUserId)
       ) {
