@@ -18,5 +18,8 @@ export const types = {
   LOG_OUT: "LOG_OUT",
   BYPASS_ONBOARDING: "BYPASS_ONBOARDING",
   GET_USER_MESSAGES: "GET_USER_MESSAGES",
-  GET_ALL_USERS: "GET_ALL_USERS",
+  GET_ALL_USERS: "GET_ALL_USERS", // this is for the API to go and get the users
+  SET_ALL_USERS: "SET_ALL_USERS", // redux - set all users and send to store
+  SET_ALL_MESSAGES: "SET_ALL_MESSAGES", // redux - set all messages and send to store
+  
 };

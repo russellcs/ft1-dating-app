@@ -9,9 +9,7 @@ const Conversations = () => {
 
 	// Iterate through the messages data from the store then checks if the foreign ID exists. if it doesn't a new array is created. Matches is the iterated through and saved in the entries object
 	const result = {};
-	setTimeout(() => {
-		console.log(messages, users);
-	}, 3000);
+
 	messages &&
 		messages.forEach((message) => {
 			const existing = result[message.foreignId]
@@ -19,6 +17,8 @@ const Conversations = () => {
 				: [];
 			result[message.foreignId] = [...existing, message];
 		});
+
+	console.log(result)
 
 	let index = getIndexById(currentUserId, users);
 

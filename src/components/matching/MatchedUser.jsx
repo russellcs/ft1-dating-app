@@ -19,6 +19,8 @@ const MatchedUser = (props) => {
       <UserName name={user.personalDetails.name.firstName} />
       {user.personalDetails.selfie && (
         <UserImage image={user.personalDetails.selfie.image} />
+        // <UserImage image={`http://findsparks.uk/userImages/${user.userId}.jpg`} />
+        
       )}
       <ul className="userDetails">
         <li>

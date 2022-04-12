@@ -55,8 +55,9 @@ export function generalReducer(
 
     case types.BYPASS_ONBOARDING: {
       let screen = 1;
+      let currentUserId = 38;
 
-      return { ...state, screen };
+      return { ...state, screen, loggedIn: true, currentUserId };
     }
     default:
       return state;

@@ -27,8 +27,8 @@ export const callAPI = async (type, payload) => {
 				"get",
 				API_URL + "/messages/" + payload.userId
 			);
-			console.log(result);
-			break;
+			return result;
+	
 
 		default:
 			break;
