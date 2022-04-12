@@ -109,7 +109,10 @@ export const openToKidsFilter = (currentUser, user) => {
 
 export const seenFilter = (currentUser, user) => {
   if (currentUser.seen && currentUser.seen.length > 0) {
-    return currentUser.seen.includes(user.userId) === false;
+    return (
+      currentUser.seen.includes(user.userId) === false ||
+      currentUserSeen[currentUserSeen.length - 1] === user.userId //!!!!! Ardo recently added because we need to keep last seen user
+    );
   }
   return true;
 };

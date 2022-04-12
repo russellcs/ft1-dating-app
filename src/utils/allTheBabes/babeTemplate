@@ -1,0 +1,37 @@
+let userTemplate = {
+  userId: 0, 
+  signUpDate: 0, 
+  personalDetails: {
+    name: { firstName: "", lastName: "" }, //gen
+    selfie: {
+      image: "",
+    },
+    dob: { year: "", months: "", day: "" },
+    location: {
+      town: "", 
+      postCode: "", 
+      longitude: 0,
+      latitude: 0,
+    },
+    kids: 0, // 0: not saying, 1: no, 2: Yes
+    religion: 0,
+    height: 0,
+    gender: 0, // 0: female, 1: male, 2: non-binary, 3: trans, 4: intersex
+    smokers: 0, // 0: undefined: 1: no, 2: sometimes, 3: yes
+  },
+  preferences: {
+    lifeStyle: { marriage: false, casual: false, openToKids: 0 }, // 0: don't want, 1: not sure, 2: open, 3: want
+    age: { min: 18, max: 99 },
+    height: { min: 0, max: 0 },
+    gender: [],
+    kidsAccepted: 0, // 0: not sure, 1: don't want parents, 2: parents OK
+    smokers: false, //NOT USING
+    acceptedDistance: 20,
+  },
+  seen: [],
+  matches: [],
+  likes: [],
+  blocked: [],
+  login: { email: "", password: "" },
+  status: { type: "admin", blocked: false, lastLoginTimestamp: 0 },
+};

@@ -31,13 +31,12 @@ const Matching = () => {
 
   // update current user's likes, check if they like eachother, load next user for review.
   const onLike = (user) => {
-    const usersToAddToLikes = { user, currentUser };
     callAPI("ADD_TO_LIKES", {
       userId: currentUser.userId,
       foreignUserId: user.userId,
     });
 
-
+    const usersToAddToLikes = { user, currentUser };
     dispatch({ type: types.ADD_TO_LIKES, payload: usersToAddToLikes });
     dispatch({
       type: types.UPDATE_MATCHES,
