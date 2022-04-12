@@ -12,15 +12,23 @@ const App = () => {
   const dispatch = useDispatch();
   const loggedIn = useSelector((state) => state.general.loggedIn);
   const currentUserId = useSelector((state) => state.general.currentUserId);
+  const token = useSelector((state) => state.general.token);
 
   useEffect(() => {
+
     if (currentUserId) getInitialData();
   }, [currentUserId]);
 
   const getInitialData = async () => {
-    const messages = await messagingCallAPI(types.GET_USER_MESSAGES, {
-      userId: currentUserId,
-    });
+    console.log("getting initial state")
+    const messages = await messagingCallAPI(
+      types.GET_USER_MESSAGES,
+      {
+        userId: currentUserId,
+      },
+      token
+    );
+    console.log("messages", messages)
     const users = await matchingCallAPI(types.GET_ALL_USERS);
     // console.log(messages, users)
 
@@ -29,10 +37,10 @@ const App = () => {
         type: types.SET_ALL_USERS,
         payload: users.data.payload,
       });
-      dispatch({
-        type: types.SET_ALL_MESSAGES,
-        payload: messages.data.payload,
-      });
+      // dispatch({
+      //   type: types.SET_ALL_MESSAGES,
+      //   payload: messages.data.payload,
+      // });
     } else {
       alert("something has gone wrong with the back end!");
     }

@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { getIndexByEmailAndPassword } from "../../utils/general";
 import { useDispatch } from "react-redux";
 import { types } from "../../redux/types/types";
+import { callAPI as onboardingCallAPI } from "../../dataController/onboarding";
 
 const Login = () => {
   const users = useSelector((state) => state.matching.users);
@@ -18,22 +19,33 @@ const Login = () => {
 
   // checks if email and password combo exists in users data
   // if true, then sets currentUserId, loggedInStatus and changes the screen
-  const loginSubmit = () => {
-    const currentUserIndex = getIndexByEmailAndPassword(
-      data.email,
-      data.password,
-      users
-    );
-    if (currentUserIndex > -1) {
-      dispatch({
-        type: types.SET_CURRENT_USER_ID,
-        payload: users[currentUserIndex].userId,
-      });
-      dispatch({ type: types.SET_SCREEN, payload: 1 });
-      dispatch({ type: types.SET_LOGGED_IN_STATUS, payload: true });
-    } else {
-      alert("Invalid email / password");
-    }
+  const loginSubmit = async () => {
+    console.log("login submitted");
+    const result = await onboardingCallAPI(types.GET_TOKEN, {
+      email: data.email,
+      password: data.password,
+    });
+    console.log(result);
+    dispatch({ type: types.SET_TOKEN, payload: result.data.token });
+    dispatch({ type: types.SET_CURRENT_USER_ID, payload: result.data.userId });
+    dispatch({ type: types.SET_SCREEN, payload: 1 });
+    dispatch({ type: types.SET_LOGGED_IN_STATUS, payload: true });
+    
+
+    // const currentUserIndex = getIndexByEmailAndPassword(
+    //   data.email,
+    //   data.password,
+    //   users
+    // );
+    // if (currentUserIndex > -1) {
+    //   dispatch({
+    //     type: types.SET_CURRENT_USER_ID,
+    //     payload: users[currentUserIndex].userId,
+    //   });
+
+    // } else {
+    //   alert("Invalid email / password");
+    // }
   };
 
   return (
