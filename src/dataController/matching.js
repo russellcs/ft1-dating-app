@@ -2,7 +2,7 @@ import { API_URL } from "../config/general";
 import { callAxios } from "./dynamicAxios";
 
 export const callAPI = async (type, payload) => {
-  console.log(type);
+  // console.log(type);
   switch (type) {
     case "ADD_TO_SEEN":
       callAxios("post", API_URL + "/matching/seen", {
@@ -19,9 +19,9 @@ export const callAPI = async (type, payload) => {
       break;
 
     case "GET_ALL_USERS":
-      console.log("about to get results");
+      // console.log("about to get results");
       const result = await callAxios("get", API_URL + "/matching/0");
-      console.log(result);
+      // console.log(result);
       return result;
 
     default:

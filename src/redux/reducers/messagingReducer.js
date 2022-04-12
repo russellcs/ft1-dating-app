@@ -27,6 +27,13 @@ export function messagingReducer(
       return result;
     }
 
+    case types.SET_ALL_MESSAGES: {
+      return { messages: action.payload };
+    }
+
+
+
+
     default:
       return state;
   }

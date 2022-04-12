@@ -7,7 +7,7 @@ const UserImage = (props) => {
   return (
     <img
       className="w-50 rounded-circle ms-2 shadow-lg"
-      src={users[index].personalDetails.selfie.image}
+      // src={users[index].personalDetails.selfie.image}
       alt="user"
     />
   );

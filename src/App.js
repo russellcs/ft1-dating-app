@@ -6,22 +6,39 @@ import { useSelector } from "react-redux";
 import { callAPI as matchingCallAPI } from "./dataController/matching";
 import { callAPI as messagingCallAPI } from "./dataController/messages";
 import "./App.css";
+import { useEffect } from "react";
 
 const App = () => {
   const dispatch = useDispatch();
   const loggedIn = useSelector((state) => state.general.loggedIn);
+  const currentUserId = useSelector((state) => state.general.currentUserId);
+
+  useEffect(() => {
+    if (currentUserId) getInitialData();
+  }, [currentUserId]);
 
   const getInitialData = async () => {
-    // await messagingCallAPI(types.GET_USER_MESSAGES, { userId: 1 });
-    const userData = await matchingCallAPI(types.GET_ALL_USERS);
+    const messages = await messagingCallAPI(types.GET_USER_MESSAGES, {
+      userId: currentUserId,
+    });
+    const users = await matchingCallAPI(types.GET_ALL_USERS);
+    // console.log(messages, users)
 
-	// dispatch({type: types.})
-
-    console.log("userdata", userData);
+    if (messages.data.status && users.data.status) {
+      dispatch({
+        type: types.SET_ALL_USERS,
+        payload: users.data.payload,
+      });
+      dispatch({
+        type: types.SET_ALL_MESSAGES,
+        payload: messages.data.payload,
+      });
+    } else {
+      alert("something has gone wrong with the back end!");
+    }
   };
 
-  getInitialData();
-
+  // return
   return (
     <>
       <button

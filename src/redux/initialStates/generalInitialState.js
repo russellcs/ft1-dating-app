@@ -9,6 +9,6 @@ export const generalInitialState = {
     openToKidsFilter: true,
     seenFilter: false,
   },
-  currentUserId: 1,
+  currentUserId: undefined,
   loggedIn: false,
 };

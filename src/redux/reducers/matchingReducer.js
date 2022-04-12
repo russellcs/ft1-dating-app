@@ -75,6 +75,11 @@ export function matchingReducer(
       return result;
     }
 
+    case types.SET_ALL_USERS: {
+      console.log(action.payload)
+      return { users: action.payload };
+    }
+
     default:
       return state;
   }
