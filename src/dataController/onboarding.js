@@ -7,9 +7,9 @@ export const callAPI = async (type, payload) => {
       callAxios("post", API_URL + "/users", payload);
       break;
 
-    case "ADD_SELFIE":
-      callAxios("post", API_URL + "/users/selfie", payload);
-      break;
+    case "GET_TOKEN":
+      return await callAxios("post", API_URL + "/users/login", payload);
+
 
     default:
       break;

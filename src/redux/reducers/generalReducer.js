@@ -59,6 +59,13 @@ export function generalReducer(
 
       return { ...state, screen, loggedIn: true, currentUserId };
     }
+
+    case types.SET_TOKEN: {
+      return { ...state, token: action.payload };
+
+    }
+
+
     default:
       return state;
   }
