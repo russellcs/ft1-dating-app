@@ -25,7 +25,7 @@ export const callAPI = async (type, payload, headers) => {
       callAxios("delete", API_URL + "/messages/" + payload.messageId);
       break;
 
-    case "GET_USER_MESSAGES":
+    case types.GET_USER_MESSAGES:
       console.log(payload, headers);
       const result = await callAxios(
         "get",

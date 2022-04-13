@@ -17,7 +17,7 @@ export const types = {
   SET_LOGGED_IN_STATUS: "SET_LOGGED_IN_STATUS", //sets logged in status to true
   LOG_OUT: "LOG_OUT", //set logged in status to false
   BYPASS_ONBOARDING: "BYPASS_ONBOARDING", // changes screen value to matches screen, sets current user id to 38, sets logged in as true
-  GET_USER_MESSAGES: "GET_USER_MESSAGES",
+  GET_USER_MESSAGES: "GET_USER_MESSAGES", // sets user messages from database to store
   GET_ALL_USERS: "GET_ALL_USERS", // this is for the API to go and get the users
   SET_ALL_USERS: "SET_ALL_USERS", // redux - set all users and send to store
   SET_ALL_MESSAGES: "SET_ALL_MESSAGES", // redux - set all messages and send to store
