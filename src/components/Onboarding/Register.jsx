@@ -66,15 +66,9 @@ const Register = () => {
       },
       login: { email: newUserData.email, password: newUserData.password },
     };
-    callAPI("ADD_USER", newUserStructured);
-    dispatch({ type: types.ADD_USER, payload: newUserStructured });
-    dispatch({ type: types.SET_SCREEN, payload: 1 });
-    dispatch({
-      type: types.SET_CURRENT_USER_ID,
-      payload: newUserStructured.userId,
-    });
-
-    dispatch({ type: types.SET_LOGGED_IN_STATUS, payload: true });
+    callAPI("ADD_USER", newUserStructured); // sends new user to the database
+    dispatch({ type: types.SET_SCREEN, payload: 1 }); // sends user to matching screen
+    dispatch({ type: types.SET_LOGGED_IN_STATUS, payload: true }); // sets logged in status to true
   };
 
   // Joi (not so much joy...) validation
