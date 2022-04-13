@@ -15,32 +15,28 @@ const App = () => {
   const token = useSelector((state) => state.general.token);
 
   useEffect(() => {
-
-    if (currentUserId) getInitialData();
-  }, [currentUserId]);
+    if (currentUserId) {
+      getInitialData();
+    }
+  }, [currentUserId, token]);
 
   const getInitialData = async () => {
-    console.log("getting initial state")
     const messages = await messagingCallAPI(
       types.GET_USER_MESSAGES,
-      {
-        userId: currentUserId,
-      },
-      token
+      {},
+      { token }
     );
-    console.log("messages", messages)
     const users = await matchingCallAPI(types.GET_ALL_USERS);
-    // console.log(messages, users)
 
     if (messages.data.status && users.data.status) {
       dispatch({
         type: types.SET_ALL_USERS,
         payload: users.data.payload,
       });
-      // dispatch({
-      //   type: types.SET_ALL_MESSAGES,
-      //   payload: messages.data.payload,
-      // });
+      dispatch({
+        type: types.SET_ALL_MESSAGES,
+        payload: messages.data.payload,
+      });
     } else {
       alert("something has gone wrong with the back end!");
     }

@@ -3,7 +3,6 @@ import { callAxios } from "./dynamicAxios";
 import { types } from "../redux/types/types";
 
 export const callAPI = async (type, payload, headers) => {
-  console.log(type, payload, headers);
 
   switch (type) {
     case types.BLOCK_USER:
@@ -25,11 +24,11 @@ export const callAPI = async (type, payload, headers) => {
       callAxios("delete", API_URL + "/messages/" + payload.messageId);
       break;
 
+
     case types.GET_USER_MESSAGES:
-      console.log(payload, headers);
       const result = await callAxios(
         "get",
-        API_URL + "/messages/" + payload.userId,
+        API_URL + "/messages",
         { headers: { token: headers.token } }
       );
       return result;
