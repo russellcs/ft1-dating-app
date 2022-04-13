@@ -8,7 +8,6 @@ export function generalReducer(
   state = generalInitialStateFromDisk || generalInitialState,
   action
 ) {
-  // console.log(action);
   switch (action.type) {
     case types.SET_USER_INPUT: {
       const result = { ...state, userInput: action.payload };
@@ -47,10 +46,10 @@ export function generalReducer(
 
     case types.LOG_OUT: {
       let loggedIn = false;
-      let currentUserId = null;
+      let currentUserId = undefined;
       let screen = 0;
-
-      return { ...state, loggedIn, currentUserId, screen };
+      let token = undefined;
+      return { ...state, loggedIn, currentUserId, screen, token };
     }
 
     case types.BYPASS_ONBOARDING: {
@@ -62,9 +61,7 @@ export function generalReducer(
 
     case types.SET_TOKEN: {
       return { ...state, token: action.payload };
-
     }
-
 
     default:
       return state;

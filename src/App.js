@@ -7,6 +7,7 @@ import { callAPI as matchingCallAPI } from "./dataController/matching";
 import { callAPI as messagingCallAPI } from "./dataController/messages";
 import "./App.css";
 import { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const App = () => {
   const currentUserId = useSelector((state) => state.general.currentUserId);
   const token = useSelector((state) => state.general.token);
 
+  // gets initial data from database once user has logged in and has a token
   useEffect(() => {
     if (currentUserId) {
       getInitialData();
@@ -45,7 +47,8 @@ const App = () => {
   // return
   return (
     <>
-      <button
+      <Toaster position="top-right" reverseOrder={false} />
+      <button /// for toast alerts / notifications
         className="btn btn-primary"
         onClick={() => {
           localStorage.clear();
