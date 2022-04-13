@@ -2,9 +2,7 @@ import { API_URL } from "../config/general";
 import { callAxios } from "./dynamicAxios";
 
 export const callAPI = async (type, payload, headers) => {
-	console.log(type, payload, headers)
 
-	
   switch (type) {
     case "BLOCK_USER":
       callAxios("post", API_URL + "/messages/blocked", {
@@ -26,16 +24,15 @@ export const callAPI = async (type, payload, headers) => {
       break;
 
     case "GET_USER_MESSAGES":
-		console.log(payload, headers)
       const result = await callAxios(
         "get",
-        API_URL + "/messages/" + payload.userId,
+        API_URL + "/messages",
         { headers: { token: headers.token } }
       );
       return result;
 
     default:
-		console.log("the default occurred in messages")
+      console.log("the default occurred in messages");
       break;
   }
 };

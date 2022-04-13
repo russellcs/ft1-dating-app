@@ -34,7 +34,7 @@ const Selfie = (props) => {
         </div>
 
         <div className="selfie">
-          <img src={imgSrc} />
+          <img src={imgSrc} alt="" />
         </div>
       </div>
       {imgSrc === null && (
