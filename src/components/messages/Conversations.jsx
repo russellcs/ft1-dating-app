@@ -36,16 +36,14 @@ const Conversations = () => {
 
 	return (
 		<div>
-			{/* {!filteredConversations && (
-				<h3>Please match with someone to start a conversation</h3>
-			)} */}
-
 			{filteredConversations > 0 ? (
 				filteredConversations.map((conversation, index) => {
 					return <Conversation conversation={conversation} key={index} />;
 				})
 			) : (
-				<h3>Please match with someone to start a conversation</h3>
+				<h3 className="p-3 text-center">
+					Please match with someone to start a conversation
+				</h3>
 			)}
 		</div>
 	);
