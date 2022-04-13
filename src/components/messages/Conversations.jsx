@@ -18,8 +18,6 @@ const Conversations = () => {
 			result[message.foreignId] = [...existing, message];
 		});
 
-	console.log(result)
-
 	let index = getIndexById(currentUserId, users);
 
 	let matches = users[index].matches;
@@ -38,9 +36,17 @@ const Conversations = () => {
 
 	return (
 		<div>
-			{filteredConversations.map((conversation, index) => {
-				return <Conversation conversation={conversation} key={index} />;
-			})}
+			{/* {!filteredConversations && (
+				<h3>Please match with someone to start a conversation</h3>
+			)} */}
+
+			{filteredConversations > 0 ? (
+				filteredConversations.map((conversation, index) => {
+					return <Conversation conversation={conversation} key={index} />;
+				})
+			) : (
+				<h3>Please match with someone to start a conversation</h3>
+			)}
 		</div>
 	);
 };
