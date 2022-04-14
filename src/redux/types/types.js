@@ -23,4 +23,5 @@ export const types = {
   SET_ALL_MESSAGES: "SET_ALL_MESSAGES", // redux - set all messages and send to store
   GET_TOKEN: "GET_TOKEN", //gets token from database
   SET_TOKEN: "SET_TOKEN", //sets token to store
+  DELETE_TOKEN: "DELETE_TOKEN", //deletes token from store
 };
