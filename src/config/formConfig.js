@@ -1,5 +1,7 @@
 import Joi from "joi";
 
+// Config files for form questions and user's data (eg. "religion: 2" means "agnostic"  )
+
 export const religions = [
   "Prefer not to say",
   "African Traditional",
@@ -66,6 +68,8 @@ export const gendersPref = [
   "Intersex",
 ];
 
+// joi validators for user registration
+
 const now = Date.now();
 const eigthteenYearsAgo = new Date(now - 1000 * 60 * 60 * 24 * 365 * 18);
 const ukPostcode =
@@ -114,6 +118,7 @@ export function joiDataReorder(details) {
   return errorsMod;
 }
 
+// converts unix time into year, month and day values.
 export function timeConverter(UNIX_timestamp) {
   const a = new Date(UNIX_timestamp);
   var months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -125,6 +130,7 @@ export function timeConverter(UNIX_timestamp) {
   return time;
 }
 
+// converts user registration inputs into data values.
 export function dataConstructor(e) {
   let value = e.target.value;
   if (e.target.name === "genderPref") {

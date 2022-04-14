@@ -1,7 +1,7 @@
 // import messages from "./mock";
 import axios from "axios";
 
-// retreives a long and lat from a valid uk postcode, returns location of central london if unsuccessful 
+// Retrieve longitude and latitude through post code.
 export const getLngLat = async (postcode) => {
   try {
     const result = await axios.get(
@@ -25,7 +25,7 @@ function degreesToRadians(degrees) {
   return (degrees * Math.PI) / 180;
 }
 
-//finds distance between 2no long and lat co-ordinates
+// Calculates distance between 2 co-ordinates.
 function distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
   const earthRadiusKm = 6371;
 
@@ -52,10 +52,8 @@ export const findDistanceFromLongsAndLats = (location1, location2) => {
   return distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2);
 };
 
-// function that returns a unique id of a specific length when given
-// default? 32?
-export function getUniqueId(length) {
-  // return Math.round(Math.random() * 10000000000);
+// Generates unique userId of specified length (default 32).
+export function getUniqueId(length=32) {
   const now = Date.now().toString();
   let uniqueId = "";
   const chars =

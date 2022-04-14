@@ -10,31 +10,47 @@ import { types } from "../../redux/types/types";
 import { gsap } from "gsap";
 import { callAPI } from "../../dataController/matching";
 
+// MATCHING: Where potential matches are displayed and current user likes/passes.
 const Matching = () => {
-	const [currentResultIndex, setCurrentResultIndex] = useState(0);
+  const [currentResultIndex, setCurrentResultIndex] = useState(0); // state to control which potential match is shown to current user.
+  const matchingFilter = useSelector((state) => state.general.matchingFilter); // state to control which filters are applied (so the user can change these)
+  const currentUserId = useSelector((state) => state.general.currentUserId); 
+  let currentUser = getUserById(currentUserId, users);
+  const users = useSelector((state) => state.matching.users); 
+  const dispatch = useDispatch();
 
-	const users = useSelector((state) => state.matching.users);
-	const matchingFilter = useSelector((state) => state.general.matchingFilter);
-	const currentUserId = useSelector((state) => state.general.currentUserId);
-	let currentUser = getUserById(currentUserId, users);
-	const dispatch = useDispatch();
+  // Creates list of potential matches for current user to review. Created from a copy of all users, filtered and sorted according to compatabilities with current user.
+  let usersCopy = [...users];
+  usersCopy.splice(
+    usersCopy.findIndex((user) => user === currentUser),
+    1
+  );
+  let filteredUsers = filteringUsers(usersCopy, currentUser, matchingFilter);
+  let sortedUsers = sortingUsers(filteredUsers, currentUser);
+  let userForReview = sortedUsers[currentResultIndex];
 
-	// Creates duplicate of all users, filtered and sorted according to compatabilities with current user.
-	let usersCopy = [...users];
-	usersCopy.splice(
-		usersCopy.findIndex((user) => user === currentUser),
-		1
-	);
-	let filteredUsers = filteringUsers(usersCopy, currentUser, matchingFilter);
-	let sortedUsers = sortingUsers(filteredUsers, currentUser);
-	let userForReview = sortedUsers[currentResultIndex];
+  // Add user being reviewed to current user's seen array.
+  useEffect(() => {
+    if (currentResultIndex < sortedUsers.length) {
+      callAPI("ADD_TO_SEEN", {
+        userId: currentUser.userId,
+        foreignUserId: userForReview.userId,
+      });
+    }
+  }, [
+    currentResultIndex,
+    // currentUser.userId,
+    // sortedUsers.length,
+    // userForReview.userId,
+    // dispatch,
+  ]);
 
-	// update current user's likes, check if they like eachother, load next user for review.
-	const onLike = (user) => {
-		callAPI("ADD_TO_LIKES", {
-			userId: currentUser.userId,
-			foreignUserId: user.userId,
-		});
+  // update current user's likes, check if they like eachother to add to matches if they have, load next user for review.
+  const onLike = (user) => {
+    callAPI("ADD_TO_LIKES", {
+      userId: currentUser.userId,
+      foreignUserId: user.userId,
+    });
 
 		const usersToAddToLikes = { user, currentUser };
 		dispatch({ type: types.ADD_TO_LIKES, payload: usersToAddToLikes });
@@ -53,33 +69,9 @@ const Matching = () => {
 		gsap.fromTo(".btn-pass", { color: "#000" }, { color: "#fff", duration: 1 });
 	};
 
-	//Add user being reviewed to current user's seen array.
-	useEffect(() => {
-		if (currentResultIndex < sortedUsers.length) {
-			callAPI("ADD_TO_SEEN", {
-				userId: currentUser.userId,
-				foreignUserId: userForReview.userId,
-			});
-
-			// dispatch({
-			//   type: types.ADD_TO_SEEN,
-			//   payload: {
-			//     seenUserId: userForReview.userId,
-			//     currentUserId: currentUser.userId,
-			//   },
-			// });
-		}
-	}, [
-		currentResultIndex,
-		// currentUser.userId,
-		// sortedUsers.length,
-		// userForReview.userId,
-		// dispatch,
-	]);
-
-	return (
-		<>
-			<Search />
+  return (
+    <>
+      <Search />
 
 			{currentResultIndex < sortedUsers.length ? (
 				<div className="container">
