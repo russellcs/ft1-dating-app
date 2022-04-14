@@ -22,7 +22,6 @@ export function matchingReducer(
         Number(action.payload.currentUserId),
         state.users
       );
-      console.log(currentUserIndex, action.payload.currentUserId);
       if (
         !state.users[currentUserIndex].seen.includes(action.payload.seenUserId)
       ) {
@@ -76,7 +75,7 @@ export function matchingReducer(
     }
 
     case types.SET_ALL_USERS: {
-      console.log(action.payload)
+      // console.log(action.payload)
       return { users: action.payload };
     }
 

@@ -4,6 +4,7 @@ import "./search.scss";
 import gsap from "gsap";
 import { useState } from "react";
 
+// SEARCH: Where filter options can be enabled/disabled.
 const Search = () => {
   const [menu, setMenu] = useState(false);
 

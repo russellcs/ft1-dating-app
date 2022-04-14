@@ -1,8 +1,7 @@
 // import messages from "./mock";
 import axios from "axios";
 
-// console.log(messages);
-
+// Retrieve longitude and latitude through post code.
 export const getLngLat = async (postcode) => {
   try {
     const result = await axios.get(
@@ -26,6 +25,7 @@ function degreesToRadians(degrees) {
   return (degrees * Math.PI) / 180;
 }
 
+// Calculates distance between 2 co-ordinates.
 function distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
   const earthRadiusKm = 6371;
 
@@ -52,6 +52,7 @@ export const findDistanceFromLongsAndLats = (location1, location2) => {
   return distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2);
 };
 
+// Generates unique userId.
 export function getUniqueId(length) {
   // return Math.round(Math.random() * 10000000000);
   const now = Date.now().toString();
