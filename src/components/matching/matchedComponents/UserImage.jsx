@@ -1,5 +1,7 @@
 const UserImage = (props) => {
   // return <div className="userImage">Image of user.</div>;
+  console.log(props);
+
   return (
     <div>
       <img

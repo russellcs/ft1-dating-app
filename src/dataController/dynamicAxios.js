@@ -8,6 +8,6 @@ export const callAxios = async (method, url, body, headers) => {
     // }
     return result;
   } catch (error) {
-    alert("API down");
+    alert("Sorry, the server is experiencing high load");
   }
 };

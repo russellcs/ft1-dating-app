@@ -11,17 +11,18 @@ import UserImage from "./matchedComponents/UserImage";
 import UserName from "./matchedComponents/UserName";
 import UserTown from "./matchedComponents/UserTown";
 import { getAge } from "../../utils/general";
+import { API_URL } from "../../config/general";
+
 
 const MatchedUser = (props) => {
   const { user } = props;
   return (
     <div>
       <UserName name={user.personalDetails.name.firstName} />
-      {user.personalDetails.selfie && (
-        <UserImage image={user.personalDetails.selfie.image} />
-        // <UserImage image={`http://findsparks.uk/userImages/${user.userId}.jpg`} />
-        
-      )}
+
+      {/* <UserImage image={user.personalDetails.selfie.image} /> */}
+      <UserImage image={`${API_URL}/userImages/${user.userId}.jpg`} />
+
       <ul className="userDetails">
         <li>
           <UserGender gender={user.personalDetails.gender} />
