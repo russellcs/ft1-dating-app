@@ -19,7 +19,7 @@ const MatchedUser = (props) => {
 		<div className="mb-2">
 			<UserName name={user.personalDetails.name.firstName} />
 
-			<UserImage image={`${API_URL}/userImages/${user.userId}.jpg`} />
+			<UserImage image={`${API_URL}/userImages/${user.userId}.jpg`} name={user.personalDetails.name.firstName}/>
 
 			<ul className="userDetails">
 				<li>

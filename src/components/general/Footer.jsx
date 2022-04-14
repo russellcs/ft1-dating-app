@@ -11,7 +11,7 @@ const Footer = () => {
     <footer>
       <div className="container">
         <div className="site-logo">
-          <a href="#">Back to Top</a>
+          <a href="#root">Back to Top</a>
           {loggedIn === true && (
             <button
               className="btn log-out "

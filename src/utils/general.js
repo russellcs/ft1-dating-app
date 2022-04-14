@@ -30,7 +30,7 @@ export const getIndexByEmailAndPassword = (emailTest, passwordTest, users) => {
 
 export const getIndexById = (id, users) => {
   // console.log(users, id);
-  return users.findIndex(({ userId }) => userId == id);
+  return users.findIndex(({ userId }) => userId === Number(id));
 };
 
 // Get index of particular message in messages (object with all messages data) through messageId.

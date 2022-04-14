@@ -3,7 +3,7 @@ const UserImage = (props) => {
 		<div className="text-center">
 			<img
 				src={props.image}
-				alt="Image of user"
+				alt={props.name}
 				className="img-fluid img-thumbnail mb-3"
 			/>
 		</div>

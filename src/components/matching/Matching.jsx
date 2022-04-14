@@ -15,8 +15,8 @@ const Matching = () => {
   const [currentResultIndex, setCurrentResultIndex] = useState(0); // state to control which potential match is shown to current user.
   const matchingFilter = useSelector((state) => state.general.matchingFilter); // state to control which filters are applied (so the user can change these)
   const currentUserId = useSelector((state) => state.general.currentUserId); 
-  let currentUser = getUserById(currentUserId, users);
   const users = useSelector((state) => state.matching.users); 
+  let currentUser = getUserById(currentUserId, users);
   const dispatch = useDispatch();
 
   // Creates list of potential matches for current user to review. Created from a copy of all users, filtered and sorted according to compatabilities with current user.
@@ -39,10 +39,10 @@ const Matching = () => {
     }
   }, [
     currentResultIndex,
-    // currentUser.userId,
-    // sortedUsers.length,
-    // userForReview.userId,
-    // dispatch,
+    currentUser.userId,
+    sortedUsers.length,
+    userForReview.userId,
+    dispatch,
   ]);
 
   // update current user's likes, check if they like eachother to add to matches if they have, load next user for review.

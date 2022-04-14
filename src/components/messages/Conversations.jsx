@@ -23,7 +23,6 @@ const Conversations = () => {
   let index = getIndexById(currentUserId, users);
 
   let matches = users[index].matches;
-  console.log(matches);
 
   for (let i = 0; i < matches.length; i++) {
     if (result[matches[i]] === undefined) {
@@ -31,13 +30,11 @@ const Conversations = () => {
     }
   }
   const entries = Object.entries(result);
-  console.log(entries);
 
   // Filter through the entries object returning only the conversations which do not match (not blocked)
   const filteredConversations = entries.filter((conversation) => {
     return !users[index].blocked.includes(Number(conversation[0]));
   });
-console.log(filteredConversations)
   return (
     <div>
       <h3>You've found a spark!</h3>
