@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { getIndexById } from "../../utils/general";
 
 const Conversations = () => {
+
   const users = useSelector((state) => state.matching.users);
   const messages = useSelector((state) => state.messaging.messages);
   const currentUserId = useSelector((state) => state.general.currentUserId);
@@ -47,10 +48,13 @@ console.log(filteredConversations)
           return <Conversation conversation={conversation} key={index} />;
         })
       ) : (
-        <h3>Please match with someone to start a conversation</h3>
+        				<h3 className="p-3 text-center">
+					You need to match with someone to start a conversation
+				</h3>
       )}
     </div>
   );
+
 };
 
 export default Conversations;
