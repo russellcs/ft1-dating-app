@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.profilePicture {
+  background-color: #ff7f50;
+  height: 150px;
+  width: 150px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+  // inline code in parent:
+  //   background-image: ${API_URL}/userImages/${props.foreignId}.jpg;
+}
+
+button {
+    .btn {
+        color: #ff7f50;
+        border-radius: 50%;
+    }
+}
+
+div > h3 {
+  margin-top: 20px;
+  text-align: center;
+  // color: #ff7f50;
+}

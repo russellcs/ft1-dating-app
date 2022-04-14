@@ -1,3 +1,5 @@
+import "./messages.scss";
+
 const Input = (props) => {
 	const { onInput, onKeyDown, onMessageClick } = props;
 

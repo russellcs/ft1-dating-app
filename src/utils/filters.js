@@ -3,6 +3,7 @@ import { getAge } from "../utils/general";
 let matchingFilterGlobal = null;
 let currentUser = null;
 
+// 
 export function filteringUsers(users, currentUserArgument, matchingFilter) {
   matchingFilterGlobal = matchingFilter;
   currentUser = currentUserArgument;
@@ -31,11 +32,12 @@ export const potentialMatchFilter = (user) => {
     : true;
 };
 
+// runs distance filter check between two users in both directions - to find if they are compatible 
 export const distanceFilter = (currentUser, user) => {
-  // checks if users location is more less than accepted distance
   return distanceCheck(currentUser, user) && distanceCheck(user, currentUser);
 };
 
+// checks if user2's location is within the accepted distance of user1
 export const distanceCheck = (user1, user2) => {
   const user1Location = user1.personalDetails.location;
   const user1AcceptedDistance = user1.preferences.acceptedDistance;
@@ -46,12 +48,12 @@ export const distanceCheck = (user1, user2) => {
   );
 };
 
+// checks if two users are compatible regarding age 
 export const ageFilter = (currentUser, user) => {
-  // checks if user1's age is more/less than user2's prefered min/max age
-
-  return ageCheck(currentUser, user) && ageCheck(user, currentUser);
+    return ageCheck(currentUser, user) && ageCheck(user, currentUser);
 };
 
+// checks if user1's age is more/less than user2's prefered min/max age
 export const ageCheck = (user1, user2) => {
   return getAge(user1.personalDetails.dob) >= user2.preferences.age.min &&
     getAge(user1.personalDetails.dob) <= user2.preferences.age.max
@@ -59,6 +61,7 @@ export const ageCheck = (user1, user2) => {
     : false;
 };
 
+// checks if two users are compatible regarding genders
 export const genderFilter = (currentUser, user) => {
   // console.log(currentUser, user);
   return (
@@ -67,11 +70,13 @@ export const genderFilter = (currentUser, user) => {
   );
 };
 
+
+// checks if two users are compatible regarding height
 export const heightFilter = (currentUser, user) => {
-  // checks if user1's height is more/less than user2's prefered min/max height
   return heightCheck(currentUser, user) && heightCheck(user, currentUser);
 };
 
+// checks if user1's height is more/less than user2's prefered min/max height
 export const heightCheck = (user1, user2) => {
   return user1.personalDetails.height >= user2.preferences.height.min &&
     user1.personalDetails.height <= user2.preferences.height.max
@@ -98,6 +103,7 @@ export const existingKidsFilter = (currentUser, user) => {
   );
 };
 
+// filters out users that are incompatible on wanting kids in the future
 export const openToKidsFilter = (currentUser, user) => {
   return (currentUser.preferences.lifeStyle.openToKids === 3 &&
     user.preferences.lifeStyle.openToKids === 0) || // cUser wants kids & user doesn't
@@ -107,6 +113,7 @@ export const openToKidsFilter = (currentUser, user) => {
     : true;
 };
 
+// filters out users that have already been seen, and dismissed/liked, by the currentuser
 export const seenFilter = (currentUser, user) => {
   if (currentUser.seen && currentUser.seen.length > 0) {
     return (

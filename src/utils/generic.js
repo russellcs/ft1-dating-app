@@ -1,8 +1,7 @@
 // import messages from "./mock";
 import axios from "axios";
 
-// console.log(messages);
-
+// retreives a long and lat from a valid uk postcode, returns location of central london if unsuccessful 
 export const getLngLat = async (postcode) => {
   try {
     const result = await axios.get(
@@ -15,17 +14,18 @@ export const getLngLat = async (postcode) => {
     };
   } catch (error) {
     return {
-      latitude: 0,
-      longitude: 0, //change to london
+      latitude: 51.509865,
+      longitude: -0.118092, 
     };
   }
 };
 
-// Haversine function - from stack overflow
+// Haversine function - converts degrees to radians - from stack overflow
 function degreesToRadians(degrees) {
   return (degrees * Math.PI) / 180;
 }
 
+//finds distance between 2no long and lat co-ordinates
 function distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
   const earthRadiusKm = 6371;
 
@@ -43,15 +43,17 @@ function distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
   return earthRadiusKm * c;
 }
 
+// splits two locations into respective longs and lats, and runs function to find distance between them
 export const findDistanceFromLongsAndLats = (location1, location2) => {
   const lat1 = location1.latitude;
   const lat2 = location2.latitude;
   const lon1 = location1.longitude;
   const lon2 = location2.longitude;
-  // console.log(location2);
   return distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2);
 };
 
+// function that returns a unique id of a specific length when given
+// default? 32?
 export function getUniqueId(length) {
   // return Math.round(Math.random() * 10000000000);
   const now = Date.now().toString();
