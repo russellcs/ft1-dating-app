@@ -15,47 +15,56 @@ import { API_URL } from "../../config/general";
 
 const MatchedUser = (props) => {
 	const { user } = props;
+	const { gender, dob, height, kids, religion, smokers } =
+		props.user.personalDetails;
+	const { marriage, casual, openToKids } = props.user.preferences.lifeStyle;
+	const { firstName } = props.user.personalDetails.name;
+	const { town } = props.user.personalDetails.location;
+
 	return (
 		<div className="mb-2">
-			<UserName name={user.personalDetails.name.firstName} />
+			<UserName name={firstName} />
 
-			<UserImage image={`${API_URL}/userImages/${user.userId}.jpg`} name={user.personalDetails.name.firstName}/>
+			<UserImage
+				image={`${API_URL}/userImages/${user.userId}.jpg`}
+				name={firstName}
+			/>
 
 			<ul className="userDetails">
 				<li>
-					<UserGender gender={user.personalDetails.gender} />
+					<UserGender gender={gender} />
 				</li>
 				<li>
-					<UserTown town={user.personalDetails.location.town} />
+					<UserTown town={town} />
 				</li>
 				<li>
-					<UserAge age={getAge(user.personalDetails.dob)} />
+					<UserAge age={getAge(dob)} />
 				</li>
 				<li>
-					<UserHeight height={user.personalDetails.height} />
+					<UserHeight height={height} />
 				</li>
 				<li>
-					<UserMarriage marriage={user.preferences.lifeStyle.marriage} />
+					<UserMarriage marriage={marriage} />
 				</li>
 				<li>
-					<UserCasual casual={user.preferences.lifeStyle.casual} />
+					<UserCasual casual={casual} />
 				</li>
 
 				<li>
-					<UserChildren haveKids={user.personalDetails.kids} />
+					<UserChildren haveKids={kids} />
 				</li>
 
 				<li>
-					<UserOpenToKids openToKids={user.preferences.lifeStyle.openToKids} />
+					<UserOpenToKids openToKids={openToKids} />
 				</li>
-				{user.personalDetails.religion ? (
+				{religion ? (
 					<li className="truncate">
-						<UserReligion religion={user.personalDetails.religion} />
+						<UserReligion religion={religion} />
 					</li>
 				) : null}
-				{user.personalDetails.smokers ? (
+				{smokers ? (
 					<li>
-						<UserSmokes smoker={user.personalDetails.smokers} />
+						<UserSmokes smoker={smokers} />
 					</li>
 				) : null}
 			</ul>
