@@ -52,57 +52,57 @@ const Matching = () => {
       foreignUserId: user.userId,
     });
 
-    const usersToAddToLikes = { user, currentUser };
-    dispatch({ type: types.ADD_TO_LIKES, payload: usersToAddToLikes });
-    dispatch({
-      type: types.UPDATE_MATCHES,
-      payload: { seenUserId: user.userId, currentUserId: currentUser.userId },
-    });
-    //foreign ID convention not seenUser
+		const usersToAddToLikes = { user, currentUser };
+		dispatch({ type: types.ADD_TO_LIKES, payload: usersToAddToLikes });
+		dispatch({
+			type: types.UPDATE_MATCHES,
+			payload: { seenUserId: user.userId, currentUserId: currentUser.userId },
+		});
+		//foreign ID convention not seenUser
 
-    setCurrentResultIndex(currentResultIndex + 1);
-  };
+		setCurrentResultIndex(currentResultIndex + 1);
+	};
 
-  // load next user for review
-  const onPass = () => {
-    setCurrentResultIndex(currentResultIndex + 1);
-    gsap.fromTo(".btn-pass", { color: "#000" }, { color: "#fff", duration: 1 });
-  };
+	// load next user for review
+	const onPass = () => {
+		setCurrentResultIndex(currentResultIndex + 1);
+		gsap.fromTo(".btn-pass", { color: "#000" }, { color: "#fff", duration: 1 });
+	};
 
   return (
     <>
       <Search />
 
-      {currentResultIndex < sortedUsers.length ? (
-        <div className="container">
-          <div className="userCard row card container-sm shadow">
-            <MatchedUser user={userForReview} />
-          </div>
-          <div className="row my-2">
-            <button
-              className="col btn btn-love btn-round btn-lg ms-3 me-1"
-              onClick={() => onLike(userForReview)}
-            >
-              Like
-            </button>
-            <button
-              className="col btn btn-pass btn-round btn-lg ms-1 me-3"
-              onClick={() => onPass()}
-            >
-              Pass
-            </button>
-          </div>
-        </div>
-      ) : (
-        <div>
-          <p>
-            You've seen all potential matches in current search parameters, try
-            again later or be less picky!
-          </p>
-        </div>
-      )}
-    </>
-  );
+			{currentResultIndex < sortedUsers.length ? (
+				<div className="container">
+					<div className="userCard row card container-sm shadow">
+						<MatchedUser user={userForReview} />
+					</div>
+					<div className="row my-2">
+						<button
+							className="col btn btn-pass btn-round btn-lg ms-3 me-2 mt-2"
+							onClick={() => onPass()}
+						>
+							Pass
+						</button>
+						<button
+							className="col btn btn-success btn-round btn-lg ms-2 me-3 mt-2"
+							onClick={() => onLike(userForReview)}
+						>
+							Like
+						</button>
+					</div>
+				</div>
+			) : (
+				<div>
+					<p>
+						You've seen all potential matches in current search parameters, try
+						again later or be less picky!
+					</p>
+				</div>
+			)}
+		</>
+	);
 };
 
 export default Matching;

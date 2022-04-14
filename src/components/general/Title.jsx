@@ -1,5 +1,6 @@
 import { gsap } from "gsap";
 import { useEffect } from "react";
+import "./Title.scss";
 
 const Title = () => {
   useEffect(() => {

@@ -12,6 +12,7 @@ body::before {
   background-repeat: no-repeat;
   content: "";
   background-size: cover;
+  background-position: center;
   position: absolute;
   top: 0px;
   right: 0px;
@@ -31,5 +32,5 @@ code {
   margin: auto;
   position: relative;
   background-color: white;
-  min-height: 80vh;
+  /* min-height: 80vh; */
 }

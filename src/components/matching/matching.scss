@@ -1,52 +1,52 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 .userCard {
-  padding: 12px;
-  background-color: rgb(252, 235, 203);
-  margin: auto;
-  width: 100%;
-  position: relative;
-  ul {
-    list-style: none;
-  }
+	padding: 12px;
+	background-color: rgb(252, 235, 203);
+	margin: auto;
+	width: 100%;
+	position: relative;
+	ul {
+		list-style: none;
+	}
 }
 
 .userName {
-  font-size: 30px;
-  // text-align: center;
+	font-size: 30px;
+	// text-align: center;
 }
 
 .userDetails {
-  padding-inline-start: 0;
-  margin: 0;
-  display: flex;
-  position: relative;
-  flex-wrap: wrap;
-  align-content: space-around;
-  font-weight: 500;
-  li {
-    width: 50%;
-    margin-top: 10px;
-    font-size: 16px;
-    padding-right: 5px;
-  }
+	padding-inline-start: 0;
+	margin: 0;
+	display: flex;
+	position: relative;
+	flex-wrap: wrap;
+	align-content: space-around;
+	font-weight: 500;
+	li {
+		width: 50%;
+		margin-top: 10px;
+		font-size: 16px;
+		padding-right: 5px;
+	}
 }
 
 .matchedIcon {
-  width: 40px;
-  height: 40px;
-  display: inline-block;
-  margin-right: 2px;
+	width: 40px;
+	height: 40px;
+	display: inline-block;
+	margin-right: 2px;
 }
 
 .truncate {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .religHover:hover {
@@ -54,12 +54,12 @@
 
 // custom boostrap classes
 
-.btn-love {
-  background-color: rgb(223, 77, 77);
-  color: #fff;
-}
+// .btn-love {
+// 	background-color: rgb(0, 128, 0);
+// 	color: #fff;
+// }
 
 .btn-pass {
-  background-color: rgb(19, 139, 179);
-  color: #fff;
+	background-color: rgb(223, 77, 77);
+	color: #fff;
 }

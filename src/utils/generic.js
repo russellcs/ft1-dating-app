@@ -14,13 +14,13 @@ export const getLngLat = async (postcode) => {
     };
   } catch (error) {
     return {
-      latitude: 0,
-      longitude: 0, //change to london
+      latitude: 51.509865,
+      longitude: -0.118092, 
     };
   }
 };
 
-// Haversine function - from stack overflow
+// Haversine function - converts degrees to radians - from stack overflow
 function degreesToRadians(degrees) {
   return (degrees * Math.PI) / 180;
 }
@@ -43,18 +43,17 @@ function distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
   return earthRadiusKm * c;
 }
 
+// splits two locations into respective longs and lats, and runs function to find distance between them
 export const findDistanceFromLongsAndLats = (location1, location2) => {
   const lat1 = location1.latitude;
   const lat2 = location2.latitude;
   const lon1 = location1.longitude;
   const lon2 = location2.longitude;
-  // console.log(location2);
   return distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2);
 };
 
-// Generates unique userId.
-export function getUniqueId(length) {
-  // return Math.round(Math.random() * 10000000000);
+// Generates unique userId of specified length (default 32).
+export function getUniqueId(length=32) {
   const now = Date.now().toString();
   let uniqueId = "";
   const chars =

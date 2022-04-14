@@ -4,7 +4,6 @@ let matchingFilterGlobal = null;
 let currentUser = null;
 // Filters out incompatible users (including seen) from array of potencial matches. Check's if each user is a viable potential match for current user through a series of filters. 
 
-
 // Due to filter-options, filter must be called as this function, which in turn applies the filter.
 export function filteringUsers(users, currentUserArgument, matchingFilter) {
   matchingFilterGlobal = matchingFilter;
@@ -39,6 +38,7 @@ const distanceFilter = (currentUser, user) => {
   return distanceCheck(currentUser, user) && distanceCheck(user, currentUser);
 };
 
+// checks if user2's location is within the accepted distance of user1
 export const distanceCheck = (user1, user2) => {
   const user1Location = user1.personalDetails.location;
   const user1AcceptedDistance = user1.preferences.acceptedDistance;
@@ -54,6 +54,7 @@ const ageFilter = (currentUser, user) => {
   return ageCheck(currentUser, user) && ageCheck(user, currentUser);
 };
 
+// checks if user1's age is more/less than user2's prefered min/max age
 const ageCheck = (user1, user2) => {
   return getAge(user1.personalDetails.dob) >= user2.preferences.age.min &&
     getAge(user1.personalDetails.dob) <= user2.preferences.age.max
@@ -74,6 +75,7 @@ export const heightFilter = (currentUser, user) => {
   return heightCheck(currentUser, user) && heightCheck(user, currentUser);
 };
 
+// checks if user1's height is more/less than user2's prefered min/max height
 export const heightCheck = (user1, user2) => {
   return user1.personalDetails.height >= user2.preferences.height.min &&
     user1.personalDetails.height <= user2.preferences.height.max

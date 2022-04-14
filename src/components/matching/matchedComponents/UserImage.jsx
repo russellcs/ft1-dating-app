@@ -1,16 +1,13 @@
 const UserImage = (props) => {
-  // return <div className="userImage">Image of user.</div>;
-  console.log(props);
-
-  return (
-    <div>
-      <img
-        src={props.image}
-        alt="Image of user"
-        className="rounded img-fluid img-thumbnail"
-      />
-    </div>
-  );
+	return (
+		<div className="text-center">
+			<img
+				src={props.image}
+				alt="Image of user"
+				className="img-fluid img-thumbnail mb-3"
+			/>
+		</div>
+	);
 };
 
 export default UserImage;

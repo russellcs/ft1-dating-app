@@ -1,7 +1,6 @@
 import Login from "./Login";
 import Register from "./Register";
 import "./onboarding.css";
-
 import { types } from "../../redux/types/types";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -29,7 +28,7 @@ const Onboarding = (props) => {
 
   return (
     <>
-      <div>
+      <div className="onBoardingContainer">
         <nav className="onBoarding">
           <button
             className="btn btn-outline-dark register_btn"
