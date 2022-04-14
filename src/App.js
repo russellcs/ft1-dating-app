@@ -11,7 +11,6 @@ import { Toaster } from "react-hot-toast";
 
 const App = () => {
   const dispatch = useDispatch();
-  const loggedIn = useSelector((state) => state.general.loggedIn);
   const currentUserId = useSelector((state) => state.general.currentUserId);
   const token = useSelector((state) => state.general.token);
 
@@ -44,22 +43,9 @@ const App = () => {
     }
   };
 
-  // return
   return (
     <>
       <Toaster position="top-right" reverseOrder={false} />
-      
-      {loggedIn === true && (
-        <button
-          className="btn log-out "
-          style={{ float: "right" }}
-          onClick={() => {
-            dispatch({ type: types.LOG_OUT });
-          }}
-        >
-          Log Out
-        </button>
-      )}
       <Title />
       <Interface />
     </>

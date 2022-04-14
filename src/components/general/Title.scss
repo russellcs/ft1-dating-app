@@ -1,0 +1,12 @@
+.title {
+  display: flex;
+  justify-content: center;
+  column-gap: 5px;
+  text-decoration: none;
+  svg {
+    margin-top: 15px;
+  }
+  h1 {
+    margin-top: 10px;
+  }
+}

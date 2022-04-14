@@ -8,9 +8,15 @@
   display: flex;
   justify-content: center;
   padding: 20px 0px;
-  background-color: rgb(247, 248, 249);
+  /* background-color: rgb(247, 248, 249); */
 }
 
 .motto {
   margin-top: 20px;
+}
+
+.onBoardingContainer {
+  border-radius: 10px;
+  border: 1px;
+  background-color: rgb(247, 248, 249);
 }
