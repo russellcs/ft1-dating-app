@@ -11,6 +11,10 @@ export const callAPI = async (type, payload) => {
     case types.GET_TOKEN:
       return await callAxios("post", API_URL + "/users/login", payload);
 
+    case types.DELETE_TOKEN:
+      callAxios("delete", API_URL + "/users/logout/" + payload);
+      break;
+
     default:
       break;
   }

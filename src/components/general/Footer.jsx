@@ -1,10 +1,12 @@
 import "./Footer.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { types } from "../../redux/types/types";
+import { callAPI } from "../../dataController/onboarding";
 
 const Footer = () => {
   const dispatch = useDispatch();
   const loggedIn = useSelector((state) => state.general.loggedIn);
+  const userId = useSelector((state) => state.general.currentUserId);
   let date = new Date();
   let year = date.getFullYear();
   return (
@@ -16,6 +18,7 @@ const Footer = () => {
             <button
               className="btn log-out "
               onClick={() => {
+                callAPI(types.DELETE_TOKEN, userId);
                 dispatch({ type: types.LOG_OUT });
               }}
             >
