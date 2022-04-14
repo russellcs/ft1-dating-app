@@ -42,7 +42,7 @@ const Conversations = () => {
 				})
 			) : (
 				<h3 className="p-3 text-center">
-					Please match with someone to start a conversation
+					You need to match with someone to start a conversation
 				</h3>
 			)}
 		</div>
