@@ -1,6 +1,7 @@
 import Conversation from "./Conversation";
 import { useSelector } from "react-redux";
 import { getIndexById } from "../../utils/general";
+import "./messages.scss"
 
 const Conversations = () => {
 
@@ -39,6 +40,7 @@ const Conversations = () => {
 console.log(filteredConversations)
   return (
     <div>
+      <h3>You've found a spark!</h3>
       {/* {!filteredConversations && (
 				<h3>Please match with someone to start a conversation</h3>
 			)} */}
