@@ -3,52 +3,54 @@ import { useSelector } from "react-redux";
 import { getIndexById } from "../../utils/general";
 
 const Conversations = () => {
-	const users = useSelector((state) => state.matching.users);
-	const messages = useSelector((state) => state.messaging.messages);
-	const currentUserId = useSelector((state) => state.general.currentUserId);
+  const users = useSelector((state) => state.matching.users);
+  const messages = useSelector((state) => state.messaging.messages);
+  const currentUserId = useSelector((state) => state.general.currentUserId);
 
-	// Iterate through the messages data from the store then checks if the foreign ID exists. if it doesn't a new array is created. Matches is the iterated through and saved in the entries object
-	const result = {};
+  // Iterate through the messages data from the store then checks if the foreign ID exists. if it doesn't a new array is created. Matches is the iterated through and saved in the entries object
+  const result = {};
 
-	messages &&
-		messages.forEach((message) => {
-			const existing = result[message.foreignId]
-				? result[message.foreignId]
-				: [];
-			result[message.foreignId] = [...existing, message];
-		});
+  messages &&
+    messages.forEach((message) => {
+      const existing = result[message.foreignId]
+        ? result[message.foreignId]
+        : [];
+      result[message.foreignId] = [...existing, message];
+    });
 
-	let index = getIndexById(currentUserId, users);
+  let index = getIndexById(currentUserId, users);
 
-	let matches = users[index].matches;
+  let matches = users[index].matches;
+  console.log(matches);
 
-	for (let i = 0; i < matches.length; i++) {
-		if (result[matches[i]] === undefined) {
-			result[matches[i]] = [];
-		}
-	}
-	const entries = Object.entries(result);
+  for (let i = 0; i < matches.length; i++) {
+    if (result[matches[i]] === undefined) {
+      result[matches[i]] = [];
+    }
+  }
+  const entries = Object.entries(result);
+  console.log(entries);
 
-	// Filter through the entries object returning only the conversations which do not match (not blocked)
-	const filteredConversations = entries.filter((conversation) => {
-		return !users[index].blocked.includes(Number(conversation[0]));
-	});
-
-	return (
-		<div>
-			{/* {!filteredConversations && (
+  // Filter through the entries object returning only the conversations which do not match (not blocked)
+  const filteredConversations = entries.filter((conversation) => {
+    return !users[index].blocked.includes(Number(conversation[0]));
+  });
+console.log(filteredConversations)
+  return (
+    <div>
+      {/* {!filteredConversations && (
 				<h3>Please match with someone to start a conversation</h3>
 			)} */}
 
-			{filteredConversations > 0 ? (
-				filteredConversations.map((conversation, index) => {
-					return <Conversation conversation={conversation} key={index} />;
-				})
-			) : (
-				<h3>Please match with someone to start a conversation</h3>
-			)}
-		</div>
-	);
+      {filteredConversations.length > 0 ? (
+        filteredConversations.map((conversation, index) => {
+          return <Conversation conversation={conversation} key={index} />;
+        })
+      ) : (
+        <h3>Please match with someone to start a conversation</h3>
+      )}
+    </div>
+  );
 };
 
 export default Conversations;

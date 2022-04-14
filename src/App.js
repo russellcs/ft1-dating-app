@@ -48,15 +48,7 @@ const App = () => {
   return (
     <>
       <Toaster position="top-right" reverseOrder={false} />
-      <button /// for toast alerts / notifications
-        className="btn btn-primary"
-        onClick={() => {
-          localStorage.clear();
-        }}
-      >
-        Clear localStorage
-      </button>
-
+      
       {loggedIn === true && (
         <button
           className="btn log-out "
