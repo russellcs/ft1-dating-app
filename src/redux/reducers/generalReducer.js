@@ -49,7 +49,9 @@ export function generalReducer(
       let currentUserId = undefined;
       let screen = 0;
       let token = undefined;
-      return { ...state, loggedIn, currentUserId, screen, token };
+      const result = { ...state, loggedIn, currentUserId, screen, token };
+      storeData("generalInitialStateFromDisk", result);
+      return result;
     }
 
     case types.BYPASS_ONBOARDING: {

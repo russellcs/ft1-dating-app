@@ -8,22 +8,29 @@ import { callAPI as messagingCallAPI } from "./dataController/messages";
 import "./App.css";
 import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
+let token = undefined; // creating a global token to stop setInterval using the previous instance of token because functional components can behave like closures.
 
 const App = () => {
 	const dispatch = useDispatch();
 	const currentUserId = useSelector((state) => state.general.currentUserId);
-	const token = useSelector((state) => state.general.token);
+	const localToken = useSelector((state) => state.general.token);
+  token = localToken;
 
 	const getInitialData = async () => {
-		console.log("getting new data");
+    if (!token){ 
+      console.log("quiting early"); 
+      return;} // ensures we don't try to get data if we don't have a token
 		const messages = await messagingCallAPI(
 			types.GET_USER_MESSAGES,
 			{},
 			{ token }
 		);
-		const users = await matchingCallAPI(types.GET_ALL_USERS);
+		const users = await matchingCallAPI(types.GET_ALL_USERS,
+			{},
+			{ token });
 
 		if (messages.data.status && users.data.status) {
+      setTimeout(getInitialData, 10000)
 			dispatch({
 				type: types.SET_ALL_USERS,
 				payload: users.data.payload,
@@ -33,6 +40,7 @@ const App = () => {
 				payload: messages.data.payload,
 			});
 		} else {
+      console.log(users,messages)
 			alert("something has gone wrong with the back end!");
 		}
 	};
@@ -41,7 +49,7 @@ const App = () => {
 	useEffect(() => {
 		if (currentUserId) {
 			getInitialData();
-			setInterval(getInitialData, 10000);
+      setTimeout(getInitialData, 10000);
 		}
 	}, [currentUserId, token]);
 

@@ -76,7 +76,9 @@ export function matchingReducer(
 
     case types.SET_ALL_USERS: {
       // console.log(action.payload)
-      return { users: action.payload };
+      const result = { users: action.payload }
+      storeData("matchingInitialStateFromDisk", result);
+      return result;
     }
 
     default:

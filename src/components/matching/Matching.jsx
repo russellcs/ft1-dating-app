@@ -10,11 +10,13 @@ import { types } from "../../redux/types/types";
 import { gsap } from "gsap";
 import { callAPI } from "../../dataController/matching";
 
+
 // MATCHING: Where potential matches are displayed and current user likes/passes.
 const Matching = () => {
   const [currentResultIndex, setCurrentResultIndex] = useState(0); // state to control which potential match is shown to current user.
   const matchingFilter = useSelector((state) => state.general.matchingFilter); // state to control which filters are applied (so the user can change these)
   const currentUserId = useSelector((state) => state.general.currentUserId);
+  const token = useSelector((state) => state.general.token);
   const users = useSelector((state) => state.matching.users);
   let currentUser = getUserById(currentUserId, users);
   const dispatch = useDispatch();
@@ -35,7 +37,7 @@ const Matching = () => {
       callAPI("ADD_TO_SEEN", {
         userId: currentUser.userId,
         foreignUserId: userForReview.userId,
-      });
+      }, {token} );
     }
   }, [
     currentResultIndex,
@@ -50,7 +52,7 @@ const Matching = () => {
     callAPI("ADD_TO_LIKES", {
       userId: currentUser.userId,
       foreignUserId: user.userId,
-    });
+    }, {token});
 
     const usersToAddToLikes = { user, currentUser };
     dispatch({ type: types.ADD_TO_LIKES, payload: usersToAddToLikes });
