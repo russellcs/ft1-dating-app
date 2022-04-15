@@ -6,7 +6,7 @@ import { callAPI } from "../../dataController/onboarding";
 const Footer = () => {
   const dispatch = useDispatch();
   const loggedIn = useSelector((state) => state.general.loggedIn);
-  const userId = useSelector((state) => state.general.currentUserId);
+  const token = useSelector((state) => state.general.token);
   let date = new Date();
   let year = date.getFullYear();
   return (
@@ -18,7 +18,7 @@ const Footer = () => {
             <button
               className="btn log-out "
               onClick={() => {
-                callAPI(types.DELETE_TOKEN, userId);
+                callAPI(types.DELETE_TOKEN, token);
                 dispatch({ type: types.LOG_OUT });
               }}
             >
