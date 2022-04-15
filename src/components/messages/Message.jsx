@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { callAPI } from "../../dataController/messages";
 import { types } from "../../redux/types/types";
 
 const Message = (props) => {
 	const dispatch = useDispatch();
+	const token = useSelector((state) => state.general.token);
 
 	const [likeClicked, setLikeClicked] = useState(false);
 	const { message } = props;
@@ -29,11 +30,11 @@ const Message = (props) => {
 				<button
 					className="btn btn-sm btn-dark position-absolute top-0 end-0 shadow"
 					onClick={() => {
-						callAPI(types.DELETE_MESSAGE, { messageId: message });
+						callAPI(types.DELETE_MESSAGE, { messageId: message }, {token});
 						dispatch({
 							type: types.DELETE_MESSAGE,
 							payload: message.messageId,
-						});
+						}, {token});
 					}}
 				>
 					Delete message

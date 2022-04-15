@@ -7,14 +7,15 @@ import Conversations from "../messages/Conversations";
 
 const Interface = () => {
   const screen = useSelector((state) => state.general.screen);
-
+  const users = useSelector((state) => state.matching.users);
+  console.log(users)
   return (
     <>
       {screen === 0 ? null : <Navbar />}
 
       {screen === 0 && <Onboarding />}
 
-      {screen === 1 && <Matching />}
+      {screen === 1 && users.length > 0 && <Matching />}
 
       {screen === 2 && <Conversations />}
 

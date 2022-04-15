@@ -18,7 +18,7 @@ const Footer = () => {
             <button
               className="btn log-out "
               onClick={() => {
-                callAPI(types.DELETE_TOKEN, token);
+                callAPI(types.DELETE_TOKEN, token, { token });
                 dispatch({ type: types.LOG_OUT });
               }}
             >

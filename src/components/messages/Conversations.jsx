@@ -22,7 +22,8 @@ const Conversations = () => {
 
   let index = getIndexById(currentUserId, users);
 
-  let matches = users[index].matches;
+  let matches = index !== -1 && users[index].matches;
+
 
   for (let i = 0; i < matches.length; i++) {
     if (result[matches[i]] === undefined) {
