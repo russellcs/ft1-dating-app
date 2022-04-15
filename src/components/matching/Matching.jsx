@@ -14,15 +14,16 @@ import { callAPI } from "../../dataController/matching";
 // MATCHING: Where potential matches are displayed and current user likes/passes.
 const Matching = () => {
   const [currentResultIndex, setCurrentResultIndex] = useState(0); // state to control which potential match is shown to current user.
+  const [tempUsers, setTempUsers] = useState([])
   const matchingFilter = useSelector((state) => state.general.matchingFilter); // state to control which filters are applied (so the user can change these)
   const currentUserId = useSelector((state) => state.general.currentUserId);
   const token = useSelector((state) => state.general.token);
   const users = useSelector((state) => state.matching.users);
-  let currentUser = getUserById(currentUserId, users);
+  let currentUser = getUserById(currentUserId, tempUsers);
   const dispatch = useDispatch();
 
   // Creates list of potential matches for current user to review. Created from a copy of all users, filtered and sorted according to compatabilities with current user.
-  let usersCopy = [...users];
+  let usersCopy = [...tempUsers];
   usersCopy.splice(
     usersCopy.findIndex((user) => user === currentUser),
     1
@@ -30,9 +31,14 @@ const Matching = () => {
   let filteredUsers = filteringUsers(usersCopy, currentUser, matchingFilter);
   let sortedUsers = sortingUsers(filteredUsers, currentUser);
   let userForReview = sortedUsers[currentResultIndex];
+  
+  useEffect(() => {
+    if (tempUsers.length === 0) setTempUsers(JSON.parse(JSON.stringify(users)));
+  })
 
   // Add user being reviewed to current user's seen array.
   useEffect(() => {
+    console.log(currentResultIndex)
     if (currentResultIndex < sortedUsers.length) {
       callAPI("ADD_TO_SEEN", {
         userId: currentUser.userId,

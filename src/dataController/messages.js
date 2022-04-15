@@ -8,7 +8,8 @@ export const callAPI = async (type, payload, headers) => {
 			callAxios("post", API_URL + "/messages/blocked", {
 				user_id: payload.userId,
 				foreign_id: payload.foreignId,
-			});
+			},
+			{ headers: { token: headers.token } });
 			break;
 
 		case types.ADD_MESSAGE:
@@ -26,7 +27,8 @@ export const callAPI = async (type, payload, headers) => {
 			break;
 
 		case types.DELETE_MESSAGE:
-			callAxios("delete", API_URL + "/messages/" + payload.messageId);
+			callAxios("delete", API_URL + "/messages/" + payload.messageId,
+			{ headers: { token: headers.token }});
 			break;
 
 		case types.GET_USER_MESSAGES:

@@ -34,7 +34,7 @@ const Message = (props) => {
 						dispatch({
 							type: types.DELETE_MESSAGE,
 							payload: message.messageId,
-						});
+						}, {token});
 					}}
 				>
 					Delete message

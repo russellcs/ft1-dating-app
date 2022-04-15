@@ -115,6 +115,7 @@ export const openToKidsFilter = (currentUser, user) => {
 // filters out users already seen, except for the most recently seen user.
 export const seenFilter = (currentUser, user) => {
   if (currentUser.seen && currentUser.seen.length > 0) {
+    console.log("seenfilter:", currentUser.seen[currentUser.seen.length - 1])
     return (
       currentUser.seen.includes(user.userId) === false ||
       currentUser.seen[currentUser.seen.length - 1] === user.userId 
