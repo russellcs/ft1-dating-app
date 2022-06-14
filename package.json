@@ -15,7 +15,7 @@
     "react-confirm-alert": "^2.8.0",
     "react-dom": "^17.0.2",
     "react-hot-toast": "^2.2.0",
-    "react-redux": "^7.2.6",
+    "react-redux": "^7.2.8",
     "react-scripts": "5.0.0",
     "react-webcam": "^7.0.0",
     "redux": "^4.1.2",
